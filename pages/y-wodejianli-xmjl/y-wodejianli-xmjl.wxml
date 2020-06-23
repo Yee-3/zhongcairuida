@@ -1,0 +1,38 @@
+<view class="r_01">
+	<view class="r_02">
+		<view class="r_03">所属公司：</view>
+		<view class="r_04"><input placeholder="请输入您的姓名" /></view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">项目名称：</view>
+		<view class="r_04"><input placeholder="请输入您的姓名" /></view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">项目的起止时间：</view>
+		<view class="t_01">
+			<view class="t_02 fl">
+				<view class="section">
+					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+						<view class="picker">{{date}}</view>
+					</picker>
+				</view>
+			</view>
+			<view class="t_03 fl">———</view>
+			<view class="t_04 fr">
+				<view class="section">
+					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange1">
+						<view class="picker">{{date1}}</view>
+					</picker>
+				</view>
+			</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+
+	<view class="r_02">
+		<view class="r_03">项目简介：</view>
+		<view class="t_05"><textarea placeholder="请输入"></textarea></view>
+	</view>
+</view>
+
+<view class="r_05">提交</view>

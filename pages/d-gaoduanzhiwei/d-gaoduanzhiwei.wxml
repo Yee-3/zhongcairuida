@@ -1,0 +1,74 @@
+<view class="d_01">
+	<ul>
+		<li bindtap="detail">
+			<view class="d_02"><image src="../img/f004.jpg"></image></view>
+			<view class="d_03">
+				<view class="d_04"><image src="../img/f005.png"></image></view>
+				<view class="d_05">高铁动车</view>
+			</view>
+		</li>
+		<li>
+			<view class="d_02"><image src="../img/f013.jpg"></image></view>
+			<view class="d_03">
+				<view class="d_04"><image src="../img/f006.png"></image></view>
+				<view class="d_05">航空票务</view>
+			</view>
+		</li>
+		<li>
+			<view class="d_02"><image src="../img/f014.jpg"></image></view>
+			<view class="d_03">
+				<view class="d_04"><image src="../img/f007.png"></image></view>
+				<view class="d_05">机场地勤</view>
+			</view>
+		</li>
+		<li>
+			<view class="d_02"><image src="../img/f015.jpg"></image></view>
+			<view class="d_03">
+				<view class="d_04"><image src="../img/f008.png"></image></view>
+				<view class="d_05">高铁动车</view>
+			</view>
+		</li>
+		<li>
+			<view class="d_02"><image src="../img/f016.jpg"></image></view>
+			<view class="d_03">
+				<view class="d_04"><image src="../img/f009.png"></image></view>
+				<view class="d_05">高铁动车</view>
+			</view>
+		</li>
+		<li>
+			<view class="d_02"><image src="../img/f017.jpg"></image></view>
+			<view class="d_03">
+				<view class="d_04"><image src="../img/f010.png"></image></view>
+				<view class="d_05">高铁动车</view>
+			</view>
+		</li>
+		<li>
+			<view class="d_02"><image src="../img/f018.jpg"></image></view>
+			<view class="d_03">
+				<view class="d_04"><image src="../img/f011.png"></image></view>
+				<view class="d_05">高铁动车</view>
+			</view>
+		</li>
+		<li>
+			<view class="d_02"><image src="../img/f019.jpg"></image></view>
+			<view class="d_03">
+				<view class="d_04"><image src="../img/f012.png"></image></view>
+				<view class="d_05">高铁动车</view>
+			</view>
+		</li>
+	</ul>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

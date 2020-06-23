@@ -1,0 +1,124 @@
+<view class="r_01">
+	<view class="r_02">
+		<view class="r_03">公司名字：</view>
+		<view class="r_04"><input placeholder="请输入" /></view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">工作的起止时间：</view>
+		<view class="t_01">
+			<view class="t_02 fl">
+				<view class="section">
+					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+						<view class="picker">{{date}}</view>
+					</picker>
+				</view>
+			</view>
+			<view class="t_03 fl">———</view>
+			<view class="t_04 fr">
+				<view class="section">
+					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange1">
+						<view class="picker">{{date1}}</view>
+					</picker>
+				</view>
+			</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">您在公司担任的职位：</view>
+		<view class="r_04" bindtap="position">{{value}}</view>
+	</view>
+	<!-- 职位弹框 -->
+	<view class="mask" wx:if="{{isAdd}}" bindtap="position"></view>
+	<view class="mask1" wx:if="{{isAdd}}">
+		<view class="m_top">
+			<view class="title">职位</view>
+			<!-- 遮罩层2 -->
+			<view class="mask_02" wx:if="{{isTwo}}" bindtap="hide"></view>
+			<view class="mask_02_01" wx:if="{{isTwo}}">
+				<scroll-view class="mask_left" scroll-y="true">
+					<view class="{{index==ind1?'no':'bot'}}" wx:for='{{9}}' style="" data-index='{{index}}' bindtap="toggle1" style="width:220rpx">
+						<image class="img" wx:if="{{index==ind1}}" src="../../static/icon_02.png"></image>
+						销售顾问
+						<image class="img1" wx:if="{{index==ind1}}" src="../../static/icon_01.png"></image>
+					</view>
+				</scroll-view>
+
+				<scroll-view class="mask_right" scroll-y="true">
+					<view class="{{index==ind2?'no':'bot'}}" wx:for='{{9}}' data-index='{{index}}' bindtap="toggle2">
+						大客户代表
+						<image class="img2" wx:if="{{index==ind2}}" src="../../static/icon_01.png"></image>
+					</view>
+				</scroll-view>
+
+			</view>
+			<!-- —————— -->
+			<scroll-view class="top_top" scroll-y="true">
+				<view class="{{index==ind?'no':'bot'}}" wx:for='{{9}}' data-index='{{index}}' bindtap="toggle">
+					<image class="img" wx:if="{{index==ind}}" src="../../static/icon_02.png"></image>
+					销售/商务拓展
+				</view>
+			</scroll-view>
+		</view>
+		<view class="m_bottom">
+			<button class="b_left" bindtap="position">取消</button>
+			<button class="b_right" bindtap="queren">确认</button>
+		</view>
+	</view>
+	<!-- ---end-- -->
+	<view class="r_02">
+		<view class="r_03">工作类型：</view>
+		<view class="r_04" bindtap="tanchuang_2" style="line-height:80rpx;font-size: 28rpx;padding: 0 25rpx;box-sizing: border-box;">{{value}}</view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">行业：</view>
+		<view class="r_04" bindtap="industry">请选择</view>
+	</view>
+		<!-- 行业弹框 -->
+	<view class="mask" wx:if="{{isInd}}" bindtap="industry"></view>
+	<view class="mask_ind" wx:if="{{isInd}}">
+		<view class="ind_top">
+			<view class="ind_title">行业</view>
+			<view class="ind_bot">
+				<button class="{{index==ind3?'tt1':'ind_bot_tt'}}" size="mini" data-indu="{{index}}" wx:for="{{8}}" wx:key="index" bindtap="toggle3" style="font-size:25rpx">高科技jishu </button>
+			</view>
+		</view>
+		<view class="m_bottom">
+			<button class="b_left" bindtap="industry">取消</button>
+			<button class="b_right">确认</button>
+		</view>
+	</view>
+	<!-- --end-- -->
+	<view class="r_02">
+		<view class="r_03">部门：</view>
+		<view class="r_04"><input placeholder="请输入" /></view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">工作描述：</view>
+		<view class="t_05"><textarea placeholder="请输入"></textarea></view>
+	</view>
+</view>
+
+<view class="r_05">提交</view>
+
+
+
+<view class="f_08" style="{{dianhua}}">
+	<view class="f_07">
+		<view class="f_14">
+			<p>类型</p>
+		</view>
+		<view class="t_06">
+			<ul>
+				<li class="{{types==1?'on':''}}" data-index="1" bindtap="type">全职</li>
+				<li class="{{types==2?'on':''}}" data-index="2" bindtap="type">兼职</li>
+				<li class="{{types==3?'on':''}}" data-index="3" bindtap="type">实习</li>
+			</ul>
+		</view>
+		<view class="f_11">
+			<view class="f_12 fl" bindtap="quxiao2">取消</view>
+			<view class="f_13 fr" bindtap="submit">提交</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+</view>

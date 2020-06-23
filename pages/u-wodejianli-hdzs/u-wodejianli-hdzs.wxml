@@ -1,0 +1,26 @@
+<view class="r_01">
+	<view class="r_02">
+		<view class="r_03">证书名字：</view>
+		<view class="r_04"><input placeholder="请输入" /></view>
+	</view>
+
+	<view class="r_02">
+		<view class="r_03">获得证书时间：</view>
+		<view class="r_04">
+			<view class="section">
+				<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+					<view class="picker">{{date}}</view>
+				</picker>
+			</view>
+		</view>
+	</view>
+
+	<view class="r_02">
+		<view class="r_03">获得证书图片：</view>
+		<view class="u_01">
+			<image bindtap="images" src="{{img}}"></image>
+		</view>
+	</view>
+</view>
+
+<view class="r_05">提交</view>

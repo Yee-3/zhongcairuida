@@ -1,0 +1,218 @@
+<view class="l_01">
+	<ul>
+		<li bindtap="">
+			<!-- <view class="l_02">综合排序</view> -->
+			<picker bindtap="position3" class="l_02" range='{{array}}' value='inda' range-key='name' bindchange="bindPickerChange">{{array[inda].name}}</picker>
+			<view class="l_04">
+				<image src="../img/f033.png"></image>
+			</view>
+		</li>
+		<li bindtap="position">
+			<view class="l_02">职位</view>
+			<view class="l_03">
+				<image src="../img/f033.png"></image>
+			</view>
+		</li>
+		<!-- 职位弹框 -->
+		<view class="mask" wx:if="{{isAdd}}" bindtap="position"></view>
+		<view class="mask1" wx:if="{{isAdd}}">
+			<view class="m_top">
+				<view class="title">职位</view>
+				<!-- 遮罩层2 -->
+				<view class="mask_02" wx:if="{{isTwo}}" bindtap="hide"></view>
+				<view class="mask_02_01" wx:if="{{isTwo}}">
+					<scroll-view class="mask_left" scroll-y="true">
+						<view class="{{index==ind1?'no':'bot'}}" wx:for='{{9}}' style="" data-index='{{index}}' bindtap="toggle1" style="width:220rpx">
+							<image class="img" wx:if="{{index==ind1}}" src="../../static/icon_02.png"></image>
+							销售顾问
+							<image class="img1" wx:if="{{index==ind1}}" src="../../static/icon_01.png"></image>
+						</view>
+					</scroll-view>
+
+					<scroll-view class="mask_right" scroll-y="true">
+						<view class="{{index==ind2?'no':'bot'}}" wx:for='{{9}}' data-index='{{index}}' bindtap="toggle2">
+							大客户代表
+							<image class="img2" wx:if="{{index==ind2}}" src="../../static/icon_01.png"></image>
+						</view>
+					</scroll-view>
+
+				</view>
+				<!-- —————— -->
+				<scroll-view class="top_top" scroll-y="true">
+					<view class="{{index==ind?'no':'bot'}}" wx:for='{{9}}' data-index='{{index}}' bindtap="toggle">
+						<image class="img" wx:if="{{index==ind}}" src="../../static/icon_02.png"></image>
+						销售/商务拓展
+					</view>
+				</scroll-view>
+			</view>
+			<view class="m_bottom">
+				<button class="b_left" bindtap="position">取消</button>
+				<button class="b_right">确认</button>
+			</view>
+		</view>
+		<!-- ---end-- -->
+		<li bindtap="position1">
+			<view class="l_02">公司</view>
+			<view class="l_03">
+				<image src="../img/f033.png"></image>
+			</view>
+		</li>
+		<!-- 公司弹窗 -->
+		<view class="mask2" wx:if="{{isAdd_T}}" bindtap="position1"></view>
+		<view class="mask2_01" wx:if="{{isAdd_T}}">
+			<view class="mask2_top">
+				<view class="top_t">
+					<view class="t_title">公司性质</view>
+					<scroll-view class="scr_02" scroll-y="true">
+						<button class="{{index==ind3?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle3" style="font-size:25rpx">外资（欧美）</button>
+					</scroll-view>
+				</view>
+				<view class="top_bb">
+					<view class="t_title">公司规模</view>
+					<scroll-view class="scr_01" scroll-y="true">
+						<button class="{{index==ind4?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle4" style="font-size:25rpx">500-1000人</button>
+					</scroll-view>
+				</view>
+			</view>
+			<view class="m_bottom">
+				<button class="b_left" bindtap="position1">取消</button>
+				<button class="b_right">确认</button>
+			</view>
+		</view>
+		<!-- --end-- -->
+		<li bindtap="position2">
+			<view class="l_02">更多</view>
+			<view class="l_03">
+				<image src="../img/f033.png"></image>
+			</view>
+		</li>
+		<!-- 更多弹框 -->
+		<view class="mask3" wx:if="{{isAdd_F}}" bindtap="position2"></view>
+		<view class="mask3_01" wx:if="{{isAdd_F}}">
+			<view class="mask3_top">
+				<view class="top3_t">
+					<view class="t3_title">薪资范围</view>
+					<scroll-view class="scr3_02" scroll-y="true">
+						<button class="{{index==ind5?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle5" style="font-size:25rpx;min-width:160rpx">20k-50k</button>
+					</scroll-view>
+				</view>
+				<view class="top3_bb">
+					<view class="t3_title">工作经验</view>
+					<scroll-view class="scr3_01" scroll-y="true">
+						<button class="{{index==ind6?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle6" style="font-size:25rpx;min-width:160rpx">1~3年</button>
+					</scroll-view>
+				</view>
+				<view class="top3_three">
+					<view class="t3_title">学历要求</view>
+					<scroll-view class="scr3_03" scroll-y="true">
+						<button class="{{index==ind7?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle7" style="font-size:25rpx">本科</button>
+					</scroll-view>
+				</view>
+			</view>
+			<view class="m_bottom">
+				<button class="b_left" bindtap="position2">取消</button>
+				<button class="b_right">确认</button>
+			</view>
+		</view>
+		<!-- --end-- -->
+	</ul>
+</view>
+
+<view class="l_05">
+	<view class="h_10">
+		<view class="h_11">
+			<view class="fl h_12">行政助理</view>
+			<view class="fr h_13">9K-13K</view>
+		</view>
+		<view class="h_14">
+			<view class="fl h_15">
+				<p>济南市市中区</p><span>|</span>
+				<p>经验不限</p><span>|</span>
+				<p>本科</p>
+			</view>
+			<view class="fr h_16">4天前</view>
+		</view>
+		<view class="h_17">
+			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
+		</view>
+		<view class="j_01">
+			<view class="j_02 fl">
+				<image src="../img/f031.png"></image>
+			</view>
+			<view class="j_03 fl">成都锦江思儿康诊所有限公司</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+	<view class="h_10">
+		<view class="h_11">
+			<view class="fl h_12">行政助理</view>
+			<view class="fr h_13">9K-13K</view>
+		</view>
+		<view class="h_14">
+			<view class="fl h_15">
+				<p>济南市市中区</p><span>|</span>
+				<p>经验不限</p><span>|</span>
+				<p>本科</p>
+			</view>
+			<view class="fr h_16">4天前</view>
+		</view>
+		<view class="h_17">
+			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
+		</view>
+		<view class="j_01">
+			<view class="j_02 fl">
+				<image src="../img/f031.png"></image>
+			</view>
+			<view class="j_03 fl">成都锦江思儿康诊所有限公司</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+	<view class="h_10">
+		<view class="h_11">
+			<view class="fl h_12">行政助理</view>
+			<view class="fr h_13">9K-13K</view>
+		</view>
+		<view class="h_14">
+			<view class="fl h_15">
+				<p>济南市市中区</p><span>|</span>
+				<p>经验不限</p><span>|</span>
+				<p>本科</p>
+			</view>
+			<view class="fr h_16">4天前</view>
+		</view>
+		<view class="h_17">
+			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
+		</view>
+		<view class="j_01">
+			<view class="j_02 fl">
+				<image src="../img/f031.png"></image>
+			</view>
+			<view class="j_03 fl">成都锦江思儿康诊所有限公司</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+	<view class="h_10">
+		<view class="h_11">
+			<view class="fl h_12">行政助理</view>
+			<view class="fr h_13">9K-13K</view>
+		</view>
+		<view class="h_14">
+			<view class="fl h_15">
+				<p>济南市市中区</p><span>|</span>
+				<p>经验不限</p><span>|</span>
+				<p>本科</p>
+			</view>
+			<view class="fr h_16">4天前</view>
+		</view>
+		<view class="h_17">
+			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
+		</view>
+		<view class="j_01">
+			<view class="j_02 fl">
+				<image src="../img/f031.png"></image>
+			</view>
+			<view class="j_03 fl">成都锦江思儿康诊所有限公司</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+</view>

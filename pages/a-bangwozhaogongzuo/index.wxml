@@ -1,0 +1,165 @@
+<!--index.wxml-->
+<view class="a_00">
+<!-- 弹框 -->
+	<view class="mask" wx:if="{{isAdd}}" bindtap="zhiwei"></view>
+	<view class="mask1" wx:if="{{isAdd}}">
+		<view class="m_top">
+			<scroll-view class="t_left" scroll-y="true">
+				<view class="{{index==ind?'no':'bot'}}"  wx:for='{{9}}' data-index='{{index}}' bindtap="toggle" >财务</view>
+				<view class="bot" >人力资源</view>
+				<view class="bot" >行政</view>
+				<view class="bot" >财务</view>
+			</scroll-view>
+			<scroll-view class="t_right" scroll-y="true">
+				<button class="{{index==ind1?'no1':'bott'}}" size="mini" wx:for="{{3}}" data-index='{{index}}' bindtap="toggle1" style="font-size:22rpx">金融/证卷/资产</button>
+				<!-- <button class="bott" size="mini" wx:for="{{2}}">金融/证卷/资产</button> -->
+			</scroll-view>
+		</view>
+		<view class="m_bottom">
+			<button class="b_left" bindtap="zhiwei">取消</button>
+			<button class="b_right">确认</button>
+
+		</view>
+	</view>
+	<!-- --end-- -->
+	<view class="a_01">
+		<view class="a_02">您的期望薪资（月）是多少？</view>
+		<view class="a_03">
+			<ul>
+				<li class='{{num==0?"on":""}}' bindtap="active" data-num='0'>
+					<p>3K以下</p>
+				</li>
+				<li class='{{num==1?"on":""}}' bindtap="active" data-num='1'>
+					<p>3~5K</p>
+				</li>
+				<li class='{{num==2?"on":""}}' bindtap="active" data-num='2'>
+					<p>5~10K</p>
+				</li>
+				<li class='{{num==3?"on":""}}' bindtap="active" data-num='3'>
+					<p>10~15K</p>
+				</li>
+				<li class='{{num==4?"on":""}}' bindtap="active" data-num='4'>
+					<p>15~20K</p>
+				</li>
+				<li class='{{num==5?"on":""}}' bindtap="active" data-num='5'>
+					<p>20~25K</p>
+				</li>
+				<li class='{{num==6?"on":""}}' bindtap="active" data-num='6'>
+					<p>25~50K</p>
+				</li>
+				<li class='{{num==7?"on":""}}' bindtap="active" data-num='7'>
+					<p>面议</p>
+				</li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+	<view class="a_04">
+		<view class="a_02">类型</view>
+		<view class="a_05">
+			<ul>
+				<li class='{{index==1?"on":""}}' data-index='1' bindtap="activeOne">
+					<p>全职</p>
+				</li>
+				<li class='{{index==2?"on":""}}' data-index='2' bindtap="activeOne">
+					<p>兼职</p>
+				</li>
+				<li class='{{index==3?"on":""}}' data-index='3' bindtap="activeOne">
+					<p>实习</p>
+				</li>
+				<li class='{{index==4?"on":""}}' data-index='4' bindtap="activeOne">
+					<p>全/兼职</p>
+				</li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+	<view class="a_04">
+		<view class="a_02">您期望的职位类别</view>
+		<view class="a_06">
+			<view class="section" bindtap="zhiwei">
+				<view class="picker">这里有个弹窗-帮我找工作-期望职位弹框</view>
+			</view>
+		</view>
+	</view>
+	<view class="a_04">
+		<view class="a_02">您期望的工作地点（多选）</view>
+		<view class="a_06">
+			<view class="section">
+				<!-- <picker value="{{index}}" range="{{array}}"> -->
+					<view class="picker" bindtap="weizhi">请选择</view>
+				<!-- </picker> -->
+			</view>
+		</view>
+	</view>
+	<view class="a_04">
+		<view class="a_02">您当前的求职状态</view>
+		<view class="a_07">
+			<ul>
+				<li class='{{num1==0?"on":""}}' data-num1='0' bindtap="activeTwo">
+					<p>求职中</p>
+				</li>
+				<li class='{{num1==1?"on":""}}' data-num1='1' bindtap="activeTwo">
+					<p>随便看看</p>
+				</li>
+				<li class='{{num1==2?"on":""}}' data-num1='2' bindtap="activeTwo">
+					<p>暂时不考虑</p>
+				</li>
+				<li class='{{num1==3?"on":""}}' data-num1='3' bindtap="activeTwo">
+					<p>有好机会考虑</p>
+				</li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+	<view class="a_04">
+		<view class="a_02">您可接受最快的到岗时间</view>
+		<view class="a_07">
+			<ul>
+				<li class="{{num2==1?'on':''}}" data-num2='1' bindtap="activeThree" >
+					<p>随时</p>
+				</li>
+				<li class="{{num2==2?'on':''}}" data-num2='2' bindtap="activeThree">
+					<p>1个月内</p>
+				</li>
+				<li class="{{num2==3?'on':''}}" data-num2='3' bindtap="activeThree">
+					<p>3个月内</p>
+				</li>
+				<li class="{{num2==4?'on':''}}" data-num2='4' bindtap="activeThree">
+					<p>3个月内</p>
+				</li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+	<view class="a_04">
+		<view class="a_02">您的名字</view>
+		<view class="a_08">
+			<input placeholder="您的名称" />
+		</view>
+	</view>
+	<view class="a_04">
+		<view class="a_02">您的联系方式</view>
+		<view class="a_08">
+			<input placeholder="14753701234" />
+		</view>
+	</view>
+
+	<view class="a_09">
+		<view class="a_10">
+			<view class="a_12">
+				<image src="../img/f001.png"></image>
+			</view>
+			<view class="a_13">
+				<p>温馨提示</p>
+			</view>
+		</view>
+		<view class="a_11">
+			<p>请保持电话通畅，方便工作人员及时联系您！</p>
+		</view>
+	</view>
+
+	<view class="a_14">
+		<p>提交</p>
+	</view>
+</view>

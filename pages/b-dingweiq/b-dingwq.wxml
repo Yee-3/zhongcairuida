@@ -1,0 +1,130 @@
+<!--pages/b-dingwq/b-dingwq.wxml-->
+<view class="">
+	<view class="b_01">
+		<view class="b_02">
+			<view class="b_03"><image src="../img/f002.png"></image></view>
+			<view class="b_04"><p>当前位置</p></view>
+		</view>
+		<view class="b_05">
+			<ul>
+				<li class="on"><p>济南</p></li>
+			</ul>
+		</view>
+		<view class="b_06">
+			<ul>
+				<li class="on"><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+	<view class="b_01">
+		<view class="b_02">
+			<view class="b_08"><image src="../img/f003.png"></image></view>
+			<view class="b_04"><p>热门城市</p></view>
+		</view>
+		<view class="b_07">
+			<ul>
+				<li class="on"><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+	<view class="b_01">
+		<view class="b_02">
+			<view class="b_04"><p>A</p></view>
+		</view>
+		<view class="b_07">
+			<ul>
+				<li class="on"><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+	<view class="b_01">
+		<view class="b_02">
+			<view class="b_04"><p>B</p></view>
+		</view>
+		<view class="b_07">
+			<ul>
+				<li class="on"><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+	<view class="b_01">
+		<view class="b_02">
+			<view class="b_04"><p>C</p></view>
+		</view>
+		<view class="b_07">
+			<ul>
+				<li class="on"><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<li><p>济南</p></li>
+				<view class="w-clear"></view>
+			</ul>
+		</view>
+	</view>
+</view>
+
+<view class="b_09">
+	<ul>
+		<li>#</li>
+		<li>A</li>
+		<li>B</li>
+		<li>C</li>
+		<li>D</li>
+		<li>E</li>
+		<li>F</li>
+		<li>G</li>
+		<li>H</li>
+		<li>J</li>
+		<li>K</li>
+		<li>L</li>
+		<li>M</li>
+		<li>N</li>
+		<li>O</li>
+		<li>P</li>
+		<li>Q</li>
+		<li>R</li>
+		<li>S</li>
+		<li>T</li>
+		<li>U</li>
+		<li>V</li>
+		<li>W</li>
+		<li>X</li>
+		<li>Y</li>
+		<li>Z</li>
+	</ul>
+</view>
+
+
+
+
+
+
+
+
+

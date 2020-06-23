@@ -1,0 +1,94 @@
+<view class="r_01">
+	<view class="r_02">
+		<view class="r_03">学校名字：</view>
+		<view class="r_04"><input placeholder="请输入您的学校名称" /></view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">教育的起止时间：</view>
+		<view class="t_01">
+			<view class="t_02 fl">
+				<view class="section">
+					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
+						<view class="picker">{{date}}</view>
+					</picker>
+				</view>
+			</view>
+			<view class="t_03 fl">———</view>
+			<view class="t_04 fr">
+				<view class="section">
+					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange1">
+						<view class="picker">{{date1}}</view>
+					</picker>
+				</view>
+			</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">学历：</view>
+		<view class="r_04">
+			<view class="section1" bindtap="educat">
+				<!-- <picker value="{{index}}" range="{{array}}"> -->
+					<view class="picker1">{{valu}}</view>
+				<!-- </picker> -->
+			</view>
+		</view>
+	</view>
+	<!-- 学历弹框 -->
+	<view class="mask" wx:if="{{isEdu}}" bindtap="educat"></view>
+	<view class="mask_edu" wx:if="{{isEdu}}">
+		<view class="edu_top">
+			<view class="edu_title">学历</view>
+			<view class="edu_bot">
+				<button class="{{edu==1?'no1':'no'}}" size="mini" data-edu="1" bindtap="toggle" style="font-size:24rpx;">大专</button>
+				<button class="{{edu==2?'no1':'no'}}" size="mini" data-edu="2" bindtap="toggle" style="font-size:24rpx;">本科</button>
+				<button class="{{edu==3?'no1':'no'}}" size="mini" data-edu="3" bindtap="toggle" style="font-size:24rpx;">硕士</button>
+				<button class="{{edu==4?'no1':'no'}}" size="mini" data-edu="4" bindtap="toggle" style="font-size:24rpx;">博士</button>
+			</view>
+		</view>
+		<view class="m_bottom">
+			<button class="b_left" bindtap="educat">取消</button>
+			<button class="b_right" bindtap="con">确认</button>
+		</view>
+	</view>
+	<!-- ---end--- -->
+	<view class="r_02">
+		<view class="r_03">专业：</view>
+		<view class="r_04">
+			<view class="section1">
+				<!-- <picker value="{{index}}" range="{{array}}"> -->
+					<view class="r_04"><input placeholder="请输入" /></view>
+				<!-- </picker> -->
+			</view>
+		</view>
+	</view>
+	<view class="r_02">
+		<view class="r_03">专业描述：</view>
+		<view class="t_05"><textarea placeholder="请输入"></textarea></view>
+	</view>
+</view>
+
+<view class="r_05">提交</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

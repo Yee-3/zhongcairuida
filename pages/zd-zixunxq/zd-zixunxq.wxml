@@ -1,0 +1,47 @@
+<view class="zd_01">
+	<view class="f_02">
+		<p>疫情后企业依旧是传统的用工形式？太落后了</p>
+	</view>
+	<view class="e_05">
+		<view class="e_06 fl">
+			<p>2020-05-11</p>
+		</view>
+		<view class="e_07 fl">
+			<view class="e_08 fl">
+				<image src="../img/f020.png"></image>
+			</view>
+			<view class="e_09 fr">
+				<p>4600</p>
+			</view>
+		</view>
+		<view class="w-clear"></view>
+	</view>
+</view>
+
+<view class="zd_02">
+	<view class="zd_03">
+		<view class="zd_04"><image src="../img/f078.png"></image></view>
+		<view class="zd_05"><p>1</p></view>
+	</view>
+	<view class="zd_06">2020年，在这场突如其来的灾难面前，各行各业都在经受着危机的考验，众多企业面临着生存危机。“星巴克、海底捞、西贝等企业接连受创，让众多企业陷入焦虑，迎面而来的是高昂的人工成本：疫情期间员工无法正常上岗，但按照法律规定企业还需要支付工资，如果要临时解除劳动合同又可能要支付大笔的违约金。“星巴克、海底捞、西贝等企业接连受创，让众多企业陷入焦虑，迎面而来的是高昂的人工成本：疫情期间员工无法正常上岗，但按照法律规定企业还需要支付工资，如果要临时解除劳动合同又可能要支付大笔的违约金。</view>
+    <view class="zd_07"><image src="../img/f079.png"></image></view>
+</view>
+<view class="zd_02">
+	<view class="zd_03">
+		<view class="zd_04"><image src="../img/f078.png"></image></view>
+		<view class="zd_05"><p>2</p></view>
+	</view>
+	<view class="zd_06">2020年，在这场突如其来的灾难面前，各行各业都在经受着危机的考验，众多企业面临着生存危机。“星巴克、海底捞、西贝等企业接连受创，让众多企业陷入焦虑，迎面而来的是高昂的人工成本：疫情期间员工无法正常上岗，但按照法律规定企业还需要支付工资，如果要临时解除劳动合同又可能要支付大笔的违约金。“星巴克、海底捞、西贝等企业接连受创，让众多企业陷入焦虑，迎面而来的是高昂的人工成本：疫情期间员工无法正常上岗，但按照法律规定企业还需要支付工资，如果要临时解除劳动合同又可能要支付大笔的违约金。</view>
+    <view class="zd_07"><image src="../img/f079.png"></image></view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
