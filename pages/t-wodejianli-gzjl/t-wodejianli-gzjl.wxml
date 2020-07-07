@@ -7,23 +7,24 @@
 		<view class="r_03">工作的起止时间：</view>
 		<view class="t_01">
 			<view class="t_02 fl">
-				<view class="section">
-					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange">
-						<view class="picker">{{date}}</view>
-					</picker>
+				<view class="section" bindtap="bindDateChange" data-de="1">
+					<view class="picker">{{date}}</view>
 				</view>
 			</view>
+			<!-- 时间弹框 -->
+			<date-picker id="star-date" value="{{datePickerValue}}" isShow="{{datePickerIsShow}}" bindsureclick="datePickerOnSureClick" />
+
 			<view class="t_03 fl">———</view>
 			<view class="t_04 fr">
-				<view class="section">
-					<picker mode="date" value="{{date}}" start="2015-09-01" end="2017-09-01" bindchange="bindDateChange1">
-						<view class="picker">{{date1}}</view>
-					</picker>
+				<view class="section" bindtap="bindDateChange1" data-de="2">
+					<view class="picker">{{date1}}</view>
 				</view>
 			</view>
+			<date-picker id="end-date" value="{{datePickerValue}}" isShow="{{datePickerIsShow}}" bindsureclick="datePickerOnSureClick" />
 			<view class="w-clear"></view>
 		</view>
 	</view>
+
 	<view class="r_02">
 		<view class="r_03">您在公司担任的职位：</view>
 		<view class="r_04" bindtap="position">{{value}}</view>
@@ -74,7 +75,7 @@
 		<view class="r_03">行业：</view>
 		<view class="r_04" bindtap="industry">请选择</view>
 	</view>
-		<!-- 行业弹框 -->
+	<!-- 行业弹框 -->
 	<view class="mask" wx:if="{{isInd}}" bindtap="industry"></view>
 	<view class="mask_ind" wx:if="{{isInd}}">
 		<view class="ind_top">

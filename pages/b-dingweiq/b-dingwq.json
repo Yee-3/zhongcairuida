@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "cityList":"../components/cityListCom/cityListCom"
+  },
   "navigationBarTitleText": "选择城市"
 }

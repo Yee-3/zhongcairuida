@@ -2,32 +2,62 @@
 	<view class="h_02">
 		<ul>
 			<li>
-				<view class="h_03">投递列表</view>
-				<view class=""></view>
+				<view class="{{idn==1?'h_04':'h_03'}}" bindtap="toggleTitle" data-index="1">投递列表</view>
+				<view class="{{idn==1?'h_05':''}}"></view>
 			</li>
 			<li>
-				<view class="h_03">面试状态</view>
-				<view class=""></view>
+				<view class="{{idn==2?'h_04':'h_03'}}" bindtap="toggleTitle" data-index="2">面试状态</view>
+				<view class="{{idn==2?'h_05':''}}"></view>
 			</li>
 			<li>
-				<view class="h_04">入职状态</view>
-				<view class="h_05"></view>
+				<view class="{{idn==3?'h_04':'h_03'}}" bindtap="toggleTitle" data-index="3">入职状态</view>
+				<view class="{{idn==3?'h_05':''}}"></view>
 			</li>
 		</ul>
 	</view>
-	<view class="h_06">
+	<!-- 面试状态 -->
+	<view class="h_06" wx:if="{{idn==2?true:false}}">
 		<ul>
-			<li class="on">
-				<view class="h_07"></view>
-				<view class="h_08">邀面试</view>
+			<li class="{{ind==1?'on':''}}">
+				<view class="h_07">
+					<image wx:if="{{idn==1}}" src="../img/f026.png"></image>
+				</view>
+				<view class="h_08" data-index="1" bindtap="toggleType">待确认</view>
 			</li>
-			<li>
-				<view class="h_07"></view>
-				<view class="h_08">已同意</view>
+			<li class="{{ind==2?'on':''}}">
+				<view class="h_07">
+					<image wx:if="{{idn==2}}" src="../img/f026.png"></image>
+				</view>
+				<view class="h_08" data-index="2" bindtap="toggleType">已同意</view>
 			</li>
-			<li>
-				<view class="h_07"><image src="../img/f026.png"></image></view>
-				<view class="h_08">已拒绝</view>
+			<li class="{{ind==3?'on':''}}">
+				<view class="h_07">
+					<image wx:if="{{idn==3}}" src="../img/f026.png"></image>
+				</view>
+				<view class="h_08" data-index="3" bindtap="toggleType">已拒绝</view>
+			</li>
+		</ul>
+	</view>
+	<!-- 入职状态 -->
+	<view class="h_06" wx:if="{{idn==3?true:false}}">
+		<ul>
+			<li class="{{ind1==1?'on':''}}">
+				<view class="h_07">
+					<image wx:if="{{idn==1}}" src="../img/f026.png"></image>
+				</view>
+				<view class="h_08" data-index="1" bindtap="toggleRu">邀入职</view>
+			</li>
+			<li class="{{ind1==2?'on':''}}">
+				<view class="h_07">
+					<image wx:if="{{idn==2}}" src="../img/f026.png"></image>
+				</view>
+				<view class="h_08" data-index="2" bindtap="toggleRu">已同意</view>
+			</li>
+			<li class="{{ind1==3?'on':''}}">
+				<view class="h_07">
+					<image wx:if="{{idn==3}}" src="../img/f026.png"></image>
+				</view>
+				<view class="h_08" data-index="3" bindtap="toggleRu">已拒绝</view>
 			</li>
 		</ul>
 	</view>
@@ -39,24 +69,26 @@
 			<view class="fl h_12">行政助理</view>
 			<view class="fr h_13">已同意</view>
 		</view>
-		
+
 		<view class="h_14">
 			<view class="fl h_15">
-				<p>济南市市中区</p><span>|</span><p>经验不限</p><span>|</span><p>本科</p>
+				<p>济南市市中区</p><span>|</span>
+				<p>经验不限</p><span>|</span>
+				<p>本科</p>
 			</view>
 			<view class="fr h_16">4天前</view>
 		</view>
-		
+
 		<view class="h_17">
 			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
 		</view>
-		
+
 		<view class="h_18">
 			<view class="h_19 fl">面试时间：</view>
-			<view class="h_20 fl">2020-05-20  13:30</view>
+			<view class="h_20 fl">2020-05-20 13:30</view>
 			<view class="w-clear"></view>
 		</view>
-		
+
 		<view class="h_21">
 			<ul>
 				<li bindtap="tanchuang">取消</li>
@@ -64,24 +96,70 @@
 			</ul>
 		</view>
 	</view>
-	
+
+	<!-- 面试状态-已同意 -->
+	<view class="h_10" wx:if="{{(ind==2&&idn==2)?true:false}}">
+		<view class="h_11">
+			<view class="fl h_12">行政助理</view>
+			<view class="fr h_13">已同意</view>
+		</view>
+		<view class="h_14">
+			<view class="fl h_15">
+				<p>济南市市中区</p><span>|</span>
+				<p>经验不限</p><span>|</span>
+				<p>本科</p>
+			</view>
+			<view class="fr h_16">4天前</view>
+		</view>
+		<view class="h_18">
+			<view class="h_19 fl">面试时间：</view>
+			<view class="h_20 fl">2020-05-20 13:30</view>
+			<view class="w-clear"></view>
+		</view>
+		<view class="h_22">
+			<view class="h_23">
+				<image src="../img/f027.png"></image>
+			</view>
+			<view class="h_24">
+				<view class="h_27">
+					<view class="h_26 fl">
+						<image src="../img/f029.png"></image>
+					</view>
+					<view class="h_25 fl">
+						<p>面试地点</p><span>（请按照约定时间和地点参加面试）</span>
+					</view>
+				</view>
+				<view class="h_28">地址：北京市-昌平区南彩镇彩祥东路16号29幢1层1</view>
+			</view>
+			<view class="h_29">
+				<image src="../img/f030.png"></image>
+			</view>
+			<view class="h_30">
+				<image src="../img/f028.png"></image>
+			</view>
+		</view>
+	</view>
+
+
 	<view class="h_31">
 		<view class="h_11">
 			<view class="fl h_12">行政助理</view>
 			<view class="fr h_13">已同意</view>
 		</view>
-		
+
 		<view class="h_14">
 			<view class="fl h_15">
-				<p>济南市市中区</p><span>|</span><p>经验不限</p><span>|</span><p>本科</p>
+				<p>济南市市中区</p><span>|</span>
+				<p>经验不限</p><span>|</span>
+				<p>本科</p>
 			</view>
 			<view class="fr h_16">4天前</view>
 		</view>
-		
+
 		<view class="h_17">
 			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
 		</view>
-		
+
 		<view class="h_18">
 			<view class="h_19 fl">原因：</view>
 			<view class="h_20 fl">其他原因</view>
@@ -93,24 +171,26 @@
 			<view class="w-clear"></view>
 		</view>
 	</view>
-	
+
 	<view class="h_31">
 		<view class="h_11">
 			<view class="fl h_12">行政助理</view>
 			<view class="fr h_13">已同意</view>
 		</view>
-		
+
 		<view class="h_14">
 			<view class="fl h_15">
-				<p>济南市市中区</p><span>|</span><p>经验不限</p><span>|</span><p>本科</p>
+				<p>济南市市中区</p><span>|</span>
+				<p>经验不限</p><span>|</span>
+				<p>本科</p>
 			</view>
 			<view class="fr h_16">4天前</view>
 		</view>
-		
+
 		<view class="h_17">
 			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
 		</view>
-		
+
 		<view class="h_18">
 			<view class="h_19 fl">原因：</view>
 			<view class="h_20 fl">面试时间不合适</view>
@@ -118,7 +198,7 @@
 		</view>
 		<view class="h_18">
 			<view class="h_19 fl">请写下合适的面试时间：</view>
-			<view class="h_20 fl">2020.05.13 周三 下午   2020.05.13 周三 下午    2020.05.13 周三 下午</view>
+			<view class="h_20 fl">2020.05.13 周三 下午 2020.05.13 周三 下午 2020.05.13 周三 下午</view>
 			<view class="w-clear"></view>
 		</view>
 	</view>
@@ -129,13 +209,14 @@
 	<view class="f_07">
 		<view class="f_09">
 			<p>原因:</p>
-			<picker value="{{index}}" range="{{array}}">
+			<!-- <picker value="{{index}}" range="{{array}}">
 				<view class="picker">这里有个弹窗</view>
-			</picker>
+			</picker> -->
+			<Select prop-array='{{selectArray}}' bind:myget='getDate'></Select>
 		</view>
 		<view class="f_10">
-			<p>姓名:</p>
-			<textarea placeholder="原因"></textarea>
+			<p>{{valu}}</p>
+			<textarea placeholder="{{value}}"></textarea>
 		</view>
 		<view class="f_11">
 			<view class="f_12 fl" bindtap="quxiao2">取消</view>
@@ -144,30 +225,3 @@
 		</view>
 	</view>
 </view>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

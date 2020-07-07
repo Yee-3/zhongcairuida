@@ -41,6 +41,21 @@ quxiao2: function() {
       url: '../v-wodejianli-jcxx/v-wodejianli-jcxx',
     })
   },
+  phone(){
+    wx.makePhoneCall({
+      phoneNumber: '400-061235'
+    })
+  },
+  zhaopin(){
+    wx.redirectTo({
+      url: '../p-qiyeduan/p-qiyeduan',
+    })
+  },
+  about(){
+    wx.navigateTo({
+      url: '../g-guanyuwomen/g-guanyuwomen',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

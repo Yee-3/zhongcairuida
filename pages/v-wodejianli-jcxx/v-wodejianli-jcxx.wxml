@@ -19,10 +19,10 @@
 		<view class="v_04">生日</view>
 		<view class="v_05">
 			<view class="v_06 fl">
-				<view class="section">
-					<picker value="{{index}}" range="{{array}}">
-						<view class="picker">请选择</view>
-					</picker>
+				<view class="section" bindtap="showDatePicker" >
+					<!-- <picker value="{{index}}" range="{{array}}"> -->
+						<view class="picker">{{date_value}}</view>
+					<!-- </picker> -->
 				</view>
 			</view>
 			<view class="v_07 fr">
@@ -30,6 +30,11 @@
 			</view>
 		</view>
 	</view>
+<date-picker
+    id="date-picker"
+    value="{{datePickerValue}}" 
+    isShow="{{datePickerIsShow}}"
+    bindsureclick="datePickerOnSureClick" />
 
 	<view class="v_03">
 		<view class="v_04">性别</view>
@@ -66,15 +71,18 @@
 		<view class="v_05">
 			<view class="v_06 fl">
 				<view class="section">
-					<picker value="{{index}}" range="{{array}}">
-						<view class="picker">请选择</view>
-					</picker>
+					<!-- <picker value="{{index}}" range="{{array}}"> -->
+						<view class="picker" bindtap="show">{{type_content}}</view>
+						
+						<spring id="spring" title="求职状态" confirmText="确定" cancelText="取消" content="{{springContent}}" bind:confirm="handleConfirmDialog">
+							</spring>
+					<!-- </picker> -->
 				</view>
 			</view>
 			<view class="v_07 fr">
 				<image src="../img/f068.png"></image>
 			</view>
-		</view>
+		</view>  
 	</view>
 
 	<view class="v_03">
@@ -83,7 +91,7 @@
 			<view class="v_06 fl">
 				<view class="section">
 					<!-- <picker value="{{index}}" range="{{array}}"> -->
-						<view class="picker" bindtap="educat">{{valu2}}</view>
+					<view class="picker" bindtap="educat">{{valu2}}</view>
 					<!-- </picker> -->
 				</view>
 			</view>
@@ -92,7 +100,7 @@
 			</view>
 		</view>
 	</view>
-<!-- 学历弹框 -->
+	<!-- 学历弹框 -->
 	<view class="mask" wx:if="{{isEdu}}" bindtap="educat"></view>
 	<view class="mask_edu" wx:if="{{isEdu}}">
 		<view class="edu_top">
@@ -115,9 +123,9 @@
 		<view class="v_05">
 			<view class="v_06 fl">
 				<view class="section">
-					<picker value="{{index}}" range="{{array}}">
-						<view class="picker">请选择</view>
-					</picker>
+					<!-- <picker value="{{index}}" range="{{array}}"> -->
+						<view class="picker"><input placeholder="请输入" /></view>
+					<!-- </picker> -->
 				</view>
 			</view>
 			<view class="v_07 fr">
@@ -149,9 +157,9 @@
 		<view class="v_05">
 			<view class="v_06 fl">
 				<view class="section">
-					<picker value="{{index}}" range="{{array}}">
-						<view class="picker">请选择</view>
-					</picker>
+					<!-- <picker value="{{index}}" range="{{array}}"> -->
+						<view class="picker"><input placeholder="请输入" /></view>
+					<!-- </picker> -->
 				</view>
 			</view>
 			<view class="v_07 fr">

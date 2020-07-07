@@ -5,20 +5,23 @@ Page({
    * 页面的初始数据
    */
   data: {
+    date1: '请选择',
+    datePickerValue: ['', '', ''],
+    datePickerIsShow: false,
     dianhua: 'display:none',
-    date: '2016-09-01',
+    date: '请选择',
     time: '12:01',
-    date1: '2018-09-01',
     time1: '12:01',
     types: '',
     value: '请选择',
-    isAdd:false,
-    isTwo:false,
+    isAdd: false,
+    isTwo: false,
     isInd: false,
-    ind:'x',
-    ind1:'',
-    ind2:'',
-    ind3:'0',
+    ind: 'x',
+    ind1: '',
+    ind2: '',
+    ind3: '0',
+    data_index:''
   },
 
   /**
@@ -28,29 +31,41 @@ Page({
 
   },
   // 职位遮罩层中的函数
-  toggle(e){
-    this.setData({ ind:e.currentTarget.dataset['index']})
-    var two=this.data.isTwo
-    this.setData({isTwo:!two})
+  toggle(e) {
+    this.setData({
+      ind: e.currentTarget.dataset['index']
+    })
+    var two = this.data.isTwo
+    this.setData({
+      isTwo: !two
+    })
   },
-  toggle1(e){
-    this.setData({ ind1:e.currentTarget.dataset['index']})
+  toggle1(e) {
+    this.setData({
+      ind1: e.currentTarget.dataset['index']
+    })
   },
-  toggle2(e){
-    this.setData({ ind2:e.currentTarget.dataset['index']})
+  toggle2(e) {
+    this.setData({
+      ind2: e.currentTarget.dataset['index']
+    })
   },
-  position(){
-	  var add=this.data.isAdd
-    this.setData({isAdd:!add})	  
+  position() {
+    var add = this.data.isAdd
+    this.setData({
+      isAdd: !add
+    })
   },
-  hide(){
-    var two=this.data.isTwo
-    this.setData({isTwo:!two})
+  hide() {
+    var two = this.data.isTwo
+    this.setData({
+      isTwo: !two
+    })
   },
-  zhiDetail(){
+  zhiDetail() {
     console.log(3333)
     wx.navigateTo({
-      url:'../zc-zhiweixq/zc-zhiweixq'
+      url: '../zc-zhiweixq/zc-zhiweixq'
     })
   },
   // --end--
@@ -61,34 +76,13 @@ Page({
       isInd: !ind
     })
   },
-  toggle3(e){
-    this.setData({ ind3:e.currentTarget.dataset['index']})
+  toggle3(e) {
+    this.setData({
+      ind3: e.currentTarget.dataset['index']
+    })
   },
   // --end---
-  bindDateChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      date: e.detail.value
-    })
-  },
-  bindTimeChange: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      time: e.detail.value
-    })
-  },
-  bindDateChange1: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      date1: e.detail.value
-    })
-  },
-  bindTimeChange1: function (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
-    this.setData({
-      time1: e.detail.value
-    })
-  },
+  
   tanchuang_2: function () {
     this.setData({
       dianhua: 'display:block'
@@ -115,14 +109,14 @@ Page({
       this.setData({
         value: '兼职'
       })
-    }else{
+    } else {
       this.setData({
-        value:'实习'
+        value: '实习'
       })
     }
 
   },
-
+  
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -170,5 +164,35 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  // 选择时间
+  bindDateChange: function (e) {
+    this.setData({
+      datePickerIsShow: true,
+      data_index:e.currentTarget.dataset.de
+    });
+  },
+  bindDateChange1: function (e) {
+    console.log(this.data.datePickerIsShow)
+    this.setData({
+      datePickerIsShow: true,
+      data_index:e.currentTarget.dataset.de
+    });
+  },
+
+  datePickerOnSureClick: function (e) {
+    if(this.data.data_index==1){
+      this.setData({
+        date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+        datePickerValue: e.detail.value,
+        datePickerIsShow: false,
+      })
+    }else{
+      this.setData({
+        date1: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+        datePickerValue: e.detail.value,
+        datePickerIsShow: false,
+      })
+    }
+  },
 })

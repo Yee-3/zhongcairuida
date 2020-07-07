@@ -112,7 +112,7 @@
   left: 50rpx;
   z-index: 9999;
   top: 320rpx;
-  text-align: center;
+  /* text-align: center; */
 }
 
 .mar_top {
@@ -128,7 +128,7 @@
 .mar_bot{
   padding-left: 20rpx;
   margin-bottom: 40rpx;
-  text-align: center;
+  /* text-align: center; */
 }
 .but{
   text-align: center;

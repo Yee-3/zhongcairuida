@@ -1,17 +1,28 @@
 <view class="l_01">
 	<ul>
-		<li bindtap="">
-			<!-- <view class="l_02">综合排序</view> -->
-			<picker bindtap="position3" class="l_02" range='{{array}}' value='inda' range-key='name' bindchange="bindPickerChange">{{array[inda].name}}</picker>
-			<view class="l_04">
-				<image src="../img/f033.png"></image>
+		<li bindtap="position3" style="width:30%">
+			<view class="l_02">{{z_val}}
+				<image class="image" src="../img/f033.png"></image>
 			</view>
 		</li>
-		<li bindtap="position">
-			<view class="l_02">职位</view>
-			<view class="l_03">
-				<image src="../img/f033.png"></image>
+		<!-- 综合排序弹框 -->
+		<view class="mask4" wx:if="{{isAdd_S}}" bindtap="position3"></view>
+		<view class="mask4_01" wx:if="{{isAdd_S}}">
+			<view class="mask4_top">
+				<button class="{{m_zong==1?'zong':'z'}}" data-index="1" bindtap="sixChange">综合排序</button>
+				<button class="{{m_zong==2?'zong':'z'}}" data-index="2" bindtap="sixChange">最新发布优先</button>
 			</view>
+			<view class="m_bottom">
+				<button class="b_left" bindtap="position3">取消</button>
+				<button class="b_right" bindtap="confirm">确认</button>
+			</view>
+		</view>
+		<!-- --end-- -->
+		<li bindtap="position" style="width:23%">
+			<view class="l_02">职位
+			<image class="image" src="../img/f033.png"></image>
+			</view>
+			
 		</li>
 		<!-- 职位弹框 -->
 		<view class="mask" wx:if="{{isAdd}}" bindtap="position"></view>
@@ -51,11 +62,11 @@
 			</view>
 		</view>
 		<!-- ---end-- -->
-		<li bindtap="position1">
-			<view class="l_02">公司</view>
-			<view class="l_03">
-				<image src="../img/f033.png"></image>
+		<li bindtap="position1" style="width:23%">
+			<view class="l_02">公司
+			<image class="image" src="../img/f033.png"></image>
 			</view>
+		
 		</li>
 		<!-- 公司弹窗 -->
 		<view class="mask2" wx:if="{{isAdd_T}}" bindtap="position1"></view>
@@ -80,10 +91,9 @@
 			</view>
 		</view>
 		<!-- --end-- -->
-		<li bindtap="position2">
-			<view class="l_02">更多</view>
-			<view class="l_03">
-				<image src="../img/f033.png"></image>
+		<li bindtap="position2" style="width:23%">
+			<view class="l_02">更多
+			<image class="image" src="../img/f033.png"></image>
 			</view>
 		</li>
 		<!-- 更多弹框 -->

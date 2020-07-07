@@ -23,7 +23,12 @@ tanchuang: function() {
 		this.setData({
 			style:'display:none'
 		})
-	},
+  },
+  buquan(){
+    wx.navigateTo({
+      url: '../s-wodejianli/s-wodejianli',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

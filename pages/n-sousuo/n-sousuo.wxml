@@ -4,7 +4,7 @@
 			<view class="fl n_04"><image src="../img/f057.png"></image></view>
 			<view class="fl n_05"><input placeholder="请输入需要查找的职位" /></view>
 		</view>
-		<view class="fr n_06">搜索</view>
+		<view class="fr n_06" bindtap="search_s">搜索</view>
 	</view>
 	
 	<view class="n_07">

@@ -1,4 +1,7 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "获得证书"
+  "usingComponents": {
+      "spring": "../components/spring/index",
+      "date-picker": "../components/date-picker/date-picker"
+    },
+  "navigationBarTitleText": "基本信息"
 }

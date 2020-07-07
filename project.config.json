@@ -7,16 +7,26 @@
 		"urlCheck": true,
 		"es6": true,
 		"postcss": true,
+		"preloadBackgroundData": false,
 		"minified": true,
 		"newFeature": true,
-		"autoAudits": false,
 		"coverView": true,
+		"nodeModules": false,
+		"autoAudits": false,
 		"showShadowRootInWxmlPanel": true,
-		"scopeDataCheck": false
+		"scopeDataCheck": false,
+		"checkInvalidKey": true,
+		"checkSiteMap": true,
+		"uploadWithSourceMap": true,
+		"babelSetting": {
+			"ignore": [],
+			"disablePlugins": [],
+			"outputPath": ""
+		}
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.1",
-	"appid": "wxb9c80cc944b62b0e",
+	"appid": "wx60fdbc6ece8a7eb9",
 	"projectname": "%E4%B8%AD%E6%89%8D%E7%91%9E%E8%BE%BE%EF%BC%88%E6%B1%82%E8%81%8C%E7%AB%AF%EF%BC%89",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -50,22 +60,36 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/s-wodejianli/s-wodejianli",
-					"pathName": "pages/s-wodejianli/s-wodejianli",
+					"name": "pages/t-wodejianli-gzjl/t-wodejianli-gzjl",
+					"pathName": "pages/t-wodejianli-gzjl/t-wodejianli-gzjl",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/q-wode/q-wode",
-					"pathName": "pages/q-wode/q-wode",
+					"name": "pages/zc-zhiweixq/zc-zhiweixq",
+					"pathName": "pages/zc-zhiweixq/zc-zhiweixq",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
-					"pathName": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
+					"name": "pages/p-qiyeduan/p-qiyeduan",
+					"pathName": "pages/p-qiyeduan/p-qiyeduan",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/m-shouye/m-shouye",
+					"pathName": "pages/m-shouye/m-shouye",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/m-qiyezhuce/m-qiyezhuce",
+					"pathName": "pages/m-qiyezhuce/m-qiyezhuce",
 					"query": "",
 					"scene": null
 				}

@@ -1,0 +1,159 @@
+<view class="s_01">
+	<view class="fl s_02">
+		<view class="q_03">
+			<view class="q_04 fl"><input placeholder="小明" /></view>
+			
+		</view>
+		<view class="q_06">
+			<view class="s_03"><p>24岁</p><span>|</span><p>本科</p><span>|</span><p>全职</p></view>
+			<view class="s_04">手机号码：14753701234</view>
+			<view class="s_04">求职状态：求职中</view>
+		</view>
+	</view>
+	<view class="fr q_09">
+		<image src="../img2/f051.png"></image>
+	</view>
+</view>
+
+<view class="s_05">
+	<view class="s_06">
+		<view class="fl s_07">求职意向</view>
+		
+		<view class="w-clear"></view>
+	</view>
+	<view class="s_09">
+		<view class="fl s_10">求职意向</view>
+		<view class="fr s_11">全职</view>
+		<view class="w-clear"></view>
+	</view>
+	<view class="s_09">
+		<view class="fl s_10">职位</view>
+		<view class="fr s_11">文员</view>
+		<view class="w-clear"></view>
+	</view>
+	<view class="s_09">
+		<view class="fl s_10">工作地点</view>
+		<view class="fr s_11">济南市-槐荫区</view>
+		<view class="w-clear"></view>
+	</view>
+	<view class="s_09">
+		<view class="fl s_10">期望薪资</view>
+		<view class="fr s_11">5K-8K</view>
+		<view class="w-clear"></view>
+	</view>
+</view>
+
+<view class="s_05">
+	<view class="s_06">
+		<view class="fl s_07">工作经历</view>
+		
+		<view class="w-clear"></view>
+	</view>
+	<view class="s_20">
+		<view class="s_13">
+			<view class="fl s_14">海鸿达(北京)餐饮管理有限公司</view>
+			
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_16">2017/09~2018/06</view>
+		<view class="s_17">
+			<view class="s_18 fl">海底捞店长</view>
+			<view class="s_19 fr">7000元/月</view>
+		</view>
+		<view class="s_21">挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件...</view>
+	</view>
+	<view class="s_20">
+		<view class="s_13">
+			<view class="fl s_14">海鸿达(北京)餐饮管理有限公司</view>
+			
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_16">2017/09~2018/06</view>
+		<view class="s_17">
+			<view class="s_18 fl">海底捞店长</view>
+			<view class="s_19 fr">7000元/月</view>
+		</view>
+		<view class="s_21">挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件...</view>
+	</view>
+	<view class="s_22"><image src="../img2/f064.png"></image></view>
+</view>
+
+<view class="s_05">
+	<view class="s_06">
+		<view class="fl s_07">项目经历</view>
+		
+		<view class="w-clear"></view>
+	</view>
+	<view class="s_20">
+		<view class="s_13">
+			<view class="fl s_14">OFF</view>
+			
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_16">2017/09~2018/06</view>
+		<view class="s_21">1.OFF是一款海外代购轻奢品牌的APP；2.OFF主要是为国内消费者提供当季热款、下季新款的折扣...</view>
+	</view>
+	<view class="s_20">
+		<view class="s_13">
+			<view class="fl s_14">OFF</view>
+			
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_16">2017/09~2018/06</view>
+		<view class="s_21">1.OFF是一款海外代购轻奢品牌的APP；2.OFF主要是为国内消费者提供当季热款、下季新款的折扣...</view>
+	</view>
+	<view class="s_22"><image src="../img2/f064.png"></image></view>
+</view>
+
+<view class="s_05">
+	<view class="s_06">
+		<view class="fl s_07">教育经历</view>
+		
+		<view class="w-clear"></view>
+	</view>
+	<view class="s_20">
+		<view class="s_13">
+			<view class="fl s_14">青岛海洋大学</view>
+			
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_16">2013/09~2016/07</view>
+		<view class="s_03"><p>本科</p><span>|</span><p>酒店管理</p></view>
+	</view>
+</view>
+
+<view class="s_05">
+	<view class="s_06">
+		<view class="fl s_07">获得证书</view>
+		
+		<view class="w-clear"></view>
+	</view>
+	<view class="s_20">
+		<view class="s_13">
+			<view class="fl s_14">优秀三好学生</view>
+			
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_16">2013年09月</view>
+		<view class="s_23"><image src="../img2/f065.png"></image></view>
+	</view>
+</view>
+
+<view class="s_24">邀请面试</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

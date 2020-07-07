@@ -5,7 +5,16 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+ isF:true,
+ isX:true,
+ DataSource: [
+  {
+    content: '挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..',
+  },
+  {
+    content: '挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..',
+  }
+],
   },
 
   /**
@@ -13,6 +22,18 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+  change: function (e) {
+    var f=this.data.isF
+    this.setData({
+      isF:!f
+    })
+  },
+  change1: function (e) {
+    var x=this.data.isX
+    this.setData({
+      isX:!x
+    })
   },
   int() {
     wx.navigateTo({

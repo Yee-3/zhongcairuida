@@ -1,0 +1,179 @@
+<view class="top">
+	<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+		<block class="top_img">
+			<swiper-item>
+				<image class="banner" src="../img2/f008.png"></image>
+			</swiper-item>
+			<swiper-item>
+				<image class="banner" src="../img2/f008.png"></image>
+			</swiper-item>
+			<swiper-item>
+				<image class="banner" src="../img2/f008.png"></image>
+			</swiper-item>
+		</block>
+	</swiper>
+</view>
+
+<view class="m_01">
+	<ul>
+		<li bindtap="person"><image src="../img2/f038.png"></image><p>海量人才</p></li>
+		<li bindtap="resume"><image src="../img2/f039.png"></image><p>精准简历</p></li>
+		<li bindtap="entry"><image src="../img2/f040.png"></image><p>即刻入职</p></li>
+		<view class="w-clear"></view>
+	</ul>
+</view>
+
+<view class="p_01"><image src="../img2/f073.png"></image></view>
+
+<view class="p_02">
+	<view class="p_03">
+		<view class="g_13 fl">
+			<view class="g_14 fl"></view>
+			<view class="g_15 fl"><p>为你推荐</p></view>
+		</view>
+		<view class="p_04 fr">
+			<view class="p_05 fl">更多</view>
+			<view class="p_06 fl"><image src="../img2/f074.png"></image></view>
+		</view>
+		<view class="w-clear"></view>
+	</view>
+</view>
+
+<view class="d_02">
+	<view class="d_03" bindtap="detail">
+		<view class="">
+			<view class="fl d_04">
+				<view class="fl d_05">
+					<image src="../img2/f001.png"></image>
+				</view>
+				<view class="fl d_06">
+					<view class="d_07">
+						<view class="fl d_08">刘女士</view>
+						<view class="fl d_091">产品经理</view>
+						<view class="w-clear"></view>
+					</view>
+					<view class="d_10">
+						<p>10年</p><span>|</span>
+						<p>本科</p><span>|</span>
+						<p>北京</p><span>|</span>
+						<p>15k~30k</p>
+					</view>
+				</view>
+			</view>
+			<view class="d_11 fr">22小时前活跃</view>
+			<view class="w-clear"></view>
+		</view>
+		<view class="d_12">
+			<view class="d_13">
+				<view class="fl d_14">
+					<image src="../img2/f002.png"></image>
+				</view>
+				<view class="fl d_15">
+					<p>北京酷马科技有限公司·2年1个月</p>
+					<span>业务部经理</span>
+				</view>
+				<view class="w-clear"></view>
+			</view>
+			<view class="d_13">
+				<view class="fl d_14"></view>
+				<view class="fl d_15">
+					<p>北京酷马科技有限公司·2年1个月</p>
+					<span>业务部经理</span>
+				</view>
+				<view class="w-clear"></view>
+			</view>
+		</view>
+	</view>
+	<view class="d_03">
+		<view class="">
+			<view class="fl d_04">
+				<view class="fl d_05">
+					<image src="../img2/f001.png"></image>
+				</view>
+				<view class="fl d_06">
+					<view class="d_07">
+						<view class="fl d_08">刘女士</view>
+						<view class="fl d_092">产品经理</view>
+						<view class="w-clear"></view>
+					</view>
+					<view class="d_10">
+						<p>10年</p><span>|</span>
+						<p>本科</p><span>|</span>
+						<p>北京</p><span>|</span>
+						<p>15k~30k</p>
+					</view>
+				</view>
+			</view>
+			<view class="d_11 fr">22小时前活跃</view>
+			<view class="w-clear"></view>
+		</view>
+		<view class="d_12">
+			<view class="d_13">
+				<view class="fl d_14">
+					<image src="../img2/f002.png"></image>
+				</view>
+				<view class="fl d_15">
+					<p>北京酷马科技有限公司·2年1个月</p>
+					<span>业务部经理</span>
+				</view>
+				<view class="w-clear"></view>
+			</view>
+			<view class="d_13">
+				<view class="fl d_14"></view>
+				<view class="fl d_15">
+					<p>北京酷马科技有限公司·2年1个月</p>
+					<span>业务部经理</span>
+				</view>
+				<view class="w-clear"></view>
+			</view>
+		</view>
+	</view>
+	<view class="d_03">
+		<view class="">
+			<view class="fl d_04">
+				<view class="fl d_05">
+					<image src="../img2/f001.png"></image>
+				</view>
+				<view class="fl d_06">
+					<view class="d_07">
+						<view class="fl d_08">刘女士</view>
+						<view class="fl d_093">产品经理</view>
+						<view class="w-clear"></view>
+					</view>
+					<view class="d_10">
+						<p>10年</p><span>|</span>
+						<p>本科</p><span>|</span>
+						<p>北京</p><span>|</span>
+						<p>15k~30k</p>
+					</view>
+				</view>
+			</view>
+			<view class="d_11 fr">22小时前活跃</view>
+			<view class="w-clear"></view>
+		</view>
+		<view class="d_12">
+			<view class="d_13">
+				<view class="fl d_14">
+					<image src="../img2/f002.png"></image>
+				</view>
+				<view class="fl d_15">
+					<p>北京酷马科技有限公司·2年1个月</p>
+					<span>业务部经理</span>
+				</view>
+				<view class="w-clear"></view>
+			</view>
+			<view class="d_13">
+				<view class="fl d_14"></view>
+				<view class="fl d_15">
+					<p>北京酷马科技有限公司·2年1个月</p>
+					<span>业务部经理</span>
+				</view>
+				<view class="w-clear"></view>
+			</view>
+		</view>
+	</view>
+</view>
+<view class="d_16">就这么多了~</view>
+<tabbars id="tab" bind:toggle="showTab"></tabbars>
+
+

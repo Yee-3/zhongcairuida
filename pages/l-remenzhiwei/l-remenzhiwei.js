@@ -25,7 +25,9 @@ Page({
         name: ' 最新发布优先'
       }
     ],
-    inda: 0
+    inda: 0,
+    m_zong:'1',
+    z_val:"综合排序"
   },
 
   /**
@@ -33,6 +35,23 @@ Page({
    */
   onLoad: function (options) {
 
+  },
+  sixChange(e){
+    this.setData({
+      m_zong:e.currentTarget.dataset.index
+    })
+  },
+  confirm(){
+    this.position3()
+    if(this.data.m_zong==1){
+      this.setData({
+        z_val:'综合排序'
+      })
+    }else{
+      this.setData({
+        z_val:'最新发布优先'
+      })
+    }
   },
   toggle(e){
     this.setData({ ind:e.currentTarget.dataset['index']})

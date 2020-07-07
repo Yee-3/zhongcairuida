@@ -111,7 +111,7 @@
 			</view>
 			<view class="f_11">
 				<view class="f_12 fl" bindtap="quxiao1">朕知道了</view>
-				<view class="f_13 fr">补全简历</view>
+				<view class="f_13 fr" bindtap="buquan">补全简历</view>
 				<view class="w-clear"></view>
 			</view>
 		</view>

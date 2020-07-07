@@ -130,6 +130,12 @@
 
 .s_20 {
   margin-top: 20rpx;
+  display: -webkit-box;  /*关键属性（必须有的）  */
+  -webkit-box-orient: vertical;   /*规定子元素的排列方向 */
+  -webkit-line-clamp:2; /*行数*/
+  /* 实现多余的文字隐藏并用省略号来代表被隐藏的文字    */
+  overflow: hidden;
+  text-overflow:ellipsis; 
 }
 
 .s_22 {
@@ -215,3 +221,13 @@
   width: 140rpx;
   height: 140rpx;
 }
+.hidden{
+ 
+}
+.hide{
+  display: -webkit-box;
+}
+
+.show{
+  display: block
+} 

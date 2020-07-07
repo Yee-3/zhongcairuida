@@ -1,4 +1,5 @@
 // pages/m-shouye/m-shouye.js
+import qqmap from '../../utils/map.js'
 Page({
 
   /**
@@ -26,18 +27,71 @@ Page({
        name:' 最新发布优先'
       }
     ],
-    inda:0
+    inda:0,
+    m_zong:'1',
+    z_val:'综合排序',
+    mapValue:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.getLocation()
+    let that = this,
+    cityOrTime = wx.getStorageSync('locatecity') || {},
+    time = new Date().getTime(),
+    city = '';
+  if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
+    this.getLocate();
+  } else { //如果未满30分钟，那么直接从本地缓存里取值
+    that.setData({
+      mapValue: cityOrTime.city
+    })
+  }
   },
-
+  // 获取位置
+  getLocation() {
+    let that = this;
+    new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
+      var x = val.address_component.city
+      if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
+        // console.log(val.indexOf('市') - 1);
+        val = x.slice(0, x.indexOf('市'));
+      }
+      that.setData({
+        mapValue: val,
+      });
+      //把获取的定位和获取的时间放到本地存储
+      wx.setStorageSync('locatecity', {
+        city: val,
+        time: new Date().getTime()
+      });
+    });
+  },
   // 事件
-
+  sixChange(e){
+    this.setData({
+      m_zong:e.currentTarget.dataset.index
+    })
+  },
+  confirm(){
+    this.position3()
+    if(this.data.m_zong==1){
+      this.setData({
+        z_val:'综合排序'
+      })
+    }else{
+      this.setData({
+        z_val:'最新发布优先'
+      })
+    }
+  },
+  search(){
+    wx.navigateTo({
+      url: '../n-sousuo/n-sousuo',
+    })
+  },
   high() {
 
     wx.navigateTo({
@@ -81,7 +135,6 @@ Page({
     this.setData({ ind7:e.currentTarget.dataset['index']})
   },
   bindPickerChange: function(e) {
-    console.log(e.detail.value)
     this.setData({
         inda: e.detail.value
     })
@@ -109,9 +162,18 @@ Page({
     this.setData({isTwo:!two})
   },
   zhiDetail(){
-    console.log(3333)
     wx.navigateTo({
       url:'../zc-zhiweixq/zc-zhiweixq'
+    })
+  },
+  run(){
+    wx.navigateTo({
+      url: '../a-bangwozhaogongzuo/index',
+    })
+  },
+  weizhi(){
+    wx.navigateTo({
+      url: '../b-dingweiq/b-dingwq?id=1',
     })
   },
   /**
@@ -161,5 +223,7 @@ Page({
    */
   onShareAppMessage: function () {
 
-  }
+  },
+ 
+ 
 })

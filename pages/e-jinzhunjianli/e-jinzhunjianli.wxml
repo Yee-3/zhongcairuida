@@ -1,0 +1,113 @@
+<view class="e_01">
+	<view class="e_02" bindtap="jingzhun">
+		<view class="fl e_03">
+			<view class="e_04">保安部领班</view>
+			<view class="d_10">
+				<p>杭州</p><span>|</span>
+				<p>7K-8K</p><span>|</span>
+				<p>到面式</p><span>|</span>
+				<p>1人</p>
+			</view>
+		</view>
+		<view class="fr e_05">
+			<view class="e_06">
+				<view class="e_07 fl">应聘简历</view>
+				<view class="e_08 fr">3</view>
+			</view>
+			<view class="e_06">
+				<view class="e_07 fl">应聘简历</view>
+				<view class="e_08 fr">3</view>
+			</view>
+		</view>
+		<view class="w-clear"></view>
+	</view>
+	<view class="e_02">
+		<view class="fl e_03">
+			<view class="e_04">保安部领班</view>
+			<view class="d_10">
+				<p>杭州</p><span>|</span>
+				<p>7K-8K</p><span>|</span>
+				<p>到面式</p><span>|</span>
+				<p>1人</p>
+			</view>
+		</view>
+		<view class="fr e_05">
+			<view class="e_06">
+				<view class="e_07 fl">应聘简历</view>
+				<view class="e_08 fr">3</view>
+			</view>
+			<view class="e_06">
+				<view class="e_07 fl">应聘简历</view>
+				<view class="e_08 fr">3</view>
+			</view>
+		</view>
+		<view class="w-clear"></view>
+	</view>
+	<view class="e_02">
+		<view class="fl e_03">
+			<view class="e_04">保安部领班</view>
+			<view class="d_10">
+				<p>杭州</p><span>|</span>
+				<p>7K-8K</p><span>|</span>
+				<p>到面式</p><span>|</span>
+				<p>1人</p>
+			</view>
+		</view>
+		<view class="fr e_05">
+			<view class="e_06">
+				<view class="e_07 fl">应聘简历</view>
+				<view class="e_08 fr">3</view>
+			</view>
+			<view class="e_06">
+				<view class="e_07 fl">应聘简历</view>
+				<view class="e_08 fr">3</view>
+			</view>
+		</view>
+		<view class="w-clear"></view>
+	</view>
+	<view class="e_02">
+		<view class="fl e_03">
+			<view class="e_04">保安部领班</view>
+			<view class="d_10">
+				<p>杭州</p><span>|</span>
+				<p>7K-8K</p><span>|</span>
+				<p>到面式</p><span>|</span>
+				<p>1人</p>
+			</view>
+		</view>
+		<view class="fr e_05">
+			<view class="e_06">
+				<view class="e_07 fl">应聘简历</view>
+				<view class="e_08 fr">3</view>
+			</view>
+			<view class="e_06">
+				<view class="e_07 fl">应聘简历</view>
+				<view class="e_08 fr">3</view>
+			</view>
+		</view>
+		<view class="w-clear"></view>
+	</view>
+</view>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

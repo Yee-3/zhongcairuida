@@ -14,7 +14,11 @@ Page({
   onLoad: function (options) {
 
   },
-
+  search_s(){
+    wx.navigateTo({
+      url: '../o-sousuojieguo-jl/o-sousuojieguo-jl',
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

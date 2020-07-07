@@ -49,10 +49,10 @@
 		<view class="fr s_12" bindtap="work"><image src="../img/f063.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20">
+	<view class="{{isF?'hide s_20':'show s_20'}}" data-index="{{index}}" wx:for="{{DataSource}}" >
 		<view class="s_13">
 			<view class="fl s_14">海鸿达(北京)餐饮管理有限公司</view>
-			<view class="fr s_15"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15"><image :src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">2017/09~2018/06</view>
@@ -60,22 +60,10 @@
 			<view class="s_18 fl">海底捞店长</view>
 			<view class="s_19 fr">7000元/月</view>
 		</view>
-		<view class="s_21">挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件...</view>
+		<view class="s_21">{{item.content}}</view>
 	</view>
-	<view class="s_20">
-		<view class="s_13">
-			<view class="fl s_14">海鸿达(北京)餐饮管理有限公司</view>
-			<view class="fr s_15"><image src="../img/f050.png"></image></view>
-			<view class="w-clear"></view>
-		</view>
-		<view class="s_16">2017/09~2018/06</view>
-		<view class="s_17">
-			<view class="s_18 fl">海底捞店长</view>
-			<view class="s_19 fr">7000元/月</view>
-		</view>
-		<view class="s_21">挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件...</view>
-	</view>
-	<view class="s_22"><image src="../img/f064.png"></image></view>
+
+	<view class="s_22"  bindtap="change"><image src="{{isF?'../img/f064.png':'../img/f064-01.png'}}"></image></view>
 </view>
 
 <view class="s_05">
@@ -84,7 +72,7 @@
 		<view class="fr s_12" bindtap="project"><image src="../img/f063.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20">
+	<view class="{{isX?'hide s_20':'show s_20'}}" wx:for="{{2}}">
 		<view class="s_13">
 			<view class="fl s_14">OFF</view>
 			<view class="fr s_15"><image src="../img/f050.png"></image></view>
@@ -93,16 +81,7 @@
 		<view class="s_16">2017/09~2018/06</view>
 		<view class="s_21">1.OFF是一款海外代购轻奢品牌的APP；2.OFF主要是为国内消费者提供当季热款、下季新款的折扣...</view>
 	</view>
-	<view class="s_20">
-		<view class="s_13">
-			<view class="fl s_14">OFF</view>
-			<view class="fr s_15"><image src="../img/f050.png"></image></view>
-			<view class="w-clear"></view>
-		</view>
-		<view class="s_16">2017/09~2018/06</view>
-		<view class="s_21">1.OFF是一款海外代购轻奢品牌的APP；2.OFF主要是为国内消费者提供当季热款、下季新款的折扣...</view>
-	</view>
-	<view class="s_22"><image src="../img/f064.png"></image></view>
+	<view class="s_22" bindtap="change1"><image src="{{isX?'../img/f064.png':'../img/f064-01.png'}}"></image></view>
 </view>
 
 <view class="s_05">

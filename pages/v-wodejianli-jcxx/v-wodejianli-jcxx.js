@@ -5,6 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    date_value:'请选择',
+    datePickerValue: ['', '', ''],
+    datePickerIsShow: false,
     img: '../img/f067.png',
     isMar:false,
     mar:'1',
@@ -14,15 +17,45 @@ Page({
     six_val:'请选择',
     isEdu:false,
     edu:'1',
-    valu2:'请选择'
+    valu2:'请选择',
+    // 表单数据
+    assets: [],
+    assetIndex: 0,
+    isCostText: '支出',
+    date: '',
+    amount: null,
+    descripition: '',
+    // 用来放弹窗内容的，里面的格式应该为[{label: 'sadsa', value: 'dsadsad'}]
+    springContent: [
+      {value:'求职中'},
+      {value:'随便看看'},
+      {value:'暂时不考虑'},
+      {value:'有好机会考虑'}
+      ],
+      type_content:'请选择'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.spring = this.selectComponent("#spring");
 
   },
+  // 求职状态
+  show(){
+    this.spring.show()
+  },
+  handleConfirmDialog(){
+    // console.log(this.spring.data.mar)
+    this.spring.show()
+    var index=this.spring.data.mar
+    this.setData({
+      type_content:this.data.springContent[index].value
+    })
+
+  },
+  // --end--
 // 婚姻状况弹框
 toggle(e){
   this.setData({
@@ -177,5 +210,22 @@ con2() {
    */
   onShareAppMessage: function () {
 
-  }
+  },
+  showDatePicker: function (e) {
+    // this.data.datePicker.show(this);
+    this.setData({
+      datePickerIsShow: true,
+    });
+  },
+
+  datePickerOnSureClick: function (e) {
+    console.log('datePickerOnSureClick');
+    console.log(e);
+    this.setData({
+      date_value: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+      datePickerValue: e.detail.value,
+      datePickerIsShow: false,
+    });
+  },
+
 })

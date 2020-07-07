@@ -1,7 +1,8 @@
 <!--index.wxml-->
+
 <view class="a_00">
 <!-- 弹框 -->
-	<view class="mask" wx:if="{{isAdd}}" bindtap="zhiwei"></view>
+	<view class="mask" wx:if="{{isAdd}}"></view>
 	<view class="mask1" wx:if="{{isAdd}}">
 		<view class="m_top">
 			<scroll-view class="t_left" scroll-y="true">
@@ -11,13 +12,13 @@
 				<view class="bot" >财务</view>
 			</scroll-view>
 			<scroll-view class="t_right" scroll-y="true">
-				<button class="{{index==ind1?'no1':'bott'}}" size="mini" wx:for="{{3}}" data-index='{{index}}' bindtap="toggle1" style="font-size:22rpx">金融/证卷/资产</button>
+				<button class="{{index==ind1?'no1':'bott'}}" size="mini" wx:for="{{classContent}}" data-index='{{index}}' bindtap="toggle1" style="font-size:22rpx">{{item.name}}</button>
 				<!-- <button class="bott" size="mini" wx:for="{{2}}">金融/证卷/资产</button> -->
 			</scroll-view>
 		</view>
 		<view class="m_bottom">
 			<button class="b_left" bindtap="zhiwei">取消</button>
-			<button class="b_right">确认</button>
+			<button class="b_right" bindtap="confirm">确认</button>
 
 		</view>
 	</view>
@@ -78,7 +79,7 @@
 		<view class="a_02">您期望的职位类别</view>
 		<view class="a_06">
 			<view class="section" bindtap="zhiwei">
-				<view class="picker">这里有个弹窗-帮我找工作-期望职位弹框</view>
+				<view class="picker">{{classValue}}</view>
 			</view>
 		</view>
 	</view>
@@ -87,11 +88,12 @@
 		<view class="a_06">
 			<view class="section">
 				<!-- <picker value="{{index}}" range="{{array}}"> -->
-					<view class="picker" bindtap="weizhi">请选择</view>
+					<view class="picker" bindtap="weizhi">{{mapValue}}</view>
 				<!-- </picker> -->
 			</view>
 		</view>
 	</view>
+
 	<view class="a_04">
 		<view class="a_02">您当前的求职状态</view>
 		<view class="a_07">

@@ -1,5 +1,5 @@
 {
-  "pages":[
+  "pages": [
     "pages/m-shouye/m-shouye",
     "pages/zd-zixunxq/zd-zixunxq",
     "pages/zc-zhiweixq/zc-zhiweixq",
@@ -28,17 +28,37 @@
     "pages/d-gaoduanzhiwei/d-gaoduanzhiwei",
     "pages/c-dingwei/c-dingw",
     "pages/b-dingweiq/b-dingwq",
-    "pages/a-bangwozhaogongzuo/index"
+    "pages/a-bangwozhaogongzuo/index",
+    "pages/p-qiyeduan/p-qiyeduan",
+    "pages/o-qiyezhuce/o-qiyezhuce",
+    "pages/n-qiyezhuce-gsms/n-qiyezhuce-gsms",
+    "pages/m-qiyezhuce/m-qiyezhuce",
+    "pages/l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz",
+    "pages/k-qiyezhongxin/k-qiyezhongxin",
+    "pages/j-mianshiguanli-yiruzhi/j-mianshiguanli-yiruzhi",
+    "pages/i-mianshiguanli-yrz/i-mianshiguanli-yrz",
+    "pages/h-mianshiguanli-yms/h-mianshiguanli-yms",
+    "pages/g-jinzhunjianli-zwjl/g-jinzhunjianli-zwjl",
+    "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
+    "pages/e-jinzhunjianli/e-jinzhunjianli",
+    "pages/d-hailiangrencai/d-hailiangrencai",
+    "pages/c-hailiangjianlixq/c-hailiangjianlixq",
+    "pages/b-guanyuwomen/b-guanyuwomen",
+    "pages/a-gangweifabu/a-gangweifabu"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"
+    "navigationBarTextStyle": "black"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "小程序将获取你的位置信息" 
+    }
   },
   "style": "v2",
   "sitemapLocation": "sitemap.json",
-  
   "tabBar": {
     "color": "#a1a1a1",
     "selectedColor": "#0286ff",

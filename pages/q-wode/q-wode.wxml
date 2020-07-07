@@ -36,7 +36,7 @@
 				<view class="q_15 fl"><image src="../img/f052.png"></image></view>
 			</view>
 		</view>
-		<view class="q_11">
+		<view class="q_11" bindtap="about">
 			<view class="fl">
 				<view class="q_12 fl"><image src="../img/f060.png"></image></view>
 				<view class="q_13 fl">关于我们</view>
@@ -54,7 +54,7 @@
 				<view class="q_15 fl"><image src="../img/f052.png"></image></view>
 			</view>
 		</view>
-		<view class="q_16">
+		<view class="q_16" bindtap="zhaopin">
 			<view class="fl">
 				<view class="q_17 fl"><image src="../img/f062.png"></image></view>
 				<view class="q_18 fl">切换至招聘版</view>
@@ -77,7 +77,7 @@
 		</view>
 		<view class="f_11">
 			<view class="f_12 fl" bindtap="quxiao2">取消</view>
-			<view class="f_13 fr">拨打</view>
+			<view class="f_13 fr" bindtap="phone">拨打</view>
 			<view class="w-clear"></view>
 		</view>
 	</view>
