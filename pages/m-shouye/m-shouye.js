@@ -6,31 +6,33 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isAdd:false,
-    isTwo:false,
-    isAdd_T:false,
-    isAdd_F:false,
-    isAdd_S:false,
-    ind:'x',
-    ind1:'',
-    ind2:'',
-    ind3:'',
-    ind4:'',
-    ind5:'',
-    ind6:'',
-    ind7:'',
-    array:[
-      {
-        name:'综合排序'
+    isAdd: false,
+    isTwo: false,
+    isAdd_T: false,
+    isAdd_F: false,
+    isAdd_S: false,
+    ind: 'x',
+    ind1: '',
+    ind2: '',
+    ind3: '',
+    ind4: '',
+    ind5: '',
+    ind6: '',
+    ind7: '',
+    array: [{
+        name: '综合排序'
       },
       {
-       name:' 最新发布优先'
+        name: ' 最新发布优先'
       }
     ],
-    inda:0,
-    m_zong:'1',
-    z_val:'综合排序',
-    mapValue:''
+    inda: 0,
+    m_zong: '1',
+    z_val: '综合排序',
+    mapValue: '',
+    app: getApp().globalData,
+    xingzhi:[],
+    guimo:[]
   },
 
   /**
@@ -39,18 +41,19 @@ Page({
   onLoad: function (options) {
     this.getLocation()
     let that = this,
-    cityOrTime = wx.getStorageSync('locatecity') || {},
-    time = new Date().getTime(),
-    city = '';
-  if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
-    this.getLocate();
-  } else { //如果未满30分钟，那么直接从本地缓存里取值
-    that.setData({
-      mapValue: cityOrTime.city
-    })
-  }
+      cityOrTime = wx.getStorageSync('locatecity') || {},
+      time = new Date().getTime(),
+      city = '';
+    if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
+      this.getLocate();
+    } else { //如果未满30分钟，那么直接从本地缓存里取值
+      that.setData({
+        mapValue: cityOrTime.city
+      })
+    }
   },
   // 获取位置
+
   getLocation() {
     let that = this;
     new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
@@ -70,24 +73,24 @@ Page({
     });
   },
   // 事件
-  sixChange(e){
+  sixChange(e) {
     this.setData({
-      m_zong:e.currentTarget.dataset.index
+      m_zong: e.currentTarget.dataset.index
     })
   },
-  confirm(){
+  confirm() {
     this.position3()
-    if(this.data.m_zong==1){
+    if (this.data.m_zong == 1) {
       this.setData({
-        z_val:'综合排序'
+        z_val: '综合排序'
       })
-    }else{
+    } else {
       this.setData({
-        z_val:'最新发布优先'
+        z_val: '最新发布优先'
       })
     }
   },
-  search(){
+  search() {
     wx.navigateTo({
       url: '../n-sousuo/n-sousuo',
     })
@@ -108,70 +111,120 @@ Page({
       url: '../l-remenzhiwei/l-remenzhiwei'
     })
   },
-  toggle(e){
-    this.setData({ ind:e.currentTarget.dataset['index']})
-    var two=this.data.isTwo
-    this.setData({isTwo:!two})
-  },
-  toggle1(e){
-    this.setData({ ind1:e.currentTarget.dataset['index']})
-  },
-  toggle2(e){
-    this.setData({ ind2:e.currentTarget.dataset['index']})
-  },
-  toggle3(e){
-    this.setData({ ind3:e.currentTarget.dataset['index']})
-  },
-  toggle4(e){
-    this.setData({ ind4:e.currentTarget.dataset['index']})
-  },
-  toggle5(e){
-    this.setData({ ind5:e.currentTarget.dataset['index']})
-  },
-  toggle6(e){
-    this.setData({ ind6:e.currentTarget.dataset['index']})
-  },
-  toggle7(e){
-    this.setData({ ind7:e.currentTarget.dataset['index']})
-  },
-  bindPickerChange: function(e) {
+  toggle(e) {
     this.setData({
-        inda: e.detail.value
+      ind: e.currentTarget.dataset['index']
     })
-},
+    var two = this.data.isTwo
+    this.setData({
+      isTwo: !two
+    })
+  },
+  toggle1(e) {
+    this.setData({
+      ind1: e.currentTarget.dataset['index']
+    })
+  },
+  toggle2(e) {
+    this.setData({
+      ind2: e.currentTarget.dataset['index']
+    })
+  },
+  toggle3(e) {
+    this.setData({
+      ind3: e.currentTarget.dataset['index']
+    })
+  },
+  toggle4(e) {
+    this.setData({
+      ind4: e.currentTarget.dataset['index']
+    })
+  },
+  toggle5(e) {
+    this.setData({
+      ind5: e.currentTarget.dataset['index']
+    })
+  },
+  toggle6(e) {
+    this.setData({
+      ind6: e.currentTarget.dataset['index']
+    })
+  },
+  toggle7(e) {
+    this.setData({
+      ind7: e.currentTarget.dataset['index']
+    })
+  },
+  bindPickerChange: function (e) {
+    this.setData({
+      inda: e.detail.value
+    })
+  },
 
-  position(){
-	  var add=this.data.isAdd
-    this.setData({isAdd:!add})	  
-  },
-  position1(){
-	  var add_t=this.data.isAdd_T
-    this.setData({isAdd_T:!add_t})	  
-  },
-  position2(){
-	  var add_f=this.data.isAdd_F
-    this.setData({isAdd_F:!add_f})	  
-  },
-  position3(){
-	  var add_s=this.data.isAdd_S
-    this.setData({isAdd_S:!add_s})	  
-  },
-  
-  hide(){
-    var two=this.data.isTwo
-    this.setData({isTwo:!two})
-  },
-  zhiDetail(){
-    wx.navigateTo({
-      url:'../zc-zhiweixq/zc-zhiweixq'
+  position() {
+    var add = this.data.isAdd
+    this.setData({
+      isAdd: !add
     })
   },
-  run(){
+  position1() {
+    var that=this
+    var add_t = this.data.isAdd_T
+    this.setData({
+      isAdd_T: !add_t
+    })
+    this.data.app.http({
+      url: '/selects/company_num',
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          guimo:res.data.rdata
+        })
+      }
+    })
+    this.data.app.http({
+      url: '/selects/company_nature',
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          xingzhi:res.data.rdata
+        })
+      }
+    })
+  },
+  position2() {
+    var add_f = this.data.isAdd_F
+    this.setData({
+      isAdd_F: !add_f
+    })
+
+  },
+  position3() {
+    var add_s = this.data.isAdd_S
+    this.setData({
+      isAdd_S: !add_s
+    })
+  },
+
+  hide() {
+    var two = this.data.isTwo
+    this.setData({
+      isTwo: !two
+    })
+  },
+  zhiDetail() {
+    wx.navigateTo({
+      url: '../zc-zhiweixq/zc-zhiweixq'
+    })
+  },
+  run() {
     wx.navigateTo({
       url: '../a-bangwozhaogongzuo/index',
     })
   },
-  weizhi(){
+  weizhi() {
     wx.navigateTo({
       url: '../b-dingweiq/b-dingwq?id=1',
     })
@@ -224,6 +277,6 @@ Page({
   onShareAppMessage: function () {
 
   },
- 
- 
+
+
 })

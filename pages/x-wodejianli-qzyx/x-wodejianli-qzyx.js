@@ -17,33 +17,65 @@ Page({
     isInd: false,
     isTime: false,
     num: 0,
-    index: 1,
+    indexs: 0,
     num1: 0,
-    num2: 1,
-    num3: 1,
-    valu: '请选择',
+    num2: 0,
+    num3: 0,
     vauee: '请选择您期望的职位',
-    type: [
+    type_value: '请选择',
+    app: getApp().globalData,
+    class_types: [],
+    type: [{
+        item: '财务'
+      },
       {
-      item: '财务'
-    },
-    {
-      item: '设计'
-    },
-    {
-      item: '财务2'
-    },
-    {
-      item: '财务'
-    },
-  ]
+        item: '设计'
+      },
+      {
+        item: '财务2'
+      },
+      {
+        item: '财务'
+      },
+    ],
+    money: [],
+    work_type:[],
+    work_time:[],
+    time_value:'请选择',
+    mapValue:'请选择'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    this.data.app.http({
+      url: '/selects/expect_money',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          money: res.data.rdata
+        })
+      }
+      
 
+    }),
+    this.data.app.http({
+      url: '/selects/work_type',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          work_type: res.data.rdata
+        })
+      }
+      
+
+    })
   },
   toggle(e) {
     this.setData({
@@ -56,24 +88,29 @@ Page({
     })
   },
   toggle2(e) {
-    console.log(e)
     this.setData({
-      ind2: e.currentTarget.dataset['indu']
+      ind2: e.currentTarget.dataset['indu'],
+    })
+  },
+  confirm() {
+    var index = this.data.ind2
+    var that = this
+    this.industry()
+    this.setData({
+      type_value: that.data.class_types[index].label
     })
   },
   checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    // console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   },
   active(e) {
-    // console.log(e.currentTarget.dataset.num)
-    // console.log(e)
     this.setData({
       num: e.currentTarget.dataset.num
     })
   },
   activeOne(e) {
     this.setData({
-      index: e.currentTarget.dataset.index
+      indexs: e.currentTarget.dataset.index
     })
   },
   // activeTwo(e) {
@@ -87,20 +124,16 @@ Page({
     })
   },
   activeFour(e) {
-    console.log(e)
     this.setData({
       num3: e.currentTarget.dataset.num
     })
   },
   zhiwei() {
-    console.log(222)
     // var that=this
     var add = this.data.isAdd
-    // console.log(add)
     this.setData({
       isAdd: !add
     })
-    // console.log(add)
   },
   weizhi() {
     wx.navigateTo({
@@ -109,48 +142,53 @@ Page({
   },
   Ttime() {
     var timer = this.data.isTime
+    var that=this
     this.setData({
       isTime: !timer
+    })
+    this.data.app.http({
+      url: '/selects/work_time',
+      data: {},
+      dengl: true,
+      success(res) {
+        that.setData({
+          work_time: res.data.rdata
+        })
+      }
     })
   },
   industry() {
     var ind = this.data.isInd
+    var that = this
     this.setData({
       isInd: !ind
+    })
+    this.data.app.http({
+      url: '/selects/company_type',
+      data: {},
+      dengl: true,
+      success(res) {
+        that.setData({
+          class_types: res.data.rdata
+        })
+      }
     })
   },
   con() {
     // var numb=currentTarget.dataset.num
-    console.log(this.data.num3)
     this.Ttime()
-    if (this.data.num3 == 1) {
-      this.setData({
-        valu: '立即到岗'
-      })
-    } else if (this.data.num3 == 2) {
-      this.setData({
-        valu: '一周内'
-      })
-    } else if (this.data.num3 == 3) {
-      this.setData({
-        valu: '一个月内'
-      })
-    } else if (this.data.num3 == 4) {
-      this.setData({
-        valu: '三个月内'
-      })
-    } else {
-      this.setData({
-        valu: '待定'
-      })
-    }
-  },
-  con1(){
-    var ind=this.data.ind1
-    this.zhiwei()
+    var index = this.data.num3
     this.setData({
-      vauee:this.data.type[ind].item
+      time_value: this.data.work_time[index].label
     })
+  },
+  dingwei(){
+wx.navigateTo({
+  url: '../b-dingweiq/b-dingwq',
+})
+  },
+  con1() {
+  
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

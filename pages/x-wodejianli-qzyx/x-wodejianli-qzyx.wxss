@@ -411,7 +411,7 @@
 }
 .mask_ind{
   width: 690rpx;
-  height: 760rpx;
+  /* height: 760rpx; */
   position: fixed;
   left: 30rpx;
   z-index: 9999;
@@ -421,7 +421,7 @@
   border-radius: 15rpx;
   box-sizing: border-box;
   padding-left: 30rpx;
-  height: 640rpx;
+  /* height: 640rpx; */
   background: #fff;
   width: 690rpx;
   margin-bottom: 20rpx;

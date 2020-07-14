@@ -26,30 +26,10 @@
 		<view class="a_02">您的期望薪资（月）是多少？</view>
 		<view class="a_03">
 			<ul>
-				<li class='{{num==0?"on":""}}' bindtap="active" data-num='0'>
-					<p>3K以下</p>
+				<li class='{{num==index?"on":""}}' bindtap="active" wx:for="{{money}}" data-num='{{index}}'>
+					<p>{{item.label}}</p>
 				</li>
-				<li class='{{num==1?"on":""}}' bindtap="active" data-num='1'>
-					<p>3~5K</p>
-				</li>
-				<li class='{{num==2?"on":""}}' bindtap="active" data-num='2'>
-					<p>5~10K</p>
-				</li>
-				<li class='{{num==3?"on":""}}' bindtap="active" data-num='3'>
-					<p>10~15K</p>
-				</li>
-				<li class='{{num==4?"on":""}}' bindtap="active" data-num='4'>
-					<p>15~20K</p>
-				</li>
-				<li class='{{num==5?"on":""}}' bindtap="active" data-num='5'>
-					<p>20~25K</p>
-				</li>
-				<li class='{{num==6?"on":""}}' bindtap="active" data-num='6'>
-					<p>25~50K</p>
-				</li>
-				<li class='{{num==7?"on":""}}' bindtap="active" data-num='7'>
-					<p>面议</p>
-				</li>
+			
 				<view class="w-clear"></view>
 			</ul>
 		</view>
@@ -58,17 +38,8 @@
 		<view class="a_02">类型</view>
 		<view class="a_05">
 			<ul>
-				<li class='{{index==1?"on":""}}' data-index='1' bindtap="activeOne">
-					<p>全职</p>
-				</li>
-				<li class='{{index==2?"on":""}}' data-index='2' bindtap="activeOne">
-					<p>兼职</p>
-				</li>
-				<li class='{{index==3?"on":""}}' data-index='3' bindtap="activeOne">
-					<p>实习</p>
-				</li>
-				<li class='{{index==4?"on":""}}' data-index='4' bindtap="activeOne">
-					<p>全/兼职</p>
+				<li class='{{indexs==index?"on":""}}' wx:for="{{work_type}}" data-index='{{index}}' bindtap="activeOne">
+					<p>{{item.label}}</p>
 				</li>
 				<view class="w-clear"></view>
 			</ul>
@@ -86,9 +57,7 @@
 		<view class="a_02">您期望的工作地点（多选）</view>
 		<view class="a_06">
 			<view class="section">
-				<picker value="{{index}}" range="{{array}}">
-					<view class="picker">请选择</view>
-				</picker>
+					<view class="picker" bindtap="dingwei">{{mapValue}}</view>
 			</view>
 		</view>
 	</view>
@@ -97,7 +66,7 @@
 		<view class="a_06">
 			<view class="section" bindtap="industry">
 				<!-- <picker value="{{index}}" range="{{array}}"> -->
-				<view class="picker">请选择</view>
+				<view class="picker">{{type_value}}</view>
 				<!-- </picker> -->
 			</view>
 		</view>
@@ -108,12 +77,12 @@
 		<view class="ind_top">
 			<view class="ind_title">行业</view>
 			<view class="ind_bot">
-				<button class="{{index==ind2?'tt1':'ind_bot_tt'}}" size="mini" data-indu="{{index}}" wx:for="{{8}}" wx:key="index" bindtap="toggle2" style="font-size:25rpx">高科技jishu </button>
+				<button class="{{index==ind2?'tt1':'ind_bot_tt'}}" size="mini" data-indu="{{index}}" wx:for="{{class_types}}" data-value="{{item.label}}" wx:key="index" bindtap="toggle2" style="font-size:25rpx">{{item.label}}</button>
 			</view>
 		</view>
 		<view class="m_bottom">
 			<button class="b_left" bindtap="industry">取消</button>
-			<button class="b_right">确认</button>
+			<button class="b_right" bindtap="confirm">确认</button>
 		</view>
 	</view>
 	<!-- --end-- -->
@@ -122,7 +91,7 @@
 		<view class="a_06">
 			<view class="section" bindtap="Ttime">
 				<!-- <picker value="{{index}}" range="{{array}}"> -->
-				<view class="picker">{{valu}}</view>
+				<view class="picker">{{time_value}}</view>
 				<!-- </picker> -->
 			</view>
 		</view>
@@ -132,11 +101,7 @@
 	<view class="mask2_01" wx:if="{{isTime}}">
 		<view class="title_01"> 到岗时间</view>
 		<view class="butt">
-			<button class="{{num3==1?'bot_02':'bot_01'}}" size="mini" style="font-size:28rpx" data-num="1" bindtap="activeFour"> 立即到岗</button>
-			<button class="{{num3==2?'bot_02':'bot_01'}}" size="mini" style="font-size:28rpx" data-num="2" bindtap="activeFour"> 一周内</button>
-			<button class="{{num3==3?'bot_02':'bot_01'}}" size="mini" style="font-size:28rpx" data-num="3" bindtap="activeFour"> 一个月内</button>
-			<button class="{{num3==4?'bot_02':'bot_01'}}" size="mini" style="font-size:28rpx" data-num="4" bindtap="activeFour"> 三个月内</button>
-			<button class="{{num3==5?'bot_02':'bot_01'}}" size="mini" style="font-size:28rpx" data-num="5" bindtap="activeFour"> 待定</button>
+			<button class="{{num3==index?'bot_02':'bot_01'}}" wx:for="{{work_time}}" size="mini" style="font-size:28rpx" data-num="{{index}}" bindtap="activeFour"> {{item.label}}</button>
 		</view>
 		<button class="button_2" bindtap="con">确认</button>
 	</view>

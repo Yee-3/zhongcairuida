@@ -5,14 +5,25 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    clas:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var app=getApp().globalData
+    var that=this
+    app.http({
+      url: '/selects/position_highend',
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          clas:res.data.rdata
+        })
+      }
+    })
   },
   detail() {
     console.log('1111')

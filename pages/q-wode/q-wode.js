@@ -5,53 +5,71 @@ Page({
    * 页面的初始数据
    */
   data: {
-     dianhua:'display:none'
+    dianhua: 'display:none'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const app = getApp().globalData
+    // app.http({  
+    //     url: '/selects/company_nature',
+    //     dengl:true,
 
+    // })
+   
   },
-  
-  tanchuang_2: function() {
-  	this.setData({
-  		dianhua:'display:block'
-  	})
-  },
-quxiao2: function() {
-		this.setData({
-			dianhua:'display:none'
-		})
-  },
-  create(){
-    wx.navigateTo({
-      url: '../s-wodejianli/s-wodejianli',
+
+  tanchuang_2: function () {
+    this.setData({
+      dianhua: 'display:block'
     })
   },
-  user1(){
+  quxiao2: function () {
+    this.setData({
+      dianhua: 'display:none'
+    })
+  },
+  create() {
+    wx.checkSession({
+      success() {
+        console.log('success')
+        wx.navigateTo({
+          url: '../s-wodejianli/s-wodejianli',
+        })
+      },
+      fail() {
+        var that = this;
+      console.log('失败')
+      wx.navigateTo({
+        url: 'pages/login/index',
+      })
+      }
+    })
+  },
+  user1() {
     wx.navigateTo({
       url: '../r-wode-bdjl/r-wode-bdjl',
     })
   },
-  base(){
+  base() {
     console.log('222')
     wx.navigateTo({
       url: '../v-wodejianli-jcxx/v-wodejianli-jcxx',
     })
   },
-  phone(){
+  phone() {
     wx.makePhoneCall({
       phoneNumber: '400-061235'
     })
   },
-  zhaopin(){
+  zhaopin() {
     wx.redirectTo({
       url: '../p-qiyeduan/p-qiyeduan',
     })
   },
-  about(){
+  about() {
     wx.navigateTo({
       url: '../g-guanyuwomen/g-guanyuwomen',
     })

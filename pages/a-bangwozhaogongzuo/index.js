@@ -15,9 +15,9 @@ Page({
     }, ],
     isAdd: false,
     num: 0,
-    index: 1,
+    indexs: 0,
     num1: 0,
-    num2: 1,
+    num2: 0,
     classValue: '请选择',
     classContent: [{
         name: '金融、证卷、资产'
@@ -30,12 +30,66 @@ Page({
       },
     ],
     mapValue:'请选择',
+    money:[],
+    status:[],
+    work_time:[],
+    work_type:[]
+    
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var app=getApp().globalData
+    var that = this
+    // 期望薪资
+   app.http({
+      url: '/selects/expect_money',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          money: res.data.rdata
+        })
+      } 
+    })
+    // 求职状态
+    app.http({
+      url: '/selects/resume_status',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+         status: res.data.rdata
+        })
+      } 
+    })
+    // 到岗时间
+    app.http({
+      url: '/selects/work_time',
+      data: {},
+      dengl: true,
+      success(res) {
+        that.setData({
+          work_time: res.data.rdata
+        })
+      }
+    })
+    // 类型
+  app.http({
+      url: '/selects/work_type',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          work_type: res.data.rdata
+        })
+      }
+    })
   },
   
   toggle(e) {
@@ -60,7 +114,7 @@ Page({
   },
   activeOne(e) {
     this.setData({
-      index: e.currentTarget.dataset.index
+      indexs: e.currentTarget.dataset.index
     })
   },
   activeTwo(e) {
