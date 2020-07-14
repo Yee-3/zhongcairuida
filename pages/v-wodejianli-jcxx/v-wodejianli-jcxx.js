@@ -10,13 +10,13 @@ Page({
     datePickerIsShow: false,
     img: '../img/f067.png',
     isMar: false,
-    mar: '1',
+    mar: '0',
     valu: '请选择',
     isSix: false,
     six: '1',
     six_val: '请选择',
     isEdu: false,
-    edu: '1',
+    edu: '0',
     valu2: '请选择',
     // 表单数据
     assets: [],
@@ -26,20 +26,11 @@ Page({
     amount: null,
     descripition: '',
     // 用来放弹窗内容的，里面的格式应该为[{label: 'sadsa', value: 'dsadsad'}]
-    springContent: [{
-        value: '求职中'
-      },
-      {
-        value: '随便看看'
-      },
-      {
-        value: '暂时不考虑'
-      },
-      {
-        value: '有好机会考虑'
-      }
-    ],
-    type_content: '请选择'
+    springContent: [],
+    type_content: '请选择',
+    app: getApp().globalData,
+    eduction:[],
+    marr:[],
   },
 
   /**
@@ -52,14 +43,27 @@ Page({
   },
   // 求职状态
   show() {
+    var that=this
+    this.data.app.http({
+      url: '/selects/resume_status',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          springContent:res.data.rdata
+        })
+      }
+    })
     this.spring.show()
+    
   },
   handleConfirmDialog() {
     // console.log(this.spring.data.mar)
     this.spring.show()
     var index = this.spring.data.mar
     this.setData({
-      type_content: this.data.springContent[index].value
+      type_content: this.data.springContent[index].label
     })
 
   },
@@ -72,38 +76,30 @@ Page({
   },
   marriage() {
     var mar = this.data.isMar
+    var that=this
+    this.data.app.http({
+      url: '/selects/resume_marriage',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          marr:res.data.rdata
+        })
+      }
+    })
     this.setData({
       isMar: !mar
     })
-    app.http({
-      url: '/selects/resume_marriage',
-      dengl: false,
-      data: {},
-      success(res) {
-        //  wx.setStorageSync('Authorization',res.data.data.access_token)
-        console.log(res)
-      }
-    })
+    
   },
   con() {
     this.marriage()
-    if (this.data.mar == 1) {
+    var that=this
+    var index=this.data.mar
       this.setData({
-        valu: '未婚'
+        valu: that.data.marr[index].label
       })
-    } else if (this.data.mar == 2) {
-      this.setData({
-        valu: '已婚未育'
-      })
-    } else if (this.data.mar == 3) {
-      this.setData({
-        valu: '已婚已育'
-      })
-    } else {
-      this.setData({
-        valu: '保密'
-      })
-    }
   },
   // ---end---
   // 性别
@@ -139,29 +135,29 @@ Page({
   },
   educat() {
     var eduu = this.data.isEdu
+    var that = this
     this.setData({
       isEdu: !eduu
     })
+    this.data.app.http({
+      url: '/selects/school_record',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+        eduction:res.data.rdata
+        })
+      }
+    })
   },
   con2() {
+    var that=this
+    var index=this.data.edu
     this.educat()
-    if (this.data.edu == 1) {
-      this.setData({
-        valu2: '大专'
-      })
-    } else if (this.data.edu == 2) {
-      this.setData({
-        valu2: '本科'
-      })
-    } else if (this.data.edu == 3) {
-      this.setData({
-        valu2: '硕士'
-      })
-    } else {
-      this.setData({
-        valu2: '博士'
-      })
-    }
+    this.setData({
+      valu2:that.data.eduction[index].label
+    })
   },
   // ---end---
   /**

@@ -29,7 +29,7 @@
 }
 .mar_bot{
   padding-left: 20rpx;
-  margin-bottom: 40rpx;
+  /* margin-bottom: 40rpx; */
 }
 .but{
   text-align: center;

@@ -199,14 +199,14 @@
 /* ---end--- */
 .mask_edu{
   width: 690rpx;
-  height: 380rpx;
+  /* height: 380rpx; */
   position: fixed;
   left: 30rpx;
   z-index: 9999;
   bottom: 20rpx;
 }
 .edu_top{
-  height: 260rpx;
+  /* height: 260rpx; */
   padding-left: 26rpx;
   padding-top: 50rpx;
   background: #fff;

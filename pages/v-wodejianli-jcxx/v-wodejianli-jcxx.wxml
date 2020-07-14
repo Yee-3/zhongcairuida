@@ -106,10 +106,7 @@
 		<view class="edu_top">
 			<view class="edu_title">学历</view>
 			<view class="edu_bot">
-				<button class="{{edu==1?'no1':'no'}}" size="mini" data-edu="1" bindtap="toggle" style="font-size:24rpx;">大专</button>
-				<button class="{{edu==2?'no1':'no'}}" size="mini" data-edu="2" bindtap="toggle" style="font-size:24rpx;">本科</button>
-				<button class="{{edu==3?'no1':'no'}}" size="mini" data-edu="3" bindtap="toggle" style="font-size:24rpx;">硕士</button>
-				<button class="{{edu==4?'no1':'no'}}" size="mini" data-edu="4" bindtap="toggle" style="font-size:24rpx;">博士</button>
+				<button class="{{edu==index?'no1':'no'}}" wx:for="{{eduction}}" size="mini" data-edu="{{index}}" bindtap="toggle" style="font-size:24rpx;">{{item.label}}</button>
 			</view>
 		</view>
 		<view class="m_bottom">
@@ -189,10 +186,7 @@
 		<view class="mar_top">
 			<view class="mar_title">婚姻状况</view>
 			<view class="mar_bot">
-				<button class="{{mar==1?'no1':'no'}}" size="mini" data-mar="1" bindtap="toggle" style="font-size:28rpx">未婚</button>
-				<button class="{{mar==2?'no1':'no'}}" size="mini" data-mar="2" bindtap="toggle" style="font-size:28rpx">已婚未育</button>
-				<button class="{{mar==3?'no1':'no'}}" size="mini" data-mar="3" bindtap="toggle" style="font-size:28rpx">已婚已育</button>
-				<button class="{{mar==4?'no1':'no'}}" size="mini" data-mar="4" bindtap="toggle" style="font-size:28rpx">保密</button>
+				<button class="{{mar==index?'no1':'no'}}" wx:for="{{marr}}" size="mini" data-mar="{{index}}" bindtap="toggle" style="font-size:28rpx">{{item.label}}</button>
 			</view>
 			<view class="but">
 				<button class="queren" size="mini" style="font-weight:normal;" bindtap="con">确认</button>
