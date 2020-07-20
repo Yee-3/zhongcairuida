@@ -11,7 +11,7 @@
 		</view>
 	</view>
 	<view class="fr q_09">
-		<image src="../img2/f051.png"></image>
+		<image src="../img/f051.png"></image>
 	</view>
 </view>
 
@@ -75,7 +75,7 @@
 		</view>
 		<view class="s_21">挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件...</view>
 	</view>
-	<view class="s_22"><image src="../img2/f064.png"></image></view>
+	<view class="s_22"><image src="../img/f064.png"></image></view>
 </view>
 
 <view class="s_05">
@@ -102,7 +102,7 @@
 		<view class="s_16">2017/09~2018/06</view>
 		<view class="s_21">1.OFF是一款海外代购轻奢品牌的APP；2.OFF主要是为国内消费者提供当季热款、下季新款的折扣...</view>
 	</view>
-	<view class="s_22"><image src="../img2/f064.png"></image></view>
+	<view class="s_22"><image src="../img/f064.png"></image></view>
 </view>
 
 <view class="s_05">
@@ -135,7 +135,7 @@
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">2013年09月</view>
-		<view class="s_23"><image src="../img2/f065.png"></image></view>
+		<view class="s_23"><image src="../img/f065.png"></image></view>
 	</view>
 </view>
 

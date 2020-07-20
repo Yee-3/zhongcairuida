@@ -62,13 +62,13 @@
 						<view class='add-pic'>
 							<image class='add-pic' src='{{item}}'></image>
 							<view class='img-de' data-deindex='{{index}}' bindtap='imgDelete1'>
-								<image class='img' src='../img2/f071.png'></image>
+								<image class='img' src='../img/q071.png'></image>
 							</view>
 						</view>
 					</view>
 				</block>
 				<view class='add-pic' bindtap='images' wx:if="{{imgbox.length<9}}">
-					<image class='img' src='../img2/f069.png'></image>
+					<image class='img' src='../img/f066.png'></image>
 				</view>
 			</view>
 		</view>

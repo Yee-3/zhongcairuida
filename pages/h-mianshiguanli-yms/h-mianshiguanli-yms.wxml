@@ -19,17 +19,17 @@
 		<ul>
 			<li>
 				<view class="h_07">
-					<image wx:if="{{idn==1}}" src="../img2/f026.png"></image>
+					<image wx:if="{{idn==1}}" src="../img/f026.png"></image>
 				</view>
 			</li>
 			<li>
 				<view class="h_07">
-					<image wx:if="{{idn==2}}" src="../img2/f026.png"></image>
+					<image wx:if="{{idn==2}}" src="../img/f026.png"></image>
 				</view>
 			</li>
 			<li>
 				<view class="h_07">
-					<image wx:if="{{idn==3}}" src="../img2/f026.png"></image>
+					<image wx:if="{{idn==3}}" src="../img/f026.png"></image>
 				</view>
 			</li>
 		</ul>
@@ -92,7 +92,7 @@
 		<view class="h_13">
 			<view class="fl h_14">
 				<view class="fl h_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h_16">
 					<view class="h_17">李先生</view>
@@ -124,7 +124,7 @@
 		<view class="h_13">
 			<view class="fl h_14">
 				<view class="fl h_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h_16">
 					<view class="h_17">李先生</view>
@@ -162,7 +162,7 @@
 		<view class="h_13">
 			<view class="fl h_14">
 				<view class="fl h_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h_16">
 					<view class="h_17">李先生</view>
@@ -200,7 +200,7 @@
 		<view class="h_13">
 			<view class="fl h_14">
 				<view class="fl h_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h_16">
 					<view class="h_17">李先生</view>
@@ -243,7 +243,7 @@
 		<view class="h1_13">
 			<view class="fl h1_14">
 				<view class="fl h1_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h1_16">
 					<view class="h1_17">李先生</view>
@@ -275,7 +275,7 @@
 		<view class="h1_13">
 			<view class="fl h1_14">
 				<view class="fl h1_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h1_16">
 					<view class="h1_17">李先生</view>
@@ -313,7 +313,7 @@
 		<view class="h1_13">
 			<view class="fl h1_14">
 				<view class="fl h1_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h1_16">
 					<view class="h1_17">李先生</view>
@@ -351,7 +351,7 @@
 		<view class="h1_13">
 			<view class="fl h1_14">
 				<view class="fl h1_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h1_16">
 					<view class="h1_17">李先生</view>
@@ -394,7 +394,7 @@
 		<view class="h2_13">
 			<view class="fl h2_14">
 				<view class="fl h2_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h2_16">
 					<view class="h2_17">李先生</view>
@@ -429,7 +429,7 @@
 		<view class="h2_13">
 			<view class="fl h2_14">
 				<view class="fl h2_15">
-					<image src="../img2/f004.png"></image>
+					<image src="../img/f004.png"></image>
 				</view>
 				<view class="fl h2_16">
 					<view class="h2_17">李先生</view>

@@ -2,13 +2,13 @@
 	<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
 		<block class="top_img">
 			<swiper-item>
-				<image class="banner" src="../img2/f008.png"></image>
+				<image class="banner" src="../img/q008.png"></image>
 			</swiper-item>
 			<swiper-item>
-				<image class="banner" src="../img2/f008.png"></image>
+				<image class="banner" src="../img/q008.png"></image>
 			</swiper-item>
 			<swiper-item>
-				<image class="banner" src="../img2/f008.png"></image>
+				<image class="banner" src="../img/q008.png"></image>
 			</swiper-item>
 		</block>
 	</swiper>
@@ -16,14 +16,14 @@
 
 <view class="m_01">
 	<ul>
-		<li bindtap="person"><image src="../img2/f038.png"></image><p>海量人才</p></li>
-		<li bindtap="resume"><image src="../img2/f039.png"></image><p>精准简历</p></li>
-		<li bindtap="entry"><image src="../img2/f040.png"></image><p>即刻入职</p></li>
+		<li bindtap="person"><image src="../img/qf038.png"></image><p>海量人才</p></li>
+		<li bindtap="resume"><image src="../img/qf039.png"></image><p>精准简历</p></li>
+		<li bindtap="entry"><image src="../img/qf040.png"></image><p>即刻入职</p></li>
 		<view class="w-clear"></view>
 	</ul>
 </view>
 
-<view class="p_01"><image src="../img2/f073.png"></image></view>
+<view class="p_01"><image src="../img/q073.png"></image></view>
 
 <view class="p_02">
 	<view class="p_03">
@@ -33,7 +33,7 @@
 		</view>
 		<view class="p_04 fr">
 			<view class="p_05 fl">更多</view>
-			<view class="p_06 fl"><image src="../img2/f074.png"></image></view>
+			<view class="p_06 fl"><image src="../img/q074.png"></image></view>
 		</view>
 		<view class="w-clear"></view>
 	</view>
@@ -44,7 +44,7 @@
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
-					<image src="../img2/f001.png"></image>
+					<image src="../img/f01.png"></image>
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
@@ -66,7 +66,7 @@
 		<view class="d_12">
 			<view class="d_13">
 				<view class="fl d_14">
-					<image src="../img2/f002.png"></image>
+					<image src="../img/f0021.png"></image>
 				</view>
 				<view class="fl d_15">
 					<p>北京酷马科技有限公司·2年1个月</p>
@@ -88,7 +88,7 @@
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
-					<image src="../img2/f001.png"></image>
+					<image src="../img/f01.png"></image>
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
@@ -110,7 +110,7 @@
 		<view class="d_12">
 			<view class="d_13">
 				<view class="fl d_14">
-					<image src="../img2/f002.png"></image>
+					<image src="../img/f0021.png"></image>
 				</view>
 				<view class="fl d_15">
 					<p>北京酷马科技有限公司·2年1个月</p>
@@ -132,7 +132,7 @@
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
-					<image src="../img2/f001.png"></image>
+					<image src="../img/f01.png"></image>
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
@@ -154,7 +154,7 @@
 		<view class="d_12">
 			<view class="d_13">
 				<view class="fl d_14">
-					<image src="../img2/f002.png"></image>
+					<image src="../img/f0021.png"></image>
 				</view>
 				<view class="fl d_15">
 					<p>北京酷马科技有限公司·2年1个月</p>

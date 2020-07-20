@@ -17,7 +17,7 @@
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
-					<image src="../img2/f001.png"></image>
+					<image src="../img/f01.png"></image>
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
@@ -35,7 +35,7 @@
 			</view>
 			<view class="fr g_03">
 				<view class="g_02">
-					<view class="g_04"><image src="../img2/f003.png"></image></view>
+					<view class="g_04"><image src="../img/f03.png"></image></view>
 					<view class="g_05">新</view>
 				</view>
 				<view class="g_01">22小时前活跃</view>
@@ -45,7 +45,7 @@
 		<view class="d_12">
 			<view class="d_13">
 				<view class="fl d_14">
-					<image src="../img2/f002.png"></image>
+					<image src="../img/f0021.png"></image>
 				</view>
 				<view class="fl d_15">
 					<p>北京酷马科技有限公司·2年1个月</p>
@@ -67,7 +67,7 @@
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
-					<image src="../img2/f001.png"></image>
+					<image src="../img/f01.png"></image>
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
@@ -85,7 +85,7 @@
 			</view>
 			<view class="fr g_03">
 				<view class="g_02">
-					<view class="g_04"><image src="../img2/f003.png"></image></view>
+					<view class="g_04"><image src="../img/f03.png"></image></view>
 					<view class="g_05">新</view>
 				</view>
 				<view class="g_01">22小时前活跃</view>
@@ -95,7 +95,7 @@
 		<view class="d_12">
 			<view class="d_13">
 				<view class="fl d_14">
-					<image src="../img2/f002.png"></image>
+					<image src="../img/f0021.png"></image>
 				</view>
 				<view class="fl d_15">
 					<p>北京酷马科技有限公司·2年1个月</p>
@@ -117,7 +117,7 @@
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
-					<image src="../img2/f001.png"></image>
+					<image src="../img/f01.png"></image>
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
@@ -135,7 +135,7 @@
 			</view>
 			<view class="fr g_03">
 				<view class="g_02">
-					<view class="g_04"><image src="../img2/f003.png"></image></view>
+					<view class="g_04"><image src="../img/f03.png"></image></view>
 					<view class="g_05">新</view>
 				</view>
 				<view class="g_01">22小时前活跃</view>
@@ -145,7 +145,7 @@
 		<view class="d_12">
 			<view class="d_13">
 				<view class="fl d_14">
-					<image src="../img2/f002.png"></image>
+					<image src="../img/f0021.png"></image>
 				</view>
 				<view class="fl d_15">
 					<p>北京酷马科技有限公司·2年1个月</p>
