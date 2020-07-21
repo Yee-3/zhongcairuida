@@ -5,16 +5,32 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    app :getApp().globalData,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
   },
+  change(e){
+    console.log(e)
+    
+  },
+  submit() {
+    this.app.http({
+      url:'/resume/binding',
+      dengl:true,
+      method:'post',
+      header:true,
+      data:{
 
+      },
+      success(res){
+
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

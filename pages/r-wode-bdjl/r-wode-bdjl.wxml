@@ -5,11 +5,11 @@
 	</view>
 	<view class="r_02">
 		<view class="r_03">电话：</view>
-		<view class="r_04"><input placeholder="请输入您的电话" /></view>
+		<view class="r_04"><input data-value="valueCon" value='{{valueCon}}' bindblur="change" placeholder="请输入您的电话" /></view>
 	</view>
 </view>
 
-<view class="r_05">提交</view>
+<view class="r_05" bindtap="submit">提交</view>
 
 
 
