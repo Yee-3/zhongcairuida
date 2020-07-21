@@ -17,20 +17,20 @@ Component({
         {
           pagePath: "pages/p-qiyeduan/p-qiyeduan",
           text: "简历中心",
-          iconPath: "../../img2/d_1.png",
-          selectedIconPath: "../..//img2/d_11.png"
+          iconPath: "../../img/d1_1.png",
+          selectedIconPath: "../..//img/d1_11.png"
         },
         {
           pagePath: "pages/h-mianshiguanli-yms/h-mianshiguanli-yms",
           text: "进程管理",
-          iconPath: "../../img2/d_2.png",
-          selectedIconPath:"../../img2/d_22.png"
+          iconPath: "../../img/d1_2.png",
+          selectedIconPath:"../../img/d1_22.png"
         },
         {
           pagePath: "pages/k-qiyezhongxin/k-qiyezhongxin",
           text: "企业中心",
-          iconPath: "../../img2/d_3.png",
-          selectedIconPath: "../../img2/d_33.png"
+          iconPath: "../../img/d1_3.png",
+          selectedIconPath: "../../img/d1_33.png"
         }
       ]
   },

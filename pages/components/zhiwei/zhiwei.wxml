@@ -8,16 +8,16 @@
 		<view class="mask_02_01" wx:if="{{isTwo}}">
 			<scroll-view class="mask_left" scroll-y="true">
 				<view class="{{index==ind1?'no':'bot'}}" wx:for='{{9}}' style="" data-index='{{index}}' bindtap="toggle1" style="width:220rpx">
-					<image class="img" wx:if="{{index==ind1}}" src="../../../static/icon_02.png"></image>
+					<image class="img" wx:if="{{index==ind1}}" src="../../img/icon_02.png"></image>
 					销售顾问
-					<image class="img1" wx:if="{{index==ind1}}" src="../../../static/icon_01.png"></image>
+					<image class="img1" wx:if="{{index==ind1}}" src="../../img/icon_01.png"></image>
 				</view>
 			</scroll-view>
 
 			<scroll-view class="mask_right" scroll-y="true">
 				<view class="{{index==ind2?'no':'bot'}}" wx:for='{{9}}' data-index='{{index}}' bindtap="toggle2">
 					大客户代表
-					<image class="img2" wx:if="{{index==ind2}}" src="../../../static/icon_01.png"></image>
+					<image class="img2" wx:if="{{index==ind2}}" src="../../img/icon_01.png"></image>
 				</view>
 			</scroll-view>
 
@@ -25,7 +25,7 @@
 		<!-- —————— -->
 		<scroll-view class="top_top" scroll-y="true">
 			<view class="{{index==ind?'no':'bot'}}" wx:for='{{9}}' data-index='{{index}}' bindtap="toggle">
-				<image class="img" wx:if="{{index==ind}}" src="../../../static/icon_02.png"></image>
+				<image class="img" wx:if="{{index==ind}}" src="../../img/icon_02.png"></image>
 				销售/商务拓展
 			</view>
 		</scroll-view>

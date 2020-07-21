@@ -25,7 +25,7 @@ Page({
     isImg: false,
     img:'',
     imgbox: '',
-    zhi_img:'../img2/f072.png',
+    zhi_img:'../img/q072.png',
     imgValue:'请上传'
   },
 
