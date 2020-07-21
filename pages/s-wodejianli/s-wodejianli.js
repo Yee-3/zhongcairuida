@@ -5,39 +5,94 @@ Page({
    * 页面的初始数据
    */
   data: {
- isF:true,
- isX:true,
- DataSource: [
-  {
-    content: '挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..',
-  },
-  {
-    content: '挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..',
-  }
-],
+    isF: true,
+    isX: true,
+    app: getApp().globalData,
+    DataSource: [{
+        content: '挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..',
+      },
+      {
+        content: '挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..',
+      }
+    ],
+   resume:{},
+   baseUrl:getApp().globalData.baseUrl,
+   time:[],
+   times:[],
+   schoolT:[],
+   book:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    // console.log(this.data.baseUrl)
+    let that=this
+    this.data.app.http({
+      url: '/resume/getResume',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res.data.rdata)
+        var timer=res.data.rdata.ctrlWorkDTOS
+        var time=[]
+        var times=[]
+        var schoolT=[]
+        var xiangTime=res.data.rdata.ctrlProjectDTOS
+        var schoolTime=res.data.rdata.ctrlSchoolDTOS
+        var book=[]
+        for(var i=0;i<timer.length;i++){
+          time.push({
+            startTime:timer[i].startTime.substring(0,10),
+            endTime:timer[i].endTime.substring(0,10)
+          })
+        }
+        for(var i=0;i<xiangTime.length;i++){
+          times.push({
+            startTime:xiangTime[i].startTime.substring(0,10),
+            endTime:xiangTime[i].endTime.substring(0,10)
+          })
+        }
+        for(var i=0;i<schoolTime.length;i++){
+          schoolT.push({
+            startTime:schoolTime[i].startTime.substring(0,10),
+            endTime:schoolTime[i].endTime.substring(0,10)
+          })
+        }
+        for(var i=0;i<res.data.rdata.ctrlBookDTOS.length;i++){
+          book.push({
+            time:res.data.rdata.ctrlBookDTOS[i].time.substring(0,4)+'年'+res.data.rdata.ctrlBookDTOS[i].time.substring(5,7)+'月',
+          })
+        }
 
+        that.setData({
+          resume:res.data.rdata,
+          time:time,
+          times:times,
+          schoolT:schoolT,
+          book:book
+        })
+      }
+    })
   },
   change: function (e) {
-    var f=this.data.isF
+    var f = this.data.isF
     this.setData({
-      isF:!f
+      isF: !f
     })
   },
   change1: function (e) {
-    var x=this.data.isX
+    var x = this.data.isX
     this.setData({
-      isX:!x
+      isX: !x
     })
   },
   int() {
+    // console.log(this.data.resume.ctrlObjectiveDTOS[0])
+    var cot=this.data.resume.ctrlObjectiveDTOS[0]
     wx.navigateTo({
-      url: '../x-wodejianli-qzyx/x-wodejianli-qzyx',
+      url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?money='+cot.money+'&type='+cot.type+'&industry='+cot.industry+'&time='+cot.time+'&address='+cot.address,
     })
   },
   work() {
@@ -55,12 +110,12 @@ Page({
       url: '../w-wodejianli-jyjl/w-wodejianli-jyjl',
     })
   },
-  honor(){
+  honor() {
     wx.navigateTo({
       url: '../u-wodejianli-hdzs/u-wodejianli-hdzs',
     })
   },
- 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

@@ -12,7 +12,7 @@ Page({
     isAdd_F: false,
     isAdd_S: false,
     ind: 'x',
-    ind1: '',
+    ind1: 0,
     ind2: '',
     ind3: '',
     ind4: '',
@@ -32,7 +32,9 @@ Page({
     mapValue: '',
     app: getApp().globalData,
     xingzhi:[],
-    guimo:[]
+    guimo:[],
+    imgList:[],
+    zhiList:[]
   },
 
   /**
@@ -51,6 +53,16 @@ Page({
         mapValue: cityOrTime.city
       })
     }
+    this.data.app.http({
+      url:'/index/getIndex',
+      data:{},
+      success(res){
+        console.log(res)
+        that.setData({
+          imgList:res.data.rdata.ctrlBannerList
+        })
+      }
+    })
   },
   // 获取位置
 
@@ -96,7 +108,6 @@ Page({
     })
   },
   high() {
-
     wx.navigateTo({
       url: '../d-gaoduanzhiwei/d-gaoduanzhiwei'
     })
@@ -163,9 +174,21 @@ Page({
 
   position() {
     var add = this.data.isAdd
-    this.setData({
-      isAdd: !add
+    var that=this
+    this.data.app.http({
+      url:'/selects/position',
+      data:{},
+      success(res){
+        that.setData({
+          isAdd: !add,
+          zhiList:res.data.rdata
+        })
+        console.log(res.data.rdata)
+      }
     })
+    // this.setData({
+    //   isAdd: !add
+    // })
   },
   position1() {
     var that=this

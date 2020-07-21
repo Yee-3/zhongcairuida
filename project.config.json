@@ -26,7 +26,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.1",
-	"appid": "wx60fdbc6ece8a7eb9",
+	"appid": "wx4e6c0fd45e00eba3",
 	"projectname": "%E4%B8%AD%E6%89%8D%E7%91%9E%E8%BE%BE%EF%BC%88%E6%B1%82%E8%81%8C%E7%AB%AF%EF%BC%89",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -60,13 +60,6 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
-					"pathName": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/login/index",
 					"pathName": "pages/login/index",
 					"query": "",
@@ -80,22 +73,31 @@
 					"scene": null
 				},
 				{
-					"id": 3,
-					"name": "pages/g-jinzhunjianli-zwjl/g-jinzhunjianli-zwjl",
-					"pathName": "pages/g-jinzhunjianli-zwjl/g-jinzhunjianli-zwjl",
+					"id": -1,
+					"name": "pages/s-wodejianli/s-wodejianli",
+					"pathName": "pages/s-wodejianli/s-wodejianli",
 					"query": "",
 					"scene": null
-},
+				},
 				{
 					"id": -1,
-					"name": "pages/login/index",
-					"pathName": "pages/login/index",
+					"name": "pages/x-wodejianli-qzyx/x-wodejianli-qzyx",
+					"pathName": "pages/x-wodejianli-qzyx/x-wodejianli-qzyx",
 					"query": "",
-					"scene": null				},
+					"scene": null
+				},
 				{
 					"id": -1,
-					"name": "pages/r-wode-bdjl/r-wode-bdjl",
-					"pathName": "pages/r-wode-bdjl/r-wode-bdjl",
+					"name": "pages/s-wodejianli/s-wodejianli",
+					"pathName": "pages/s-wodejianli/s-wodejianli",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/m-shouye/m-shouye",
+					"pathName": "pages/m-shouye/m-shouye",
+					"query": "",
 					"scene": null
 				}
 			]

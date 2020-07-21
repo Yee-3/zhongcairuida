@@ -1,21 +1,21 @@
 <view class="s_01">
 	<view class="fl s_02">
 		<view class="q_03">
-			<view class="q_04 fl"><input placeholder="小明" /></view>
+			<view class="q_04 fl"><input value="{{resume.ctrlResumeDTO.name}}" placeholder="小明" /></view>
 			<view class="q_05 fl"><image src="../img/f050.png"></image></view>
 		</view>
 		<view class="q_06">
-			<view class="s_03"><p>24岁</p><span>|</span><p>本科</p><span>|</span><p>全职</p></view>
-			<view class="s_04">手机号码：14753701234</view>
-			<view class="s_04">求职状态：求职中</view>
+			<view class="s_03"><p>{{resume.ctrlResumeDTO.age}}岁</p><span>|</span><p>{{resume.ctrlResumeDTO.schoolName}}</p><span>|</span><p>{{resume.ctrlResumeDTO.worktypeName}}</p></view>
+			<view class="s_04">手机号码：{{resume.ctrlResumeDTO.phone}}</view>
+			<view class="s_04">求职状态：{{resume.ctrlResumeDTO.statusName}}</view>
 		</view>
 	</view>
 	<view class="fr q_09">
-		<image src="../img/f051.png"></image>
+		<!-- <image src="{{baseUrl+resume.ctrlResumeDTO.url}}"></image> -->
 	</view>
 </view>
 
-<view class="s_05">
+<view class="s_05" wx:for="{{resume.ctrlObjectiveDTOS}}">
 	<view class="s_06">
 		<view class="fl s_07">求职意向</view>
 		<view class="fr s_08" bindtap="int"><image src="../img/f050.png"></image></view>
@@ -23,44 +23,44 @@
 	</view>
 	<view class="s_09">
 		<view class="fl s_10">求职意向</view>
-		<view class="fr s_11">全职</view>
+		<view class="fr s_11">{{item.typeName}}</view>
 		<view class="w-clear"></view>
 	</view>
 	<view class="s_09">
 		<view class="fl s_10">职位</view>
-		<view class="fr s_11">文员</view>
+		<view class="fr s_11">{{item.positionName}}</view>
 		<view class="w-clear"></view>
 	</view>
 	<view class="s_09">
 		<view class="fl s_10">工作地点</view>
-		<view class="fr s_11">济南市-槐荫区</view>
+		<view class="fr s_11">{{item.address}}</view>
 		<view class="w-clear"></view>
 	</view>
 	<view class="s_09">
 		<view class="fl s_10">期望薪资</view>
-		<view class="fr s_11">5K-8K</view>
+		<view class="fr s_11">{{item.moneyName}}</view>
 		<view class="w-clear"></view>
 	</view>
 </view>
 
-<view class="s_05">
+<view class="s_05" >
 	<view class="s_06">
 		<view class="fl s_07">工作经历</view>
 		<view class="fr s_12" bindtap="work"><image src="../img/f063.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="{{isF?'hide s_20':'show s_20'}}" data-index="{{index}}" wx:for="{{DataSource}}" >
+	<view class="{{isF?'hide s_20':'show s_20'}}" data-index="{{index}}" wx:for="{{resume.ctrlWorkDTOS}}" >
 		<view class="s_13">
-			<view class="fl s_14">海鸿达(北京)餐饮管理有限公司</view>
+			<view class="fl s_14">{{item.company}}</view>
 			<view class="fr s_15"><image :src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="s_16">2017/09~2018/06</view>
+		<view class="s_16">{{time[index].startTime}}~{{time[index].endTime}}</view>
 		<view class="s_17">
-			<view class="s_18 fl">海底捞店长</view>
+			<view class="s_18 fl">{{item.position}}</view>
 			<view class="s_19 fr">7000元/月</view>
 		</view>
-		<view class="s_21">{{item.content}}</view>
+		<view class="s_21">{{item.describe}}</view>
 	</view>
 
 	<view class="s_22"  bindtap="change"><image src="{{isF?'../img/f064.png':'../img/f064-01.png'}}"></image></view>
@@ -72,14 +72,14 @@
 		<view class="fr s_12" bindtap="project"><image src="../img/f063.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="{{isX?'hide s_20':'show s_20'}}" wx:for="{{2}}">
+	<view class="{{isX?'hide s_20':'show s_20'}}" wx:for="{{resume.ctrlProjectDTOS}}">
 		<view class="s_13">
-			<view class="fl s_14">OFF</view>
+			<view class="fl s_14">{{item.name}}</view>
 			<view class="fr s_15"><image src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="s_16">2017/09~2018/06</view>
-		<view class="s_21">1.OFF是一款海外代购轻奢品牌的APP；2.OFF主要是为国内消费者提供当季热款、下季新款的折扣...</view>
+		<view class="s_16">{{times[index].startTime}}~{{times[index].endTime}}</view>
+		<view class="s_21">{{item.describe}}</view>
 	</view>
 	<view class="s_22" bindtap="change1"><image src="{{isX?'../img/f064.png':'../img/f064-01.png'}}"></image></view>
 </view>
@@ -90,14 +90,14 @@
 		<view class="fr s_12" bindtap="education"><image src="../img/f063.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20">
+	<view class="s_20" wx:for="{{resume.ctrlSchoolDTOS}}">
 		<view class="s_13">
-			<view class="fl s_14">青岛海洋大学</view>
+			<view class="fl s_14">{{item.school}}</view>
 			<view class="fr s_15"><image src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="s_16">2013/09~2016/07</view>
-		<view class="s_03"><p>本科</p><span>|</span><p>酒店管理</p></view>
+		<view class="s_16">{{schoolT[index].startTime}}~{{schoolT[index].endTime}}</view>
+		<view class="s_03"><p>{{item.recordName}}</p><span>|</span><p>{{item.professionalName}}</p></view>
 	</view>
 </view>
 
@@ -107,13 +107,13 @@
 		<view class="fr s_12" bindtap="honor"><image src="../img/f063.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20">
+	<view class="s_20" wx:for="{{resume.ctrlBookDTOS}}">
 		<view class="s_13">
-			<view class="fl s_14">优秀三好学生</view>
+			<view class="fl s_14">{{item.name}}</view>
 			<view class="fr s_15"><image src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="s_16">2013年09月</view>
+		<view class="s_16">{{book[index].time	}}</view>
 		<view class="s_23"><image src="../img/f065.jpg"></image></view>
 	</view>
 </view>

@@ -73,9 +73,10 @@ Page({
                 }),
                 success(res) {
 
-                  console.log(res)
+                  console.log(res.data.rdata.ctrlToken.token)
                   if (res.data.rdata) {
                     wx.setStorageSync('Authorization', res.data.rdata.ctrlToken.token)
+                    console.log(wx.getStorageSync('Authorization')),
                     wx.showToast({
                       title:'登录成功'
                     })
@@ -83,7 +84,7 @@ Page({
                       wx.reLaunch({
                         url:'../m-shouye/m-shouye'
                       })
-                    },1900)
+                    },1000)
                   }
                 }
               })

@@ -43,7 +43,7 @@ Page({
         var that = this;
       console.log('失败')
       wx.navigateTo({
-        url: 'pages/login/index',
+        url: '../login/index',
       })
       }
     })
