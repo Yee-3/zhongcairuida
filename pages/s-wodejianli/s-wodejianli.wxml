@@ -52,7 +52,7 @@
 	<view class="{{isF?'hide s_20':'show s_20'}}" data-index="{{index}}" wx:for="{{resume.ctrlWorkDTOS}}" >
 		<view class="s_13">
 			<view class="fl s_14">{{item.company}}</view>
-			<view class="fr s_15"><image :src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="work" data-id="1"><image src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{time[index].startTime}}~{{time[index].endTime}}</view>

@@ -8,13 +8,6 @@ Page({
     isF: true,
     isX: true,
     app: getApp().globalData,
-    DataSource: [{
-        content: '挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..',
-      },
-      {
-        content: '挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..挖掘开拓本地特色餐饮客户为客户提供优质的合作方案，与公司各部门有效配合，所遇到的问题及突发事件..',
-      }
-    ],
    resume:{},
    baseUrl:getApp().globalData.baseUrl,
    time:[],
@@ -92,13 +85,20 @@ Page({
     // console.log(this.data.resume.ctrlObjectiveDTOS[0])
     var cot=this.data.resume.ctrlObjectiveDTOS[0]
     wx.navigateTo({
-      url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?money='+cot.money+'&type='+cot.type+'&industry='+cot.industry+'&time='+cot.time+'&address='+cot.address,
+      url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?money='+cot.money+'&type='+cot.type+'&industry='+cot.industry+'&time='+cot.time+'&address='+cot.address+'&posit='+cot.position+'&pingjia='+cot.introduction+'&id='+cot.id,
     })
   },
-  work() {
-    wx.navigateTo({
-      url: '../t-wodejianli-gzjl/t-wodejianli-gzjl',
-    })
+  work(e) {
+    console.log(e)
+    if(e.currentTarget.dataset.id){
+      wx.navigateTo({
+        url: '../t-wodejianli-gzjl/t-wodejianli-gzjl',
+      })
+    }else{
+      wx.navigateTo({
+        url: '../t-wodejianli-gzjl/t-wodejianli-gzjl',
+      })
+    }
   },
   project() {
     wx.navigateTo({

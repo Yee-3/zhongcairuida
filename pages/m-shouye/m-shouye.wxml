@@ -21,7 +21,7 @@
 
 	<swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
 		<block class="top_img">
-		 <!-- wx:for="{{imgList}}" -->
+			<!-- wx:for="{{imgList}}" -->
 			<swiper-item>
 				<image class="banner" src="../img/f034.png"></image>
 			</swiper-item>
@@ -101,7 +101,7 @@
 		<ul>
 			<li bindtap="position3" style="width:30%">
 				<view class="l_02">{{z_val}}
-				<image class="image" src="../img/f033.png"></image>
+					<image class="image" src="../img/f033.png"></image>
 				</view>
 			</li>
 			<!-- 综合排序弹框 -->
@@ -129,6 +129,7 @@
 				<view class="m_top">
 					<view class="title">职位</view>
 					<!-- 遮罩层2 -->
+					<!-- 二级弹框 -->
 					<view class="mask_02" wx:if="{{isTwo}}" bindtap="hide"></view>
 					<view class="mask_02_01" wx:if="{{isTwo}}">
 						<scroll-view class="mask_left" scroll-y="true">
@@ -138,26 +139,26 @@
 								<image class="img1" wx:if="{{index==ind1}}" src="../img/icon_01.png"></image>
 							</view>
 						</scroll-view>
-
+						<!-- 三级弹框 -->
 						<scroll-view class="mask_right" scroll-y="true">
 							<view class="{{index==ind2?'no':'bot'}}" wx:for='{{zhiList[ind].treeDTOS[ind1].treeDTOS}}' data-index='{{index}}' bindtap="toggle2">
 								{{item.name}}
 								<image class="img2" wx:if="{{index==ind2}}" src="../img/icon_01.png"></image>
 							</view>
 						</scroll-view>
-
 					</view>
 					<!-- —————— -->
+					<!-- 一级弹框 -->
 					<scroll-view class="top_top" scroll-y="true">
 						<view class="{{index==ind?'no':'bot'}}" wx:for='{{zhiList}}' data-index='{{index}}' bindtap="toggle">
 							<image class="img" wx:if="{{index==ind}}" src="../img/icon_02.png"></image>
-						{{item.name}}
+							{{item.name}}
 						</view>
 					</scroll-view>
 				</view>
 				<view class="m_bottom">
 					<button class="b_left" bindtap="position">取消</button>
-					<button class="b_right">确认</button>
+					<button class="b_right" bindtap="con">确认</button>
 				</view>
 			</view>
 			<!-- ---end-- -->
@@ -193,7 +194,7 @@
 			<!-- --end-- -->
 			<li bindtap="position2" style="width:23%">
 				<view class="l_02">更多
-				<image class="image" src="../img/f033.png"></image>
+					<image class="image" src="../img/f033.png"></image>
 				</view>
 			</li>
 			<!-- 更多弹框 -->

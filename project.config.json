@@ -60,27 +60,6 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/login/index",
-					"pathName": "pages/login/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
-					"pathName": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/s-wodejianli/s-wodejianli",
-					"pathName": "pages/s-wodejianli/s-wodejianli",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/x-wodejianli-qzyx/x-wodejianli-qzyx",
 					"pathName": "pages/x-wodejianli-qzyx/x-wodejianli-qzyx",
 					"query": "",
@@ -88,6 +67,20 @@
 				},
 				{
 					"id": -1,
+					"name": "pages/m-shouye/m-shouye",
+					"pathName": "pages/m-shouye/m-shouye",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/t-wodejianli-gzjl/t-wodejianli-gzjl",
+					"pathName": "pages/t-wodejianli-gzjl/t-wodejianli-gzjl",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
 					"name": "pages/s-wodejianli/s-wodejianli",
 					"pathName": "pages/s-wodejianli/s-wodejianli",
 					"query": "",
@@ -95,8 +88,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/m-shouye/m-shouye",
-					"pathName": "pages/m-shouye/m-shouye",
+					"name": "pages/t-wodejianli-gzjl/t-wodejianli-gzjl",
+					"pathName": "pages/t-wodejianli-gzjl/t-wodejianli-gzjl",
 					"query": "",
 					"scene": null
 				}

@@ -17,43 +17,121 @@ Page({
     isAdd: false,
     isTwo: false,
     isInd: false,
-    ind: 'x',
-    ind1: '',
-    ind2: '',
+    ind: '',
+    ind1: 0,
+    ind2: 0,
     ind3: '0',
-    data_index:''
+    data_index: '',
+    app: getApp().globalData,
+    zhiList: [],
+    value_Zhi: '请选择',
+    value_zhi: '',
+    type_cont:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    // 职位类别
+    this.data.app.http({
+      url: '/selects/position',
+      dengl: true,
+      data: {},
+      success(res) {
+        var arr = res.data.rdata[0].treeDTOS
+        that.setData({
+          zhiList: res.data.rdata[0].treeDTOS,
+        })
+        for (var i = 0; i < arr.length; i++) {
+          for (var j = 0; j < arr[i].treeDTOS.length; j++) {
+            for (var x = 0; x < arr[i].treeDTOS[j].treeDTOS.length; x++) {
+              if (options.posit == arr[i].treeDTOS[j].treeDTOS[x].id) {
+                that.setData({
+                  vauee: arr[i].treeDTOS[j].treeDTOS[x].name,
+                  ind: i,
+                  ind1: j,
+                  ind_three: x,
+                })
+                console.log(arr[i].treeDTOS[j].treeDTOS[x].id)
+              }
 
+            }
+          }
+        }
+
+      }
+    })
+    // 工作类型
+    this.data.app.http({
+      url:'/selects/work_type',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          type_cont:res.data.rdata
+        })
+        console.log(res.data.rdata)
+      }
+    })
   },
   // 职位遮罩层中的函数
   toggle(e) {
-    this.setData({
-      ind: e.currentTarget.dataset['index']
-    })
     var two = this.data.isTwo
+    var index = e.currentTarget.dataset['index'],
+    index2 = 0,
+    index3 = 0,
+    that = this
+    console.log(that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name)
     this.setData({
-      isTwo: !two
+      ind: e.currentTarget.dataset['index'],
+      isTwo: !two,
+      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
     })
   },
   toggle1(e) {
+    var index = this.data.ind,
+    index2 =  e.currentTarget.dataset['index'],
+    index3 =0,
+    that = this
+    console.log(that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name)
     this.setData({
-      ind1: e.currentTarget.dataset['index']
+      ind1: e.currentTarget.dataset['index'],
+      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
     })
   },
   toggle2(e) {
+    console.log(this.data.ind,this.data.ind1,this.data.ind2)
+    var index = this.data.ind,
+    index2 = this.data.ind1,
+    index3 = e.currentTarget.dataset['index'],
+    that = this
+    console.log(that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name)
     this.setData({
-      ind2: e.currentTarget.dataset['index']
+      ind2: e.currentTarget.dataset['index'],
+      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+    })
+  },
+  // 职位确认
+  queren(e) {
+    console.log(this.data.ind,this.data.ind1,this.data.ind2)
+    var that = this
+    this.setData({
+      value_Zhi: that.data.value_zhi
     })
   },
   position() {
     var add = this.data.isAdd
     this.setData({
-      isAdd: !add
+      isAdd: !add,
+     
+    })
+  },
+  confirm(){
+    this.setData({
+      isAdd: false,
+      isTwo: false
     })
   },
   hide() {
@@ -61,6 +139,12 @@ Page({
     this.setData({
       isTwo: !two
     })
+    if(!this.data.isTwo){
+      this.setData({
+        ind1:0,
+        ind2:0
+      })
+    }
   },
   zhiDetail() {
     console.log(3333)
@@ -82,7 +166,7 @@ Page({
     })
   },
   // --end---
-  
+
   tanchuang_2: function () {
     this.setData({
       dianhua: 'display:block'
@@ -116,7 +200,7 @@ Page({
     }
 
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -169,25 +253,25 @@ Page({
   bindDateChange: function (e) {
     this.setData({
       datePickerIsShow: true,
-      data_index:e.currentTarget.dataset.de
+      data_index: e.currentTarget.dataset.de
     });
   },
   bindDateChange1: function (e) {
     console.log(this.data.datePickerIsShow)
     this.setData({
       datePickerIsShow: true,
-      data_index:e.currentTarget.dataset.de
+      data_index: e.currentTarget.dataset.de
     });
   },
 
   datePickerOnSureClick: function (e) {
-    if(this.data.data_index==1){
+    if (this.data.data_index == 1) {
       this.setData({
         date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
         datePickerValue: e.detail.value,
         datePickerIsShow: false,
       })
-    }else{
+    } else {
       this.setData({
         date1: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
         datePickerValue: e.detail.value,

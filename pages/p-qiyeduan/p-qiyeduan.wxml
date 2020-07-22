@@ -16,9 +16,9 @@
 
 <view class="m_01">
 	<ul>
-		<li bindtap="person"><image src="../img/qf038.png"></image><p>海量人才</p></li>
-		<li bindtap="resume"><image src="../img/qf039.png"></image><p>精准简历</p></li>
-		<li bindtap="entry"><image src="../img/qf040.png"></image><p>即刻入职</p></li>
+		<li bindtap="person"><image src="../img/q038.png"></image><p>海量人才</p></li>
+		<li bindtap="resume"><image src="../img/q039.png"></image><p>精准简历</p></li>
+		<li bindtap="entry"><image src="../img/q040.png"></image><p>即刻入职</p></li>
 		<view class="w-clear"></view>
 	</ul>
 </view>

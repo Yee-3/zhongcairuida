@@ -123,17 +123,16 @@ Page({
     })
   },
   toggle(e) {
-    this.setData({
-      ind: e.currentTarget.dataset['index']
-    })
     var two = this.data.isTwo
     this.setData({
+      ind: e.currentTarget.dataset['index'],
       isTwo: !two
     })
   },
   toggle1(e) {
     this.setData({
-      ind1: e.currentTarget.dataset['index']
+      ind1: e.currentTarget.dataset['index'],
+      ind2:0
     })
   },
   toggle2(e) {
@@ -251,6 +250,9 @@ Page({
     wx.navigateTo({
       url: '../b-dingweiq/b-dingwq?id=1',
     })
+  },
+  con(){
+    this
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
