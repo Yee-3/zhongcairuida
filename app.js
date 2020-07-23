@@ -34,32 +34,17 @@ App({
         }
       }
     })
-   
+
   },
- 
+
   globalData: {
     userInfo: null,
-    baseUrl:'http://123.56.114.88:8089',
+    baseUrl: 'http://123.56.114.88:8089',
     http(obj) {
       // console.log(webUrl)
-      // var webUrl='http://192.168.100.240:8089'
-      var webUrl='http://123.56.114.88:8089'
-      if (!obj.dengl) {
-        wx.request({
-          url: webUrl + obj.url,
-          data: obj.data,
-          method: obj.method ? obj.method : 'GET',
-          header: {
-            'content-type': obj.header ? "application/json" : 'application/x-www-form-urlencoded',
-            // 'maijiToken': 'abc494548414c8d8abc14541abc84cc1'
-            'Authorization': wx.getStorageSync('Authorization')
-          },
-          success: function (res) {
-            obj.success(res)
-            // console.log(wx.getStorageSync('Authorization'))
-          }
-        })
-      } else {
+      var webUrl='http://192.168.100.240:8089'
+      // var webUrl = 'http://123.56.114.88:8089'
+      if (obj.dengl) {
         if (wx.getStorageSync('Authorization')) {
           wx.request({
             url: webUrl + obj.url,
@@ -91,11 +76,25 @@ App({
             icon: 'none'
           })
           setTimeout(function () {
+            console.log(2222)
             wx.navigateTo({
-              // url: '/pages/enter/enter'
+              url: '/pages/login/index'
             })
-          }, 1600)
+          }, 1000)
         }
+      } else {
+        wx.request({
+          url: webUrl + obj.url,
+          data: obj.data,
+          method: obj.method ? obj.method : 'GET',
+          header: {
+            'content-type': obj.header ? "application/json" : 'application/x-www-form-urlencoded',
+          },
+          success: function (res) {
+            obj.success(res)
+            // console.log(wx.getStorageSync('Authorization'))
+          }
+        })
       }
     }
 

@@ -6,6 +6,7 @@ Page({
    */
   data: {
     app :getApp().globalData,
+    valueCon:''
   },
 
   /**
@@ -15,19 +16,37 @@ Page({
   },
   change(e){
     console.log(e)
+    this.setData({
+      valueCon:e.detail.value
+    })
     
   },
   submit() {
-    this.app.http({
+    var that=this
+    this.data.app.http({
       url:'/resume/binding',
       dengl:true,
       method:'post',
-      header:true,
       data:{
-
+        phone:that.data.valueCon
       },
       success(res){
-
+        console.log(res,that.data.valueCon)
+        if (res.data.code==200) {
+          // 及时更新上层页面
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          prevPage.setData({
+            resume: []
+          })
+          wx.navigateBack({
+            success(res) {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
+          })
+        }
       }
     })
   },

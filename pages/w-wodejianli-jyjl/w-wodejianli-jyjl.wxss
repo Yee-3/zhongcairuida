@@ -126,14 +126,14 @@
 }
 .mask_edu{
   width: 690rpx;
-  height: 380rpx;
+  /* height: 380rpx; */
   position: fixed;
   left: 30rpx;
   z-index: 9999;
   bottom: 20rpx;
 }
 .edu_top{
-  height: 260rpx;
+  /* height: 260rpx; */
   padding-left: 26rpx;
   padding-top: 50rpx;
   background: #fff;
@@ -155,6 +155,7 @@
   background: #e5e5e5;
   font-weight: normal;
   margin-right: 26rpx;
+  margin-bottom: 20rpx;
 }
 .no1{
   min-width: 140rpx;
@@ -165,6 +166,7 @@
   margin-right: 26rpx;
   font-weight: normal;
   background: #0385ff;
+  margin-bottom: 20rpx;
 }
 /* 底部按钮 */
 .m_bottom {

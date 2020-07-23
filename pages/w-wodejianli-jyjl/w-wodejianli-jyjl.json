@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
-  "navigationBarTitleText": "获得证书"
+  "usingComponents": {
+    "date-picker": "../components/date-picker/date-picker"
+  },
+  "navigationBarTitleText": "教育经历"
 }

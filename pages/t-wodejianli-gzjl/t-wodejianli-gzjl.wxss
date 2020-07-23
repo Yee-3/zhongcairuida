@@ -26,7 +26,7 @@
 
 .r_04 input {
   line-height: 80rpx;
-  padding: 0 25rpx;
+  /* padding: 0 25rpx; */
   box-sizing: border-box;
   height: 80rpx;
   font-size: 28rpx;
@@ -147,14 +147,15 @@
 }
 
 .f_13 {
-  width: 240rpx;
-  height: 80rpx;
+  width: 260rpx;
+  height: 68rpx;
   background: #0286ff;
   text-align: center;
   font-size: 28rpx;
   color: #fff;
-  line-height: 80rpx;
-  border-radius: 40rpx;
+  line-height: 68rpx;
+  border-radius: 10rpx;
+  margin: 0 auto;
 }
 
 .f_14 {
@@ -404,7 +405,7 @@
 /* -----行业弹框----------- */
 .mask_ind{
   width: 690rpx;
-  height: 760rpx;
+  /* height: 760rpx; */
   position: fixed;
   left: 30rpx;
   z-index: 9999;
@@ -414,7 +415,7 @@
   border-radius: 15rpx;
   box-sizing: border-box;
   padding-left: 30rpx;
-  height: 640rpx;
+  /* height: 640rpx; */
   background: #fff;
   width: 690rpx;
   margin-bottom: 20rpx;

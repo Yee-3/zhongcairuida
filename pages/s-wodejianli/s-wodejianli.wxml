@@ -22,7 +22,7 @@
 		<view class="w-clear"></view>
 	</view>
 	<view class="s_09">
-		<view class="fl s_10">求职意向</view>
+		<view class="fl s_10">类型</view>
 		<view class="fr s_11">{{item.typeName}}</view>
 		<view class="w-clear"></view>
 	</view>
@@ -52,13 +52,13 @@
 	<view class="{{isF?'hide s_20':'show s_20'}}" data-index="{{index}}" wx:for="{{resume.ctrlWorkDTOS}}" >
 		<view class="s_13">
 			<view class="fl s_14">{{item.company}}</view>
-			<view class="fr s_15" bindtap="work" data-id="1"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="work" data-id="{{item.id}}"><image src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{time[index].startTime}}~{{time[index].endTime}}</view>
 		<view class="s_17">
 			<view class="s_18 fl">{{item.position}}</view>
-			<view class="s_19 fr">7000元/月</view>
+			<view class="s_19 fr">{{item.money}}元/月</view>
 		</view>
 		<view class="s_21">{{item.describe}}</view>
 	</view>
@@ -75,7 +75,7 @@
 	<view class="{{isX?'hide s_20':'show s_20'}}" wx:for="{{resume.ctrlProjectDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.name}}</view>
-			<view class="fr s_15"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="project" data-id="{{item.id}}" data-index="{{index}}"><image src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{times[index].startTime}}~{{times[index].endTime}}</view>
@@ -93,7 +93,7 @@
 	<view class="s_20" wx:for="{{resume.ctrlSchoolDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.school}}</view>
-			<view class="fr s_15"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="education" data-id="{{item.id}}" data-index="{{index}}"><image src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{schoolT[index].startTime}}~{{schoolT[index].endTime}}</view>

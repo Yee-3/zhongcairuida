@@ -167,7 +167,6 @@ Page({
   },
   tijiao() {
     var that = this
-    console.log(that.data.posi_id)
     this.data.app.http({
       url: '/resume/saveOrUpdateObjective',
       dengl: true,

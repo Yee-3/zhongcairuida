@@ -26,7 +26,16 @@ Page({
     zhiList: [],
     value_Zhi: '请选择',
     value_zhi: '',
-    type_cont:[]
+    type_cont: [],
+    comTypeList: [],
+    comIndex: '',
+    com_value: '请选择',
+    com_Type: '',
+    dep_Type: '',
+    des_Type: '',
+    id: '',
+    money_Type: '',
+    id_ty: ''
   },
 
   /**
@@ -34,6 +43,47 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    this.setData({
+      id: options.id,
+      id_ty: options.type_id
+    })
+    if (options.type_id) {
+      that.data.app.http({
+        url: '/resume/getResume',
+        dengl: true,
+        data: {},
+        success(res) {
+          var list = res.data.rdata.ctrlWorkDTOS
+          for (var i = 0; i < list.length; i++) {
+            if (options.type_id == list[i].id) {
+              var time = list[i].startTime.substring(0, 4) + '年' + list[i].startTime.substring(5, 7) + '月' + list[i].startTime.substring(8, 10) + '日'
+              var time1 = list[i].endTime.substring(0, 4) + '年' + list[i].endTime.substring(5, 7) + '月' + list[i].endTime.substring(8, 10) + '日'
+              that.setData({
+                com_Type: list[i].company,
+                date: time,
+                date1: time1,
+                dep_Type: list[i].department,
+                des_Type: list[i].describe,
+                value_Zhi: list[i].position,
+                com_value: list[i].industry,
+                ind3: list[i].industry,
+                money_Type: list[i].money,
+                types: list[i].type,
+              })
+              for (var i = 0; i < that.data.type_cont.length; i++) {
+                if (that.data.types == that.data.type_cont[i].value) {
+                  var label = that.data.type_cont[i].label
+                }
+              }
+              that.setData({
+                value: label,
+              })
+            }
+          }
+          
+        }
+      })
+    }
     // 职位类别
     this.data.app.http({
       url: '/selects/position',
@@ -44,35 +94,28 @@ Page({
         that.setData({
           zhiList: res.data.rdata[0].treeDTOS,
         })
-        for (var i = 0; i < arr.length; i++) {
-          for (var j = 0; j < arr[i].treeDTOS.length; j++) {
-            for (var x = 0; x < arr[i].treeDTOS[j].treeDTOS.length; x++) {
-              if (options.posit == arr[i].treeDTOS[j].treeDTOS[x].id) {
-                that.setData({
-                  vauee: arr[i].treeDTOS[j].treeDTOS[x].name,
-                  ind: i,
-                  ind1: j,
-                  ind_three: x,
-                })
-                console.log(arr[i].treeDTOS[j].treeDTOS[x].id)
-              }
-
-            }
-          }
-        }
-
       }
     })
     // 工作类型
     this.data.app.http({
-      url:'/selects/work_type',
-      dengl:true,
-      data:{},
-      success(res){
+      url: '/selects/work_type',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          type_cont:res.data.rdata
+          type_cont: res.data.rdata,
         })
-        console.log(res.data.rdata)
+      }
+    })
+    // 行业弹框
+    this.data.app.http({
+      url: '/selects/company_type',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          comTypeList: res.data.rdata
+        })
       }
     })
   },
@@ -80,10 +123,9 @@ Page({
   toggle(e) {
     var two = this.data.isTwo
     var index = e.currentTarget.dataset['index'],
-    index2 = 0,
-    index3 = 0,
-    that = this
-    console.log(that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name)
+      index2 = 0,
+      index3 = 0,
+      that = this
     this.setData({
       ind: e.currentTarget.dataset['index'],
       isTwo: !two,
@@ -92,30 +134,28 @@ Page({
   },
   toggle1(e) {
     var index = this.data.ind,
-    index2 =  e.currentTarget.dataset['index'],
-    index3 =0,
-    that = this
-    console.log(that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name)
+      index2 = e.currentTarget.dataset['index'],
+      index3 = 0,
+      that = this
     this.setData({
       ind1: e.currentTarget.dataset['index'],
       value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
     })
   },
   toggle2(e) {
-    console.log(this.data.ind,this.data.ind1,this.data.ind2)
     var index = this.data.ind,
-    index2 = this.data.ind1,
-    index3 = e.currentTarget.dataset['index'],
-    that = this
-    console.log(that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name)
+      index2 = this.data.ind1,
+      index3 = e.currentTarget.dataset['index'],
+      that = this
     this.setData({
       ind2: e.currentTarget.dataset['index'],
       value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
     })
   },
+
   // 职位确认
   queren(e) {
-    console.log(this.data.ind,this.data.ind1,this.data.ind2)
+    this.position()
     var that = this
     this.setData({
       value_Zhi: that.data.value_zhi
@@ -125,10 +165,10 @@ Page({
     var add = this.data.isAdd
     this.setData({
       isAdd: !add,
-     
+
     })
   },
-  confirm(){
+  confirm() {
     this.setData({
       isAdd: false,
       isTwo: false
@@ -139,10 +179,10 @@ Page({
     this.setData({
       isTwo: !two
     })
-    if(!this.data.isTwo){
+    if (!this.data.isTwo) {
       this.setData({
-        ind1:0,
-        ind2:0
+        ind1: 0,
+        ind2: 0
       })
     }
   },
@@ -162,7 +202,16 @@ Page({
   },
   toggle3(e) {
     this.setData({
-      ind3: e.currentTarget.dataset['index']
+      ind3: e.currentTarget.dataset['index'],
+      comIndex: e.currentTarget.dataset['id']
+    })
+  },
+  com_confirm() {
+    this.industry()
+    var index = this.data.comIndex,
+      that = this
+    this.setData({
+      com_value: that.data.comTypeList[index].label
     })
   },
   // --end---
@@ -178,29 +227,83 @@ Page({
     })
   },
   type(e) {
-    console.log(e)
     this.setData({
-      types: e.currentTarget.dataset['index']
+      types: e.currentTarget.dataset['index'],
+      value: e.currentTarget.dataset.value
     })
   },
   submit() {
     this.quxiao2()
-    if (this.data.types == 1) {
-      this.setData({
-        value: '全职'
-      })
-    } else if (this.data.types == 2) {
-      this.setData({
-        value: '兼职'
-      })
-    } else {
-      this.setData({
-        value: '实习'
-      })
-    }
-
   },
 
+  blur(e) {
+    var type = e.currentTarget.dataset.ty,
+      that = this,
+      value = e.detail.value
+    if (type == 1) {
+      that.setData({
+        com_Type: value
+      })
+    }
+    if (type == 2) {
+      that.setData({
+        dep_Type: value
+      })
+    }
+    if (type == 3) {
+      that.setData({
+        des_Type: value
+      })
+    }
+    if (type == 4) {
+      that.setData({
+        money_Type: value
+      })
+    }
+  },
+  refer() {
+    var that = this
+    var date = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10)
+    var date1 = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10)
+    var id_ty=that.data.id_ty?that.data.id_ty:''
+    // if(that.data.id_ty)
+    this.data.app.http({
+      url: '/resume/saveOrUpdateWork',
+      dengl: true,
+      method: 'POST',
+      data: {
+        company: that.data.com_Type,
+        department: that.data.dep_Type,
+        describe: that.data.des_Type,
+        endTime: date1,
+        startTime: date,
+        industry: that.data.com_value,
+        position: that.data.value_Zhi,
+        resumeId: that.data.id,
+        money: that.data.money_Type,
+        type: that.data.types,
+        id: id_ty
+      },
+      success(res) {
+        console.log(res)
+        if (res.data.code==200) {
+          // 及时更新上层页面
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          prevPage.setData({
+            resume: []
+          })
+          wx.navigateBack({
+            success(res) {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
+          })
+        }
+      }
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -257,7 +360,6 @@ Page({
     });
   },
   bindDateChange1: function (e) {
-    console.log(this.data.datePickerIsShow)
     this.setData({
       datePickerIsShow: true,
       data_index: e.currentTarget.dataset.de

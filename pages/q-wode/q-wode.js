@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    dianhua: 'display:none'
+    dianhua: 'display:none',
+    app: getApp().globalData,
+    kefuPhone:{}
   },
 
   /**
@@ -18,13 +20,27 @@ Page({
     //     dengl:true,
 
     // })
-   
+    var that=this
+    this.data.app.http({
+      url:'/Other/hotline',
+      dengl:true,
+      data:{},
+      success(res){
+        console.log(res.data.rdata)
+        that.setData({
+          kefuPhone:res.data.rdata
+        })
+      }
+    })
+
   },
 
   tanchuang_2: function () {
+    var that=this
     this.setData({
       dianhua: 'display:block'
     })
+    
   },
   quxiao2: function () {
     this.setData({
@@ -33,18 +49,28 @@ Page({
   },
   create() {
     wx.checkSession({
-      success() {
+      success(res) {
         console.log('success')
         wx.navigateTo({
           url: '../s-wodejianli/s-wodejianli',
         })
       },
       fail() {
-        var that = this;
-      console.log('失败')
-      wx.navigateTo({
-        url: '../login/index',
-      })
+        // var that = this;
+        console.log('失败')
+        wx.navigateTo({
+          url: '../login/index',
+        })
+      }
+    })
+  },
+  tuichu() {
+    this.data.app.http({
+      url: '/logout',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
       }
     })
   },

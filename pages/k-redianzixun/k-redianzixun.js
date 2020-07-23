@@ -5,14 +5,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    app: getApp().globalData,
+    hotList:[],
+    baseUrl:getApp().globalData.baseUrl,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    this.data.app.http({
+      url: '/info/informationList',
+      dengl:true,
+      method: 'POST',
+      data: {
+        limit:10,
+        page:1
+      },
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          hotList:res.data.rdata
+        })
+      }
+    })
   },
 
   /**

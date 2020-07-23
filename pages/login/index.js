@@ -73,7 +73,7 @@ Page({
                 }),
                 success(res) {
 
-                  console.log(res.data.rdata.ctrlToken.token)
+                  console.log(res.data.rdata.ctrlToken.token,2222)
                   if (res.data.rdata) {
                     wx.setStorageSync('Authorization', res.data.rdata.ctrlToken.token)
                     console.log(wx.getStorageSync('Authorization')),

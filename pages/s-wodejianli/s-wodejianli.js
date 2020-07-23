@@ -90,22 +90,44 @@ Page({
   },
   work(e) {
     console.log(e)
+    var id=this.data.resume.ctrlResumeDTO.id
     if(e.currentTarget.dataset.id){
       wx.navigateTo({
-        url: '../t-wodejianli-gzjl/t-wodejianli-gzjl',
+        url: '../t-wodejianli-gzjl/t-wodejianli-gzjl?id='+id+'&type_id='+e.currentTarget.dataset.id,
       })
     }else{
       wx.navigateTo({
-        url: '../t-wodejianli-gzjl/t-wodejianli-gzjl',
+        url: '../t-wodejianli-gzjl/t-wodejianli-gzjl?id='+id,
       })
     }
   },
-  project() {
-    wx.navigateTo({
-      url: '../y-wodejianli-xmjl/y-wodejianli-xmjl',
-    })
+  project(e) {
+    var id=this.data.resume.ctrlResumeDTO.id,
+    i=e.currentTarget.dataset.index,
+    arr=this.data.resume.ctrlProjectDTOS
+    if(e.currentTarget.dataset.id){
+      wx.navigateTo({
+        url: '../y-wodejianli-xmjl/y-wodejianli-xmjl?id='+id+'&sId='+e.currentTarget.dataset.id+'&describe='+arr[i].describe+'&endTime='+arr[i].endTime+'&name='+arr[i].name+'&startTime='+arr[i].startTime+'&work='+arr[i].work,
+      })
+    }else{
+      wx.navigateTo({
+        url: '../y-wodejianli-xmjl/y-wodejianli-xmjl?id='+id,
+      })
+    }
   },
-  education() {
+  education(e) {
+    var id=this.data.resume.ctrlResumeDTO.id,
+    i=e.currentTarget.dataset.index,
+    arr=this.data.resume.ctrlSchoolDTOS
+    if(e.currentTarget.dataset.id){
+      wx.navigateTo({
+        url: '../w-wodejianli-jyjl/w-wodejianli-jyjl?id='+id+'&sId='+e.currentTarget.dataset.id+'&describe='+arr[i].describe+'&endTime='+arr[i].endTime+'&startTime='+arr[i].startTime+'&professional='+arr[i].professionalName+'&record='+arr[i].record+'&school='+arr[i].school
+      })
+    }else{
+      wx.navigateTo({
+        url: '../w-wodejianli-jyjl/w-wodejianli-jyjl?id='+id,
+      })
+    }
     wx.navigateTo({
       url: '../w-wodejianli-jyjl/w-wodejianli-jyjl',
     })

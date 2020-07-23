@@ -1,5 +1,5 @@
 <view class="g_01">
-	<view class="g_02">
+	<!-- <view class="g_02">
 		<view class="g_03"><image src="../img/f022.jpg"></image></view>
 		<view class="g_09">
 			<view class="g_04 fl">
@@ -21,22 +21,13 @@
 	<view class="g_12">
 		<view class="g_13">
 			<view class="g_14 fl"></view>
-			<view class="g_15 fl"><p>关于我们</p></view>
+			<view class="g_15 fl"><p>{{content.noticeTitle}}</p></view>
 		</view>
 		<view class="g_16">
-			<p>山东开创集团股份有限公司成立于2003年，是领先的互联网＋技术与服务提供商，云计算与应用服务生态平台，多年来一直致力于数字经济的实践与建设，是中国互联网百强企业、中国云计算百强企业、中国服务外包百强企业、国家级电子商务示范企业、国家级高新技术企业、山东省瞪羚企业、山东省大数据重点骨干企业、山东省首批企业上云服务商，于2017年7月挂牌新三板，股票代码872123。</p>
+			<rich-text nodes="{{content.noticeContent}}"></rich-text>
 		</view>
-	</view>
-	
-	<view class="g_12">
-		<view class="g_13">
-			<view class="g_14 fl"></view>
-			<view class="g_15 fl"><p>关于我们</p></view>
-		</view>
-		<view class="g_16">
-			<p>山东开创集团股份有限公司成立于2003年，是领先的互联网＋技术与服务提供商，云计算与应用服务生态平台，多年来一直致力于数字经济的实践与建设，是中国互联网百强企业、中国云计算百强企业、中国服务外包百强企业、国家级电子商务示范企业、国家级高新技术企业、山东省瞪羚企业、山东省大数据重点骨干企业、山东省首批企业上云服务商，于2017年7月挂牌新三板，股票代码872123。</p>
-		</view>
-	</view>
+	</view> -->
+	<rich-text nodes="{{content.noticeContent}}"></rich-text>
 </view>
 
 
