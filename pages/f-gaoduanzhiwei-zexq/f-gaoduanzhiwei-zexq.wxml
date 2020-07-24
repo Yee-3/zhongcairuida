@@ -1,52 +1,30 @@
 <view class="f_01">
 	<view class="f_02">
-		<p>北京市辅警招聘（可控工资；高额返费）</p>
+		<p>{{detailCont.title}}</p>
 	</view>
 	<view class="e_05">
 		<view class="e_06 fl">
-			<p>2020-05-11</p>
+			<p>{{date}}</p>
 		</view>
 		<view class="e_07 fl">
 			<view class="e_08 fl">
 				<image src="../img/f020.png"></image>
 			</view>
 			<view class="e_09 fr">
-				<p>4600</p>
+				<p>{{detailCont.view}}</p>
 			</view>
 		</view>
 		<view class="w-clear"></view>
 	</view>
 	<view class="f_03">
-		<span>一、 招聘对象和条件</span>
-		<p>
-			1、具有中专及以上文化程度；
-			2、年龄17至35周岁；
-			3、男性，身高170CM以上，身体健康，五官端正，无纹身，无明显疤痕，无口吃，身体素质较好；
-			4、退伍军人予以优先录用；
-			5、无违法犯罪嫌疑，体检、政审合格者均可。
-		</p>
-		<span>一、 招聘对象和条件</span>
-		<p>
-			1、具有中专及以上文化程度；
-			2、年龄17至35周岁；
-			3、男性，身高170CM以上，身体健康，五官端正，无纹身，无明显疤痕，无口吃，身体素质较好；
-			4、退伍军人予以优先录用；
-			5、无违法犯罪嫌疑，体检、政审合格者均可。
-		</p>
-		<span>一、 招聘对象和条件</span>
-		<p>
-			1、具有中专及以上文化程度；
-			2、年龄17至35周岁；
-			3、男性，身高170CM以上，身体健康，五官端正，无纹身，无明显疤痕，无口吃，身体素质较好；
-			4、退伍军人予以优先录用；
-			5、无违法犯罪嫌疑，体检、政审合格者均可。
-		</p>
+		<span><rich-text nodes="{{detailCont.context}}"></rich-text></span>
+	
 	</view>
 </view>
 
 <view class="f_04">
 	<view class="f_05 fl">
-		<p>我要分享</p>
+		<button open-type="share" style="font-size:28rpx;font-weight: normal;text-align: center;padding:0">我要分享</button>
 	</view>
 	<view class="f_06 fr" bindtap="tanchuang">
 		<p>我要报名</p>
@@ -67,15 +45,15 @@
 	<view class="f_07">
 		<view class="f_09">
 			<p>姓名:</p>
-			<input placeholder="您的姓名" />
+			<input placeholder="您的姓名" data-value="{{value}}" bindblur="blur" data-ty='1' value="{{name}}"/>
 		</view>
 		<view class="f_10">
-			<p>姓名:</p>
-			<input placeholder="您的姓名" />
+			<p>电话:</p>
+			<input placeholder="您的电话" data-value="{{value}}" bindblur="blur" data-ty='2' value="{{phone}}"/>
 		</view>
 		<view class="f_11">
 			<view class="f_12 fl" bindtap="quxiao1">取消</view>
-			<view class="f_13 fr">提交</view>
+			<view class="f_13 fr" bindtap="submit">提交</view>
 			<view class="w-clear"></view>
 		</view>
 	</view>

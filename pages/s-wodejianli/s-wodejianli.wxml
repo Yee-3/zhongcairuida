@@ -97,7 +97,7 @@
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{schoolT[index].startTime}}~{{schoolT[index].endTime}}</view>
-		<view class="s_03"><p>{{item.recordName}}</p><span>|</span><p>{{item.professionalName}}</p></view>
+		<view class="s_03"><p>{{item.recordName}}</p><span>|</span><p>{{item.professional}}</p></view>
 	</view>
 </view>
 
@@ -110,11 +110,11 @@
 	<view class="s_20" wx:for="{{resume.ctrlBookDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.name}}</view>
-			<view class="fr s_15"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="honor" data-id="{{item.id}}" data-index="{{index}}"><image src="../img/f050.png"></image></view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{book[index].time	}}</view>
-		<view class="s_23"><image src="../img/f065.jpg"></image></view>
+		<view class="s_23"><image :src="{{item.url}}"></image></view>
 	</view>
 </view>
 

@@ -15,7 +15,11 @@ page{ background: #f6f6f6;}
 .k_03{ width: 380rpx; height: 120rpx; font-size: 34rpx;}
 .k_04{ width: 220rpx; height: 160rpx; border-radius: 10rpx; overflow: hidden;}
 .k_04 image{ width: 220rpx; height: 160rpx;}
-
+.loading-text{
+  /* display: block; */
+  padding-bottom: 20rpx;
+  text-align: center;
+}
 
 
 

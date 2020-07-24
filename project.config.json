@@ -81,22 +81,15 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/k-redianzixun/k-redianzixun",
-					"pathName": "pages/k-redianzixun/k-redianzixun",
+					"name": "pages/l-remenzhiwei/l-remenzhiwei",
+					"pathName": "pages/l-remenzhiwei/l-remenzhiwei",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/a-bangwozhaogongzuo/index",
-					"pathName": "pages/a-bangwozhaogongzuo/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/s-wodejianli/s-wodejianli",
-					"pathName": "pages/s-wodejianli/s-wodejianli",
+					"name": "pages/d-gaoduanzhiwei/d-gaoduanzhiwei",
+					"pathName": "pages/d-gaoduanzhiwei/d-gaoduanzhiwei",
 					"query": "",
 					"scene": null
 				}

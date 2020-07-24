@@ -7,13 +7,20 @@ Page({
   data: {
     date: '请选择',
     date1: '请选择',
+    datePickerValue: ['', '', ''],
+    datePickerIsShow: false,
+    data_index: '',
     isEdu:false,
     edu:'',
     valu:'请选择',
     app: getApp().globalData,
     schList:[],
     edu_index:'',
-    school:''
+    school:'',
+    pro_value:'',
+    des_value:'',
+    shcool_value:'',
+    opList:''
   },
 
   /**
@@ -21,7 +28,23 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    this.setData({
+      opList:options
+    })
     var that=this
+    if(options.sId){
+      var time = options.startTime.substring(0, 4) + '年' + options.startTime.substring(5, 7) + '月' + options.startTime.substring(8, 10) + '日'
+      var time1 = options.endTime.substring(0, 4) + '年' + options.endTime.substring(5, 7) + '月' + options.endTime.substring(8, 10) + '日'
+      that.setData({
+        shcool_value:options.school,
+        date:time,
+        date1:time1,
+        des_value:options.describe,
+        pro_value:options.professional,
+        edu:options.record
+      })
+      console.log(this.data.shcool_value,this.data.des_value,this.data.pro_value)
+    }
     this.data.app.http({
       url:'/selects/school_record',
       dengl:true,
@@ -30,9 +53,40 @@ Page({
         that.setData({
           schList:res.data.rdata
         })
+        if(options.sId){
+          for(var i=0;i< res.data.rdata.length;i++){
+            if(options.record==res.data.rdata[i].value){
+              that.setData({
+                valu:res.data.rdata[i].label
+              })
+            }
+          }
+        }
         console.log(res.data.rdata)
       }
     })
+  },
+   // 失去焦点事件
+   blur(e) {
+     console.log(e)
+    var type = e.currentTarget.dataset.ty,
+      that = this,
+      value = e.detail.value
+    if (type == 1) {
+      that.setData({
+        shcool_value: value
+      })
+    }
+    if (type == 2) {
+      that.setData({
+        pro_value: value
+      })
+    }
+    if (type == 3) {
+      that.setData({
+        des_value: value
+      })
+    }
   },
   // 学历
   toggle(e){
@@ -56,13 +110,43 @@ Page({
     })
   },
   submit(){
-    var that=this
+    var that=this,
+    date = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10),
+    date1 = this.data.date1.substring(0, 4) + '/' + this.data.date1.substring(5, 7) + '/' + this.data.date1.substring(8, 10),
+    id=this.data.opList.sId?that.data.opList.sId:''
+    console.log(this.data.shcool_value,this.data.des_value,this.data.pro_value)
+
     this.data.app.http({
       url:'/resume/saveOrUpdateSchool',
       dengl:true,
       method:'POST',
       data:{
-
+        describe:that.data.des_value,
+        startTime:date,
+        endTime:date1,
+        school:that.data.shcool_value,
+        resumeId:that.data.opList.id,
+        id:id,
+        record:that.data.edu,
+        professional:that.data.pro_value,
+        status:''
+      },
+      success(res){
+        if (res.data.code==200) {
+          // 及时更新上层页面
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          prevPage.setData({
+            resume: []
+          })
+          wx.navigateBack({
+            success(res) {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
+          })
+        }
       }
       
     })

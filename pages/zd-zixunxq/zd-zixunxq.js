@@ -5,14 +5,30 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    app: getApp().globalData,
+    content: {},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    this.data.app.http({
+      url: '/info/informationInfo',
+      dengl: true,
+      method: 'POST',
+      data: {
+        id: options.id
+      },
+      success(res) {
+        console.log(res)
+        that.setData({
+          content: res.data.rdata
+        })
 
+      }
+    })
   },
 
   /**

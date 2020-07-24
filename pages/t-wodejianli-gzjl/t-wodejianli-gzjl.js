@@ -264,7 +264,7 @@ Page({
   refer() {
     var that = this
     var date = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10)
-    var date1 = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10)
+    var date1 = this.data.date1.substring(0, 4) + '/' + this.data.date1.substring(5, 7) + '/' + this.data.date.substring(8, 10)
     var id_ty=that.data.id_ty?that.data.id_ty:''
     // if(that.data.id_ty)
     this.data.app.http({

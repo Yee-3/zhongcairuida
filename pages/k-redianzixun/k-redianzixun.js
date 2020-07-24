@@ -6,8 +6,14 @@ Page({
    */
   data: {
     app: getApp().globalData,
-    hotList:[],
-    baseUrl:getApp().globalData.baseUrl,
+    hotList: [],
+    currentPage: 1,
+    loadingType: 0,
+    contentText: {
+      contentdown: "上拉显示更多",
+      contentrefresh: "正在加载...",
+      contentnomore: "没有更多数据了"
+    },
   },
 
   /**
@@ -15,23 +21,40 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    wx.showNavigationBarLoading()
     this.data.app.http({
       url: '/info/informationList',
-      dengl:true,
+      dengl: true,
       method: 'POST',
       data: {
-        limit:10,
-        page:1
+        limit: 10,
+        page: that.data.currentPage
       },
       success(res) {
         console.log(res.data.rdata)
         that.setData({
-          hotList:res.data.rdata
+          hotList: res.data.rdata
         })
+        if (res.data.rdata.length < 10) {
+          wx.showToast({
+            title: '已是最新',
+            duration: 2000
+          });
+          that.setData({
+            loadingType: 3
+          })
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
       }
     })
   },
-
+  detail(e){
+    console.log(e)
+    wx.navigateTo({
+      url: '../zd-zixunxq/zd-zixunxq?id='+e.currentTarget.dataset.id,
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -71,7 +94,43 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this
+    that.setData({
+      currentPage: that.data.currentPage + 1
+    })
+    if (this.data.loadingType != 0) { //loadingType!=0;直接返回
+      return false;
+    }
+    that.setData({
+      loadingType: 1
+    })
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/info/informationList',
+      dengl: true,
+      method: 'POST',
+      data: {
+        limit: 10,
+        page: that.data.currentPage
+      },
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          hotList: that.data.hotList.concat(res.data.rdata)
+        })
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+          wx.hideNavigationBarLoading()
+        } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
+        wx.hideNavigationBarLoading()
+      }
+    })
   },
 
   /**

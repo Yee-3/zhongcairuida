@@ -589,7 +589,7 @@ white-space: nowrap;
 .bott {
 	min-width: 140rpx;
 	height: 58rpx;
-	margin-top: 30rpx;
+	margin-top: 20rpx;
 	margin-left: 30rpx;
 	background-color: #f0f0f0;
 	color: #909090;
@@ -600,7 +600,7 @@ white-space: nowrap;
 .no1{
 	min-width: 140rpx;
 	height: 58rpx;
-	margin-top: 30rpx;
+	margin-top: 20rpx;
 	margin-left: 30rpx;
 	background-color: #f0f0f0;
 	color: #0385ff;
@@ -643,15 +643,15 @@ white-space: nowrap;
 }
 
 .scr3_02{
-	height:200rpx;
-	margin-bottom: 30rpx;
+	height:180rpx;
+	margin-bottom: 15rpx;
 }
 .scr3_01{
-	height: 200rpx;
-	margin-bottom: 30rpx;
+	height: 180rpx;
+	margin-bottom: 15rpx;
 }
 .scr3_03{
-	height: 96rpx;
+	height: 175rpx;
 }
 
 .t3_title{
@@ -707,6 +707,11 @@ white-space: nowrap;
 	color: #909090;
 	z-index: 999;
 
+}
+.loading-text{
+  /* display: block; */
+  padding-bottom: 20rpx;
+  text-align: center;
 }
 
 .mask2_top {

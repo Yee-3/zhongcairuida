@@ -7,6 +7,9 @@ Page({
   data: {
     date: '请选择',
     date1: '请选择',
+    datePickerValue: ['', '', ''],
+    datePickerIsShow: false,
+    data_index: '',
     com_value: '',
     name_value: '',
     int_value: '',
@@ -62,7 +65,7 @@ Page({
   submit() {
     var that = this,
       date = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10),
-      date1 = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10)
+      date1 = this.data.date1.substring(0, 4) + '/' + this.data.date1.substring(5, 7) + '/' + this.data.date1.substring(8, 10)
       var id=that.data.idL.sId?that.data.idL.sId:''
     this.data.app.http({
       url: '/resume/saveOrUpdateProject',

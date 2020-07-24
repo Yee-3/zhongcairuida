@@ -7,34 +7,26 @@ Page({
   
   data: {
     ind: 0,
-    ind1: '0',
+    ind1: 0,
     array: [1, 2, 3, 4],
     items: [{
       name: '',
       value: ''
     }, ],
     isAdd: false,
+    isTwo:false,
     num: 0,
     indexs: 0,
     num1: 0,
     num2: 0,
     classValue: '请选择',
-    classContent: [{
-        name: '金融、证卷、资产'
-      },
-      {
-        name: '金融、证卷、资产'
-      },
-      {
-        name: '金融、证卷、资产'
-      },
-    ],
     mapValue:'请选择',
     money:[],
     status:[],
     work_time:[],
-    work_type:[]
-    
+    work_type:[],
+    zhiList:[],
+    ind_three:0
   },
 
   /**
@@ -67,6 +59,18 @@ Page({
         })
       } 
     })
+    // 职位
+    app.http({
+      url: '/selects/position',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          zhiList: res.data.rdata
+        })
+      } 
+    })
     // 到岗时间
     app.http({
       url: '/selects/work_time',
@@ -91,16 +95,63 @@ Page({
       }
     })
   },
-  
-  toggle(e) {
+  hide() {
+    var two = this.data.isTwo
     this.setData({
-      ind: e.currentTarget.dataset['index']
+      isTwo: !two
+    })
+    if(!this.data.isTwo){
+      this.setData({
+        ind1:0,
+        ind_three:0
+      })
+    }
+  },
+  toggle(e) {
+    var two = this.data.isTwo
+    var index = e.currentTarget.dataset['index'],
+    index2 = 0,
+    index3 = 0,
+    that = this
+    // console.log()
+    this.setData({
+      ind: e.currentTarget.dataset['index'],
+      isTwo: !two,
+      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
     })
   },
   toggle1(e) {
+    var index = this.data.ind,
+    index2 =  e.currentTarget.dataset['index'],
+    index3 =0,
+    that = this
     this.setData({
-      ind1: e.currentTarget.dataset['index']
+      ind1: e.currentTarget.dataset['index'],
+      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
     })
+  },
+  toggle_three(e) {
+    var index = this.data.ind,
+    index2 = this.data.ind1,
+    index3 = e.currentTarget.dataset['index'],
+    that = this
+    this.setData({
+      ind_three: e.currentTarget.dataset['index'],
+      posi_id: e.currentTarget.dataset['id'],
+      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+    })
+  },
+  // 确定
+  con_zhi() {
+    this.zhiwei()
+    var index = this.data.ind,
+      index2 = this.data.ind1,
+      index3 = this.data.ind_three,
+      that = this
+    this.setData({
+      classValue: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+    })
+
   },
   checkboxChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
@@ -128,15 +179,10 @@ Page({
     })
   },
   zhiwei() {
-    console.log(222)
-    // var that=this
     var add = this.data.isAdd
-    console.log(add)
     this.setData({
       isAdd: !add
     })
-    console.log(add)
-
   },
   weizhi() {
     wx.navigateTo({

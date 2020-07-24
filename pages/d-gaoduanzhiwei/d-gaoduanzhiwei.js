@@ -17,6 +17,7 @@ Page({
     app.http({
       url: '/selects/position_highend',
       data: {},
+      dengl:true,
       success(res) {
         console.log(res)
         that.setData({
@@ -25,10 +26,9 @@ Page({
       }
     })
   },
-  detail() {
-    console.log('1111')
+  detail(e) {
     wx.navigateTo({
-      url: '../e-gaoduanzhiwei-gqyh/e-gaoduanzhiwei-gqyh',
+      url: '../e-gaoduanzhiwei-gqyh/e-gaoduanzhiwei-gqyh?id='+e.currentTarget.dataset.index,
     })
   },
   /**

@@ -132,10 +132,19 @@ Page({
       url: '../w-wodejianli-jyjl/w-wodejianli-jyjl',
     })
   },
-  honor() {
-    wx.navigateTo({
-      url: '../u-wodejianli-hdzs/u-wodejianli-hdzs',
-    })
+  honor(e) {
+    var id=this.data.resume.ctrlResumeDTO.id,
+    i=e.currentTarget.dataset.index,
+    arr=this.data.resume.ctrlBookDTOS
+    if(e.currentTarget.dataset.id){
+      wx.navigateTo({
+        url: '../u-wodejianli-hdzs/u-wodejianli-hdzs?id='+id+'&sId='+e.currentTarget.dataset.id+'&name='+arr[i].name+'&time='+arr[i].time+'&url='+arr[i].url
+      })
+    }else{
+      wx.navigateTo({
+        url: '../u-wodejianli-hdzs/u-wodejianli-hdzs?id='+id,
+      })
+    }
   },
 
   /**

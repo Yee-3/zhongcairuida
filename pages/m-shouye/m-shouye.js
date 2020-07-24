@@ -34,7 +34,18 @@ Page({
     xingzhi:[],
     guimo:[],
     imgList:[],
-    zhiList:[]
+    zhiList:[],
+    expList:[],
+    recList:[],
+    moneryList:[],
+    currentPage: 1,
+    loadingType: 0,
+    contentText: {
+      contentdown: "上拉显示更多",
+      contentrefresh: "正在加载...",
+      contentnomore: "没有更多数据了"
+    },
+    recomList:[]
   },
 
   /**
@@ -56,6 +67,7 @@ Page({
     this.data.app.http({
       url:'/index/getIndex',
       data:{},
+      dengl:true,
       success(res){
         console.log(res)
         that.setData({
@@ -63,9 +75,39 @@ Page({
         })
       }
     })
+    // 首页为你推荐
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url:'/index/getPosition',
+      dengl:true,
+      method:'POST',
+      data:{
+        pageVO:{
+          limit:10,
+          page:that.data.currentPage
+        },
+        type:1
+      },
+      success(res){
+        console.log(res)
+        that.setData({
+          recomList:res.data.rdata
+        })
+        // if (res.data.rdata.length < 10) {
+        //   wx.showToast({
+        //     title: '已是最新',
+        //     duration: 2000
+        //   });
+        //   that.setData({
+        //     loadingType: 3
+        //   })
+        // }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
+      }
+    })
   },
   // 获取位置
-
   getLocation() {
     let that = this;
     new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
@@ -177,6 +219,7 @@ Page({
     this.data.app.http({
       url:'/selects/position',
       data:{},
+      dengl:true,
       success(res){
         that.setData({
           isAdd: !add,
@@ -198,6 +241,7 @@ Page({
     this.data.app.http({
       url: '/selects/company_num',
       data: {},
+      dengl:true,
       success(res) {
         console.log(res)
         that.setData({
@@ -208,6 +252,7 @@ Page({
     this.data.app.http({
       url: '/selects/company_nature',
       data: {},
+      dengl:true,
       success(res) {
         console.log(res)
         that.setData({
@@ -217,11 +262,41 @@ Page({
     })
   },
   position2() {
-    var add_f = this.data.isAdd_F
+    var add_f = this.data.isAdd_F,
+    that=this
     this.setData({
       isAdd_F: !add_f
     })
-
+    this.data.app.http({
+      url:'/selects/work_exe',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          expList:res.data.rdata
+        })
+      }
+    })
+    this.data.app.http({
+      url:'/selects/school_record',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          recList:res.data.rdata
+        })
+      }
+    })
+    this.data.app.http({
+      url:'/selects/expect_money',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          moneryList:res.data.rdata
+        })
+      }
+    })
   },
   position3() {
     var add_s = this.data.isAdd_S
@@ -293,7 +368,43 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this
+    that.setData({
+      currentPage: that.data.currentPage + 1
+    })
+    if (this.data.loadingType != 0) { //loadingType!=0;直接返回
+      return false;
+    }
+    that.setData({
+      loadingType: 1
+    })
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/index/getPosition',
+      dengl: true,
+      method: 'POST',
+      data: {
+        limit: 10,
+        page: that.data.currentPage
+      },
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          // recomList: that.data.recomList.concat(res.data.rdata)
+        })
+        // if (res.data.rdata.length < 10) {
+        //   that.setData({
+        //     loadingType: 2
+        //   })
+        //   wx.hideNavigationBarLoading()
+        // } else {
+        //   that.setData({
+        //     loadingType: 0
+        //   })
+        // }
+        wx.hideNavigationBarLoading()
+      }
+    })
   },
 
   /**

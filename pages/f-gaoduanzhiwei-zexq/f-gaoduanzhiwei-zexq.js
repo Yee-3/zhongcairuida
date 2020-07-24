@@ -8,95 +8,158 @@ Page({
 	data: {
 		style: 'display:none',
 		xinxibaom: 'display:none',
-		dianhua:'display:none'
+		dianhua: 'display:none',
+		app: getApp().globalData,
+		detailCont: {},
+		date: '',
+		name: '',
+		phone: '',
+		id: ''
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
-	onLoad: function(options) {
+	onLoad: function (options) {
+		var that = this
+		this.setData({
+			id: options.id
+		})
+		this.data.app.http({
+			url: '/position/heightInfo',
+			dengl: true,
+			method: 'POST',
+			data: {
+				id: options.id
+			},
+			success(res) {
+				console.log(res)
+				that.setData({
+					detailCont: res.data.rdata,
+					date: res.data.rdata.createTime.substring(0, 10)
+				})
+			}
+		})
 
 	},
-	
-	tanchuang: function() {
-		this.setData({
-			style:'display:block'
+	blur(e) {
+		console.log(e)
+		var type = e.currentTarget.dataset.ty,
+			that = this,
+			value = e.detail.value
+		if (type == 1) {
+			that.setData({
+				name: value
+			})
+		}
+		if (type == 2) {
+			that.setData({
+				phone: value
+			})
+		}
+
+	},
+	submit() {
+		var that = this
+		this.data.app.http({
+			url: '/position/signUp',
+			dengl: true,
+			method: 'POST',
+			data: {
+				name: that.data.name,
+				phone: that.data.phone,
+				position: that.data.id
+			},
+			success(res) {
+				console.log(res)
+				if (res.data.code == 200) {
+					that.setData({
+						style: 'display:none',
+						xinxibaom: 'display:none',
+					})
+				}
+			}
 		})
 	},
-	tanchuang_1: function() {
+	tanchuang: function () {
 		this.setData({
-			xinxibaom:'display:block'
+			style: 'display:block'
 		})
 	},
-	tanchuang_2: function() {
+	tanchuang_1: function () {
 		this.setData({
-			dianhua:'display:block',
-			style:'display:none'
+			xinxibaom: 'display:block'
 		})
 	},
-	
-	quxiao: function() {
+	tanchuang_2: function () {
 		this.setData({
-			style:'display:none'
+			dianhua: 'display:block',
+			style: 'display:none'
 		})
 	},
-	quxiao1: function() {
+
+	quxiao: function () {
 		this.setData({
-			xinxibaom:'display:none'
+			style: 'display:none'
 		})
 	},
-	quxiao2: function() {
+	quxiao1: function () {
 		this.setData({
-			dianhua:'display:none',
-			style:'display:block'
+			xinxibaom: 'display:none'
+		})
+	},
+	quxiao2: function () {
+		this.setData({
+			dianhua: 'display:none',
+			style: 'display:block'
 		})
 	},
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */
-	onReady: function() {
+	onReady: function () {
 
 	},
 
 	/**
 	 * 生命周期函数--监听页面显示
 	 */
-	onShow: function() {
+	onShow: function () {
 
 	},
 
 	/**
 	 * 生命周期函数--监听页面隐藏
 	 */
-	onHide: function() {
+	onHide: function () {
 
 	},
 
 	/**
 	 * 生命周期函数--监听页面卸载
 	 */
-	onUnload: function() {
+	onUnload: function () {
 
 	},
 
 	/**
 	 * 页面相关事件处理函数--监听用户下拉动作
 	 */
-	onPullDownRefresh: function() {
+	onPullDownRefresh: function () {
 
 	},
 
 	/**
 	 * 页面上拉触底事件的处理函数
 	 */
-	onReachBottom: function() {
+	onReachBottom: function () {
 
 	},
 
 	/**
 	 * 用户点击右上角分享
 	 */
-	onShareAppMessage: function() {
+	onShareAppMessage: function () {
 
 	}
 })
