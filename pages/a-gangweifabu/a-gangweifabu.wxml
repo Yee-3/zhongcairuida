@@ -11,7 +11,7 @@
 			</view>
 		</view>
 	</view>
-	<name id="name" confirmText="确定" cancelText="取消" content="{{nameContent}}" contentT="{{tContent}}" contentS="{{sContent}}" bind:cancel="naCancel" bind:confirm="naConfirm"></name>
+	<name id="name" confirmText="确定" cancelText="取消" content="{{nameContent}}" bind:cancel="cancel" bind:confirm="confirm"></name>
 	<view class="a_02">
 		<view class="fl a_03"><em>*</em>
 			<p>招聘人数</p>
@@ -97,7 +97,7 @@
 			<p>任职要求</p>
 		</view>
 		<view class="a_05">
-			<textarea placeholder="请输入"></textarea>
+			<textarea style="height:200rpx" placeholder="请输入"></textarea>
 		</view>
 	</view>
 	<view class="a_07">
@@ -107,19 +107,19 @@
 			</view>
 			<view class="fr a_04">
 				<view class="section" >
-					<view class="picker" bindtap="welfare" data-type="5">{{welValue?'':'请输入'}}</view>
+					<view class="picker" bindtap="welfare" data-type="5">{{wel_Value}}</view>
 				</view>
 			</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="a_08">
 			<ul>
-				<li wx:for="welValue">{{item.item}}</li>
+				<li wx:for="{{welValue}}">{{item.label}}</li>
 				<view class="w-clear"></view>
 			</ul>
 		</view>
 	</view>
-	<checkbox id="wel" title="职位福利" confirmText="确定" cancelText="取消" content="{{welContent}}"  bind:cancel="welCancel" bind:confirm="welConfirm">
+	<checkbox id="wel" title="职位福利" confirmText="确定" cancelText="取消" content="{{welContent}}"  bind:cancel="handleCancel" bind:confirm="handleConfirm">
 	</checkbox>
 	<view class="a_06">
 		<view class="a_03"><em>*</em>

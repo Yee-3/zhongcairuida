@@ -20,8 +20,8 @@ Component({
       type: String,
       value: '取消'
     },
-    style:{
-      type:String,
+    style: {
+      type: String,
       value: "margin-right:17rpx"
     }
   },
@@ -31,8 +31,12 @@ Component({
    */
   data: {
     isShow: false,
-    edu: [],
+    isEdu: false,
     valu: '请选择',
+    edu: '',
+    value: '',
+    index:'',
+    welList:[]
   },
 
   /**
@@ -42,12 +46,27 @@ Component({
     // 添加index
     toggle(e) {
       // console.log(e.currentTarget.dataset['index'])
-      var that=this
-      var index=e.currentTarget.dataset['index']
+      var that = this
+      var index = e.currentTarget.dataset.index
+      // var edu = this.data.isEdu
+      this.data.content[index].show = !this.data.content[index].show
+      var arr = this.data.content
+      arr[e.currentTarget.dataset.index].dandu = !arr[e.currentTarget.dataset.index].dandu
       this.setData({
-        edu: that.data.edu.push(1)
+        content: arr,
+        index:e.currentTarget.dataset.index
       })
-      console.log(this.data.edu)
+      var xArr = []
+      for (var i = 0; i < this.data.content.length; i++) {
+        if (this.data.content[i].dandu) {
+          xArr.push(this.data.content[i])
+        }
+      }
+      this.setData({
+        welList: xArr,
+      })
+      console.log(this.data.welList)
+      
     },
     show() {
       console.log(this.data.style)

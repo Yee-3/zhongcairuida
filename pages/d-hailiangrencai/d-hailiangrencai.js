@@ -9,13 +9,19 @@ Page({
     animationCon: {},
     animationData: {},
     animationMor: {},
-    style: ''
+    style: '',
+    app: getApp().globalData,
+    zhiList: [],
+    moneyList:[],
+    expList:[],
+    codList:[]
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     if (options.id == 1) {
       wx.setNavigationBarTitle({
         title: '即刻入职'
@@ -24,14 +30,58 @@ Page({
     this.zhiwei = this.selectComponent("#zhiwei");
     this.zonghe = this.selectComponent("#zonghe");
     this.more = this.selectComponent("#more");
+    this.data.app.http({
+      url: '/selects/position',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          zList: res.data.rdata[0].treeDTOS
+        })
+      }
+    }),
+    // 薪资
+    this.data.app.http({
+      url:'/selects/expect_money',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          moneyList:res.data.rdata
+        })
+      }
+    })
+    // 学历
+    this.data.app.http({
+      url:'/selects/school_record',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          codList:res.data.rdata
+        })
+      }
+    })
+    // 工作经验
+    this.data.app.http({
+      url:'/selects/work_exe',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          expList:res.data.rdata
+        })
+      }
+    })
   },
   toggleZong() {
-    if(this.zhiwei.data.isAdd){
+    if (this.zhiwei.data.isAdd) {
       this.toggleZhi()
     }
-     if(this.more.data.isAdd_F){
+    if (this.more.data.isAdd_F) {
       this.toggleMor()
-    } 
+    }
     this.zonghe.toggleZong()
     this.zonghe.setData({
       style: 'top:82rpx',
@@ -92,6 +142,7 @@ Page({
     }
   },
   tog() {
+    var that=this
     this.toggleZhi()
   },
   toggleMor() {

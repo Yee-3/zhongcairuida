@@ -33,19 +33,19 @@
 				<image class="image" src="../img/f033.png" animation="{{animationData}}"></image>
 			</view>
 		</li>
-		<zhiwei id="zhiwei" bind:confirm="tog"></zhiwei>
+		<zhiwei id="zhiwei" bind:confirm="tog" zhiList="{{zhiList}}"></zhiwei>
 		<li bindtap="toggleSi" style="width:23%">
 			<view class="l_02">公司
 				<image class="image" src="../img/f033.png" animation="{{animationSi}}"></image>
 			</view>
 		</li>
-		<gongsi id="gongsi"></gongsi>
+		<gongsi id="gongsi" comList="{{comList}}" scaleList="{{scaleList}}"></gongsi>
 		<li style="width:23%" bindtap="toggleMor">
 			<view class="l_02">更多
-				<image class="image" src="../img/f033.png" animation="{{animationMor}}"></image>
+				<image class="image" src="../img/f033.png" animation="{{animationMor}}" ></image>
 			</view>
 		</li>
-		<more id="more" bind:confirm="togMore"></more>
+		<more id="more" bind:confirm="togMore" moneyList="{{moneyList}}" expList="{{expList}}"  codList="{{codList}}"></more>
 	</ul>
 </view>
 

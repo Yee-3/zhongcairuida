@@ -34,15 +34,15 @@ Page({
         that.setData({
           lisList: res.data.rdata
         })
-        if (res.data.rdata.length < 10) {
-          wx.showToast({
-            title: '已是最新',
-            duration: 2000
-          });
-          that.setData({
-            loadingType: 3
-          })
-        }
+        // if (res.data.rdata.length < 10) {
+        //   wx.showToast({
+        //     title: '已是最新',
+        //     duration: 2000
+        //   });
+        //   that.setData({
+        //     loadingType: 3
+        //   })
+        // }
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
       }

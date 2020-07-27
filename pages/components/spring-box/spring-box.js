@@ -31,8 +31,9 @@ Component({
    */
   data: {
     isShow: false,
-    edu: '0',
+    edu: '',
     valu: '请选择',
+    index:''
   },
 
   /**
@@ -41,9 +42,11 @@ Component({
   methods: {
     // 添加index
     toggle(e) {
-      console.log(e.currentTarget.dataset['index'])
+      console.log(e,2222)
+      // console.log(e.currentTarget.dataset['index'])
       this.setData({
-        edu: e.currentTarget.dataset['index']
+        edu: e.currentTarget.dataset['index'],
+        index: e.currentTarget.dataset['ind']
       })
     },
     show() {

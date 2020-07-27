@@ -19,9 +19,9 @@
 		<view class="v_04">生日</view>
 		<view class="v_05">
 			<view class="v_06 fl">
-				<view class="section" bindtap="showDatePicker" >
+				<view class="section" bindtap="showDatePicker">
 					<!-- <picker value="{{index}}" range="{{array}}"> -->
-						<view class="picker">{{date_value}}</view>
+					<view class="picker">{{date_value}}</view>
 					<!-- </picker> -->
 				</view>
 			</view>
@@ -30,11 +30,7 @@
 			</view>
 		</view>
 	</view>
-<date-picker
-    id="date-picker"
-    value="{{datePickerValue}}" 
-    isShow="{{datePickerIsShow}}"
-    bindsureclick="datePickerOnSureClick" />
+	<date-picker id="date-picker" value="{{datePickerValue}}" isShow="{{datePickerIsShow}}" bindsureclick="datePickerOnSureClick" />
 
 	<view class="v_03">
 		<view class="v_04">性别</view>
@@ -72,17 +68,17 @@
 			<view class="v_06 fl">
 				<view class="section">
 					<!-- <picker value="{{index}}" range="{{array}}"> -->
-						<view class="picker" bindtap="show">{{type_content}}</view>
-						
-						<spring id="spring" title="求职状态" confirmText="确定" cancelText="取消" content="{{springContent}}" bind:confirm="handleConfirmDialog">
-							</spring>
+					<view class="picker" bindtap="show">{{type_content}}</view>
+
+					<spring id="spring" title="求职状态" confirmText="确定" cancelText="取消" content="{{springContent}}" bind:confirm="handleConfirmDialog">
+					</spring>
 					<!-- </picker> -->
 				</view>
 			</view>
 			<view class="v_07 fr">
 				<image src="../img/f068.png"></image>
 			</view>
-		</view>  
+		</view>
 	</view>
 
 	<view class="v_03">
@@ -101,12 +97,12 @@
 		</view>
 	</view>
 	<!-- 学历弹框 -->
-	<view class="mask" wx:if="{{isEdu}}" bindtap="educat"></view>
+	<view class="mask" wx:if="{{isEdu}}"></view>
 	<view class="mask_edu" wx:if="{{isEdu}}">
 		<view class="edu_top">
-			<view class="edu_title">学历</view>
+			<view class="edu_title">最高学历</view>
 			<view class="edu_bot">
-				<button class="{{edu==index?'no1':'no'}}" wx:for="{{eduction}}" size="mini" data-edu="{{index}}" bindtap="toggle" style="font-size:24rpx;">{{item.label}}</button>
+				<button class="{{edu==item.value?'no1':'no'}}" wx:for="{{eduction}}" size="mini" data-edu="{{item.value}}" data-index="{{index}}" bindtap="toggle" style="font-size:24rpx;">{{item.label}}</button>
 			</view>
 		</view>
 		<view class="m_bottom">
@@ -121,7 +117,7 @@
 			<view class="v_06 fl">
 				<view class="section">
 					<!-- <picker value="{{index}}" range="{{array}}"> -->
-						<view class="picker"><input placeholder="请输入" /></view>
+					<view class="picker"><input placeholder="请输入" /></view>
 					<!-- </picker> -->
 				</view>
 			</view>
@@ -130,7 +126,35 @@
 			</view>
 		</view>
 	</view>
-
+	<view class="v_03">
+		<view class="v_04">参加工作时间</view>
+		<view class="v_05">
+			<view class="v_06 fl">
+				<view class="section">
+					<!-- <picker value="{{index}}" range="{{array}}"> -->
+					<view class="picker" bindtap="yearShow">{{yearValue}}</view>
+					<!-- </picker> -->
+				</view>
+			</view>
+			<view class="v_07 fr">
+				<image src="../img/f068.png"></image>
+			</view>
+		</view>
+	</view>
+	<!-- 参加工作时间 -->
+	<view class="mask" wx:if="{{isYear}}"></view>
+	<view class="mask_edu" wx:if="{{isYear}}">
+		<view class="edu_top">
+			<view class="edu_title">工作时间</view>
+			<view class="edu_bot">
+				<button class="{{year_time==item.value?'no1':'no'}}" wx:for="{{yearList}}" size="mini" data-year="{{item.value}}" data-index="{{index}}" bindtap="toggle_year" style="font-size:24rpx;">{{item.label}}</button>
+			</view>
+		</view>
+		<view class="m_bottom">
+			<button class="b_left" bindtap="yearShow">取消</button>
+			<button class="b_right" bindtap="con_year">确认</button>
+		</view>
+	</view>
 	<view class="v_03">
 		<view class="v_04">目前年收入</view>
 		<view class="v_05">
@@ -155,7 +179,7 @@
 			<view class="v_06 fl">
 				<view class="section">
 					<!-- <picker value="{{index}}" range="{{array}}"> -->
-						<view class="picker"><input placeholder="请输入" /></view>
+					<view class="picker"><input placeholder="请输入" /></view>
 					<!-- </picker> -->
 				</view>
 			</view>
@@ -186,7 +210,7 @@
 		<view class="mar_top">
 			<view class="mar_title">婚姻状况</view>
 			<view class="mar_bot">
-				<button class="{{mar==index?'no1':'no'}}" wx:for="{{marr}}" size="mini" data-mar="{{index}}" bindtap="toggle" style="font-size:28rpx">{{item.label}}</button>
+				<button class="{{mar==item.value?'no1':'no'}}" wx:for="{{marr}}" size="mini" data-mar="{{item.value}}" data-index="{{index}}" bindtap="toggle_marr" style="font-size:28rpx">{{item.label}}</button>
 			</view>
 			<view class="but">
 				<button class="queren" size="mini" style="font-weight:normal;" bindtap="con">确认</button>

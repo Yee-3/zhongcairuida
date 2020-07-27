@@ -146,7 +146,7 @@
 	/* box-sizing: border-box; */
 	position: absolute;
 	left: 0;
-	min-width: 335rpx;
+	max-width: 335rpx;
 	padding: 0;
 	line-height: 100rpx;
 	margin-right: 20rpx;
@@ -158,7 +158,7 @@
 .confirm {
 	position: absolute;
 	right: 0;
-	min-width: 335rpx;
+	max-width: 335rpx;
 	padding: 0;
 	line-height: 100rpx;
 	background-color: #0385ff;

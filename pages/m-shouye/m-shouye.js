@@ -223,7 +223,7 @@ Page({
       success(res){
         that.setData({
           isAdd: !add,
-          zhiList:res.data.rdata
+          zhiList:res.data.rdata[0].treeDTOS
         })
         console.log(res.data.rdata)
       }

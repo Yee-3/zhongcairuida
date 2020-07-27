@@ -27,7 +27,8 @@ Component({
    */
   data: {
     isHidden:false,
-    mar:'0',
+    mar:'',
+    index:''
   },
 
   /**
@@ -37,7 +38,8 @@ Component({
     toggle(e){
       // console.log('111')
       this.setData({
-        mar:e.currentTarget.dataset['index']
+        mar:e.currentTarget.dataset['val'],
+        index:e.currentTarget.dataset['index'],
       })
     },
     show() {

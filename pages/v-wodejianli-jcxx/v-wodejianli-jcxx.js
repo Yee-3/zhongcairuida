@@ -29,8 +29,17 @@ Page({
     springContent: [],
     type_content: '请选择',
     app: getApp().globalData,
-    eduction:[],
-    marr:[],
+    eduction: [],
+    marr: [],
+    app: getApp().globalData,
+    edu_index: '',
+    mar_index: '',
+    isYear: false,
+    yearValue:'请选择',
+    yearList:[],
+    year_time:'',
+year_index:''
+
   },
 
   /**
@@ -38,45 +47,31 @@ Page({
    */
   onLoad: function (options) {
     this.spring = this.selectComponent("#spring");
-
-
-  },
-  // 求职状态
-  show() {
-    var that=this
+    var that = this
+    // 求职状态
     this.data.app.http({
       url: '/selects/resume_status',
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         that.setData({
-          springContent:res.data.rdata
+          springContent: res.data.rdata
         })
       }
     })
-    this.spring.show()
-    
-  },
-  handleConfirmDialog() {
-    // console.log(this.spring.data.mar)
-    this.spring.show()
-    var index = this.spring.data.mar
-    this.setData({
-      type_content: this.data.springContent[index].label
+    // 最高学历
+    this.data.app.http({
+      url: '/selects/school_record',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          eduction: res.data.rdata
+        })
+      }
     })
-
-  },
-  // --end--
-  // 婚姻状况弹框
-  toggle(e) {
-    this.setData({
-      mar: e.currentTarget.dataset.mar
-    })
-  },
-  marriage() {
-    var mar = this.data.isMar
-    var that=this
+    // 婚姻状况
     this.data.app.http({
       url: '/selects/resume_marriage',
       dengl: true,
@@ -84,22 +79,95 @@ Page({
       success(res) {
         console.log(res)
         that.setData({
-          marr:res.data.rdata
+          marr: res.data.rdata
         })
       }
     })
+// 工作时间
+this.data.app.http({
+  url: '/selects/work_exe',
+  dengl: true,
+  data: {},
+  success(res) {
+    console.log(res)
+    that.setData({
+      yearList: res.data.rdata
+    })
+  }
+})
+  },
+  // 参加工作时间
+  yearShow(){
+    var year = this.data.isYear
+    var that = this
+    this.setData({
+      isYear: !year
+    })
+  },
+  toggle_year(e){
+    this.setData({
+      year_time: e.currentTarget.dataset.year,
+      year_index: e.currentTarget.dataset.index
+    })
+  },
+  con_year(){
+    this.yearShow()
+    var that = this
+    var index = this.data.year_index
+    this.setData({
+      yearValue: that.data.yearList[index].label
+    })
+  },
+  // end
+  // 求职状态
+  show() {
+    var that = this
+    this.data.app.http({
+      url: '/selects/resume_status',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          springContent: res.data.rdata
+        })
+      }
+    })
+    this.spring.show()
+
+  },
+  handleConfirmDialog() {
+    // console.log(this.spring.data.mar)
+    this.spring.show()
+    var index = this.spring.data.index
+    this.setData({
+      type_content: this.data.springContent[index].label
+    })
+
+  },
+  // --end--
+  // 婚姻状况弹框
+  toggle_marr(e) {
+    this.setData({
+      mar: e.currentTarget.dataset.mar,
+      mar_index: e.currentTarget.dataset.index
+    })
+  },
+  marriage() {
+    var mar = this.data.isMar
+    var that = this
     this.setData({
       isMar: !mar
     })
-    
+
   },
   con() {
     this.marriage()
-    var that=this
-    var index=this.data.mar
-      this.setData({
-        valu: that.data.marr[index].label
-      })
+    var that = this
+    var index = this.data.mar_index
+    this.setData({
+      valu: that.data.marr[index].label
+    })
   },
   // ---end---
   // 性别
@@ -129,8 +197,10 @@ Page({
   // --end--
   // 学历
   toggle(e) {
+    console.log(e)
     this.setData({
-      edu: e.currentTarget.dataset.edu
+      edu: e.currentTarget.dataset.edu,
+      edu_index: e.currentTarget.dataset.index,
     })
   },
   educat() {
@@ -139,24 +209,14 @@ Page({
     this.setData({
       isEdu: !eduu
     })
-    this.data.app.http({
-      url: '/selects/school_record',
-      dengl: true,
-      data: {},
-      success(res) {
-        console.log(res)
-        that.setData({
-        eduction:res.data.rdata
-        })
-      }
-    })
+
   },
   con2() {
-    var that=this
-    var index=this.data.edu
+    var that = this
+    var index = this.data.edu_index
     this.educat()
     this.setData({
-      valu2:that.data.eduction[index].label
+      valu2: that.data.eduction[index].label
     })
   },
   // ---end---

@@ -67,7 +67,7 @@ Page({
       success(res) {
         console.log(res)
         that.setData({
-          zhiList: res.data.rdata
+          zhiList: res.data.rdata[0].treeDTOS
         })
       } 
     })
@@ -153,6 +153,15 @@ Page({
     })
 
   },
+  confirm_zhi(){
+    this.zhiwei()
+    this.setData({
+      ind:0,
+      ind1:0,
+      ind_three:0   
+    })
+  },
+
   checkboxChange: function (e) {
     console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   },

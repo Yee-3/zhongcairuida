@@ -4,7 +4,7 @@
 		<view class="edu_top" style="{{padding}}">
 			<view class="edu_title">{{title}}</view>
 			<view class="edu_bot">
-				<button class="{{edu==index?'no1':'no'}}" size="mini" data-index="{{index}}" wx:for="{{content}}" bindtap="toggle" style="{{style}};font-size:24rpx">{{item.item}}</button>
+				<button class="{{edu==item.value?'no1':'no'}}" size="mini" data-index="{{item.value}}" data-ind="{{index}}" wx:for="{{content}}" bindtap="toggle" style="{{style}};font-size:24rpx">{{item.label}}</button>
 			</view>
 		</view>
 		<view class="m_bottom">

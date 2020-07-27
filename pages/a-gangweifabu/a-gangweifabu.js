@@ -24,183 +24,97 @@ Page({
     eduValue: '请选择',
     salaValue: '请选择',
     nameValue: '请选择',
-    welValue: [{}],
-    experContent: [{
-        item: '应届生'
-      },
-      {
-        item: '1~3年'
-      },
-      {
-        item: '3~5年'
-      },
-      {
-        item: '5~10年'
-      },
-      {
-        item: '10年以上'
-      },
-      {
-        item: '不限'
-      },
-    ],
+    welValue: '',
+    wel_Value:'请输入',
+    experContent: [],
     type: '',
-    educatContent: [{
-        item: '大专'
-      },
-      {
-        item: '本科'
-      }, {
-        item: '硕士'
-      },
-      {
-        item: '博士'
-      },
-      {
-        item: '不限'
-      },
-    ],
-    salaContent: [{
-        item: '3K以下'
-      },
-      {
-        item: '3K~5K'
-      },
-      {
-        item: '5K~10K'
-      },
-      {
-        item: '10K~15K'
-      },
-      {
-        item: '15K~20K'
-      },
-      {
-        item: '20K~25K'
-      },
-      {
-        item: '25K~50K'
-      },
-      {
-        item: '面议'
-      },
-    ],
-    welContent: [{
-        item: '14薪'
-      },
-      {
-        item: '五险一金'
-      },
-      {
-        item: '节假日福利'
-      },
-      {
-        item: '带薪年病假'
-      },
-      {
-        item: '交通补贴'
-      },
-      {
-        item: '餐补'
-      },
-      {
-        item: '年终奖'
-      },
-      {
-        item: '弹性工作制度'
-      },
-    ],
+    educatContent: [],
+    salaContent: [],
+    welContent: [],
     ty: '1',
-    nameContent: [{
-        item: '销售/商务拓展'
-      },
-      {
-        item: '人事/财务/行政/法务'
-      },
-      {
-        item: '互联网'
-      },
-      {
-        item: '运营'
-      },
-      {
-        item: '通讯'
-      },
-      {
-        item: '软件'
-      },
-      {
-        item: '硬件'
-      },
-      {
-        item: '技术'
-      },
-
-    ],
-    tContent: [{
-        item: '销售/商务拓展'
-      },
-      {
-        item: '人事/财务/行政/法务'
-      },
-      {
-        item: '互联网'
-      },
-      {
-        item: '运营'
-      },
-      {
-        item: '通讯'
-      },
-      {
-        item: '软件'
-      },
-      {
-        item: '硬件'
-      },
-      {
-        item: '技术'
-      },
-
-    ],
-    sContent: [{
-        item: '销售/商务拓展'
-      },
-      {
-        item: '人事/财务/行政/法务'
-      },
-      {
-        item: '互联网'
-      },
-      {
-        item: '运营'
-      },
-      {
-        item: '通讯'
-      },
-      {
-        item: '软件'
-      },
-      {
-        item: '硬件'
-      },
-      {
-        item: '技术'
-      },
-
-    ]
+    nameContent: [],
+    app: getApp().globalData,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that=this
     this.spring = this.selectComponent("#spring");
     this.exp = this.selectComponent("#exp");
     this.edu = this.selectComponent("#edu");
     this.sala = this.selectComponent("#sala");
     this.wel = this.selectComponent("#wel");
     this.name = this.selectComponent("#name");
+    this.data.app.http({
+      url:'/selects/position',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          nameContent:res.data.rdata[0].treeDTOS
+        })
+      }
+    })
+    // 工作类型
+    this.data.app.http({
+      url:'/selects/work_type',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          natureContent:res.data.rdata
+        })
+      }
+    })
+    // 工作经验
+    this.data.app.http({
+      url:'/selects/work_exe',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          experContent:res.data.rdata
+        })
+      }
+    })
+     // 学历要求
+     this.data.app.http({
+      url:'/selects/school_record',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          educatContent:res.data.rdata
+        })
+      }
+    })
+     // 薪资要求
+     this.data.app.http({
+      url:'/selects/expect_money',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          salaContent:res.data.rdata
+        })
+      }
+    })
+    // 职位福利
+    this.data.app.http({
+      url:'/selects/work_welfare',
+      dengl:true,
+      data:{},
+      success(res){
+        res.data.rdata.map(function(n){
+          n.dandu=false
+        })
+        that.setData({
+          welContent:res.data.rdata
+        })
+      }
+    })
   },
   zhiwei(e) {
     console.log(e)
@@ -251,33 +165,35 @@ Page({
   handleConfirm() {
     if (this.data.type == 1) {
       this.spring.show()
-      var index = this.spring.data.edu
+      var index = this.spring.data.index
       this.setData({
-        zhiValue: this.data.natureContent[index].item
+        zhiValue: this.data.natureContent[index].label
       })
     } else if (this.data.type == 2) {
       this.exp.show()
-      var index = this.exp.data.edu
+      var index = this.exp.data.index
+    
       this.setData({
-        expValue: this.data.experContent[index].item
+        expValue: this.data.experContent[index].label
       })
     } else if (this.data.type == 3) {
+      console.log()
       this.edu.show()
-      var index = this.edu.data.edu
+      var index = this.edu.data.index
       this.setData({
-        eduValue: this.data.educatContent[index].item
+        eduValue: this.data.educatContent[index].label
       })
     } else if (this.data.type == 4) {
       this.sala.show()
-      var index = this.sala.data.edu
+      var index = this.sala.data.index
       this.setData({
-        salaValue: this.data.salaContent[index].item
+        salaValue: this.data.salaContent[index].label
       })
     } else {
       this.wel.show()
-      var index = this.wel.data.edu
+      // var that = this
       this.setData({
-        welValue: this.data.welValue.push(this.data.welContent[index].item)
+        welValue: this.wel.data.welList
       })
       console.log(this.data.welValue)
     }
@@ -289,9 +205,21 @@ Page({
       this.exp.show()
     } else if (this.data.type == 3) {
       this.edu.show()
-    } else {
+    } else if(this.data.type==4) {
       this.sala.show()
+    }else{
+      this.wel.show()
     }
+  },
+ confirm(){
+    this.name.position()
+    var index = this.name.data.ind,
+      index2 = this.name.data.ind1,
+      index3 = this.name.data.ind2,
+      that = this
+    this.setData({
+      nameValue: that.data.nameContent[index].treeDTOS[index2].treeDTOS[index3].name
+    })
   },
   types(e) {
     this.setData({
@@ -314,6 +242,9 @@ Page({
       this.setData({
         nameValue: this.data.sContent[index].item
       })
+  },
+  welConfirm(){
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

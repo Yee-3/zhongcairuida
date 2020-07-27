@@ -215,10 +215,14 @@
   border-radius: 15rpx;
 }
 .edu_title{
-  font-size: 25rpx;
+  font-size: 26rpx;
   color: #565656;
-  margin-bottom: 38rpx;
+  margin-bottom: 30rpx;
   text-align: center;
+  font-weight: bold;
+}
+.edu_bot{
+  padding-bottom: 20rpx;
 }
 .mask_edu .no{
   min-width: 140rpx;

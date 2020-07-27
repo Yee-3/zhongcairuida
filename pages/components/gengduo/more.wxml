@@ -5,19 +5,19 @@
 			<view class="top3_t">
 				<view class="t3_title">薪资范围</view>
 				<scroll-view class="scr3_02" scroll-y="true">
-					<button class="{{index==ind5?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle5" style="font-size:25rpx;min-width:160rpx">20k-50k</button>
+					<button class="{{item.value==ind5?'no1':'bott'}}" size="mini" wx:for="{{moneyList}}" data-index='{{item.value}}' bindtap="toggle5" style="font-size:25rpx;min-width:160rpx">{{item.label}}</button>
 				</scroll-view>
 			</view>
 			<view class="top3_bb">
 				<view class="t3_title">工作经验</view>
 				<scroll-view class="scr3_01" scroll-y="true">
-					<button class="{{index==ind6?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle6" style="font-size:25rpx;min-width:160rpx">1~3年</button>
+					<button class="{{item.value==ind6?'no1':'bott'}}" size="mini" wx:for="{{expList}}" data-index='{{item.value}}' bindtap="toggle6" style="font-size:25rpx;min-width:160rpx">{{item.label}}</button>
 				</scroll-view>
 			</view>
 			<view class="top3_three">
 				<view class="t3_title">学历要求</view>
 				<scroll-view class="scr3_03" scroll-y="true">
-					<button class="{{index==ind7?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle7" style="font-size:25rpx">本科</button>
+					<button class="{{item.value==ind7?'no1':'bott'}}" size="mini" wx:for="{{codList}}" data-index='{{item.value}}' bindtap="toggle7" style="font-size:25rpx">{{item.label}}</button>
 				</scroll-view>
 			</view>
 		</scroll-view>

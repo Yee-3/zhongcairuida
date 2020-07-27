@@ -11,6 +11,10 @@ Component({
     styleT:{
       type:String,
       value: ""
+    },
+    zhiList:{
+      type:Array,
+      value:''
     }
   },
 
@@ -33,6 +37,7 @@ Component({
       this.setData({ ind:e.currentTarget.dataset['index']})
       var two=this.data.isTwo
       this.setData({isTwo:!two})
+      console.log(this.data.zhiList)
     },
     toggle1(e){
       this.setData({ ind1:e.currentTarget.dataset['index']})

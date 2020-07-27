@@ -4,7 +4,7 @@
 		<view class="mar_top">
 			<view class="mar_title">求职状态</view>
 			<view class="mar_bot">
-				<button class="{{mar==index?'no1':'no'}}" data-index="{{index}}" size="mini" wx:for="{{content}}" wx:for-index="index" wx:for-item="item" wx:key="index" bindtap="toggle" style="font-size:28rpx">{{item.label}}</button>
+				<button class="{{mar==item.value?'no1':'no'}}" data-val="{{item.value}}" data-index="{{index}}" size="mini" wx:for="{{content}}" wx:key="index" bindtap="toggle" style="font-size:28rpx">{{item.label}}</button>
 			</view>
 			<view class="but">
 				<button class="queren" size="mini" style="font-weight:normal;" bindtap="_confirm">确认</button>

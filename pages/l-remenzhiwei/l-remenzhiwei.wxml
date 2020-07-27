@@ -33,16 +33,16 @@
 				<view class="mask_02" wx:if="{{isTwo}}" bindtap="hide"></view>
 				<view class="mask_02_01" wx:if="{{isTwo}}">
 					<scroll-view class="mask_left" scroll-y="true">
-						<view class="{{index==ind1?'no':'bot'}}" wx:for='{{9}}' style="" data-index='{{index}}' bindtap="toggle1" style="width:220rpx">
+						<view class="{{index==ind1?'no':'bot'}}" wx:for='{{zwList[ind].treeDTOS}}' style="" data-index='{{index}}' bindtap="toggle1" style="width:220rpx">
 							<image class="img" wx:if="{{index==ind1}}" src="../img/icon_02.png"></image>
-							销售顾问
+							{{item.name}}
 							<image class="img1" wx:if="{{index==ind1}}" src="../img/icon_01.png"></image>
 						</view>
 					</scroll-view>
 
 					<scroll-view class="mask_right" scroll-y="true">
-						<view class="{{index==ind2?'no':'bot'}}" wx:for='{{9}}' data-index='{{index}}' bindtap="toggle2">
-							大客户代表
+						<view class="{{index==ind2?'no':'bot'}}" wx:for='{{zwList[ind].treeDTOS[ind1].treeDTOS}}' data-index='{{index}}' bindtap="toggle2">
+						{{item.name}}
 							<image class="img2" wx:if="{{index==ind2}}" src="../img/icon_01.png"></image>
 						</view>
 					</scroll-view>
@@ -50,9 +50,9 @@
 				</view>
 				<!-- —————— -->
 				<scroll-view class="top_top" scroll-y="true">
-					<view class="{{index==ind?'no':'bot'}}" wx:for='{{9}}' data-index='{{index}}' bindtap="toggle">
+					<view class="{{index==ind?'no':'bot'}}" wx:for='{{zwList}}' data-index='{{index}}' bindtap="toggle">
 						<image class="img" wx:if="{{index==ind}}" src="../img/icon_02.png"></image>
-						销售/商务拓展
+						{{item.name}}
 					</view>
 				</scroll-view>
 			</view>
@@ -75,13 +75,13 @@
 				<view class="top_t">
 					<view class="t_title">公司性质</view>
 					<scroll-view class="scr_02" scroll-y="true">
-						<button class="{{index==ind3?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle3" style="font-size:25rpx">外资（欧美）</button>
+						<button class="{{item.value==ind3?'no1':'bott'}}" size="mini" wx:for="{{gxzList}}" data-index='{{item.value}}' bindtap="toggle3" style="font-size:25rpx">{{item.label}}</button>
 					</scroll-view>
 				</view>
 				<view class="top_bb">
 					<view class="t_title">公司规模</view>
 					<scroll-view class="scr_01" scroll-y="true">
-						<button class="{{index==ind4?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle4" style="font-size:25rpx">500-1000人</button>
+						<button class="{{item.value==ind4?'no1':'bott'}}" size="mini" wx:for="{{ggmList}}" data-index='{{item.value}}' bindtap="toggle4" style="font-size:25rpx">{{item.label}}</button>
 					</scroll-view>
 				</view>
 			</view>
@@ -103,19 +103,19 @@
 				<view class="top3_t">
 					<view class="t3_title">薪资范围</view>
 					<scroll-view class="scr3_02" scroll-y="true">
-						<button class="{{index==ind5?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle5" style="font-size:25rpx;min-width:160rpx">20k-50k</button>
+						<button class="{{item.value==ind5?'no1':'bott'}}" size="mini" wx:for="{{mnyList}}" data-index='{{item.value}}' bindtap="toggle5" style="font-size:25rpx;min-width:160rpx">{{item.label}}</button>
 					</scroll-view>
 				</view>
 				<view class="top3_bb">
 					<view class="t3_title">工作经验</view>
 					<scroll-view class="scr3_01" scroll-y="true">
-						<button class="{{index==ind6?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle6" style="font-size:25rpx;min-width:160rpx">1~3年</button>
+						<button class="{{item.value==ind6?'no1':'bott'}}" size="mini" wx:for="{{expList}}" data-index='{{item.value}}' bindtap="toggle6" style="font-size:25rpx;min-width:160rpx">{{item.label}}</button>
 					</scroll-view>
 				</view>
 				<view class="top3_three">
 					<view class="t3_title">学历要求</view>
 					<scroll-view class="scr3_03" scroll-y="true">
-						<button class="{{index==ind7?'no1':'bott'}}" size="mini" wx:for="{{14}}" data-index='{{index}}' bindtap="toggle7" style="font-size:25rpx">本科</button>
+						<button class="{{item.value==ind7?'no1':'bott'}}" size="mini" wx:for="{{codList}}" data-index='{{item.value}}' bindtap="toggle7" style="font-size:25rpx">{{item.label}}</button>
 					</scroll-view>
 				</view>
 			</view>

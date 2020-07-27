@@ -20,7 +20,7 @@
 }
 
 .mask3_top {
-  height: 560rpx;
+  /* height: 560rpx; */
   background: #f6f6f6;
   /* border-radius: 15rpx; */
   padding-top: 30rpx;
@@ -31,16 +31,17 @@
 
 .scr3_02 {
   height: 185rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 3
+  0rpx;
 }
 
 .scr3_01 {
   height: 185rpx;
-  margin-bottom: 30rpx;
+  margin-bottom: 20rpx;
 }
 
 .scr3_03 {
-  height: 96rpx;
+  height:100rpx;
 }
 
 .t3_title {
@@ -89,7 +90,7 @@
 .bott {
   min-width: 140rpx;
   height: 58rpx;
-  margin-top: 30rpx;
+  margin-top: 20rpx;
   margin-left: 30rpx;
   background-color: #f0f0f0;
   color: #909090;
@@ -101,7 +102,7 @@
 .no1 {
   min-width: 140rpx;
   height: 58rpx;
-  margin-top: 30rpx;
+  margin-top: 20rpx;
   margin-left: 30rpx;
   background-color: #f0f0f0;
   color: #0385ff;

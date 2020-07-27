@@ -11,6 +11,18 @@ Component({
     styleT:{
       type:String,
       value: ""
+    },
+    moneyList:{
+      type:Array,
+      value:''
+    },
+    expList:{
+      type:Array,
+      value:''
+    },
+    codList:{
+      type:Array,
+      value:''
     }
   },
 
