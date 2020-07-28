@@ -24,9 +24,9 @@ Component({
   data: {
     isAdd:false,
     isTwo: false,
-    ind1:'',
-    ind2:'',
-    ind3:'',
+    ind1:'x',
+    ind2:'x',
+    ind3:'x',
   },
 
   /**

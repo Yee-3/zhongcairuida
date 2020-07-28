@@ -14,6 +14,7 @@ Page({
       contentnomore: "没有更多数据了"
     },
     lisList: [],
+    id:''
   },
 
   /**
@@ -21,28 +22,33 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    this.setData({
+      id:options.id
+    })
+    console.log(options)
     wx.showNavigationBarLoading()
     this.data.app.http({
       url: '/position/height',
       dengl: true,
       data: {
         limit: 10,
-        page: that.data.currentPage
+        page: that.data.currentPage,
+        id:options.id
       },
       success(res) {
         console.log(res.data.rdata)
         that.setData({
           lisList: res.data.rdata
         })
-        // if (res.data.rdata.length < 10) {
-        //   wx.showToast({
-        //     title: '已是最新',
-        //     duration: 2000
-        //   });
-        //   that.setData({
-        //     loadingType: 3
-        //   })
-        // }
+        if (res.data.rdata.length < 10) {
+          wx.showToast({
+            title: '已是最新',
+            duration: 2000
+          });
+          that.setData({
+            loadingType: 3
+          })
+        }
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
       }
@@ -117,7 +123,8 @@ Page({
       method: 'POST',
       data: {
         limit: 10,
-        page: that.data.currentPage
+        page: that.data.currentPage,
+        id:that.data.id
       },
       success(res) {
         console.log(res.data.rdata)

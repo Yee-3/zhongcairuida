@@ -12,7 +12,7 @@
 					</view>
 				</view>
 				<view class="e_06 fl">
-					<p>2020-05-11</p>
+					<p>{{item.createTime}}</p>
 				</view>
 				<view class="w-clear"></view>
 			</view>

@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-     style: 'display:none',
+    style: 'display:none',
   },
 
   /**
@@ -14,17 +14,22 @@ Page({
   onLoad: function (options) {
 
   },
-tanchuang: function() {
-		this.setData({
-			style:'display:block'
-		})
-	},
-	quxiao1: function() {
-		this.setData({
-			style:'display:none'
-		})
+  detail(){
+    wx.navigateTo({
+      url: '../za-xinzeng-qyzsxq/z-xinzeng-qyzsxq',
+    })
   },
-  buquan(){
+  tanchuang: function () {
+    this.setData({
+      style: 'display:block'
+    })
+  },
+  quxiao1: function () {
+    this.setData({
+      style: 'display:none'
+    })
+  },
+  buquan() {
     wx.navigateTo({
       url: '../s-wodejianli/s-wodejianli',
     })

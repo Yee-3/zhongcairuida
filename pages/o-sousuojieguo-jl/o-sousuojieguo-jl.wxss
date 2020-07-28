@@ -157,8 +157,14 @@ page {
   width: 690rpx;
   margin: 0 auto;
   padding-bottom: 30rpx;
+  margin-top: 100rpx;
 }
-
+.loading-text{
+  /* display: block; */
+  padding-bottom: 20rpx;
+	text-align: center;
+	font-size: 26rpx;
+}
 .h_10 {
   width: 690rpx;
   box-shadow: 0 0 4px rgba(0, 0, 0, 0.1);

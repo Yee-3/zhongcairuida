@@ -52,6 +52,7 @@ Component({
     position2(){
       var add_f=this.data.isAdd_F
       this.setData({isAdd_F:!add_f})	  
+      this.triggerEvent("cancel");
     },
     confirm(){
       this.triggerEvent("confirm");

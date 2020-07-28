@@ -129,7 +129,7 @@
 </view>
 
 <view class="l_05">
-	<view class="h_10">
+	<view class="h_10" bindtap="detail">
 		<view class="h_11">
 			<view class="fl h_12">行政助理</view>
 			<view class="fr h_13">9K-13K</view>

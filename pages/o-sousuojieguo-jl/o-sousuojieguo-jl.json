@@ -5,5 +5,5 @@
     "zonghe": "../components/zonghe/zonghe",
     "more": "../components/gengduo/more"
   },
-  "navigationBarTitleText": "搜索结果页"
+  "navigationBarTitleText": "搜索结果"
 }

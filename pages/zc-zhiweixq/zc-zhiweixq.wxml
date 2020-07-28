@@ -19,12 +19,13 @@
 		</view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="z_03">
+	<view class="z_03" bindtap="detail">
 		<view class="z_04 fl"><image src="../img/f070.png"></image></view>
 		<view class="z_05 fl">
 			<view class="z_06">北京最美旋律音乐教育有限公司</view>
 			<view class="z_07"><p>500人以上</p><span>|</span><p>电子商务</p><span>|</span><p>民营公司</p></view>
 		</view>
+		<image src="../img/q074.png" style="width: 17rpx;height: 33rpx;line-height: 100rpx;margin-top: 40rpx;position: absolute;right: 30rpx"></image>
 	</view>
 </view>
 

@@ -711,7 +711,8 @@ white-space: nowrap;
 .loading-text{
   /* display: block; */
   padding-bottom: 20rpx;
-  text-align: center;
+	text-align: center;
+	font-size: 26rpx;
 }
 
 .mask2_top {

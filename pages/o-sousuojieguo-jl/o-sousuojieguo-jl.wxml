@@ -45,109 +45,35 @@
 				<image class="image" src="../img/f033.png" animation="{{animationMor}}" ></image>
 			</view>
 		</li>
-		<more id="more" bind:confirm="togMore" moneyList="{{moneyList}}" expList="{{expList}}"  codList="{{codList}}"></more>
+		<more id="more" bind:confirm="togMore" moneyList="{{moneyList}}" expList="{{expList}}" bind:cancel="{{moreCancel}}"  codList="{{codList}}"></more>
 	</ul>
 </view>
 
 <view class="l_05">
-	<view class="h_10">
+	<view class="h_10" wx:for="{{recomList}}">
 		<view class="h_11">
-			<view class="fl h_12">行政助理</view>
+			<view class="fl h_12">{{item.describe}}</view>
 			<view class="fr h_13">9K-13K</view>
 		</view>
 		<view class="h_14">
 			<view class="fl h_15">
-				<p>济南市市中区</p><span>|</span>
-				<p>经验不限</p><span>|</span>
-				<p>本科</p>
+				<p>{{item.cityName}}{{item.districtName}}</p><span>|</span>
+				<p>{{item.workExperienceName}}</p><span>|</span>
+				<p>{{item.schoolRecordName}}</p>
 			</view>
 			<view class="fr h_16">4天前</view>
 		</view>
 		<view class="h_17">
-			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
+		<span wx:for="{{item.welfareName}}" wx:for-index="ind" wx:for-item="ite">{{ite}}</span>
 		</view>
 		<view class="j_01">
 			<view class="j_02 fl">
-				<image src="../img/f031.png"></image>
+				<image src="{{item.companyLogo}}"></image>
 			</view>
-			<view class="j_03 fl">成都锦江思儿康诊所有限公司</view>
+			<view class="j_03 fl">{{item.companyName}}</view>
 			<view class="o_02 fr">距您2.4KM</view>
 			<view class="w-clear"></view>
 		</view>
 	</view>
-	<view class="h_10">
-		<view class="h_11">
-			<view class="fl h_12">行政助理</view>
-			<view class="fr h_13">9K-13K</view>
-		</view>
-		<view class="h_14">
-			<view class="fl h_15">
-				<p>济南市市中区</p><span>|</span>
-				<p>经验不限</p><span>|</span>
-				<p>本科</p>
-			</view>
-			<view class="fr h_16">4天前</view>
-		</view>
-		<view class="h_17">
-			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
-		</view>
-		<view class="j_01">
-			<view class="j_02 fl">
-				<image src="../img/f031.png"></image>
-			</view>
-			<view class="j_03 fl">成都锦江思儿康诊所有限公司</view>
-			<view class="o_02 fr">距您2.4KM</view>
-			<view class="w-clear"></view>
-		</view>
-	</view>
-	<view class="h_10">
-		<view class="h_11">
-			<view class="fl h_12">行政助理</view>
-			<view class="fr h_13">9K-13K</view>
-		</view>
-		<view class="h_14">
-			<view class="fl h_15">
-				<p>济南市市中区</p><span>|</span>
-				<p>经验不限</p><span>|</span>
-				<p>本科</p>
-			</view>
-			<view class="fr h_16">4天前</view>
-		</view>
-		<view class="h_17">
-			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
-		</view>
-		<view class="j_01">
-			<view class="j_02 fl">
-				<image src="../img/f031.png"></image>
-			</view>
-			<view class="j_03 fl">成都锦江思儿康诊所有限公司</view>
-			<view class="o_02 fr">距您2.4KM</view>
-			<view class="w-clear"></view>
-		</view>
-	</view>
-	<view class="h_10">
-		<view class="h_11">
-			<view class="fl h_12">行政助理</view>
-			<view class="fr h_13">9K-13K</view>
-		</view>
-		<view class="h_14">
-			<view class="fl h_15">
-				<p>济南市市中区</p><span>|</span>
-				<p>经验不限</p><span>|</span>
-				<p>本科</p>
-			</view>
-			<view class="fr h_16">4天前</view>
-		</view>
-		<view class="h_17">
-			<span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span>
-		</view>
-		<view class="j_01">
-			<view class="j_02 fl">
-				<image src="../img/f031.png"></image>
-			</view>
-			<view class="j_03 fl">成都锦江思儿康诊所有限公司</view>
-			<view class="o_02 fr">距您2.4KM</view>
-			<view class="w-clear"></view>
-		</view>
-	</view>
+
 </view>

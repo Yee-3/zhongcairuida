@@ -13,12 +13,20 @@ Page({
     animationMor: {},
     mapValue: '',
     app: getApp().globalData,
-    zhiList:[],
-    moneyList:[],
-    codList:[],
-    expList:[],
-    comList:[],
-    scaleList:[]
+    zhiList: [],
+    moneyList: [],
+    codList: [],
+    expList: [],
+    comList: [],
+    scaleList: [],
+    currentPage: 1,
+    loadingType: 0,
+    contentText: {
+      contentdown: "上拉显示更多",
+      contentrefresh: "正在加载...",
+      contentnomore: "没有更多数据了"
+    },
+    recomList:[]
 
   },
 
@@ -26,6 +34,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.zhiwei = this.selectComponent("#zhiwei");
     this.gongsi = this.selectComponent("#gongsi");
     this.zonghe = this.selectComponent("#zonghe");
@@ -42,72 +51,78 @@ Page({
         mapValue: cityOrTime.city
       })
     }
+    var data={
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+    }
+    this.reword(data)
     // 职位
     this.data.app.http({
-      url:'/selects/position',
-      dengl:true,
-      data:{},
-      success(res){
+      url: '/selects/position',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          zhiList:res.data.rdata[0].treeDTOS
+          zhiList: res.data.rdata[0].treeDTOS
         })
       }
     })
-       // 薪资
-       this.data.app.http({
-        url:'/selects/expect_money',
-        dengl:true,
-        data:{},
-        success(res){
-          that.setData({
-            moneyList:res.data.rdata
-          })
-        }
-      })
-      // 学历
-      this.data.app.http({
-        url:'/selects/school_record',
-        dengl:true,
-        data:{},
-        success(res){
-          that.setData({
-            codList:res.data.rdata
-          })
-        }
-      })
-      // 工作经验
-      this.data.app.http({
-        url:'/selects/work_exe',
-        dengl:true,
-        data:{},
-        success(res){
-          that.setData({
-            expList:res.data.rdata
-          })
-        }
-      })
-      // 公司性质
-      this.data.app.http({
-        url:'/selects/company_nature',
-        dengl:true,
-        data:{},
-        success(res){
-          that.setData({
-          comList:res.data.rdata
-          })
-        }
-      })
-      // 公司规模
-      this.data.app.http({
-        url:'/selects/company_num',
-        dengl:true,
-        data:{},
-        success(res){
-          that.setData({
-          scaleList:res.data.rdata
-          })
-        }
-      })
+    // 薪资
+    this.data.app.http({
+      url: '/selects/expect_money',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          moneyList: res.data.rdata
+        })
+      }
+    })
+    // 学历
+    this.data.app.http({
+      url: '/selects/school_record',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          codList: res.data.rdata
+        })
+      }
+    })
+    // 工作经验
+    this.data.app.http({
+      url: '/selects/work_exe',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          expList: res.data.rdata
+        })
+      }
+    })
+    // 公司性质
+    this.data.app.http({
+      url: '/selects/company_nature',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          comList: res.data.rdata
+        })
+      }
+    })
+    // 公司规模
+    this.data.app.http({
+      url: '/selects/company_num',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          scaleList: res.data.rdata
+        })
+      }
+    })
   },
   // 获取本地地址
   getLocation() {
@@ -261,6 +276,81 @@ Page({
   },
   togMore() {
     this.toggleMor()
+    var that = this,
+    ind5 = this.more.data.ind5 ? this.more.data.ind5 : '',
+    ind6 = this.more.data.ind6 ? this.more.data.ind6 : '',
+    ind7 = this.more.data.ind7 ? this.more.data.ind7 : '',
+    data={
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      money: ind5,
+      exe: ind6,
+      school: ind7
+    }
+    this.reword(data)
+  },
+  jiazai(data) {
+    var that = this
+    this.setData({
+      currentPage: that.data.currentPage + 1
+    })
+    if (this.data.loadingType != 0) {
+      //loadingType!=0;直接返回
+      return false;
+    }
+    this.setData({
+      loadingType: 1
+    })
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/index/getPosition',
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        console.log(res.data.rdata, 22222)
+        that.setData({
+          recomList: that.data.recomList.concat(res.data.rdata)
+        })
+        if (res.data.rdata.length < 1) {
+          that.setData({
+            loadingType: 2
+          })
+          wx.hideNavigationBarLoading()
+        } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
+        wx.hideNavigationBarLoading()
+      }
+    })
+  },
+  // 首页为你推荐
+  reword(data) {
+    var that=this
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/index/getPosition',
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          recomList: res.data.rdata
+        })
+
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

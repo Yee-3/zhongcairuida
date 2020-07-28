@@ -41,7 +41,7 @@ Page({
             duration: 2000
           });
           that.setData({
-            loadingType: 3
+            loadingType: 2
           })
         }
         wx.hideNavigationBarLoading();
