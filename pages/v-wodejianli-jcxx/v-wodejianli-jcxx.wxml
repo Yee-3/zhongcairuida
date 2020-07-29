@@ -8,7 +8,7 @@
 	<view class="v_03">
 		<view class="v_04">名字</view>
 		<view class="v_05">
-			<view class="v_06 fl"><input placeholder="请输入" /></view>
+			<view class="v_06 fl"><input placeholder="请输入" data-value="{{vulue}}" data-ty="1" bindblur="blur" value="{{name_value}}" /></view>
 			<view class="v_07 fr">
 				<image src="../img/f068.png"></image>
 			</view>
@@ -53,8 +53,8 @@
 		<view class="mar_top">
 			<view class="mar_title">性别</view>
 			<view class="mar_bot" style="padding:0">
-				<button class="{{six==1?'bot1':'bot'}}" data-index="1" bindtap="sixChange">男</button>
-				<button class="{{six==2?'bot1':'bot'}}" data-index="2" bindtap="sixChange">女</button>
+				<button class="{{six==0?'bot1':'bot'}}" data-index="0" bindtap="sixChange">男</button>
+				<button class="{{six==1?'bot1':'bot'}}" data-index="1" bindtap="sixChange">女</button>
 			</view>
 			<view class="but">
 				<button class="queren" size="mini" style="font-weight:normal;" bindtap="con1">确认</button>
@@ -117,7 +117,7 @@
 			<view class="v_06 fl">
 				<view class="section">
 					<!-- <picker value="{{index}}" range="{{array}}"> -->
-					<view class="picker"><input placeholder="请输入" /></view>
+					<view class="picker"><input placeholder="请输入" data-value="{{vulue}}" data-ty="2" bindblur="blur" value="{{home_value}}" /></view>
 					<!-- </picker> -->
 				</view>
 			</view>
@@ -161,7 +161,7 @@
 			<view class="v_06 fl">
 				<view class="section">
 					<!-- <picker value="{{index}}" range="{{array}}"> -->
-					<view class="picker"><input placeholder="请输入" /></view>
+					<view class="picker"><input placeholder="请输入" data-value="{{vulue}}" data-ty="3" bindblur="blur" value="{{money_value}}"  /></view>
 					<!-- </picker> -->
 				</view>
 			</view>
@@ -179,7 +179,7 @@
 			<view class="v_06 fl">
 				<view class="section">
 					<!-- <picker value="{{index}}" range="{{array}}"> -->
-					<view class="picker"><input placeholder="请输入" /></view>
+					<view class="picker"><input placeholder="请输入" data-value="{{vulue}}" data-ty="4" bindblur="blur" value="{{reg_value}}"  /></view>
 					<!-- </picker> -->
 				</view>
 			</view>
@@ -221,7 +221,7 @@
 	<view class="v_03">
 		<view class="v_04">手机号码</view>
 		<view class="v_05">
-			<view class="v_06 fl"><input placeholder="请输入" /></view>
+			<view class="v_06 fl"><input placeholder="请输入" data-value="{{vulue}}" data-ty="5" bindblur="blur" value="{{phone_value}}" /></view>
 			<view class="v_07 fr">
 				<image src="../img/f068.png"></image>
 			</view>
@@ -230,7 +230,7 @@
 	<view class="v_03">
 		<view class="v_04">常用邮箱</view>
 		<view class="v_05">
-			<view class="v_06 fl"><input placeholder="请输入" /></view>
+			<view class="v_06 fl"><input placeholder="请输入" data-value="{{vulue}}" data-ty="6" bindblur="blur" value="{{emil_value}}" /></view>
 			<view class="v_07 fr">
 				<image src="../img/f068.png"></image>
 			</view>
@@ -238,4 +238,4 @@
 	</view>
 </view>
 
-<view class="r_05">提交</view>
+<view class="r_05" bindtap="submit">提交</view>

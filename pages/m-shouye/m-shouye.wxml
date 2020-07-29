@@ -112,7 +112,7 @@
 					<button class="{{m_zong==2?'zong':'z'}}" data-index="2" bindtap="sixChange">最新发布优先</button>
 				</view>
 				<view class="m_bottom">
-					<button class="b_left" bindtap="position3">取消</button>
+					<button class="b_left" bindtap="cancel">{{zhCom?'取消':'清空'}}</button>
 					<button class="b_right" bindtap="confirm">确认</button>
 				</view>
 			</view>
@@ -157,7 +157,7 @@
 					</scroll-view>
 				</view>
 				<view class="m_bottom">
-					<button class="b_left" bindtap="position">取消</button>
+					<button class="b_left" bindtap="can">{{zwCom?'取消':'清空'}}</button>
 					<button class="b_right" bindtap="con">确认</button>
 				</view>
 			</view>
@@ -231,9 +231,9 @@
 	</view>
 
 	<view class="l_05">
-		<view class="h_10" bindtap="zhiDetail" wx:for="{{recomList}}">
+		<view class="h_10" bindtap="zhiDetail" data-id="{{item.id}}" wx:for="{{recomList}}">
 			<view class="h_11">
-				<view class="fl h_12">{{item.describe}}</view>
+				<view class="fl h_12">{{item.title}}</view>
 				<view class="fr h_13">{{item.moneyName}}</view>
 			</view>
 			<view class="h_14">
@@ -242,7 +242,7 @@
 					<p>{{item.workExperienceName}}</p><span>|</span>
 					<p>{{item.schoolRecordName}}</p>
 				</view>
-				<view class="fr h_16">4天前</view>
+				<view class="fr h_16">{{item.timeVal}}</view>
 			</view>
 			<view class="h_17">
 				<span wx:for="{{item.welfareName}}" wx:for-index="ind" wx:for-item="ite">{{ite}}</span>

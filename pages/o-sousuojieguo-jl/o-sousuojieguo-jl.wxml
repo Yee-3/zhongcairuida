@@ -15,7 +15,7 @@
 			<view class="top_e">
 				<image src="../img/f057.png"></image>
 			</view>
-			<view class="top_d"><input placeholder="搜索产品、商家或关键词" /></view>
+			<view class="top_d"><input placeholder="搜索产品、商家或关键词" value="{{name}}" data-value="{{value}}" bindblur="search"/></view>
 		</view>
 	</view>
 </view>
@@ -39,21 +39,21 @@
 				<image class="image" src="../img/f033.png" animation="{{animationSi}}"></image>
 			</view>
 		</li>
-		<gongsi id="gongsi" comList="{{comList}}" scaleList="{{scaleList}}"></gongsi>
+		<gongsi id="gongsi" comList="{{comList}}" scaleList="{{scaleList}}" bind:confirm="togCom" bind:cancel="comCancel"></gongsi>
 		<li style="width:23%" bindtap="toggleMor">
 			<view class="l_02">更多
 				<image class="image" src="../img/f033.png" animation="{{animationMor}}" ></image>
 			</view>
 		</li>
-		<more id="more" bind:confirm="togMore" moneyList="{{moneyList}}" expList="{{expList}}" bind:cancel="{{moreCancel}}"  codList="{{codList}}"></more>
+		<more id="more" bind:confirm="togMore" bind:cancel="moreCancel" moneyList="{{moneyList}}" expList="{{expList}}" codList="{{codList}}"></more>
 	</ul>
 </view>
 
 <view class="l_05">
 	<view class="h_10" wx:for="{{recomList}}">
 		<view class="h_11">
-			<view class="fl h_12">{{item.describe}}</view>
-			<view class="fr h_13">9K-13K</view>
+			<view class="fl h_12">{{item.title}}</view>
+			<view class="fr h_13">{{item.moneyName}}</view>
 		</view>
 		<view class="h_14">
 			<view class="fl h_15">
@@ -61,7 +61,7 @@
 				<p>{{item.workExperienceName}}</p><span>|</span>
 				<p>{{item.schoolRecordName}}</p>
 			</view>
-			<view class="fr h_16">4天前</view>
+			<view class="fr h_16">{{item.timeVal}}</view>
 		</view>
 		<view class="h_17">
 		<span wx:for="{{item.welfareName}}" wx:for-index="ind" wx:for-item="ite">{{ite}}</span>
@@ -74,6 +74,9 @@
 			<view class="o_02 fr">距您2.4KM</view>
 			<view class="w-clear"></view>
 		</view>
+	</view>
+	<view class="loading-text" wx:if="{{loadingType==0||loadingType==1}}">
+		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
 	</view>
 
 </view>

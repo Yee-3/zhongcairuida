@@ -35,11 +35,16 @@ Page({
     edu_index: '',
     mar_index: '',
     isYear: false,
-    yearValue:'请选择',
-    yearList:[],
-    year_time:'',
-year_index:''
-
+    yearValue: '请选择',
+    yearList: [],
+    year_time: '',
+    year_index: '',
+    name_value:'',
+    home_value:'',
+    money_value:'',
+    reg_value:'',
+    phone_value:'',
+    emil_value:''
   },
 
   /**
@@ -83,34 +88,97 @@ year_index:''
         })
       }
     })
-// 工作时间
-this.data.app.http({
-  url: '/selects/work_exe',
-  dengl: true,
-  data: {},
-  success(res) {
-    console.log(res)
-    that.setData({
-      yearList: res.data.rdata
+    // 工作时间
+    this.data.app.http({
+      url: '/selects/work_exe',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          yearList: res.data.rdata
+        })
+      }
     })
-  }
-})
+  },
+  blur(e) {
+    var type = e.currentTarget.dataset.ty,
+      that = this,
+      value = e.detail.value
+    if (type == 1) {
+      that.setData({
+        name_value: value
+      })
+    }
+    if (type == 2) {
+      that.setData({
+        home_value: value
+      })
+    }
+    if (type == 3) {
+      that.setData({
+        money_value: value
+      })
+    }
+    if (type == 4) {
+      that.setData({
+        reg_value: value
+      })
+    }
+    if (type == 5) {
+      that.setData({
+        phone_value: value
+      })
+    }
+    if (type == 6) {
+      that.setData({
+        emil_value: value
+      })
+    }
+  },
+  submit() {
+    var that = this,
+    date = this.data.date.substring(0, 4) + '-' + this.data.date.substring(5, 7) + '-' + this.data.date.substring(8, 10)
+    this.data.app.http({
+      url: '/resume/saveOrUpdateResumes',
+      dengl: true,
+      method: 'POST',
+      data: {
+        address:that.data.home_value,
+        time:date,
+        name:that.data.name_value,
+        phone:that.data.phone_value,
+        email:that.data.email_value,
+        money:that.data.money_value,
+        url:that.data.img,
+        status:that.spring.data.mar,
+        school:that.data.edu,
+        workTime:that.data.year_time,
+        marriage:that.data.mar,
+        sex:that.data.six
+
+
+      },
+      success(res) {
+        console.log(res)
+      }
+    })
   },
   // 参加工作时间
-  yearShow(){
+  yearShow() {
     var year = this.data.isYear
     var that = this
     this.setData({
       isYear: !year
     })
   },
-  toggle_year(e){
+  toggle_year(e) {
     this.setData({
       year_time: e.currentTarget.dataset.year,
       year_index: e.currentTarget.dataset.index
     })
   },
-  con_year(){
+  con_year() {
     this.yearShow()
     var that = this
     var index = this.data.year_index

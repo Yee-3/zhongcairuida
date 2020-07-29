@@ -22,7 +22,7 @@
 			</view>
 		</scroll-view>
 		<view class="m_bottom">
-			<button class="b_left" bindtap="cancle">不限</button>
+			<button class="b_left" bindtap="cancel">不限</button>
 			<button class="b_right" bindtap="confirm">确认</button>
 		</view>
 	</view>

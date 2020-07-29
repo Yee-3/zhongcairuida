@@ -63,9 +63,9 @@ App({
                 })
                 setTimeout(function () {
                   wx.navigateTo({
-                    // url: '/pages/enter/enter'
+                    url: '/pages/enter/enter'
                   })
-                }, 1600)
+                }, 1000)
               }
               obj.success(res)
             }

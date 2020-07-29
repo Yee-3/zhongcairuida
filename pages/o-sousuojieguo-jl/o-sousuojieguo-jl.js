@@ -26,8 +26,13 @@ Page({
       contentrefresh: "正在加载...",
       contentnomore: "没有更多数据了"
     },
-    recomList:[]
-
+    recomList: [],
+    morType: false,
+    gsType: false,
+    zhType: false,
+    location: '',
+    zwType: false,
+    name:''
   },
 
   /**
@@ -35,6 +40,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+   this.setData({
+     name:options.name
+   })
     this.zhiwei = this.selectComponent("#zhiwei");
     this.gongsi = this.selectComponent("#gongsi");
     this.zonghe = this.selectComponent("#zonghe");
@@ -50,11 +58,14 @@ Page({
       that.setData({
         mapValue: cityOrTime.city
       })
+
     }
-    var data={
+    var name=options.name?options.name:'',
+     data = {
       limit: 10,
       page: that.data.currentPage,
       type: 2,
+      name:name
     }
     this.reword(data)
     // 职位
@@ -124,18 +135,38 @@ Page({
       }
     })
   },
+  search(e){
+    console.log(e)
+    this.setData({
+      currentPage: 1,
+      name:e.detail.value
+    })
+    var name=this.data.name?this.data.name:'',
+    that=this,
+     data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      name:name
+    }
+    this.reword(data)
+  },
   // 获取本地地址
   getLocation() {
     let that = this;
     new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
+      var location = val.location
       var val = val.address_component.city
       // if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
       //   // console.log(val.indexOf('市') - 1);
       //   val = x.slice(0, x.indexOf('市'));
       // }
+      console.log(location)
       that.setData({
         mapValue: val,
+        location: location.lng + ',' + location.lat
       });
+      console.log(that.data.location)
       //把获取的定位和获取的时间放到本地存储
       wx.setStorageSync('locatecity', {
         city: val,
@@ -179,7 +210,23 @@ Page({
     }
   },
   tog() {
+    console.log('zhiwei')
     this.toggleZhi()
+    this.setData({
+      currentPage: 1,
+      zhType: true
+    })
+    var that = this,
+      id = this.zhiwei.data.id ? this.zhiwei.data.id : '',
+      name=this.data.name?this.data.name:'',
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        positionId: id,
+        name:name
+      }
+    this.reword(data)
   },
   toggleSi() {
     if (this.zhiwei.data.isAdd) {
@@ -241,9 +288,32 @@ Page({
   },
   togValue() {
     this.setData({
-      value: this.zonghe.data.value
+      value: this.zonghe.data.value,
+      currentPage: 1,
+      zhType: true
     })
     this.toggleZong()
+    var that = this,
+      ind = '',
+      address = '',
+      name=this.data.name?this.data.name:''
+    if (this.zonghe.data.ind == 1) {
+      ind = that.zonghe.data.ind
+    } else if (this.zonghe.data.ind == 2) {
+      ind = that.zonghe.data.ind
+    } else if (this.zonghe.data.ind == 3) {
+      address = that.data.location
+    }
+    var data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      sort: ind,
+      address: address,
+      name:name
+    }
+    console.log(address)
+    this.reword(data)
   },
   toggleMor() {
     if (this.zhiwei.data.isAdd) {
@@ -274,21 +344,130 @@ Page({
       })
     }
   },
+  // 公司筛选
+  togCom() {
+    this.toggleSi()
+    this.setData({
+      currentPage: 1,
+      gsType: true
+    })
+    var that = this,
+      ind3 = this.gongsi.data.ind3 ? this.gongsi.data.ind3 : '',
+      ind4 = this.gongsi.data.ind4 ? this.gongsi.data.ind4 : '',
+      name=this.data.name?this.data.name:'',
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        omNum: ind4,
+        comType: ind3,
+        name:name
+      }
+    this.reword(data)
+  },
+  comCancel() {
+    this.toggleSi()
+    this.setData({
+      currentPage: 1,
+      gsType: false,
+    })
+    var that = this,
+    name=this.data.name?this.data.name:'',
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        name:name
+      }
+    this.gongsi.setData({
+      ind4: '',
+      ind3: '',
+    })
+    this.reword(data)
+  },
+  // 更多筛选
   togMore() {
     this.toggleMor()
+    this.setData({
+      currentPage: 1,
+      morType: true
+    })
     var that = this,
-    ind5 = this.more.data.ind5 ? this.more.data.ind5 : '',
-    ind6 = this.more.data.ind6 ? this.more.data.ind6 : '',
-    ind7 = this.more.data.ind7 ? this.more.data.ind7 : '',
-    data={
-      limit: 10,
-      page: that.data.currentPage,
-      type: 2,
-      money: ind5,
-      exe: ind6,
-      school: ind7
-    }
+      ind5 = this.more.data.ind5 ? this.more.data.ind5 : '',
+      ind6 = this.more.data.ind6 ? this.more.data.ind6 : '',
+      ind7 = this.more.data.ind7 ? this.more.data.ind7 : '',
+      name=this.data.name?this.data.name:'',
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        money: ind5,
+        exe: ind6,
+        school: ind7,
+        name:name
+      }
     this.reword(data)
+  },
+  moreCancel() {
+    this.toggleMor()
+    this.setData({
+      currentPage: 1,
+      morType: false,
+    })
+    var that = this,
+    name=this.data.name?this.data.name:'',
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        name:name
+      }
+    this.more.setData({
+      ind5: '',
+      ind6: '',
+      ind7: '',
+    })
+    this.reword(data)
+  },
+  // 首页为你推荐
+  reword(data) {
+    var that = this
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/index/getPosition',
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        if(arr.length>0){
+        arr.map(function (val, i) {
+          var date1 = new Date(val.createTime.substring(0, 10))
+          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          val.timeVal=value
+        })
+      }
+        console.log(arr,88888)
+        console.log(res.data.rdata)
+        that.setData({
+          recomList: res.data.rdata
+        })
+
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
+      }
+    })
   },
   jiazai(data) {
     var that = this
@@ -313,7 +492,21 @@ Page({
         that.setData({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
-        if (res.data.rdata.length < 1) {
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        if(arr.length>0){
+        arr.map(function (val, i) {
+          var date1 = new Date(val.createTime.substring(0, 10))
+          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          val.timeVal=value
+        })
+      }
+        if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
           })
@@ -324,31 +517,6 @@ Page({
           })
         }
         wx.hideNavigationBarLoading()
-      }
-    })
-  },
-  // 首页为你推荐
-  reword(data) {
-    var that=this
-    wx.showNavigationBarLoading()
-    this.data.app.http({
-      url: '/index/getPosition',
-      dengl: true,
-      method: 'POST',
-      data: data,
-      success(res) {
-        console.log(res.data.rdata)
-        that.setData({
-          recomList: res.data.rdata
-        })
-
-        if (res.data.rdata.length < 10) {
-          that.setData({
-            loadingType: 2
-          })
-        }
-        wx.hideNavigationBarLoading();
-        wx.stopPullDownRefresh()
       }
     })
   },
@@ -391,6 +559,76 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var that = this
+    var ind5 = this.more.data.ind5 ? this.more.data.ind5 : '',
+      ind6 = this.more.data.ind6 ? this.more.data.ind6 : '',
+      ind7 = this.more.data.ind7 ? this.more.data.ind7 : '',
+      ind3 = this.gongsi.data.ind3 ? this.gongsi.data.ind3 : '',
+      ind4 = this.gongsi.data.ind4 ? this.gongsi.data.ind4 : '',
+      name=this.data.name?this.data.name:''
+    //  更多
+    if (this.data.morType) {
+      var data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        money: ind5,
+        exe: ind6,
+        school: ind7,
+        name:name
+      }
+      this.jiazai(data)
+      // 公司
+    } else if (this.data.gsType) {
+      var data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        omNum: ind4,
+        comType: ind3,
+        name:name
+      }
+      this.jiazai(data)
+    } else if (this.data.zhType) {
+      var that = this,
+        ind = '',
+        address = ''
+      if (that.zonghe.data.ind == 1) {
+        ind = that.zonghe.data.ind
+      } else if (that.zonghe.data.ind == 2) {
+        ind = that.zonghe.data.ind
+      } else if (that.zonghe.data.ind == 3) {
+        address = that.data.location
+      }
+      var data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        sort: ind,
+        address: address,
+        name:name
+      }
+    } else if (this.data.zhType) {
+      var that = this,
+        id = this.zhiwei.data.id ? this.zhiwei.data.id : '',
+        data = {
+          limit: 10,
+          page: that.data.currentPage,
+          type: 2,
+          positionId: id,
+          name:name
+        }
+      this.jiazai(data)
+    } else {
+      var data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        name:name
+      }
+      this.jiazai(data)
+    }
+
 
   },
 

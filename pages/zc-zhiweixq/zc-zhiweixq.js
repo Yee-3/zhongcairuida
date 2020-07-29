@@ -6,15 +6,37 @@ Page({
    */
   data: {
     style: 'display:none',
+    app: getApp().globalData,
+    detaCont: {},
+    isShow:true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    var that = this
+    this.data.app.http({
+      url: '/index/getPosition',
+      dengl: true,
+      method:'POST',
+      data: {
+        id: options.id,
+        limit:10,
+        page:1,
+        type:2
+      },
+      success(res) {
+        console.log(res)
+        that.setData({
+          detaCont: res.data.rdata[0]
+        })
+      }
+    })
 
   },
-  detail(){
+  detail() {
     wx.navigateTo({
       url: '../za-xinzeng-qyzsxq/z-xinzeng-qyzsxq',
     })
@@ -32,6 +54,11 @@ Page({
   buquan() {
     wx.navigateTo({
       url: '../s-wodejianli/s-wodejianli',
+    })
+  },
+  show(){
+    this.setData({
+      isShow:false
     })
   },
   /**

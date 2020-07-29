@@ -27,6 +27,7 @@ Component({
     ind1:'x',
     ind2:'x',
     ind3:'x',
+    id:''
   },
 
   /**
@@ -43,7 +44,10 @@ Component({
       this.setData({ ind1:e.currentTarget.dataset['index']})
     },
     toggle2(e){
-      this.setData({ ind2:e.currentTarget.dataset['index']})
+      this.setData({ 
+        ind2:e.currentTarget.dataset['index'],
+        id:e.currentTarget.dataset['id'],
+    })
       // this.position()
       this.triggerEvent("confirm");
     },

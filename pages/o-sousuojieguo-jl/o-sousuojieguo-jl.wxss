@@ -213,7 +213,7 @@ page {
 
 .h_17 {
   padding: 20rpx;
-  height: 48rpx;
+  /* height: 48rpx; */
 }
 
 .h_17 span {
@@ -222,6 +222,7 @@ page {
   background: #f5f5f5;
   padding: 10rpx;
   margin-right: 12rpx;
+  margin-bottom: 12rpx;
 }
 
 .j_01 {

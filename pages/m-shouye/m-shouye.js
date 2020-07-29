@@ -48,7 +48,10 @@ Page({
     recomList: [],
     selList: [],
     gsCom: true,
-    moCom: true
+    moCom: true,
+    id: '',
+    zwCom: true,
+    zhCom: true,
   },
 
   /**
@@ -72,10 +75,19 @@ Page({
       data: {},
       dengl: true,
       success(res) {
-        console.log(res)
         that.setData({
           imgList: res.data.rdata.ctrlBannerList,
           selList: res.data.rdata.ctrlSelects
+        })
+      }
+    })
+    this.data.app.http({
+      url: '/selects/position',
+      data: {},
+      dengl: true,
+      success(res) {
+        that.setData({
+          zhiList: res.data.rdata[0].treeDTOS
         })
       }
     })
@@ -91,20 +103,20 @@ Page({
         type: 1,
       },
       success(res) {
-        // function jiance(x) {
-        //   return x < 10 ? '0' + x : x
-        // }
-        // var arr = res.data.rdata,
-        // date1=''
-        // arr.map(function (val, i) {
-        //   console.log(val, i)
-        //     date1=val.createTime.substring(0,10)
-        // })
-        // var myDate = new Date()
-        // var date= myDate.getFullYear()+'-'+jiance((myDate.getMonth()+1))+'-'+jiance(myDate.getDate()); //获取完整的年份(4位,1970-????)
-        // var dat=parseInt(date)-parseInt(date1) 
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        arr.map(function (val, i) {
+          var date1 = new Date(val.createTime.substring(0, 10))
+          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          val.timeVal = value
+        })
         that.setData({
-          recomList: res.data.rdata
+          recomList: res.data.rdata,
         })
 
         if (res.data.rdata.length < 10) {
@@ -144,16 +156,19 @@ Page({
   },
   confirm() {
     this.position3()
-    var that = this
+    var that = this,
+      zong = this.data.m_zong ? this.data.m_zong : ''
     if (this.data.m_zong == 1) {
       this.setData({
         z_val: '综合排序',
-        currentPage: 1
+        currentPage: 1,
+        zhCom: false
       })
     } else {
       this.setData({
         z_val: '最新发布优先',
-        currentPage: 1
+        currentPage: 1,
+        zhCom: false
       })
     }
     this.data.app.http({
@@ -164,22 +179,88 @@ Page({
         limit: 10,
         page: that.data.currentPage,
         type: 1,
-        sort: that.data.m_zong
+        sort: zong
       },
       success(res) {
-        console.log(res.data.rdata)
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        arr.map(function (val, i) {
+          var date1 = new Date(val.createTime.substring(0, 10))
+          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          val.timeVal=value
+        })
         that.setData({
           recomList: res.data.rdata
         })
         if (res.data.rdata.length < 10) {
           that.setData({
-            loadingType: 2
+            loadingType: 2,
           })
         }
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
       }
     })
+  },
+  cancel() {
+    this.position3()
+    var that = this
+    if (!this.data.zhCom) {
+      this.setData({
+        m_zong: 1,
+        z_val: '综合排序',
+        currentPage: 1,
+        zhCom: true
+      })
+      this.data.app.http({
+        url: '/index/getPosition',
+        dengl: true,
+        method: 'POST',
+        data: {
+          limit: 10,
+          page: that.data.currentPage,
+          type: 1,
+          sort: ''
+        },
+        success(res) {
+          function jiance(x) {
+            return x < 10 ? '0' + x : x
+          }
+          var arr = res.data.rdata
+          var myDate = new Date()
+          arr.map(function (val, i) {
+            var date1 = new Date(val.createTime.substring(0, 10))
+            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            val.timeVal=value
+
+          })
+          that.setData({
+            recomList: res.data.rdata
+          })
+          if (res.data.rdata.length < 10) {
+            that.setData({
+              loadingType: 2
+            })
+          }
+          wx.hideNavigationBarLoading();
+          wx.stopPullDownRefresh()
+        }
+      })
+
+    } else {
+      this.setData({
+        m_zong: 1,
+        z_val: '综合排序',
+        currentPage: 1
+      })
+    }
   },
   search() {
     wx.navigateTo({
@@ -216,6 +297,7 @@ Page({
   toggle2(e) {
     this.setData({
       ind2: e.currentTarget.dataset['index'],
+      id: e.currentTarget.dataset['id'],
 
     })
   },
@@ -253,21 +335,10 @@ Page({
   position() {
     var add = this.data.isAdd
     var that = this
-    this.data.app.http({
-      url: '/selects/position',
-      data: {},
-      dengl: true,
-      success(res) {
-        that.setData({
-          isAdd: !add,
-          zhiList: res.data.rdata[0].treeDTOS
-        })
-        console.log(res.data.rdata)
-      }
+
+    this.setData({
+      isAdd: !add
     })
-    // this.setData({
-    //   isAdd: !add
-    // })
   },
   position1() {
     var that = this
@@ -348,9 +419,9 @@ Page({
       isTwo: !two
     })
   },
-  zhiDetail() {
+  zhiDetail(e) {
     wx.navigateTo({
-      url: '../zc-zhiweixq/zc-zhiweixq'
+      url: '../zc-zhiweixq/zc-zhiweixq?id='+e.currentTarget.dataset.id
     })
   },
   run() {
@@ -363,11 +434,14 @@ Page({
       url: '../b-dingweiq/b-dingwq?id=1',
     })
   },
+  // 职位确定/取消
   con() {
     this.position()
-    var that = this
+    var that = this,
+      id = this.data.id ? this.data.id : ''
     this.setData({
-      currentPage: 1
+      currentPage: 1,
+      zwCom: false
     })
     this.data.app.http({
       url: '/index/getPosition',
@@ -377,10 +451,21 @@ Page({
         limit: 10,
         page: that.data.currentPage,
         type: 1,
-        //  id:
+        positionId: id
       },
       success(res) {
-        console.log(res.data.rdata)
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        arr.map(function (val, i) {
+          var date1 = new Date(val.createTime.substring(0, 10))
+          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          val.timeVal=value
+        })
         that.setData({
           recomList: res.data.rdata
         })
@@ -393,6 +478,62 @@ Page({
         wx.stopPullDownRefresh()
       }
     })
+  },
+  can() {
+    this.position()
+    var that = this
+    if (!this.data.zwCom) {
+      this.setData({
+        currentPage: 1,
+        zwCom: true,
+        ind: 'x',
+        ind1: 'x',
+        ind2: 'x',
+        isTwo: false
+      })
+      this.data.app.http({
+        url: '/index/getPosition',
+        dengl: true,
+        method: 'POST',
+        data: {
+          limit: 10,
+          page: that.data.currentPage,
+          type: 1,
+          positionId: ''
+        },
+        success(res) {
+          function jiance(x) {
+            return x < 10 ? '0' + x : x
+          }
+          var arr = res.data.rdata
+          var myDate = new Date()
+          arr.map(function (val, i) {
+            var date1 = new Date(val.createTime.substring(0, 10))
+            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            val.timeVal=value
+          })
+          that.setData({
+            recomList: res.data.rdata
+          })
+          if (res.data.rdata.length < 10) {
+            that.setData({
+              loadingType: 2
+            })
+          }
+          wx.hideNavigationBarLoading();
+          wx.stopPullDownRefresh()
+        }
+      })
+    } else {
+      this.setData({
+        ind: 'x',
+        ind1: 'x',
+        ind2: 'x',
+        isTwo: false
+      })
+    }
   },
   // 公司取消/确定
   gs_cancel() {
@@ -417,7 +558,19 @@ Page({
           comType: '',
         },
         success(res) {
-          console.log(res.data.rdata)
+          function jiance(x) {
+            return x < 10 ? '0' + x : x
+          }
+          var arr = res.data.rdata
+          var myDate = new Date()
+          arr.map(function (val, i) {
+            var date1 = new Date(val.createTime.substring(0, 10))
+            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            val.timeVal = value
+
+          })
           that.setData({
             recomList: res.data.rdata
           })
@@ -458,7 +611,18 @@ Page({
         comType: ind3,
       },
       success(res) {
-        console.log(res.data.rdata)
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        arr.map(function (val, i) {
+          var date1 = new Date(val.createTime.substring(0, 10))
+          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          val.timeVal = value
+        })
         that.setData({
           recomList: res.data.rdata
         })
@@ -498,7 +662,18 @@ Page({
           school: ''
         },
         success(res) {
-          console.log(res.data.rdata)
+          function jiance(x) {
+            return x < 10 ? '0' + x : x
+          }
+          var arr = res.data.rdata
+          var myDate = new Date()
+          arr.map(function (val, i) {
+            var date1 = new Date(val.createTime.substring(0, 10))
+            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            val.timeVal = value
+          })
           that.setData({
             recomList: res.data.rdata
           })
@@ -542,7 +717,18 @@ Page({
         school: ind7
       },
       success(res) {
-        console.log(res.data.rdata)
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        arr.map(function (val, i) {
+          var date1 = new Date(val.createTime.substring(0, 10))
+          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          val.timeVal = value
+        })
         that.setData({
           recomList: res.data.rdata
         })
@@ -575,7 +761,18 @@ Page({
       method: 'POST',
       data: data,
       success(res) {
-        console.log(res.data.rdata, 22222)
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        arr.map(function (val, i) {
+          var date1 = new Date(val.createTime.substring(0, 10))
+          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          val.timeVal = value
+        })
         that.setData({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
@@ -633,11 +830,13 @@ Page({
    */
   onReachBottom: function () {
     var that = this,
-      ind4 = that.data.ind4 ? that.data.ind4 : '',
-      ind3 = that.data.ind3 ? that.data.ind3 : '',
-      ind5 = that.data.ind5 ? that.data.ind5 : '',
-      ind6 = that.data.ind6 ? that.data.ind6 : '',
-      ind7 = that.data.ind7 ? that.data.ind7 : ''
+      ind4 = this.data.ind4 ? this.data.ind4 : '',
+      ind3 = this.data.ind3 ? this.data.ind3 : '',
+      ind5 = this.data.ind5 ? this.data.ind5 : '',
+      ind6 = this.data.ind6 ? this.data.ind6 : '',
+      ind7 = this.data.ind7 ? this.data.ind7 : '',
+      id = this.data.id ? this.data.id : ''
+    //  更多上拉
     if (!this.data.moCom) {
       var dat = {
         limit: 10,
@@ -648,6 +847,7 @@ Page({
         school: ind7
       }
       this.jiazai(dat)
+      // 公司上拉
     } else if (!this.data.gsCom) {
       var dat = {
         limit: 10,
@@ -657,8 +857,19 @@ Page({
         comType: ind3,
       }
       this.jiazha(dat)
-    } else {
+    } else if (!this.data.zwCom) {
+      data = {
+        limit: 1,
+        page: that.data.currentPage,
+        type: 1,
+        positionId: id
+      }
+      this.jiazai(data)
+    } else if (!this.data.zhCom) {
+      data = {
 
+      }
+    } else {
       var dat = {
         limit: 10,
         page: that.data.currentPage,

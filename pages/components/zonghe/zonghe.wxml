@@ -7,11 +7,11 @@
 					综合排序
 					<image class="img1" wx:if="{{ind==1}}" src="../../img/icon_01.png"></image>
 				</view>
-				<view class="list" data-index='2' bindtap="toggleZ">距离排序
-					<image class="img1" wx:if="{{ind==2}}" src="../../img/icon_01.png"></image>
-				</view>
-				<view class="list" data-index='3' bindtap="toggleZ">最新发布优先
+				<view class="list" data-index='3' bindtap="toggleZ">距离排序
 					<image class="img1" wx:if="{{ind==3}}" src="../../img/icon_01.png"></image>
+				</view>
+				<view class="list" data-index='2' bindtap="toggleZ">最新发布优先
+					<image class="img1" wx:if="{{ind==2}}" src="../../img/icon_01.png"></image>
 				</view>
 			</view>
 		</view>

@@ -45,5 +45,11 @@ Component({
         ind4: e.currentTarget.dataset['index']
       })
     },
+    cancel() {
+      this.triggerEvent("cancel");
+    },
+    confirm() {
+      this.triggerEvent("confirm");
+    }
   }
 })

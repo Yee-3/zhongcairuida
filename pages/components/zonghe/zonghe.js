@@ -29,7 +29,7 @@ Component({
   methods: {
     toggleZong(){
       var con=this.data.isCon
-      this.setData({isCon:!con})
+      this.setData({isCon:!con,})
     },
     toggleZ(e){
       console.log(e)
@@ -42,11 +42,11 @@ Component({
          })
         }else if(this.data.ind==2){
           this.setData({
-            value:'距离排序'
+            value:'最新发布优先'
          })
         }else{
           this.setData({
-            value:'最新发布优先'
+            value:'距离排序'
          })
         }
         this.triggerEvent("confirm");

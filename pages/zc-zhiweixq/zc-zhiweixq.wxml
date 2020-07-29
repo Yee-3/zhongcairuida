@@ -1,29 +1,43 @@
 <view class="zc_01">
 	<view class="zc_02">
-		<view class="fl zc_03"><p>行政助理</p></view>
-		<view class="fl zc_05"><span>全职</span></view>
-		<view class="fr zc_04">5k-8k</view>
+		<view class="fl zc_03">
+			<p>{{detaCont.title}}</p>
+		</view>
+		<view class="fl zc_05"><span>{{detaCont.workTypeName}}</span></view>
+		<view class="fr zc_04">{{detaCont.moneyName}}</view>
 	</view>
 	<view class="zc_06">
 		<view class="fl zc_07">
-			<view class="fl zc_08"><image src="../img/f074.png"></image></view>
-			<view class="fl zc_09">北京市-昌平区</view>
+			<view class="fl zc_08">
+				<image src="../img/f074.png"></image>
+			</view>
+			<view class="fl zc_09">{{detaCont.cityName}}-{{detaCont.districtName}}</view>
 		</view>
 		<view class="fl zc_07">
-			<view class="fl zc_08"><image src="../img/f075.png"></image></view>
-			<view class="fl zc_09">本科以上</view>
+			<view class="fl zc_08">
+				<image src="../img/f075.png"></image>
+			</view>
+			<view class="fl zc_09">{{detaCont.schoolRecordName}}</view>
 		</view>
 		<view class="fl zc_07">
-			<view class="fl zc_08"><image src="../img/f076.png"></image></view>
-			<view class="fl zc_09">3年经验</view>
+			<view class="fl zc_08">
+				<image src="../img/f076.png"></image>
+			</view>
+			<view class="fl zc_09">{{detaCont.workExperienceName}}</view>
 		</view>
 		<view class="w-clear"></view>
 	</view>
 	<view class="z_03" bindtap="detail">
-		<view class="z_04 fl"><image src="../img/f070.png"></image></view>
+		<view class="z_04 fl">
+			<image src="{{detaCont.companyLogo}}"></image>
+		</view>
 		<view class="z_05 fl">
-			<view class="z_06">北京最美旋律音乐教育有限公司</view>
-			<view class="z_07"><p>500人以上</p><span>|</span><p>电子商务</p><span>|</span><p>民营公司</p></view>
+			<view class="z_06">{{detaCont.companyName}}</view>
+			<view class="z_07">
+				<p>{{detaCont.companyNum}}</p><span>|</span>
+				<p>{{detaCont.companyType}}</p><span>|</span>
+				<p>{{detaCont.companyNature}}</p>
+			</view>
 		</view>
 		<image src="../img/q074.png" style="width: 17rpx;height: 33rpx;line-height: 100rpx;margin-top: 40rpx;position: absolute;right: 30rpx"></image>
 	</view>
@@ -32,15 +46,12 @@
 <view class="zc_10">
 	<view class="zc_11">
 		<view class="zc_12 fl"></view>
-		<view class="zc_13 fl">职位优势</view>
+		<view class="zc_13 fl">职位福利</view>
 		<view class="zc_14 fl"></view>
 	</view>
 	<view class="zc_15">
 		<ul>
-			<li>周末双休</li>
-			<li>提供食宿</li>
-			<li>五险一金</li>
-			<li>绩效奖金</li>
+			<li wx:for="{{detaCont.welfareName}}">{{item}}</li>
 			<view class="w-clear"></view>
 		</ul>
 	</view>
@@ -48,51 +59,45 @@
 <view class="zc_10">
 	<view class="zc_11">
 		<view class="zc_12 fl"></view>
-		<view class="zc_13 fl">薪资福利</view>
+		<view class="zc_13 fl">工作职责</view>
 		<view class="zc_14 fl"></view>
 	</view>
-	<view class="zc_16">
-		<p>公司提供专业培训，培训完成即可上岗！</p>
-		<p>薪资结构：单量提成+年终奖+各类福利！</p>
-		<p>薪资说明：</p>
-		<p>1、综合薪资6000-10000元/月，工资稳定！</p>
-		<p>2、前60天有浮动底薪3500元！</p>
-		<p>3、年终奖：年底评审发放年终奖！</p>
-		<p>4、每一位员工都有平等的平台晋升发展空间...!</p>
+	<view class="{{isShow?'hide zc_16':'show zc_16'}}">
+		<p>{{detaCont.describe}}司尽快哈尽快核实的快俩舍得离开啊很快就来打手看来哈萨克漏接电话哎流口水对了卡上德鲁克啊是来看的话阿里昆山杜克俩手电力科技哈市</p>
 	</view>
-	<view class="zc_17">查看全部</view>
+	<view class="zc_17" wx:if="{{isShow}}" bindtap="show">查看全部</view>
 </view>
 
 <view class="zc_10">
 	<view class="zc_11">
 		<view class="zc_12 fl"></view>
-		<view class="zc_13 fl">职位描述</view>
+		<view class="zc_13 fl">任职要求</view>
 		<view class="zc_14 fl"></view>
 	</view>
 	<view class="zc_16">
-		<p>一、行政工作</p>
-		<p>1、员工差旅信息核对、员工公出信息登记、员工通讯录更新等；</p>
-		<p>2、办公用品和办公电器采购、入库及领用登记，档案、图书借阅登记，图书和杂志的订购和分发，订购饮用水、茶歇等，名片印制、更新，会议室使用登记；</p>
-		<p>3、公文系统收发文；</p>
-		<p>二、人事辅助类工作</p>
-		<p>1、邀约面试；</p>
-		<p>2、协助新员工入职事宜等；</p>
-		<p>三、文案工作</p>
-		<p>1、需要辅助完成会议纪要、汇报材料、工作规划、工作报告等文案的撰写、PPT初稿的完成等工作；</p>
+		<p>{{detaCont.requirements}}</p>
 	</view>
 </view>
 
 <view class="h_22">
-		<view class="h_23"><image src="../img/f073.png"></image></view>
-		<view class="h_24">
-			<view class="h_27">
-				<view class="h_26 fl"><image src="../img/f029.png"></image></view>
-				<view class="h_25 fl"><p>办公地点</p></view>
-			</view>
-			<view class="h_28">地址：北京市-昌平区南彩镇彩祥东路16号29幢1层1</view>
-		</view>
-		<view class="h_30"><image src="../img/f028.png"></image></view>
+	<view class="h_23">
+		<image src="../img/f073.png"></image>
 	</view>
+	<view class="h_24">
+		<view class="h_27">
+			<view class="h_26 fl">
+				<image src="../img/f029.png"></image>
+			</view>
+			<view class="h_25 fl">
+				<p>办公地点</p>
+			</view>
+		</view>
+		<view class="h_28">地址：{{detaCont.address}}</view>
+	</view>
+	<view class="h_30">
+		<image src="../img/f028.png"></image>
+	</view>
+</view>
 <view class="f_04">
 	<view class="f_05 fl">
 		<p>我要分享</p>
@@ -104,7 +109,9 @@
 
 <view class="f_08" style="{{style}}">
 	<view class="f_07">
-		<view class="zc_18"><image src="../img/f077.png"></image></view>
+		<view class="zc_18">
+			<image src="../img/f077.png"></image>
+		</view>
 		<view class="zc_19">
 			<view class="zc_20">
 				<p>您还没有补全简历</p>
