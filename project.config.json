@@ -59,7 +59,7 @@
 			"current": -1,
 			"list": [
 				{
-					"id": 0,
+					"id": -1,
 					"name": "pages/o-sousuojieguo-jl/o-sousuojieguo-jl",
 					"pathName": "pages/o-sousuojieguo-jl/o-sousuojieguo-jl",
 					"query": "",
@@ -67,22 +67,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/p-qiyeduan/p-qiyeduan",
-					"pathName": "pages/p-qiyeduan/p-qiyeduan",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/n-sousuo/n-sousuo",
-					"pathName": "pages/n-sousuo/n-sousuo",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
-					"pathName": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
+					"name": "pages/a-gangweifabu/a-gangweifabu",
+					"pathName": "pages/a-gangweifabu/a-gangweifabu",
 					"query": "",
 					"scene": null
 				}

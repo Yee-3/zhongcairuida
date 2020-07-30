@@ -11,8 +11,8 @@ Page({
     isAdd_F: false,
     isAdd_S: false,
     ind: 'x',
-    ind1: '',
-    ind2: '',
+    ind1: 'x',
+    ind2: 'x',
     ind3: '',
     ind4: '',
     ind5: '',
@@ -26,22 +26,42 @@ Page({
       }
     ],
     inda: 0,
-    m_zong: '1',
+    m_zong: 1,
     z_val: "综合排序",
     app: getApp().globalData,
-    zwList:[],
-    gxzList:[],
-    ggmList:[],
-    mnyList:[],
-    expList:[],
-    codList:[]
+    zwList: [],
+    gxzList: [],
+    ggmList: [],
+    mnyList: [],
+    expList: [],
+    codList: [],
+    currentPage: 1,
+    loadingType: 0,
+    contentText: {
+      contentdown: "上拉显示更多",
+      contentrefresh: "正在加载...",
+      contentnomore: "我也是有底线的~"
+    },
+    recomList: [],
+    gsCom: true,
+    moCom: true,
+    id: '',
+    zwCom: true,
+    zhCom: true,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that = this
+    var that = this,
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+      }
+    this.reword(data)
+    console.log(this.data.recomList)
     // 职位
     this.data.app.http({
       url: '/selects/position',
@@ -49,7 +69,7 @@ Page({
       data: {},
       success(res) {
         that.setData({
-          zwList:res.data.rdata[0].treeDTOS
+          zwList: res.data.rdata[0].treeDTOS
         })
       }
     })
@@ -60,7 +80,7 @@ Page({
       data: {},
       success(res) {
         that.setData({
-          gxzList:res.data.rdata
+          gxzList: res.data.rdata
         })
       }
     })
@@ -71,7 +91,7 @@ Page({
       data: {},
       success(res) {
         that.setData({
-          ggmList:res.data.rdata
+          ggmList: res.data.rdata
         })
       }
     })
@@ -82,7 +102,7 @@ Page({
       data: {},
       success(res) {
         that.setData({
-          mnyList:res.data.rdata
+          mnyList: res.data.rdata
         })
       }
     })
@@ -93,7 +113,7 @@ Page({
       data: {},
       success(res) {
         that.setData({
-          expList:res.data.rdata
+          expList: res.data.rdata
         })
       }
     })
@@ -104,8 +124,99 @@ Page({
       data: {},
       success(res) {
         that.setData({
-          codList:res.data.rdata
+          codList: res.data.rdata
         })
+      }
+    })
+  },
+  // 热门职位
+  reword(data) {
+    var that = this
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/index/getPosition',
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var date1 = new Date(val.createTime.substring(0, 10))
+            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            val.timeVal = value
+          })
+        }
+        console.log(res.data.rdata)
+        that.setData({
+          recomList: res.data.rdata
+        })
+
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+  jiazai(data) {
+    var that = this
+    this.setData({
+      currentPage: that.data.currentPage + 1
+    })
+    if (this.data.loadingType != 0) {
+      //loadingType!=0;直接返回
+      return false;
+    }
+    this.setData({
+      loadingType: 1
+    })
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/index/getPosition',
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        console.log(res.data.rdata, 22222)
+        that.setData({
+          recomList: that.data.recomList.concat(res.data.rdata)
+        })
+
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
+        var arr = res.data.rdata
+        var myDate = new Date()
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var date1 = new Date(val.createTime.substring(0, 10))
+            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            val.timeVal = value
+          })
+        }
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+          wx.hideNavigationBarLoading()
+        } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
+        wx.hideNavigationBarLoading()
       }
     })
   },
@@ -114,21 +225,189 @@ Page({
       m_zong: e.currentTarget.dataset.index
     })
   },
+  // 综合确定
   confirm() {
     this.position3()
     if (this.data.m_zong == 1) {
       this.setData({
-        z_val: '综合排序'
+        z_val: '综合排序',
+        currentPage: 1,
+        zhCom: false
       })
     } else {
       this.setData({
-        z_val: '最新发布优先'
+        z_val: '最新发布优先',
+        currentPage: 1,
+        zhCom: false
+      })
+    }
+    var that = this,
+      zong = this.data.m_zong ? this.data.m_zong : ''
+    var data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      sort: zong,
+    }
+    this.reword(data)
+
+  },
+  cancel() {
+    this.position3()
+    var that = this
+    if (!this.data.zhCom) {
+      this.setData({
+        m_zong: 1,
+        z_val: '综合排序',
+        currentPage: 1,
+        zhCom: true
+      })
+      var data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        sort: '',
+      }
+      this.reword(data)
+    } else {
+      this.setData({
+        m_zong: 1,
+        z_val: '综合排序',
+        currentPage: 1
       })
     }
   },
+  // 职位
+  zConfirm() {
+    this.position()
+    this.setData({
+      currentPage: 1,
+      zwCom: false
+    })
+    var that = this,
+      id = this.data.id ? this.data.id : '',
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        positionId: id,
+      }
+    this.reword(data)
+  },
+  zCancel() {
+    this.position()
+    var that = this
+    if (!this.data.zwCom) {
+      this.setData({
+        currentPage: 1,
+        zwCom: true,
+        ind: 'x',
+        ind1: 'x',
+        ind2: 'x',
+        isTwo: false
+      })
+      var data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        positionId: ''
+      }
+      this.reword(data)
+    }
+  },
+  // 公司
+  gsConfirm() {
+    this.position1()
+    this.setData({
+      currentPage: 1,
+      gsCom: false
+    })
+    var that = this,
+      ind3 = this.data.ind3 ? this.data.ind3 : '',
+      ind4 = this.data.ind4 ? this.data.ind4 : '',
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        omNum: ind4,
+        comType: ind3,
+      }
+    this.reword(data)
+  },
+  gsCancel() {
+    this.position1()
+    if (!this.data.gsCom) {
+      this.setData({
+        currentPage: 1,
+        gsCom: true,
+        ind3: '',
+        ind4: ''
+      })
+      var that = this,
+        data = {
+          limit: 10,
+          page: that.data.currentPage,
+          type: 2,
+        }
+      this.reword(data)
+    } else {
+      this.setData({
+        ind4: '',
+        ind3: '',
+      })
+    }
+  },
+  // 更多
+  moConfirm() {
+    this.position2()
+    this.setData({
+      currentPage: 1,
+      moCom: false
+    })
+    var that = this,
+      ind5 = this.data.ind5 ? this.data.ind5 : '',
+      ind6 = this.data.ind6 ? this.data.ind6 : '',
+      ind7 = this.data.ind7 ? this.data.ind7 : '',
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        money: ind5,
+        exe: ind6,
+        school: ind7,
+      }
+    this.reword(data)
+  },
+  moCancel() {
+    this.position2()
+    if (!this.data.moCom) {
+      this.setData({
+        currentPage: 1,
+        ind5: '',
+        ind6: '',
+        ind7: '',
+        moCom: true,
+      })
+      var that = this,
+        data = {
+          limit: 10,
+          page: that.data.currentPage,
+          type: 2,
+        }
+        this.reword(data)
+    }else{
+      this.setData({
+        ind5: '',
+        ind6: '',
+        ind7: ''
+      })
+    }
+  },
+  // 更多
   toggle(e) {
     this.setData({
       ind: e.currentTarget.dataset['index']
+
     })
     var two = this.data.isTwo
     this.setData({
@@ -142,7 +421,8 @@ Page({
   },
   toggle2(e) {
     this.setData({
-      ind2: e.currentTarget.dataset['index']
+      ind2: e.currentTarget.dataset['index'],
+      id: e.currentTarget.dataset['id']
     })
   },
   toggle3(e) {
@@ -207,9 +487,9 @@ Page({
       isTwo: !two
     })
   },
-  detail(){
+  detail(e) {
     wx.navigateTo({
-      url: '../zc-zhiweixq/zc-zhiweixq',
+      url: '../zc-zhiweixq/zc-zhiweixq?id='+e.currentTarget.dataset.id,
     })
   },
   /**
@@ -251,7 +531,58 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this,
+      ind4 = this.data.ind4 ? this.data.ind4 : '',
+      ind3 = this.data.ind3 ? this.data.ind3 : '',
+      ind5 = this.data.ind5 ? this.data.ind5 : '',
+      ind6 = this.data.ind6 ? this.data.ind6 : '',
+      ind7 = this.data.ind7 ? this.data.ind7 : '',
+      id = this.data.id ? this.data.id : '',
+      zong = this.data.m_zong ? this.data.m_zong : ''
+    //  更多上拉
+    if (!this.data.moCom) {
+      var dat = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        money: ind5,
+        exe: ind6,
+        school: ind7
+      }
+      this.jiazai(dat)
+      // 公司上拉
+    } else if (!this.data.gsCom) {
+      var dat = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        comNum: ind4,
+        comType: ind3,
+      }
+      this.jiazha(dat)
+    } else if (!this.data.zwCom) {
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        positionId: id
+      }
+      this.jiazai(data)
+    } else if (!this.data.zhCom) {
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        sort: zong
+      }
+    } else {
+      var dat = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+      }
+      this.jiazai(dat)
+    }
   },
 
   /**

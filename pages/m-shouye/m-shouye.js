@@ -835,7 +835,8 @@ Page({
       ind5 = this.data.ind5 ? this.data.ind5 : '',
       ind6 = this.data.ind6 ? this.data.ind6 : '',
       ind7 = this.data.ind7 ? this.data.ind7 : '',
-      id = this.data.id ? this.data.id : ''
+      id = this.data.id ? this.data.id : '',
+      zong = this.data.m_zong ? this.data.m_zong : ''
     //  更多上拉
     if (!this.data.moCom) {
       var dat = {
@@ -867,7 +868,10 @@ Page({
       this.jiazai(data)
     } else if (!this.data.zhCom) {
       data = {
-
+          limit: 10,
+          page: that.data.currentPage,
+          type: 1,
+          sort: zong
       }
     } else {
       var dat = {

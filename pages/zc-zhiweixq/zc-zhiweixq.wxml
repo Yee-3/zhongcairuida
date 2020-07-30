@@ -27,7 +27,7 @@
 		</view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="z_03" bindtap="detail">
+	<view class="z_03" bindtap="detail" data-comId="{{detaCont.companyId}}">
 		<view class="z_04 fl">
 			<image src="{{detaCont.companyLogo}}"></image>
 		</view>
@@ -63,7 +63,7 @@
 		<view class="zc_14 fl"></view>
 	</view>
 	<view class="{{isShow?'hide zc_16':'show zc_16'}}">
-		<p>{{detaCont.describe}}司尽快哈尽快核实的快俩舍得离开啊很快就来打手看来哈萨克漏接电话哎流口水对了卡上德鲁克啊是来看的话阿里昆山杜克俩手电力科技哈市</p>
+		<p class="content">{{detaCont.describe}}</p>
 	</view>
 	<view class="zc_17" wx:if="{{isShow}}" bindtap="show">查看全部</view>
 </view>
@@ -80,10 +80,13 @@
 </view>
 
 <view class="h_22">
-	<view class="h_23">
+	<!-- <view class="h_23">
 		<image src="../img/f073.png"></image>
+	</view> -->
+	<view class="map_container ">
+		<map class='map' longitude='{{longitude}}' latitude='{{latitude}}' scale='{{scale}}' markers='{{markers}}' controls="{{controls}}" bindcontroltap="bindcontroltap" polyline='{{polyline}}' circles="{{circles}}" bindmarkertap='bindmarkertap' bindcontroltap='bindcontroltap' show-location></map>
 	</view>
-	<view class="h_24">
+	<view class="h_24"  bindtap="onGuideTap" data-latitude='{{detaCont.latitude}}' data-longitude='{{detaCont.longitude}}' data-bankName='{{detaCont.address}}'>
 		<view class="h_27">
 			<view class="h_26 fl">
 				<image src="../img/f029.png"></image>
@@ -103,7 +106,7 @@
 		<p>我要分享</p>
 	</view>
 	<view class="f_06 fr" bindtap="tanchuang">
-		<p>我要报名</p>
+		<p>立即投递</p>
 	</view>
 </view>
 

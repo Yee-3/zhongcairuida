@@ -27,7 +27,7 @@
 		</view>
 	
 	</view>
-	<view class="loading-text" wx:if="{{loadingType === 0}}">
+	<view class="loading-text" wx:if="{{loadingType==0||loadingType==1}}">
 		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
 	</view>
 </view>

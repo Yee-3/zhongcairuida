@@ -50,7 +50,7 @@
 </view>
 
 <view class="l_05">
-	<view class="h_10" wx:for="{{recomList}}">
+	<view class="h_10" wx:for="{{recomList}}" bindtap="detail" data-id="{{item.id}}">
 		<view class="h_11">
 			<view class="fl h_12">{{item.title}}</view>
 			<view class="fr h_13">{{item.moneyName}}</view>
@@ -71,12 +71,12 @@
 				<image src="{{item.companyLogo}}"></image>
 			</view>
 			<view class="j_03 fl">{{item.companyName}}</view>
-			<view class="o_02 fr">距您2.4KM</view>
+			<view class="o_02 fr">距您{{item.distance}}KM</view>
 			<view class="w-clear"></view>
 		</view>
 	</view>
-	<view class="loading-text" wx:if="{{loadingType==0||loadingType==1}}">
-		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
-	</view>
 
 </view>
+	<view class="loading-text">
+		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
+	</view>

@@ -1,6 +1,6 @@
 <!--pages/b-dingwq/b-dingwq.wxml-->
 <view>
-<cityList bind:citytap='cityTap' showMap="{{showMap}}"></cityList>
+<cityList id="map" bind:citytap='cityTap' showMap="{{showMap}}"></cityList>
 </view>
 
 

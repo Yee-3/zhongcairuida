@@ -23,7 +23,8 @@ Page({
   },
   submit() {
     var that=this
-    this.data.app.http({
+    if(this.data.app.checkPhone(this.data.valueCon)){
+    that.data.app.http({
       url:'/resume/binding',
       dengl:true,
       method:'post',
@@ -49,6 +50,12 @@ Page({
         }
       }
     })
+  }else{
+    wx.showToast({
+      title: '请输入正确的手机号',
+      icon: 'none'
+    })
+  }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

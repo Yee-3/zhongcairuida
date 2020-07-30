@@ -46,7 +46,7 @@
 		<view class="a_02">您的期望薪资（月）是多少？</view>
 		<view class="a_03">
 			<ul>
-				<li class='{{num==index?"on":""}}' bindtap="active" wx:for="{{money}}" data-num='{{index}}'>
+				<li class='{{num==item.value?"on":""}}' bindtap="active" wx:for="{{money}}" data-num='{{item.value}}'>
 					<p>{{item.label}}</p>
 				</li>
 
@@ -58,7 +58,7 @@
 		<view class="a_02">类型</view>
 		<view class="a_05">
 			<ul>
-				<li class='{{indexs==index?"on":""}}' data-index='{{index}}' wx:for="{{work_type}}" bindtap="activeOne">
+				<li class='{{indexs==item.value?"on":""}}' data-index='{{item.value}}' wx:for="{{work_type}}" bindtap="activeOne">
 					<p>{{item.label}}</p>
 				</li>
 
@@ -89,7 +89,7 @@
 		<view class="a_02">您当前的求职状态</view>
 		<view class="a_07">
 			<ul>
-				<li class='{{num1==index?"on":""}}' data-num1='{{index}}' wx:for="{{status}}" bindtap="activeTwo">
+				<li class='{{num1==item.value?"on":""}}' data-num1='{{item.value}}' wx:for="{{status}}" bindtap="activeTwo">
 					<p>{{item.label}}</p>
 				</li>
 				<view class="w-clear"></view>
@@ -100,7 +100,7 @@
 		<view class="a_02">您可接受最快的到岗时间</view>
 		<view class="a_07">
 			<ul>
-				<li class="{{num2==index?'on':''}}" wx:for="{{work_time}}" data-num2='{{index}}' bindtap="activeThree">
+				<li class="{{num2==item.value?'on':''}}" wx:for="{{work_time}}" data-num2='{{item.value}}' bindtap="activeThree">
 					<p>{{item.label}}</p>
 				</li>
 				<view class="w-clear"></view>
@@ -110,13 +110,13 @@
 	<view class="a_04">
 		<view class="a_02">您的名字</view>
 		<view class="a_08">
-			<input placeholder="您的名称" />
+			<input placeholder="您的名称"  bindblur="name" data-value="{{value}}" value='{{nameValue}}'  />
 		</view>
 	</view>
 	<view class="a_04">
 		<view class="a_02">您的联系方式</view>
 		<view class="a_08">
-			<input placeholder="请输入手机号" />
+			<input placeholder="请输入手机号" bindblur="jiaoyan" data-value="{{value}}" value='{{phoneValue}}' />
 		</view>
 	</view>
 
@@ -134,7 +134,7 @@
 		</view>
 	</view>
 
-	<view class="a_14">
+	<view class="a_14" bindtap="submit">
 		<p>提交</p>
 	</view>
 </view>

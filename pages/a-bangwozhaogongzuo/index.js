@@ -4,39 +4,43 @@ Page({
   /**
    * 页面的初始数据
    */
-  
+
   data: {
-    ind: 0,
-    ind1: 0,
+    ind: 'x',
+    ind1: 'x',
     array: [1, 2, 3, 4],
     items: [{
       name: '',
       value: ''
     }, ],
     isAdd: false,
-    isTwo:false,
-    num: 0,
-    indexs: 0,
-    num1: 0,
-    num2: 0,
+    isTwo: false,
+    num: '',
+    indexs: '',
+    num1: '',
+    num2: '',
     classValue: '请选择',
-    mapValue:'请选择',
-    money:[],
-    status:[],
-    work_time:[],
-    work_type:[],
-    zhiList:[],
-    ind_three:0
+    mapValue: '请选择',
+    money: [],
+    status: [],
+    work_time: [],
+    work_type: [],
+    zhiList: [],
+    ind_three: 'x',
+    app: getApp().globalData,
+    phoneValue: '',
+    nameValue:'',
+    id:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var app=getApp().globalData
+    var app = getApp().globalData
     var that = this
     // 期望薪资
-   app.http({
+    app.http({
       url: '/selects/expect_money',
       dengl: true,
       data: {},
@@ -45,7 +49,7 @@ Page({
         that.setData({
           money: res.data.rdata
         })
-      } 
+      }
     })
     // 求职状态
     app.http({
@@ -55,9 +59,9 @@ Page({
       success(res) {
         console.log(res)
         that.setData({
-         status: res.data.rdata
+          status: res.data.rdata
         })
-      } 
+      }
     })
     // 职位
     app.http({
@@ -69,7 +73,7 @@ Page({
         that.setData({
           zhiList: res.data.rdata[0].treeDTOS
         })
-      } 
+      }
     })
     // 到岗时间
     app.http({
@@ -83,7 +87,7 @@ Page({
       }
     })
     // 类型
-  app.http({
+    app.http({
       url: '/selects/work_type',
       dengl: true,
       data: {},
@@ -95,70 +99,72 @@ Page({
       }
     })
   },
+  // 校验手机号
+  jiaoyan(e) {
+    console.log(e)
+    
+    if(!this.data.app.checkPhone(e.detail.value)){
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none'
+      })
+    }else{
+      this.setData({
+        phoneValue: e.detail.value
+      })
+    }
+   
+  },
   hide() {
     var two = this.data.isTwo
     this.setData({
       isTwo: !two
     })
-    if(!this.data.isTwo){
+    if (!this.data.isTwo) {
       this.setData({
-        ind1:0,
-        ind_three:0
+        ind1: 'x',
+        ind_three: 'x'
       })
     }
   },
   toggle(e) {
     var two = this.data.isTwo
-    var index = e.currentTarget.dataset['index'],
-    index2 = 0,
-    index3 = 0,
-    that = this
-    // console.log()
     this.setData({
       ind: e.currentTarget.dataset['index'],
       isTwo: !two,
-      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
     })
   },
   toggle1(e) {
-    var index = this.data.ind,
-    index2 =  e.currentTarget.dataset['index'],
-    index3 =0,
-    that = this
     this.setData({
       ind1: e.currentTarget.dataset['index'],
-      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+      ind_three:'x'
     })
   },
   toggle_three(e) {
-    var index = this.data.ind,
-    index2 = this.data.ind1,
-    index3 = e.currentTarget.dataset['index'],
-    that = this
     this.setData({
       ind_three: e.currentTarget.dataset['index'],
       posi_id: e.currentTarget.dataset['id'],
-      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
     })
   },
   // 确定
-  con_zhi() {
+  con_zhi(e) {
     this.zhiwei()
     var index = this.data.ind,
       index2 = this.data.ind1,
       index3 = this.data.ind_three,
       that = this
     this.setData({
-      classValue: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+      classValue: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name,
+      id:that.data.posi_id
     })
 
   },
-  confirm_zhi(){
+  confirm_zhi() {
     this.zhiwei()
     this.setData({
-      ind:0,
-      ind1:0,
-      ind_three:0   
+      ind: 0,
+      ind1: 0,
+      ind_three: 0
     })
   },
 
@@ -205,6 +211,33 @@ Page({
     console.log(this.data.classContent[index])
     this.setData({
       classValue: this.data.classContent[index].name
+    })
+  },
+  name(e){
+    this.setData({
+      nameValue: e.detail.value
+    })
+    console.log(this.data.nameValue)
+  },
+  submit(){
+    var that=this
+    this.data.app.http({
+      url:'/index/lookingWork',
+      dengl:true,
+      method:'POST',
+      data:{
+        address:that.data.mapValue?that.data.mapValue:'',
+        money:that.data.num?that.data.num:'',
+        name:that.data.nameValue?that.data.nameValue:'',
+        position:that.data.id?that.data.id:'',
+        status:that.data.num1?that.data.num1:'',
+        time:that.data.num2?that.data.num2:'',
+        workType:that.data.indexs?that.data.indexs:''
+      },
+      success(res){
+        console.log(res)
+
+      }
     })
   },
   /**

@@ -1,7 +1,7 @@
 <view class="s_01">
 	<view class="fl s_02">
 		<view class="q_03">
-			<view class="q_04 fl"><input value="{{resume.ctrlResumeDTO.name}}" placeholder="小明" /></view>
+			<view class="q_04 fl"><input value="{{resume.ctrlResumeDTO.name}}" placeholder="请输入姓名" /></view>
 			<view class="q_05 fl"><image src="../img/f050.png"></image></view>
 		</view>
 		<view class="q_06">

@@ -14,7 +14,8 @@ Page({
 		date: '',
 		name: '',
 		phone: '',
-		id: ''
+		id: '',
+		isBao:true
 	},
 
 	/**
@@ -61,25 +62,44 @@ Page({
 	},
 	submit() {
 		var that = this
-		this.data.app.http({
-			url: '/position/signUp',
-			dengl: true,
-			method: 'POST',
-			data: {
-				name: that.data.name,
-				phone: that.data.phone,
-				position: that.data.id
-			},
-			success(res) {
-				console.log(res)
-				if (res.data.code == 200) {
-					that.setData({
-						style: 'display:none',
-						xinxibaom: 'display:none',
-					})
+		if (this.data.app.checkPhone(this.data.phone)) {
+			that.data.app.http({
+				url: '/position/signUp',
+				dengl: true,
+				method: 'POST',
+				data: {
+					name: that.data.name,
+					phone: that.data.phone,
+					position: that.data.id
+				},
+				success(res) {
+					console.log(res)
+					if (res.data.code == 200) {
+						that.setData({
+							style: 'display:none',
+							xinxibaom: 'display:none',
+							isBao:false
+						})
+					}else{
+						that.setData({
+							style: 'display:none',
+							xinxibaom: 'display:none',
+							isBao:false
+						})
+						wx.showToast({
+							title: '您已报过名！',
+							icon: 'success',
+							duration: 2000,
+						})
+					}
 				}
-			}
-		})
+			})
+		} else {
+			wx.showToast({
+				title: '请输入正确的手机号',
+				icon: 'none'
+			})
+		}
 	},
 	tanchuang: function () {
 		this.setData({

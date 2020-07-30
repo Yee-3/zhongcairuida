@@ -24,7 +24,7 @@ Page({
     contentText: {
       contentdown: "上拉显示更多",
       contentrefresh: "正在加载...",
-      contentnomore: "没有更多数据了"
+      contentnomore: "我也是有底线的~"
     },
     recomList: [],
     morType: false,
@@ -32,7 +32,8 @@ Page({
     zhType: false,
     location: '',
     zwType: false,
-    name:''
+    name:'',
+    id_adre:''
   },
 
   /**
@@ -40,9 +41,11 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-   this.setData({
-     name:options.name
-   })
+    if(options.name){
+      this.setData({
+        name:options.name
+      })
+    }
     this.zhiwei = this.selectComponent("#zhiwei");
     this.gongsi = this.selectComponent("#gongsi");
     this.zonghe = this.selectComponent("#zonghe");
@@ -60,14 +63,31 @@ Page({
       })
 
     }
-    var name=options.name?options.name:'',
-     data = {
-      limit: 10,
-      page: that.data.currentPage,
-      type: 2,
-      name:name
-    }
-    this.reword(data)
+    wx.getLocation({
+      type: 'wgs84',
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          location:res.longitude + ',' + res.latitude
+        })
+        console.log(that.data.location)
+      },
+      fail: function (res) {
+        console.log(res);
+      }
+    })
+    setTimeout(function(){
+     var data = {
+       limit: 10,
+       page: that.data.currentPage,
+       type: 2,
+       name:that.data.name?that.data.name:'',
+       location:that.data.location?that.data.location:'',
+       address:that.data.id_adre?that.data.id_adre:''
+     }
+     that.reword(data)
+    },500)
+    
     // 职位
     this.data.app.http({
       url: '/selects/position',
@@ -151,6 +171,7 @@ Page({
     }
     this.reword(data)
   },
+
   // 获取本地地址
   getLocation() {
     let that = this;
@@ -161,12 +182,10 @@ Page({
       //   // console.log(val.indexOf('市') - 1);
       //   val = x.slice(0, x.indexOf('市'));
       // }
-      console.log(location)
       that.setData({
         mapValue: val,
         location: location.lng + ',' + location.lat
       });
-      console.log(that.data.location)
       //把获取的定位和获取的时间放到本地存储
       wx.setStorageSync('locatecity', {
         city: val,
@@ -309,7 +328,7 @@ Page({
       page: that.data.currentPage,
       type: 2,
       sort: ind,
-      address: address,
+      location: address,
       name:name
     }
     console.log(address)
@@ -407,6 +426,12 @@ Page({
         name:name
       }
     this.reword(data)
+  },
+  // 职位详情
+  detail(e) {
+    wx.navigateTo({
+      url: '../zc-zhiweixq/zc-zhiweixq?id='+e.currentTarget.dataset.id,
+    })
   },
   moreCancel() {
     this.toggleMor()
@@ -605,7 +630,7 @@ Page({
         page: that.data.currentPage,
         type: 2,
         sort: ind,
-        address: address,
+        location: address,
         name:name
       }
     } else if (this.data.zhType) {

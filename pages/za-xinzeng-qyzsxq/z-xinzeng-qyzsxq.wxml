@@ -1,36 +1,51 @@
 <view class="z_01">
-	<view class="z_02"><image src="../img/f069.png"></image></view>
+	<view class="z_02">
+		<image src="../img/f069.png"></image>
+	</view>
 	<view class="z_03">
-		<view class="z_04 fl"><image src="../img/f070.png"></image></view>
+		<view class="z_04 fl">
+			<image src="{{company.companyLogo}}"></image>
+		</view>
 		<view class="z_05 fl">
-			<view class="z_06">北京最美旋律音乐教育有限公司</view>
-			<view class="z_07"><p>500人以上</p><span>|</span><p>电子商务</p><span>|</span><p>民营公司</p></view>
+			<view class="z_06">{{company.companyName}}</view>
+			<view class="z_07">
+				<p>{{company.companyNumName}}</p><span>|</span>
+				<p>{{company.companyTypeName}}</p><span>|</span>
+				<p>{{company.companyNatureName}}</p>
+			</view>
 		</view>
 	</view>
 </view>
 
 <view class="">
 	<view class="g_13">
-		<view class="g_14 fl"><image src="../img/f071.png"></image></view>
-		<view class="g_15 fl"><p>公司描述</p></view>
+		<view class="g_14 fl">
+			<image src="../img/f071.png"></image>
+		</view>
+		<view class="g_15 fl">
+			<p>公司描述</p>
+		</view>
 	</view>
 	<view class="z_08">
-		北京最美旋律音乐教育有限公司成立于2010年是国内高端音乐艺考培训机构，专注音乐教育培训，艺术高考培训，开设音乐学、音乐表演、音乐教育、音乐作曲、指挥、音乐科技以及各专业方向，业务涵盖音乐高考艺考培训班(艺考声乐培训班)，音乐考研，附中考学等升学考试培训以及少儿声乐艺术,少儿舞蹈培训，成人音乐等兴趣音乐培训班。中音阶梯艺考培训中心秉承“以优授优，以专至全”的教育理念，中音阶梯声乐艺考培训学校打造全方位音乐艺考培训、立体声教学体系，致力于提供更专业、更全面、更优质的艺考生培训，高考艺考培训班，音乐教育，建立规模化、标准化、现代化的声乐培训机构及艺术培训学校。
+		{{company.companyDescribe}}
 	</view>
 </view>
 
 <view class="">
 	<view class="g_13">
-		<view class="g_14 fl"><image src="../img/f071.png"></image></view>
-		<view class="g_15 fl"><p>公司环境</p></view>
+		<view class="g_14 fl">
+			<image src="../img/f071.png"></image>
+		</view>
+		<view class="g_15 fl">
+			<p>公司环境</p>
+		</view>
 	</view>
 	<view class="z_09">
 		<ul>
-			<li><image src="../img/f072.png"></image></li>
-			<li><image src="../img/f072.png"></image></li>
-			<li><image src="../img/f072.png"></image></li>
-			<li><image src="../img/f072.png"></image></li>
-			<li><image src="../img/f072.png"></image></li>
+			<li wx:for="{{img}}">
+				<image src="{{item}}"></image>
+			</li>
+		
 			<view class="w-clear"></view>
 		</ul>
 	</view>
@@ -38,18 +53,31 @@
 
 <view class="">
 	<view class="g_13">
-		<view class="g_14 fl"><image src="../img/f071.png"></image></view>
-		<view class="g_15 fl"><p>公司地址</p></view>
+		<view class="g_14 fl">
+			<image src="../img/f071.png"></image>
+		</view>
+		<view class="g_15 fl">
+			<p>公司地址</p>
+		</view>
 	</view>
 	<view class="h_22">
-		<view class="h_23"><image src="../img/f073.png"></image></view>
-		<view class="h_24">
-			<view class="h_27">
-				<view class="h_26 fl"><image src="../img/f029.png"></image></view>
-				<view class="h_25 fl"><p>办公地点</p></view>
-			</view>
-			<view class="h_28">地址：北京市-昌平区南彩镇彩祥东路16号29幢1层1</view>
+		<!-- <view class="h_23"><image src="../img/f073.png"></image></view> -->
+		<view class="map_container ">
+			<map class='map' longitude='{{longitude}}' latitude='{{latitude}}' scale='{{scale}}' markers='{{markers}}' controls="{{controls}}" bindcontroltap="bindcontroltap" polyline='{{polyline}}' circles="{{circles}}" bindmarkertap='bindmarkertap' bindcontroltap='bindcontroltap' show-location></map>
 		</view>
-		<view class="h_30"><image src="../img/f028.png"></image></view>
+		<view class="h_24"  bindtap="onGuideTap" data-latitude='{{detaCont.latitude}}' data-longitude='{{detaCont.longitude}}' data-bankName='{{detaCont.address}}'>
+			<view class="h_27">
+				<view class="h_26 fl">
+					<image src="../img/f029.png"></image>
+				</view>
+				<view class="h_25 fl">
+					<p>办公地点</p>
+				</view>
+			</view>
+			<view class="h_28">地址：{{company.address}}</view>
+		</view>
+		<view class="h_30">
+			<image src="../img/f028.png"></image>
+		</view>
 	</view>
 </view>

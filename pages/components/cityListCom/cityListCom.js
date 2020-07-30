@@ -45,7 +45,8 @@ Component({
     hot2: '',
     loacteId: '',
     load2: 'national',
-    showMap: true
+    showMap: true,
+    ids:''
   },
 
   /**
@@ -98,12 +99,22 @@ Component({
 
     },
     cityTap(e) {
+      console.log(e)
       var types = e.currentTarget.dataset.types
       var val = e.currentTarget.dataset.val || '',
       // types = e.currentTarget.dataset.types || '',
       Index = e.currentTarget.dataset.index || '',
       that = this;
       var city = this.data.citySel;
+      if(types=='national'){
+        that.setData({
+          ids:that.data.loacteId
+        })
+      }else{
+        that.setData({
+          ids:e.target.dataset.index
+        })
+      }
       // 如果点击的是list
       if (this.data.showMap) {
         if (types == 'list') {
@@ -112,7 +123,7 @@ Component({
             idn: e.currentTarget.dataset.index,
             id: e.currentTarget.dataset.id,
             hot2: false,
-            load2: false
+            load2: false,
           })
           // 点击的是hot列表
         } else if (types == 'new') {
@@ -171,7 +182,6 @@ Component({
             cityname: city
           });
         } else {
-
           this.getLocate();
         }
       }
@@ -197,6 +207,7 @@ Component({
           locateCity: val,
           loacteId: id
         });
+        console.log(that.data.loacteId)
         //把获取的定位和获取的时间放到本地存储
         wx.setStorageSync('locatecity', {
           city: val,
