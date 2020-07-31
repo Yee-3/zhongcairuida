@@ -6,7 +6,7 @@ Page({
    */
   data: {
     winHeight: 0,
-    showMap:true,
+    showMap: true,
   },
 
   /**
@@ -18,14 +18,13 @@ Page({
     this.setData({
       winHeight: win.windowHeight
     });
-    console.log(options.id)
-    if(options.id==1){
+    if (options.id == 1) {
       this.setData({
-        showMap:false
+        showMap: false
       })
-    }else{
+    } else {
       this.setData({
-        showMap:true
+        showMap: true
       })
     }
 
@@ -33,27 +32,44 @@ Page({
   cityTap(e) {
     let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
     let prevPage = pages[pages.length - 2];
-    console.log(this.map.data.ids)
-var that=this
+    var that = this
     //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
-
-    prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
-      mapValue:e.detail.cityname,
-      id_adre:that.map.data.ids?that.map.data.ids:''
-    })
-
+    if (e.detail.location) {
+      prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+        mapValue: e.detail.cityname,
+        id_adre: that.map.data.ids ? that.map.data.ids : '',
+        location: e.detail.location.lng + ',' + e.detail.location.lat
+      })
+    } else {
+      prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
+        mapValue: e.detail.cityname,
+        id_adre: that.map.data.ids ? that.map.data.ids : '',
+      })
+    }
+    var that = this
     const cityName = e.detail.cityname;
-    console.log(e.detail.cityname)
     wx.navigateBack({
       success(res) {
         var page = getCurrentPages().pop();
         if (page == undefined || page == null) return;
-        page.onLoad();
+        if (that.map.data.ids) {
+          var data = {
+            limit: 10,
+            page: prevPage.data.currentPage,
+            type: 2,
+            name: prevPage.data.name ? prevPage.data.name : '',
+            location: prevPage.data.location ? prevPage.data.location : '',
+            address: prevPage.data.id_adre ? prevPage.data.id_adre : ''
+          }
+          prevPage.reword(data)
+        } else {
+          page.onLoad();
+        }
+        // delta = 1
       }
-      // delta: 1
     });
-    
-    
+
+
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

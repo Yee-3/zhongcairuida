@@ -13,7 +13,7 @@
 				</view>
 
 				<view class="new_city_box">
-					<view class="{{load2=='national'?'on':'new_city_text'}}" data-types='national' data-id="{{loacteId}}" catchtap='cityTap'>
+					<view class="{{load2=='national'?'on':'new_city_text'}}" data-types='national' data-id="{{loacteId}}" data-loca="{{item.location}}" catchtap='cityTap'>
 						<p>{{locateCity||'点击定位'}}</p>
 					</view>
 				</view>
@@ -34,7 +34,7 @@
 				</view>
 				<!-- <view class='new_city_title'>热门城市</view> -->
 				<view class='new_city_box'>
-					<text class="{{(hot==item.id&&hot2=='new')?'on':'new_city_text'}}" wx:for='{{newcity}}' wx:key='this' data-types='new' data-index='{{item.id}}' data-id="{{index}}" catchtap='cityTap' data-val='{{item.cityName}}'>{{item.cityName}}</text>
+					<text class="{{(hot==item.id&&hot2=='new')?'on':'new_city_text'}}" wx:for='{{newcity}}' wx:key='this' data-types='new' data-index='{{item.id}}' data-id="{{index}}" data-loca="{{item.location}}" catchtap='cityTap' data-val='{{item.cityName}}'>{{item.cityName}}</text>
 				</view>
 				<!-- 隐藏部分 -->
 				<view class="hidden"  wx:if="{{hot2=='new'}}">
@@ -46,7 +46,7 @@
 				<block wx:for='{{citylist}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
 					<view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
 					<view class="cityList">
-						<button size="mini" class="{{(item.id==idn&&idn_nu==letterItem.letter)?'active':'city_name'}}" style="font-size:28rpx;line-height:66rpx;" wx:for='{{letterItem.data}}' wx:key='this' catchtap='cityTap' data-index='{{item.id}}' data-types="list" data-nu="{{letterItem.letter}}" data-id="{{index}}" data-val='{{item.cityName}}'>{{item.cityName}}
+						<button size="mini" class="{{(item.id==idn&&idn_nu==letterItem.letter)?'active':'city_name'}}" style="font-size:28rpx;line-height:66rpx;" wx:for='{{letterItem.data}}' wx:key='this' data-loca="{{item.location.lat}}" catchtap='cityTap' data-index='{{item.id}}' data-types="list" data-nu="{{letterItem.letter}}" data-id="{{index}}" data-val='{{item.cityName}}'>{{item.cityName}}{{location.lat}}
 						</button>
 					</view>
 					<!-- 隐藏部分 -->

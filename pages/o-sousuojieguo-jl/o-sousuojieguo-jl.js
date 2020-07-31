@@ -32,8 +32,8 @@ Page({
     zhType: false,
     location: '',
     zwType: false,
-    name:'',
-    id_adre:''
+    name: '',
+    id_adre: ''
   },
 
   /**
@@ -41,9 +41,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    if(options.name){
+    if (options) {
       this.setData({
-        name:options.name
+        name: options.name
       })
     }
     this.zhiwei = this.selectComponent("#zhiwei");
@@ -68,7 +68,7 @@ Page({
       success: function (res) {
         console.log(res);
         that.setData({
-          location:res.longitude + ',' + res.latitude
+          location: res.longitude + ',' + res.latitude
         })
         console.log(that.data.location)
       },
@@ -76,18 +76,18 @@ Page({
         console.log(res);
       }
     })
-    setTimeout(function(){
-     var data = {
-       limit: 10,
-       page: that.data.currentPage,
-       type: 2,
-       name:that.data.name?that.data.name:'',
-       location:that.data.location?that.data.location:'',
-       address:that.data.id_adre?that.data.id_adre:''
-     }
-     that.reword(data)
-    },500)
-    
+    setTimeout(function () {
+      var data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        name: that.data.name ? that.data.name : '',
+        location: that.data.location ? that.data.location : '',
+        address: that.data.id_adre ? that.data.id_adre : ''
+      }
+      that.reword(data)
+    }, 500)
+
     // 职位
     this.data.app.http({
       url: '/selects/position',
@@ -155,20 +155,20 @@ Page({
       }
     })
   },
-  search(e){
+  search(e) {
     console.log(e)
     this.setData({
       currentPage: 1,
-      name:e.detail.value
+      name: e.detail.value
     })
-    var name=this.data.name?this.data.name:'',
-    that=this,
-     data = {
-      limit: 10,
-      page: that.data.currentPage,
-      type: 2,
-      name:name
-    }
+    var name = this.data.name ? this.data.name : '',
+      that = this,
+      data = {
+        limit: 10,
+        page: that.data.currentPage,
+        type: 2,
+        name: name
+      }
     this.reword(data)
   },
 
@@ -237,13 +237,13 @@ Page({
     })
     var that = this,
       id = this.zhiwei.data.id ? this.zhiwei.data.id : '',
-      name=this.data.name?this.data.name:'',
+      name = this.data.name ? this.data.name : '',
       data = {
         limit: 10,
         page: that.data.currentPage,
         type: 2,
         positionId: id,
-        name:name
+        name: name
       }
     this.reword(data)
   },
@@ -315,7 +315,7 @@ Page({
     var that = this,
       ind = '',
       address = '',
-      name=this.data.name?this.data.name:''
+      name = this.data.name ? this.data.name : ''
     if (this.zonghe.data.ind == 1) {
       ind = that.zonghe.data.ind
     } else if (this.zonghe.data.ind == 2) {
@@ -329,7 +329,7 @@ Page({
       type: 2,
       sort: ind,
       location: address,
-      name:name
+      name: name
     }
     console.log(address)
     this.reword(data)
@@ -373,14 +373,14 @@ Page({
     var that = this,
       ind3 = this.gongsi.data.ind3 ? this.gongsi.data.ind3 : '',
       ind4 = this.gongsi.data.ind4 ? this.gongsi.data.ind4 : '',
-      name=this.data.name?this.data.name:'',
+      name = this.data.name ? this.data.name : '',
       data = {
         limit: 10,
         page: that.data.currentPage,
         type: 2,
         omNum: ind4,
         comType: ind3,
-        name:name
+        name: name
       }
     this.reword(data)
   },
@@ -391,12 +391,12 @@ Page({
       gsType: false,
     })
     var that = this,
-    name=this.data.name?this.data.name:'',
+      name = this.data.name ? this.data.name : '',
       data = {
         limit: 10,
         page: that.data.currentPage,
         type: 2,
-        name:name
+        name: name
       }
     this.gongsi.setData({
       ind4: '',
@@ -415,7 +415,7 @@ Page({
       ind5 = this.more.data.ind5 ? this.more.data.ind5 : '',
       ind6 = this.more.data.ind6 ? this.more.data.ind6 : '',
       ind7 = this.more.data.ind7 ? this.more.data.ind7 : '',
-      name=this.data.name?this.data.name:'',
+      name = this.data.name ? this.data.name : '',
       data = {
         limit: 10,
         page: that.data.currentPage,
@@ -423,14 +423,14 @@ Page({
         money: ind5,
         exe: ind6,
         school: ind7,
-        name:name
+        name: name
       }
     this.reword(data)
   },
   // 职位详情
   detail(e) {
     wx.navigateTo({
-      url: '../zc-zhiweixq/zc-zhiweixq?id='+e.currentTarget.dataset.id,
+      url: '../zc-zhiweixq/zc-zhiweixq?id=' + e.currentTarget.dataset.id,
     })
   },
   moreCancel() {
@@ -440,12 +440,12 @@ Page({
       morType: false,
     })
     var that = this,
-    name=this.data.name?this.data.name:'',
+      name = this.data.name ? this.data.name : '',
       data = {
         limit: 10,
         page: that.data.currentPage,
         type: 2,
-        name:name
+        name: name
       }
     this.more.setData({
       ind5: '',
@@ -469,16 +469,16 @@ Page({
         }
         var arr = res.data.rdata
         var myDate = new Date()
-        if(arr.length>0){
-        arr.map(function (val, i) {
-          var date1 = new Date(val.createTime.substring(0, 10))
-          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-          val.timeVal=value
-        })
-      }
-        console.log(arr,88888)
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var date1 = new Date(val.createTime.substring(0, 10))
+            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            val.timeVal = value
+          })
+        }
+        console.log(arr, 88888)
         console.log(res.data.rdata)
         that.setData({
           recomList: res.data.rdata
@@ -517,20 +517,21 @@ Page({
         that.setData({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
+
         function jiance(x) {
           return x < 10 ? '0' + x : x
         }
         var arr = res.data.rdata
         var myDate = new Date()
-        if(arr.length>0){
-        arr.map(function (val, i) {
-          var date1 = new Date(val.createTime.substring(0, 10))
-          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-          val.timeVal=value
-        })
-      }
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var date1 = new Date(val.createTime.substring(0, 10))
+            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            val.timeVal = value
+          })
+        }
         if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
@@ -590,7 +591,7 @@ Page({
       ind7 = this.more.data.ind7 ? this.more.data.ind7 : '',
       ind3 = this.gongsi.data.ind3 ? this.gongsi.data.ind3 : '',
       ind4 = this.gongsi.data.ind4 ? this.gongsi.data.ind4 : '',
-      name=this.data.name?this.data.name:''
+      name = this.data.name ? this.data.name : ''
     //  更多
     if (this.data.morType) {
       var data = {
@@ -600,7 +601,7 @@ Page({
         money: ind5,
         exe: ind6,
         school: ind7,
-        name:name
+        name: name
       }
       this.jiazai(data)
       // 公司
@@ -611,7 +612,7 @@ Page({
         type: 2,
         omNum: ind4,
         comType: ind3,
-        name:name
+        name: name
       }
       this.jiazai(data)
     } else if (this.data.zhType) {
@@ -631,7 +632,7 @@ Page({
         type: 2,
         sort: ind,
         location: address,
-        name:name
+        name: name
       }
     } else if (this.data.zhType) {
       var that = this,
@@ -641,7 +642,7 @@ Page({
           page: that.data.currentPage,
           type: 2,
           positionId: id,
-          name:name
+          name: name
         }
       this.jiazai(data)
     } else {
@@ -649,7 +650,9 @@ Page({
         limit: 10,
         page: that.data.currentPage,
         type: 2,
-        name:name
+        name: name,
+        location: that.data.location ? that.data.location : '',
+        address: that.data.id_adre ? that.data.id_adre : ''
       }
       this.jiazai(data)
     }

@@ -46,7 +46,8 @@ Component({
     loacteId: '',
     load2: 'national',
     showMap: true,
-    ids:''
+    ids: '',
+    location: {}
   },
 
   /**
@@ -62,12 +63,12 @@ Component({
       var city = this.data.citySel;
       var index = e.currentTarget.dataset.index
       switch (types) {
-          case 'national':
-            //全国  
-            that.setData({
-              idn3: index
-            })
-            city = val;
+        case 'national':
+          //全国  
+          that.setData({
+            idn3: index
+          })
+          city = val;
           break;
         case 'new':
           //热门城市
@@ -99,20 +100,19 @@ Component({
 
     },
     cityTap(e) {
-      console.log(e)
       var types = e.currentTarget.dataset.types
       var val = e.currentTarget.dataset.val || '',
-      // types = e.currentTarget.dataset.types || '',
-      Index = e.currentTarget.dataset.index || '',
-      that = this;
+        // types = e.currentTarget.dataset.types || '',
+        Index = e.currentTarget.dataset.index || '',
+        that = this;
       var city = this.data.citySel;
-      if(types=='national'){
+      if (types == 'national') {
         that.setData({
-          ids:that.data.loacteId
+          ids: that.data.loacteId,
         })
-      }else{
+      } else {
         that.setData({
-          ids:e.target.dataset.index
+          ids: e.target.dataset.index
         })
       }
       // 如果点击的是list
@@ -134,7 +134,7 @@ Component({
             idn_nu: false,
             load2: false,
           })
-        } else if (types=='national'){
+        } else if (types == 'national') {
           that.getLocate()
           that.setData({
             load2: e.currentTarget.dataset.types,
@@ -147,29 +147,34 @@ Component({
           case 'locate':
             //定位内容
             break;
-            case 'national':
-              //全国
-              that.getLocate()
-              that.setData({
-                load2: e.currentTarget.dataset.types,
-              })
-              city = this.data.locateCity;
+          case 'national':
+            //全国
+            that.getLocate()
+            that.setData({
+              load2: e.currentTarget.dataset.types,
+            })
+            city = this.data.locateCity;
+            // location=this.data
             break;
           case 'new':
             //热门城市
             that.setData({
               hot2: e.currentTarget.dataset.types,
               hot: e.currentTarget.dataset.index,
+              location: e.target.dataset.loca,
             })
             city = val;
-            break;
+            location =that.data.location;
+              break;
           case 'list':
             //城市列表
             that.setData({
               idn_nu: e.currentTarget.dataset.nu,
               idn: e.currentTarget.dataset.index,
+              location: e.target.dataset.loca,
             })
             city = val;
+            location =that.data.location;
             break;
         }
         if (city) {
@@ -179,7 +184,8 @@ Component({
           })
           //点击后给父组件可以通过bindcitytap事件，获取到cityname的值，这是子组件给父组件传值和触发事件的方法
           this.triggerEvent('citytap', {
-            cityname: city
+            cityname: city,
+            location: location
           });
         } else {
           this.getLocate();
@@ -199,15 +205,17 @@ Component({
       new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
         var x = val.address_component.city
         var id = val.ad_info.adcode
+        that.setData({
+          location: val.location
+        })
         if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
           // console.log(val.indexOf('市') - 1);
           val = x.slice(0, x.indexOf('市'));
         }
         that.setData({
           locateCity: val,
-          loacteId: id
+          loacteId: id,
         });
-        console.log(that.data.loacteId)
         //把获取的定位和获取的时间放到本地存储
         wx.setStorageSync('locatecity', {
           city: val,
@@ -277,6 +285,7 @@ Component({
           da.id = cityList[j].id
           da.cityName = cityList[j].name
           da.data = datas
+          da.location = cityList[j].location
           for (var x = 0; x < city_qu.length; x++) {
             var qu = {}
             qu.id = city_qu[x].id

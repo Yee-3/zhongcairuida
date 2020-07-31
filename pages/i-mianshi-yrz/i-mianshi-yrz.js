@@ -27,6 +27,13 @@ Page({
 		},
 		recomList: [],
 		app: getApp().globalData,
+		rea_value: '',
+		deta_value: '',
+
+		latitude: "",
+    longitude: "",
+    scale: 14,
+    markers: [],
 	},
 
 	/**
@@ -35,12 +42,52 @@ Page({
 	onLoad: function (options) {
 		var data = {
 			limit: 10,
-			page: 1,
+			page: this.data.currentPage,
 			type: 2,
-			signUp: 'Y'
+			// signUp: 'Y'
 		}
 		this.reword(data)
+		var that = this
+    //获取当前的地理位置、速度
+    // 获取当前位置地图
+    wx.getLocation({
+      type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
+      success: function (res) {
+        //赋值经纬度
+        that.setData({
+          latitude: res.latitude,
+          longitude: res.longitude,
+ 
+        })
+      }
+    })
 	},
+	bindcontroltap(e) {
+    var that = this;
+    if (e.controlId == 1) {
+      that.setData({
+        latitude: this.data.latitude,
+        longitude: this.data.longitude,
+        scale: 15,
+      })
+    }
+  },
+  //导航
+  onGuideTap: function (event) {
+    var lat = Number(event.currentTarget.dataset.latitude);
+    var lon = Number(event.currentTarget.dataset.longitude);
+    var bankName = event.currentTarget.dataset.bankname;
+    console.log(lat);
+    console.log(lon);
+    wx.openLocation({
+      type: 'gcj02',
+      latitude: lat,
+      longitude: lon,
+      name: bankName,
+      scale: 28
+    })
+  },
+
 	reword(data) {
 		var that = this
 		wx.showNavigationBarLoading()
@@ -143,6 +190,7 @@ Page({
 		})
 	},
 	getDate: function (e) {
+		console.log(e)
 		if (e.detail.text == '面试时间不合适') {
 			this.setData({
 				value: '请您写下您觉得合适的面试时间（不少于三个）',
@@ -159,13 +207,121 @@ Page({
 	toggleTitle(e) {
 		// console.log(e)
 		this.setData({
-			idn: e.currentTarget.dataset.index
+			idn: e.currentTarget.dataset.index,
+			ind: 1
 		})
+		var that = this
+		if (e.currentTarget.dataset.index == 1) {
+			that.setData({
+				currentPage: 1
+			})
+			var data = {
+				limit: 10,
+				page: that.data.currentPage,
+				type: 2,
+				// signUp: 'Y'
+			}
+			this.reword(data)
+		} else if (e.currentTarget.dataset.index == 2) {
+			that.setData({
+				currentPage: 1
+			})
+			var data = {
+				limit: 10,
+				page: that.data.currentPage,
+				type: 2,
+				interview: 'P'
+			}
+			this.reword(data)
+		} else {
+			that.setData({
+				currentPage: 1
+			})
+			var data = {
+				limit: 10,
+				page:that.data.currentPage,
+				type: 2,
+				entry: 'P'
+			}
+			this.reword(data)
+		}
 	},
 	toggleType(e) {
 		this.setData({
 			ind: e.currentTarget.dataset.index
 		})
+		var that = this
+		if (this.data.idn == 2) {
+			if (e.currentTarget.dataset.index == 1) {
+				that.setData({
+					currentPage: 1
+				})
+				var data = {
+					limit: 10,
+					page: that.data.currentPage,
+					type: 2,
+					interview: 'P'
+				}
+				this.reword(data)
+			} else if (e.currentTarget.dataset.index == 2) {
+				that.setData({
+					currentPage: 1
+				})
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					interview: 'Y'
+				}
+				this.reword(data)
+			} else {
+				that.setData({
+					currentPage: 1
+				})
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					interview: 'N'
+				}
+				this.reword(data)
+			}
+		} else if (this.data.idn == 3) {
+			if (e.currentTarget.dataset.index == 1) {
+				that.setData({
+					currentPage: 1
+				})
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					entry: 'P'
+				}
+				this.reword(data)
+			} else if (e.currentTarget.dataset.index == 2) {
+				that.setData({
+					currentPage: 1
+				})
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					entry: 'Y'
+				}
+				this.reword(data)
+			} else {
+				that.setData({
+					currentPage: 1
+				})
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					entry: 'N'
+				}
+				this.reword(data)
+			}
+		}
 	},
 	toggleRu(e) {
 		this.setData({
@@ -211,7 +367,70 @@ Page({
 	 * 页面上拉触底事件的处理函数
 	 */
 	onReachBottom: function () {
-
+		var that = this,
+			idn = this.data.idn,
+			ind = this.data.ind
+		if (idn == 1) {
+			var data = {
+				limit: 10,
+				page:that.data.currentPage,
+				type: 2,
+				// signUp: 'Y'
+			}
+			this.reword(data)
+		} else if (idn == 2) {
+			if (ind == 1) {
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					interview: 'P'
+				}
+				this.reword(data)
+			} else if (ind == 2) {
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					interview: 'Y'
+				}
+				this.reword(data)
+			} else {
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					interview: 'N'
+				}
+				this.reword(data)
+			}
+		} else {
+			if (ind == 1) {
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					entry: 'P'
+				}
+				this.reword(data)
+			} else if (ind == 2) {
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					entry: 'Y'
+				}
+				this.reword(data)
+			} else {
+				var data = {
+					limit: 10,
+					page:that.data.currentPage,
+					type: 2,
+					entry: 'N'
+				}
+				this.reword(data)
+			}
+		}
 	},
 
 	/**
