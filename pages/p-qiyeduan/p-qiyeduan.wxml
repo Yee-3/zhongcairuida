@@ -25,7 +25,7 @@
 
 <view class="p_01"><image src="../img/q073.png"></image></view>
 
-<view class="p_02">
+<view class="p_02" bindtap="more">
 	<view class="p_03">
 		<view class="g_13 fl">
 			<view class="g_14 fl"></view>

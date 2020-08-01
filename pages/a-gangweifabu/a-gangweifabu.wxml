@@ -17,7 +17,7 @@
 			<p>招聘人数</p>
 		</view>
 		<view class="fr a_04">
-			<input placeholder="请输入" />
+			<input placeholder="请输入" value="{{numValue}}" data-value="{{value}}" bindblur="blur" data-ty="1" />
 		</view>
 	</view>
 	<view class="a_02">
@@ -80,7 +80,7 @@
 		</view>
 		<view class="fr a_04">
 			<view class="section">
-				<input placeholder="请输入" />
+				<input placeholder="请输入" value="{{mapValue}}" data-value="{{value}}" bindblur="blur" data-ty="2" />
 			</view>
 		</view>
 	</view>
@@ -89,7 +89,7 @@
 			<p>工作职责</p>
 		</view>
 		<view class="a_05">
-			<textarea placeholder="请输入"></textarea>
+			<textarea placeholder="请输入" value="{{workValue}}" data-value="{{value}}" bindblur="blur" data-ty="3" ></textarea>
 		</view>
 	</view>
 	<view class="a_06">
@@ -97,7 +97,7 @@
 			<p>任职要求</p>
 		</view>
 		<view class="a_05">
-			<textarea style="height:200rpx" placeholder="请输入"></textarea>
+			<textarea style="height:200rpx" placeholder="请输入" value="{{yqValue}}" data-value="{{value}}" bindblur="blur" data-ty="4" ></textarea>
 		</view>
 	</view>
 	<view class="a_07">
@@ -126,7 +126,7 @@
 			<p>薪资结构</p>
 		</view>
 		<view class="a_05">
-			<textarea placeholder="请输入"></textarea>
+			<textarea placeholder="请输入" value="{{moneyValue}}" data-value="{{value}}" bindblur="blur" data-ty="5" ></textarea>
 		</view>
 	</view>
 	<view class="a_09">

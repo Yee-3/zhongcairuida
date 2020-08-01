@@ -14,32 +14,37 @@ Page({
   onLoad: function (options) {
     this.tab = this.selectComponent("#tab");
   },
-person(){
-  wx.navigateTo({
-    url: '../d-hailiangrencai/d-hailiangrencai',
-  })
-},
-resume(){
-  wx.navigateTo({
-    url: '../e-jinzhunjianli/e-jinzhunjianli',
-  })
-},
-entry(){
-  wx.navigateTo({
-    url: '../d-hailiangrencai/d-hailiangrencai?id='+1,
-  })
-},
-detail(){
-  wx.navigateTo({
-    url: '../f-jinzhunjianlixq/f-jinzhunjianlixq',
-  })
-},
-qyRen(){
-  wx.navigateTo({
-    url: '../m-qiyezhuce/m-qiyezhuce',
-  })
-},
-showTab(){},
+  more(){
+    wx.navigateTo({
+      url: '../d-hailiangrencai/d-hailiangrencai?id=2',
+    })
+  },
+  person() {
+    wx.navigateTo({
+      url: '../d-hailiangrencai/d-hailiangrencai',
+    })
+  },
+  resume() {
+    wx.navigateTo({
+      url: '../e-jinzhunjianli/e-jinzhunjianli',
+    })
+  },
+  entry() {
+    wx.navigateTo({
+      url: '../d-hailiangrencai/d-hailiangrencai?id=' + 1,
+    })
+  },
+  detail() {
+    wx.navigateTo({
+      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq',
+    })
+  },
+  qyRen() {
+    wx.navigateTo({
+      url: '../m-qiyezhuce/m-qiyezhuce',
+    })
+  },
+  showTab() {},
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

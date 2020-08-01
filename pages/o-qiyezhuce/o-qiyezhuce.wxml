@@ -39,7 +39,7 @@
 			</view>
 		</view>
 	</view>
-	<spring id="cls" title="行业类别" confirmText="确定" cancelText="取消" style="{{style}}" content="{{natureContent}}" bind:cancel="handleCancel" bind:confirm="handleConfirm">
+	<spring id="cls" title="行业类别" confirmText="确定" cancelText="取消" style="{{style}}" content="{{classContent}}" bind:cancel="handleCancel" bind:confirm="handleConfirm">
 	</spring>
 	<view class="a_02">
 		<view class="fl a_03"><em>*</em>
@@ -86,7 +86,7 @@
 			</view>
 		</view>
 	</view>
-	<spring id="scale" title="企业规模" confirmText="确定" cancelText="取消" style="{{style}}" content="{{natureContent}}" bind:cancel="handleCancel" bind:confirm="handleConfirm">
+	<spring id="scale" title="企业规模" confirmText="确定" cancelText="取消" style="{{style}}" content="{{numContent}}" bind:cancel="handleCancel" bind:confirm="handleConfirm">
 	</spring>
 	<view class="a_02">
 		<view class="fl a_03"><em>*</em>

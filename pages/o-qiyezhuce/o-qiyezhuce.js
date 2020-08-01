@@ -5,28 +5,19 @@ Page({
    * 页面的初始数据
    */
   data: {
-    natureContent: [{
-        item: '外资'
-      },
-      {
-        item: '国企'
-      },
-      {
-        item: '实习'
-      },
-      {
-        item: '全职/兼职'
-      }
-    ],
+    natureContent: [],
+    classContent: [],
     natValue: '请选择',
     type: '',
     clsValue: '请选择',
     scalValue: '请选择',
     isImg: false,
-    img:'',
+    img: '',
     imgbox: '',
-    zhi_img:'../img/q072.png',
-    imgValue:'请上传'
+    zhi_img: '../img/q072.png',
+    imgValue: '请上传',
+    app: getApp().globalData,
+
   },
 
   /**
@@ -36,6 +27,42 @@ Page({
     this.nature = this.selectComponent("#nature");
     this.cls = this.selectComponent("#cls");
     this.scale = this.selectComponent("#scale");
+    var that = this
+    // 公司性质
+    this.data.app.http({
+      url: '/selects/company_nature',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          natureContent: res.data.rdata
+        })
+      }
+    })
+    // 工作类型
+    this.data.app.http({
+      url: '/selects/company_type',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          classContent: res.data.rdata
+        })
+      }
+    })
+
+    // 企业规模
+    this.data.app.http({
+      url: '/selects/company_num',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          numContent: res.data.rdata
+        })
+      }
+    })
+
   },
   // 删除图片
   imgDelete1: function (e) {
@@ -63,14 +90,14 @@ Page({
       count: n,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success(res) {   
+      success(res) {
         var tempFilePaths = res.tempFilePaths
         if (imgbox.length == 0) {
           imgbox = tempFilePaths
           console.log(imgbox)
         } else if (9 > imgbox.length) {
           imgbox = imgbox.concat(tempFilePaths)
-        } else {     
+        } else {
           imgbox[picid] = tempFilePaths[0];
         }
         console.log(tempFilePaths)
@@ -109,59 +136,81 @@ Page({
       })
   },
   handleConfirm() {
+    console.log(4444343)
     if (this.data.type == 1) {
       this.nature.show()
-      var index = this.nature.data.edu
+      var index = this.nature.data.index
       this.setData({
-        natValue: this.data.natureContent[index].item
+        natValue: this.data.natureContent[index].label
       })
-    }else if(this.data.type==2){
+    } else if (this.data.type == 2) {
       this.cls.show()
-      var index=this.cls.data.edu
+      var index = this.cls.data.index
       this.setData({
-        clsValue:this.data.natureContent[index].item
+        clsValue: this.data.classContent[index].label
       })
-    }else{
-        this.scale.show()
-        var index=this.scale.data.edu
-        this.setData({
-          scalValue:this.data.natureContent[index].item
-        })
+    } else {
+      this.scale.show()
+      var index = this.scale.data.index
+      this.setData({
+        scalValue: this.data.numContent[index].label
+      })
     }
   },
-  zhiZhao(){
-    var _this=this
+  handleCancel() {
+    var that = this
+    console.log(this.nature.data.index)
+    if (this.data.type == 1) {
+      this.nature.show()
+      that.nature.setData({
+        edu: ''
+      })
+      console.log(this.nature.data.index)
+    } else if (this.data.type == 2) {
+      this.cls.show()
+      this.cls.setData({
+        edu: ''
+      })
+    } else {
+      this.scale.show()
+      this.scale.setData({
+        edu: ''
+      })
+    }
+  },
+  zhiZhao() {
+    var _this = this
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success (res) {
+      success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths
         console.log(tempFilePaths)
         _this.setData({
-          zhi_img:tempFilePaths
+          zhi_img: tempFilePaths
         })
       }
     })
   },
-  logoImg(){
-    var _this=this
+  logoImg() {
+    var _this = this
     wx.chooseImage({
       count: 1,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
-      success (res) {
+      success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths
         console.log(tempFilePaths)
         _this.setData({
-          imgValue:'已上传'
+          imgValue: '已上传'
         })
       }
     })
   },
-  next(){
+  next() {
     wx.switchTab({
       url: '../k-qiyezhongxin/k-qiyezhongxin',
     })

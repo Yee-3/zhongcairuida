@@ -78,6 +78,27 @@
 					"pathName": "pages/i-mianshi-yrz/i-mianshi-yrz",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/a-gangweifabu/a-gangweifabu",
+					"pathName": "pages/a-gangweifabu/a-gangweifabu",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": 4,
+					"name": "pages/m-qiyezhuce/m-qiyezhuce",
+					"pathName": "pages/m-qiyezhuce/m-qiyezhuce",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/o-qiyezhuce/o-qiyezhuce",
+					"pathName": "pages/o-qiyezhuce/o-qiyezhuce",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

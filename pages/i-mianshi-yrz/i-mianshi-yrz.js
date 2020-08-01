@@ -31,63 +31,102 @@ Page({
 		deta_value: '',
 
 		latitude: "",
-    longitude: "",
-    scale: 14,
-    markers: [],
+		longitude: "",
+		scale: 14,
+		markers: [],
+		id: ''
 	},
 
 	/**
 	 * 生命周期函数--监听页面加载
 	 */
 	onLoad: function (options) {
+		this.sel = this.selectComponent("#select");
 		var data = {
 			limit: 10,
 			page: this.data.currentPage,
 			type: 2,
-			// signUp: 'Y'
+			signUp: 'Y'
 		}
 		this.reword(data)
 		var that = this
-    //获取当前的地理位置、速度
-    // 获取当前位置地图
-    wx.getLocation({
-      type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
-      success: function (res) {
-        //赋值经纬度
-        that.setData({
-          latitude: res.latitude,
-          longitude: res.longitude,
- 
-        })
-      }
-    })
+		//获取当前的地理位置、速度
+		// 获取当前位置地图
+		wx.getLocation({
+			type: 'wgs84', // 默认为 wgs84 返回 gps 坐标，gcj02 返回可用于 wx.openLocation 的坐标
+			success: function (res) {
+				//赋值经纬度
+				that.setData({
+					latitude: res.latitude,
+					longitude: res.longitude,
+
+				})
+			}
+		})
 	},
 	bindcontroltap(e) {
-    var that = this;
-    if (e.controlId == 1) {
-      that.setData({
-        latitude: this.data.latitude,
-        longitude: this.data.longitude,
-        scale: 15,
-      })
-    }
-  },
-  //导航
-  onGuideTap: function (event) {
-    var lat = Number(event.currentTarget.dataset.latitude);
-    var lon = Number(event.currentTarget.dataset.longitude);
-    var bankName = event.currentTarget.dataset.bankname;
-    console.log(lat);
-    console.log(lon);
-    wx.openLocation({
-      type: 'gcj02',
-      latitude: lat,
-      longitude: lon,
-      name: bankName,
-      scale: 28
-    })
-  },
-
+		var that = this;
+		if (e.controlId == 1) {
+			that.setData({
+				latitude: this.data.latitude,
+				longitude: this.data.longitude,
+				scale: 15,
+			})
+		}
+	},
+	//导航
+	onGuideTap: function (event) {
+		var lat = Number(event.currentTarget.dataset.latitude);
+		var lon = Number(event.currentTarget.dataset.longitude);
+		var bankName = event.currentTarget.dataset.bankname;
+		console.log(lat);
+		console.log(lon);
+		wx.openLocation({
+			type: 'gcj02',
+			latitude: lat,
+			longitude: lon,
+			name: bankName,
+			scale: 28
+		})
+	},
+	// 取消
+	submit() {
+		var that = this
+		this.setData
+		var type = this.data.idn == 2 ? 1 : this.data.idn == 3 ? 2 : ''
+		this.data.app.http({
+			url: '/index/updateStatus',
+			dengl: true,
+			method: 'POST',
+			data: {
+				id: that.data.id,
+				status: 'N',
+				type: type,
+				why: that.sel.data.ids
+			},
+			success(res) {
+				console.log(res)
+			}
+		})
+	},
+	// 同意
+	tongyi(e) {
+		var that = this
+		var type = this.data.idn == 2 ? 1 : this.data.idn == 3 ? 2 : ''
+		this.data.app.http({
+			url: '/index/updateStatus',
+			dengl: true,
+			method: 'POST',
+			data: {
+				id: e.currentTarget.dataset.id,
+				status: 'Y',
+				type: type,
+			},
+			success(res) {
+				console.log(res)
+			}
+		})
+	},
 	reword(data) {
 		var that = this
 		wx.showNavigationBarLoading()
@@ -178,19 +217,20 @@ Page({
 			}
 		})
 	},
-	tanchuang: function () {
+	tanchuang: function (e) {
+		console.log(e)
 		this.setData({
-			style: 'display:block'
+			style: 'display:block',
+			id: e.currentTarget.dataset.id
 		})
 	},
 
 	quxiao2: function () {
 		this.setData({
-			style: 'display:none'
+			style: 'display:none',
 		})
 	},
 	getDate: function (e) {
-		console.log(e)
 		if (e.detail.text == '面试时间不合适') {
 			this.setData({
 				value: '请您写下您觉得合适的面试时间（不少于三个）',
@@ -219,7 +259,7 @@ Page({
 				limit: 10,
 				page: that.data.currentPage,
 				type: 2,
-				// signUp: 'Y'
+				signUp: 'Y'
 			}
 			this.reword(data)
 		} else if (e.currentTarget.dataset.index == 2) {
@@ -239,7 +279,7 @@ Page({
 			})
 			var data = {
 				limit: 10,
-				page:that.data.currentPage,
+				page: that.data.currentPage,
 				type: 2,
 				entry: 'P'
 			}
@@ -269,7 +309,7 @@ Page({
 				})
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					interview: 'Y'
 				}
@@ -280,7 +320,7 @@ Page({
 				})
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					interview: 'N'
 				}
@@ -293,7 +333,7 @@ Page({
 				})
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					entry: 'P'
 				}
@@ -304,7 +344,7 @@ Page({
 				})
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					entry: 'Y'
 				}
@@ -315,7 +355,7 @@ Page({
 				})
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					entry: 'N'
 				}
@@ -373,16 +413,16 @@ Page({
 		if (idn == 1) {
 			var data = {
 				limit: 10,
-				page:that.data.currentPage,
+				page: that.data.currentPage,
 				type: 2,
-				// signUp: 'Y'
+				signUp: 'Y'
 			}
 			this.reword(data)
 		} else if (idn == 2) {
 			if (ind == 1) {
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					interview: 'P'
 				}
@@ -390,7 +430,7 @@ Page({
 			} else if (ind == 2) {
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					interview: 'Y'
 				}
@@ -398,7 +438,7 @@ Page({
 			} else {
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					interview: 'N'
 				}
@@ -408,7 +448,7 @@ Page({
 			if (ind == 1) {
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					entry: 'P'
 				}
@@ -416,7 +456,7 @@ Page({
 			} else if (ind == 2) {
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					entry: 'Y'
 				}
@@ -424,7 +464,7 @@ Page({
 			} else {
 				var data = {
 					limit: 10,
-					page:that.data.currentPage,
+					page: that.data.currentPage,
 					type: 2,
 					entry: 'N'
 				}

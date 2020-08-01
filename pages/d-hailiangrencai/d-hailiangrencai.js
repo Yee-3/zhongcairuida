@@ -21,10 +21,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this
     if (options.id == 1) {
       wx.setNavigationBarTitle({
         title: '即刻入职'
+      })
+    }else if(options.id==2){
+      wx.setNavigationBarTitle({
+        title: '推荐人才'
       })
     }
     this.zhiwei = this.selectComponent("#zhiwei");

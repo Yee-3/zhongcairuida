@@ -24,6 +24,11 @@ Page({
     eduValue: '请选择',
     salaValue: '请选择',
     nameValue: '请选择',
+    numValue:'',
+    mapValue:'',
+    workValue:'',
+    yqValue:'',
+    moneyValue:'',
     welValue: '',
     wel_Value:'请输入',
     experContent: [],
@@ -47,6 +52,7 @@ Page({
     this.sala = this.selectComponent("#sala");
     this.wel = this.selectComponent("#wel");
     this.name = this.selectComponent("#name");
+    // 职位
     this.data.app.http({
       url:'/selects/position',
       dengl:true,

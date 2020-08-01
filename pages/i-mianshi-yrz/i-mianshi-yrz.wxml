@@ -46,7 +46,7 @@
 	<view class="h_10" wx:for="{{recomList}}">
 		<view class="h_11">
 			<view class="fl h_12">{{item.title}}</view>
-			<view class="fr h_13" wx:if="{{idn!=1}}">{{((idn==2||idn==3)&&ind==1)?'待确认':((idn==2||idn==3)&&ind==2)?'已同意':((idn==2||idn==3)&&ind==3)?'取消':false}}</view>
+			<view class="fr h_13" wx:if="{{idn!=1}}">{{((idn==2||idn==3)&&ind==1)?'待确认':((idn==2||idn==3)&&ind==2)?'已同意':((idn==2||idn==3)&&ind==3)?'已取消':false}}</view>
 			<!-- 投递列表显示 -->
 			<view class="fr h_13" wx:if="{{idn==1}}">{{item.moneyName}}</view>
 		</view>
@@ -92,7 +92,7 @@
 			<view class="j_03 fl">{{item.companyName}}</view>
 			<view class="w-clear"></view>
 		</view>
-		<!-- 面试地点：面试状态同意显示 -->	
+		<!-- 面试地点：面试状态同意显示 -->
 		<view class="h_22" wx:if="{{idn==2&&ind==2}}">
 			<!-- <view class="h_23">
 				<image src="../img/f027.png"></image>
@@ -100,7 +100,7 @@
 			<view class="map_container">
 				<map class='map' longitude='{{longitude}}' latitude='{{latitude}}' scale='{{scale}}' markers='{{markers}}' bindcontroltap="bindcontroltap" polyline='{{polyline}}' circles="{{circles}}" bindmarkertap='bindmarkertap' bindcontroltap='bindcontroltap' show-location></map>
 			</view>
-			<view class="h_24" >
+			<view class="h_24">
 				<view class="h_27">
 					<view class="h_26 fl">
 						<image src="../img/f029.png"></image>
@@ -121,8 +121,8 @@
 		<!-- 面试状态待确认、入职状态待确认显示 -->
 		<view class="h_21" wx:if="{{(idn==2||idn==3)&&ind==1}}">
 			<ul>
-				<li bindtap="tanchuang">取消</li>
-				<li>同意</li>
+				<li bindtap="tanchuang" data-id="{{item.id}}">取消</li>
+				<li bindtap="tongyi" data-id="{{item.id}}">同意</li>
 			</ul>
 		</view>
 	</view>
@@ -133,7 +133,7 @@
 	<view class="f_07">
 		<view class="f_09">
 			<p>原因:</p>
-			<Select prop-array='{{selectArray}}' bind:myget='getDate'></Select>
+			<Select id="select" prop-array='{{selectArray}}' bind:myget='getDate'></Select>
 		</view>
 		<view class="f_10">
 			<p>{{valu}}</p>
@@ -141,7 +141,7 @@
 		</view>
 		<view class="f_11">
 			<view class="f_12 fl" bindtap="quxiao2">取消</view>
-			<view class="f_13 fr">提交</view>
+			<view class="f_13 fr" bindtap="submit">提交</view>
 			<view class="w-clear"></view>
 		</view>
 	</view>
