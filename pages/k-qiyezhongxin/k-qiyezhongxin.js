@@ -5,7 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-     dianhua:'display:none'
+     dianhua:'display:none',
+     app: getApp().globalData,
+     kefuPhone:{},
   },
 
   /**
@@ -13,6 +15,18 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    var that=this
+    this.data.app.http({
+      url:'/Other/hotline',
+      dengl:true,
+      data:{},
+      success(res){
+        console.log(res.data.rdata)
+        that.setData({
+          kefuPhone:res.data.rdata
+        })
+      }
+    })
   },
   gangwei(){
     wx.navigateTo({
@@ -26,7 +40,7 @@ Page({
   },
   phone(){
     wx.makePhoneCall({
-      phoneNumber: '400-061235'
+      phoneNumber: this.data.kefuPhone.phone
     })
   },
   tanchuang_2: function() {

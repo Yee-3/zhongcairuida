@@ -16,7 +16,7 @@ Page({
     six: '1',
     six_val: '请选择',
     isEdu: false,
-    edu: '0',
+    edu: 'x',
     valu2: '请选择',
     // 表单数据
     assets: [],
@@ -39,12 +39,12 @@ Page({
     yearList: [],
     year_time: '',
     year_index: '',
-    name_value:'',
-    home_value:'',
-    money_value:'',
-    reg_value:'',
-    phone_value:'',
-    emil_value:''
+    name_value: '',
+    home_value: '',
+    money_value: '',
+    reg_value: '',
+    phone_value: '',
+    emil_value: '',
   },
 
   /**
@@ -53,53 +53,70 @@ Page({
   onLoad: function (options) {
     this.spring = this.selectComponent("#spring");
     var that = this
-    // 求职状态
-    this.data.app.http({
-      url: '/selects/resume_status',
-      dengl: true,
-      data: {},
-      success(res) {
-        that.setData({
-          springContent: res.data.rdata
-        })
-      }
-    })
-    // 最高学历
-    this.data.app.http({
-      url: '/selects/school_record',
-      dengl: true,
-      data: {},
-      success(res) {
-        console.log(res)
-        that.setData({
-          eduction: res.data.rdata
-        })
-      }
-    })
-    // 婚姻状况
-    this.data.app.http({
-      url: '/selects/resume_marriage',
-      dengl: true,
-      data: {},
-      success(res) {
-        console.log(res)
-        that.setData({
-          marr: res.data.rdata
-        })
-      }
-    })
-    // 工作时间
-    this.data.app.http({
-      url: '/selects/work_exe',
-      dengl: true,
-      data: {},
-      success(res) {
-        console.log(res)
-        that.setData({
-          yearList: res.data.rdata
-        })
-      }
-    })
+    if (wx.getStorageSync('userInfo').ctrlResumeDTO) {
+      var list = wx.getStorageSync('userInfo').ctrlResumeDTO
+      this.setData({
+        img: list.url?list.url:'../img/f067.png',
+        name_value: list.name?list.name:'请输入',
+        date_value: list.time?list.time:'请选择',
+        type_content: list.statusName?list.statusName:'',
+        valu2: list.schoolName?list.schoolName:'',
+        phone_value: list.phone?list.phone:'',
+      })
+      this.spring.setData({
+        mar: status
+      })
+      this.spring.setData({
+        edu: list.school
+      })
+      // 求职状态
+      this.data.app.http({
+        url: '/selects/resume_status',
+        dengl: true,
+        data: {},
+        success(res) {
+          that.setData({
+            springContent: res.data.rdata
+          })
+        }
+      })
+      // 最高学历
+      this.data.app.http({
+        url: '/selects/school_record',
+        dengl: true,
+        data: {},
+        success(res) {
+          console.log(res)
+          that.setData({
+            eduction: res.data.rdata
+          })
+        }
+      })
+      // 婚姻状况
+      this.data.app.http({
+        url: '/selects/resume_marriage',
+        dengl: true,
+        data: {},
+        success(res) {
+          console.log(res)
+          that.setData({
+            marr: res.data.rdata
+          })
+        }
+      })
+      // 工作时间
+      this.data.app.http({
+        url: '/selects/work_exe',
+        dengl: true,
+        data: {},
+        success(res) {
+          console.log(res)
+          that.setData({
+            yearList: res.data.rdata
+          })
+        }
+      })
+    }
   },
   blur(e) {
     var type = e.currentTarget.dataset.ty,
@@ -126,36 +143,51 @@ Page({
       })
     }
     if (type == 5) {
-      that.setData({
-        phone_value: value
-      })
+      if (!this.data.app.checkPhone(value)) {
+        wx.showToast({
+          title: '请输入正确的手机号',
+          icon: 'none'
+        })
+      } else {
+        that.setData({
+          phone_value: value
+        })
+      }
+
     }
     if (type == 6) {
-      that.setData({
-        emil_value: value
-      })
+      if (!this.data.app.checkEmail(value)) {
+        wx.showToast({
+          title: '请输入正确的邮箱',
+          icon: 'none'
+        })
+      } else {
+        that.setData({
+          emil_value: value
+        })
+      }
     }
   },
   submit() {
     var that = this,
-    date = this.data.date.substring(0, 4) + '-' + this.data.date.substring(5, 7) + '-' + this.data.date.substring(8, 10)
+      date = this.data.date.substring(0, 4) + '-' + this.data.date.substring(5, 7) + '-' + this.data.date.substring(8, 10)
     this.data.app.http({
       url: '/resume/saveOrUpdateResumes',
       dengl: true,
       method: 'POST',
       data: {
-        address:that.data.home_value,
-        time:date,
-        name:that.data.name_value,
-        phone:that.data.phone_value,
-        email:that.data.email_value,
-        money:that.data.money_value,
-        url:that.data.img,
-        status:that.spring.data.mar,
-        school:that.data.edu,
-        workTime:that.data.year_time,
-        marriage:that.data.mar,
-        sex:that.data.six
+        address: that.data.home_value,
+        time: date,
+        name: that.data.name_value,
+        phone: that.data.phone_value,
+        email: that.data.email_value,
+        money: that.data.money_value,
+        url: that.data.img,
+        status: that.spring.data.mar,
+        school: that.data.edu,
+        workTime: that.data.year_time,
+        marriage: that.data.mar,
+        sex: that.data.six
 
 
       },

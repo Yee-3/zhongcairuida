@@ -2,16 +2,16 @@
 	<view class="q_02">
 		<view class="fl">
 			<view class="q_03">
-				<view class="q_04 fl"><view class="title">小明</view></view>
+				<view class="q_04 fl"><view class="title">{{user.name?user.name:'登录/注册'}}</view></view>
 				<view class="q_05 fl" bindtap="base"><image src="../img/f050.png"></image></view>
 			</view>
 			<view class="q_06">
 				<view class="q_07 fl"><image src="../img/f049.png"></image></view>
-				<view class="q_08 fl">14753701234</view>
+				<view class="q_08 fl">{{user.phone?user.phone:''}}</view>
 			</view>
 		</view>
 		<view class="fr q_09">
-			<image src="../img/f051.png"></image>
+			<image src="{{user.url?user.url:'../img/f051.png'}}"></image>
 		</view>
 	</view>
 	

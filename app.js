@@ -63,7 +63,7 @@ App({
                 })
                 setTimeout(function () {
                   wx.navigateTo({
-                    url: '/pages/enter/enter'
+                    url: '/pages/login/index'
                   })
                 }, 1000)
               }
@@ -97,13 +97,19 @@ App({
         })
       }
     },
-    checkPhone (phone) {
+    checkPhone(phone) {
       if (!(/^1[3456789]\d{9}$/.test(phone))) {
         return false;
       } else {
         return true
       }
+    },
+    checkEmail(email) {
+      if (!(/^[a-zA-Z0-9_-]+@[a-zA-Z0-9_-]+(\.[a-zA-Z0-9_-]+)+$/.test(email))) {
+        return false;
+      } else {
+        return true
+      }
     }
-
   }
 })

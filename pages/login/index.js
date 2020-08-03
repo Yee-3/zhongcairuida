@@ -28,8 +28,7 @@ Page({
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {
-  },
+  onLoad: function (options) {},
   //不登陆
   noLogin() {
     wx.reLaunch({
@@ -73,18 +72,19 @@ Page({
                 }),
                 success(res) {
 
-                  console.log(res.data.rdata.ctrlToken.token,2222)
+                  console.log(res.data.rdata.ctrlToken.token, 2222)
                   if (res.data.rdata) {
                     wx.setStorageSync('Authorization', res.data.rdata.ctrlToken.token)
+                    wx.setStorageSync('userInfo', res.data.rdata)
                     console.log(wx.getStorageSync('Authorization')),
-                    wx.showToast({
-                      title:'登录成功'
-                    })
-                    setTimeout(function(){
-                      wx.reLaunch({
-                        url:'../m-shouye/m-shouye'
+                      wx.showToast({
+                        title: '登录成功'
                       })
-                    },1000)
+                    setTimeout(function () {
+                      wx.reLaunch({
+                        url: '../m-shouye/m-shouye'
+                      })
+                    }, 1000)
                   }
                 }
               })

@@ -156,7 +156,8 @@ Page({
     })
   },
   search(e) {
-    console.log(e)
+    console.log(this.data.location)
+  var that=this
     this.setData({
       currentPage: 1,
       name: e.detail.value
@@ -167,7 +168,8 @@ Page({
         limit: 10,
         page: that.data.currentPage,
         type: 2,
-        name: name
+        name: name,
+        location: that.data.location ? that.data.location : '',
       }
     this.reword(data)
   },
@@ -243,7 +245,8 @@ Page({
         page: that.data.currentPage,
         type: 2,
         positionId: id,
-        name: name
+        name: name,
+        location: that.data.location ? that.data.location : '',
       }
     this.reword(data)
   },
@@ -318,8 +321,10 @@ Page({
       name = this.data.name ? this.data.name : ''
     if (this.zonghe.data.ind == 1) {
       ind = that.zonghe.data.ind
+      address = that.data.location
     } else if (this.zonghe.data.ind == 2) {
       ind = that.zonghe.data.ind
+      address = that.data.location
     } else if (this.zonghe.data.ind == 3) {
       address = that.data.location
     }
@@ -380,7 +385,8 @@ Page({
         type: 2,
         omNum: ind4,
         comType: ind3,
-        name: name
+        name: name,
+        location: that.data.location ? that.data.location : '',
       }
     this.reword(data)
   },
@@ -396,7 +402,8 @@ Page({
         limit: 10,
         page: that.data.currentPage,
         type: 2,
-        name: name
+        name: name,
+        location: that.data.location ? that.data.location : '',
       }
     this.gongsi.setData({
       ind4: '',
@@ -420,6 +427,7 @@ Page({
         limit: 10,
         page: that.data.currentPage,
         type: 2,
+        location: that.data.location ? that.data.location : '',
         money: ind5,
         exe: ind6,
         school: ind7,
@@ -444,6 +452,7 @@ Page({
       data = {
         limit: 10,
         page: that.data.currentPage,
+        location: that.data.location ? that.data.location : '',
         type: 2,
         name: name
       }
@@ -597,6 +606,7 @@ Page({
       var data = {
         limit: 10,
         page: that.data.currentPage,
+        location: that.data.location ? that.data.location : '',
         type: 2,
         money: ind5,
         exe: ind6,
@@ -609,6 +619,7 @@ Page({
       var data = {
         limit: 10,
         page: that.data.currentPage,
+        location: that.data.location ? that.data.location : '',
         type: 2,
         omNum: ind4,
         comType: ind3,
@@ -620,9 +631,11 @@ Page({
         ind = '',
         address = ''
       if (that.zonghe.data.ind == 1) {
-        ind = that.zonghe.data.ind
+        ind = that.zonghe.data.ind,
+        address = that.data.location
       } else if (that.zonghe.data.ind == 2) {
-        ind = that.zonghe.data.ind
+        ind = that.zonghe.data.ind,
+        address = that.data.location
       } else if (that.zonghe.data.ind == 3) {
         address = that.data.location
       }
@@ -640,6 +653,7 @@ Page({
         data = {
           limit: 10,
           page: that.data.currentPage,
+          location: that.data.location ? that.data.location : '',
           type: 2,
           positionId: id,
           name: name

@@ -112,7 +112,7 @@
 	<view class="m_07" bindtap="next">下一步</view>
 
 	<view class="m_08">
-		<p>前往求职端</p><span>|</span>
-		<p>联系客服</p>
+		<p bindtap="qzduan">前往求职端</p><span>|</span>
+		<p bindtap="phone">联系客服</p>
 	</view>
 </view>

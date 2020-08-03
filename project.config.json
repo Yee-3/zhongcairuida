@@ -60,20 +60,6 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/o-sousuojieguo-jl/o-sousuojieguo-jl",
-					"pathName": "pages/o-sousuojieguo-jl/o-sousuojieguo-jl",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/a-gangweifabu/a-gangweifabu",
-					"pathName": "pages/a-gangweifabu/a-gangweifabu",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/i-mianshi-yrz/i-mianshi-yrz",
 					"pathName": "pages/i-mianshi-yrz/i-mianshi-yrz",
 					"query": "",
@@ -81,22 +67,15 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/a-gangweifabu/a-gangweifabu",
-					"pathName": "pages/a-gangweifabu/a-gangweifabu",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 4,
-					"name": "pages/m-qiyezhuce/m-qiyezhuce",
-					"pathName": "pages/m-qiyezhuce/m-qiyezhuce",
+					"name": "pages/k-qiyezhongxin/k-qiyezhongxin",
+					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/o-qiyezhuce/o-qiyezhuce",
-					"pathName": "pages/o-qiyezhuce/o-qiyezhuce",
+					"name": "pages/q-wode/q-wode",
+					"pathName": "pages/q-wode/q-wode",
 					"query": "",
 					"scene": null
 				}

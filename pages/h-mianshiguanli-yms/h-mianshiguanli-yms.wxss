@@ -121,7 +121,9 @@ page {
   margin-top: 20rpx;
   overflow: hidden;
 }
-
+.h_11 .h_12:last-child{
+  margin-bottom: 100rpx;
+}
 .h_13 {
   height: 90rpx;
   padding: 20rpx 20rpx 0 20rpx;
@@ -170,7 +172,7 @@ page {
 .h_21 {
   font-size: 22rpx;
   color: #c0c0c0;
-  margin-top: 16rpx;
+  margin-top: 75rpx;
 }
 
 
@@ -192,7 +194,10 @@ page {
   font-size: 24rpx;
   color: #666;
 }
-
+.h_23 text {
+  font-size: 24rpx;
+  color: #666;
+}
 
 
 
@@ -237,7 +242,7 @@ page {
   margin-top: 20rpx;
   overflow: hidden;
 }
-
+.h2_22{ margin-left: 130rpx; margin-top: 16rpx;}
 
 .h_26 {
   background: #e6f3ff;
@@ -277,41 +282,18 @@ page {
   line-height: 80rpx;
 }
 
-.h_06_1 ul li.on .h_08_1 {
+.on .h_08 {
   color: #0286ff;
 }
-.h2_10{ width: 630rpx; height: 15rpx; margin: 0 auto;}
-.h2_10 ul{ width: 630rpx; height: 15rpx; display: block;}
-.h2_10 ul li{ float: left; width: 210rpx; display: block; height: 15rpx;}
-.h2_12{ width: 690rpx; box-sizing: border-box; margin: 0 auto; padding-bottom: 20rpx; background: #fff; border-radius: 10rpx; margin-top: 20rpx; overflow: hidden;}
-.h2_13{ height: 90rpx; padding: 20rpx 20rpx 0 20rpx;}
-.h2_14{ height: 90rpx;}
-.h2_15{}
-.h2_15 image{ width: 90rpx; height: 90rpx;}
-.h2_16{ margin-left: 20rpx;}
-.h2_17{ font-size: 30rpx; color: #333; margin-top: 10rpx;}
-.h2_18 p{ font-size: 22rpx; color: #c0c0c0;}
-.h2_18 span{ font-size: 22rpx; color: #c0c0c0; display: inline-block; padding: 0 8rpx;}
-.h2_20{ font-size: 30rpx; color: #ff4949; text-align: right;}
-.h2_21{ font-size: 22rpx; color: #c0c0c0; margin-top: 16rpx;}
-.h2_22{ margin-left: 130rpx; margin-top: 16rpx;}
-.h2_23{ padding-bottom: 10rpx;}
-.h2_23 p{ font-size: 24rpx; color: #333;}
-.h2_23 span{ font-size: 24rpx; color: #666;}
-.h2_24{ width: 690rpx; height: 92rpx; margin-top: 15rpx; border-top: 2rpx solid #f1f1f1;}
-.h2_24 ul{ width: 690rpx; height: 92rpx; display: block; box-sizing: border-box;}
-.h2_24 ul li{ float: left; width: 344rpx; box-sizing: border-box; display: block; height: 92rpx; line-height: 92rpx; text-align: center; border-left: 2rpx solid #f1f1f1; color: #0286ff; font-size: 28rpx;}
-.h2_24 ul li:first-child{ border-left: none; color: #909090;}
-.h2_25{ width: 690rpx; box-sizing: border-box; margin: 0 auto; background: #fff; border-radius: 10rpx; margin-top: 20rpx; overflow: hidden;}
-.h2_26{ border: 1rpx solid #ff4949; margin-top: 80rpx; width: 140rpx; height: 60rpx; font-size: 28rpx; color: #ff4949; line-height: 60rpx; text-align: center; border-radius: 10rpx; margin-right: 20rpx;}
-
-/* 入职进程样式 */
 .two_t {
   width: 630rpx;
   height: 95rpx;
   margin: 0 auto;
 }
-
+.h2_26{ border: 1rpx solid #ff4949; margin-top: 80rpx; width: 140rpx; height: 60rpx; font-size: 28rpx; color: #ff4949; line-height: 60rpx; text-align: center; }
+.h2_23{ padding-bottom: 10rpx;}
+.h2_23 p{ font-size: 24rpx; color: #333;}
+.h2_23 span{ font-size: 24rpx; color: #666;}
 .two_t_2 ul {
   width: 630rpx;
   height: 66rpx;
@@ -321,173 +303,8 @@ page {
   float: left;
   width: 33.33333%;
 }
+  
 
-.two_s {
-  width: 100%;
-  background: #fff;
-  text-align: center;
-  font-size: 28rpx;
-  color: #909090;
-  height: 80rpx;
-  line-height: 80rpx;
-}
-
-.two_t ul li.on .two_s {
-  color: #0286ff;
-}
-
-.h1_10 {
-  width: 630rpx;
-  height: 15rpx;
-  margin: 0 auto;
-}
-
-.h1_10 ul {
-  width: 630rpx;
-  height: 15rpx;
-  display: block;
-}
-
-.h1_10 ul li {
-  float: left;
-  width: 210rpx;
-  display: block;
-  height: 15rpx;
-}
-
-.h1_12 {
-  width: 690rpx;
-  box-sizing: border-box;
-  margin: 0 auto;
-  padding-bottom: 20rpx;
-  background: #fff;
-  border-radius: 10rpx;
-  margin-top: 20rpx;
-  overflow: hidden;
-}
-
-.h1_13 {
-  height: 90rpx;
-  padding: 20rpx 20rpx 0 20rpx;
-}
-
-.h1_14 {
-  height: 90rpx;
-}
-
-.h1_15 {}
-
-.h1_15 image {
-  width: 90rpx;
-  height: 90rpx;
-}
-
-.h1_16 {
-  margin-left: 20rpx;
-}
-
-.h1_17 {
-  font-size: 30rpx;
-  color: #333;
-  margin-top: 10rpx;
-}
-
-.h1_18 p {
-  font-size: 22rpx;
-  color: #c0c0c0;
-}
-
-.h1_18 span {
-  font-size: 22rpx;
-  color: #c0c0c0;
-  display: inline-block;
-  padding: 0 8rpx;
-}
-
-.h1_20 {
-  font-size: 30rpx;
-  color: #ff4949;
-  text-align: right;
-}
-
-.h1_21 {
-  font-size: 22rpx;
-  color: #c0c0c0;
-  margin-top: 16rpx;
-}
-
-.h1_22 {
-  margin-left: 130rpx;
-  margin-top: 16rpx;
-}
-
-.h1_23 {
-  padding-bottom: 10rpx;
-}
-
-.h1_23 p {
-  font-size: 24rpx;
-  color: #333;
-}
-
-.h1_23 span {
-  font-size: 24rpx;
-  color: #666;
-}
-
-.h1_24 {
-  width: 690rpx;
-  height: 92rpx;
-  margin-top: 15rpx;
-  border-top: 2rpx solid #f1f1f1;
-}
-
-.h1_24 ul {
-  width: 690rpx;
-  height: 92rpx;
-  display: block;
-  box-sizing: border-box;
-}
-
-.h1_24 ul li {
-  float: left;
-  width: 344rpx;
-  box-sizing: border-box;
-  display: block;
-  height: 92rpx;
-  line-height: 92rpx;
-  text-align: center;
-  border-left: 2rpx solid #f1f1f1;
-  color: #0286ff;
-  font-size: 28rpx;
-}
-
-.h1_24 ul li:first-child {
-  border-left: none;
-  color: #909090;
-}
-
-.h1_25 {
-  width: 690rpx;
-  box-sizing: border-box;
-  margin: 0 auto;
-  background: #fff;
-  border-radius: 10rpx;
-  margin-top: 20rpx;
-  overflow: hidden;
-}
-
-.h1_26 {
-  background: #e6f3ff;
-  width: 690rpx;
-  height: 90rpx;
-  font-size: 28rpx;
-  color: #0286ff;
-  line-height: 90rpx;
-  text-align: center;
-  margin-top: 16rpx;
-}
-/* --end */
 .del_mask{
 	position: fixed;
 	top: 0;

@@ -64,9 +64,9 @@
 			<button size="mini" style="font-size:24rpx" wx:for="{{item.welfareName}}" wx:for-index="ind" wx:for-item="ite">{{ite}}</button>
 		</view>
 
-		<view class="h_18" wx:if="{{!(idn==1||(idn==2&&ind==3)||(idn==3&&ind==3))}}">
+		<view class="h_18" wx:if="{{!(idn==1||(idn==2&&ind==3)||(idn==3&&ind==3))}}">		 
 			<view class="h_19 fl">{{idn==2?'面试时间：':'入职时间：'}}</view>
-			<view class="h_20 fl" style="{{idn==2&&ind==2?'color:#ff4949;':'color:#000'}}">2020-05-20 13:30</view>
+			<view class="h_20 fl" style="{{idn==2&&ind==2?'color:#ff4949;':'color:#000'}}">{{idn==2?item.ctrlMemberCompanies.statTime:item.ctrlMemberCompanies.inductionTime}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="h_18" wx:if="{{idn==3&&ind==2}}">
@@ -76,12 +76,12 @@
 		</view>
 		<view class="h_18" wx:if="{{(idn==2||idn==3)&&ind==3}}">
 			<view class="h_19 fl">原因：</view>
-			<view class="h_20 fl">{{rea_value}}</view>
+			<view class="h_20 fl">{{idn==2?item.ctrlMemberCompanies.auditType:item.ctrlMemberCompanies.auditType1}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="h_18" wx:if="{{(idn==2||idn==3)&&ind==3}}">
 			<view class="h_19 fl">详细：</view>
-			<view class="h_20 fl">{{deta_value}}</view>
+			<view class="h_20 fl">{{idn==2?item.ctrlMemberCompanies.whyStatus:item.ctrlMemberCompanies.whyInduction}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<!-- 投递列表显示 -->
@@ -137,7 +137,7 @@
 		</view>
 		<view class="f_10">
 			<p>{{valu}}</p>
-			<textarea placeholder="{{value}}"></textarea>
+			<textarea placeholder="{{value}}" value="{{val}}" data-value="{{value}}" bindblur="blur"></textarea>
 		</view>
 		<view class="f_11">
 			<view class="f_12 fl" bindtap="quxiao2">取消</view>

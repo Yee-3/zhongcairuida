@@ -109,7 +109,7 @@
 	<view class="f_07">
 		<view class="f_14">
 			<p>请拨打客服电话</p>
-			<span>400-061235</span>
+			<span>{{kefuPhone.phone}}</span>
 		</view>
 		<view class="f_11">
 			<view class="f_12 fl" bindtap="quxiao2">取消</view>

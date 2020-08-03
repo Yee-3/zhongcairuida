@@ -11,7 +11,7 @@
 		<view class="n_08">搜索记录</view>
 		<view class="n_09">
 			<ul>
-				<li wx:for="{{hisList}}">{{item.name}}</li>
+				<li wx:for="{{hisList}}" data-value="{{item.name}}" bindtap="addValue">{{item.name}}</li>
 				<view class="w-clear"></view>
 			</ul>
 		</view>
@@ -20,7 +20,7 @@
 		<view class="n_08">热门搜索</view>
 		<view class="n_09">
 			<ul>
-				<li wx:for="{{searchList}}">{{item.name}}</li>
+				<li wx:for="{{searchList}}" data-value="{{item.name}}" bindtap="addValue">{{item.name}}</li>
 				<view class="w-clear"></view>
 			</ul>
 		</view>

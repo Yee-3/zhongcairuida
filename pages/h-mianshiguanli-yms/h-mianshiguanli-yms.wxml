@@ -1,4 +1,5 @@
 <view class="h_01">
+	<!-- 头部标题 -->
 	<view class="h_02">
 		<ul>
 			<li>
@@ -15,6 +16,7 @@
 			</li>
 		</ul>
 	</view>
+	<!-- 标题图标 -->
 	<view class="h_10">
 		<ul>
 			<li>
@@ -34,50 +36,38 @@
 			</li>
 		</ul>
 	</view>
-	<view class="h_06" wx:if="{{idn==1}}">
+	<!-- 面试进程，入职进程 -->
+	<view class="{{idn==1?'h_06':'two_t'}}" wx:if="{{idn==1||idn==2}}">
 		<ul>
-			<li class="{{idn1==1?'on':''}}" data-index="1" bindtap="toggleMin">
-				<view class="h_08">邀面试</view>
+			<li class="{{ind==1?'on':''}}" data-index="1" bindtap="toggleMin">
+				<view class="h_08">待回复</view>
 			</li>
-			<li class="{{idn1==2?'on':''}}" data-index="2" bindtap="toggleMin">
+			<li class="{{ind==2?'on':''}}" data-index="2" bindtap="toggleMin">
 
 				<view class="h_08">已同意</view>
 			</li>
-			<li class="{{idn1==3?'on':''}}" data-index="3" bindtap="toggleMin">
+			<li class="{{ind==3?'on':''}}" data-index="3" bindtap="toggleMin">
 
 				<view class="h_08">已拒绝</view>
 			</li>
-			<li class="{{idn1==4?'on':''}}" data-index="4" bindtap="toggleMin">
-
+			<li class="{{ind==4?'on':''}}" wx:if="{{idn==1}}" data-index="4" bindtap="toggleMin">
 				<view class="h_08">已面试</view>
 			</li>
 		</ul>
 	</view>
+	<!-- 成功招聘 -->
 	<view class="h_06_1" wx:if="{{idn==3}}">
 		<ul>
-			<li class="{{idn2==1?'on':''}}" data-index="1" bindtap="toggleMin1">
-				<view class="h_08_1">到面式</view>
+			<li class="{{ind1==1?'on':''}}" data-index="1" bindtap="toggleMin1">
+				<view class="h_08">到面式</view>
 			</li>
-			<li class="{{idn2==2?'on':''}}" data-index="2" bindtap="toggleMin1">
-				<view class="h_08_1">到岗式</view>
+			<li class="{{ind1==2?'on':''}}" data-index="2" bindtap="toggleMin1">
+				<view class="h_08">到岗式</view>
 			</li>
-		</ul>
-	</view>
-	<view class="two_t" wx:if="{{idn==2}}">
-		<ul>
-			<li class="{{idn3==1?'on':''}}" data-index="1" bindtap="toggleMin2">
-				<view class="two_s">邀面试</view>
-			</li>
-			<li class="{{idn3==2?'on':''}}" data-index="2" bindtap="toggleMin2">
-				<view class="two_s">已同意</view>
-			</li>
-			<li class="{{idn3==3?'on':''}}" data-index="3" bindtap="toggleMin2">
-				<view class="two_s">已拒绝</view>
-			</li>
-
 		</ul>
 	</view>
 </view>
+<!-- 删除弹框 -->
 <view class="del_mask" wx:if="{{isDel}}"></view>
 <view class="del" wx:if="{{isDel}}">
 	<view class="title">您要<text style="color:#fa4b4f">删除</text>这条进程吗？</view>
@@ -87,8 +77,8 @@
 	</view>
 </view>
 <!-- 面试进程 -->
-<view class="h_11" wx:if="{{idn==1}}">
-	<view class="h_12" wx:if="{{idn1==1}}" bindlongtap="dele">
+<view class="h_11">
+	<view class="h_12" style="{{ind==2||ind==4||ind==3?'padding-bottom:0rpx;':''}}" bindlongtap="dele" wx:for="{{2}}">
 		<view class="h_13">
 			<view class="fl h_14">
 				<view class="fl h_15">
@@ -104,362 +94,41 @@
 					</view>
 				</view>
 			</view>
-			<view class="fr h_19">
-				<view class="h_20">待回复</view>
+			<view class="fr h_19" wx:if="{{idn==1||idn==2}}">
+				<view class="h_20">{{ind==1?'待回复':ind==2?'同意':ind==3?'已拒绝':'已面试'}}</view>
 				<view class="h_21">22小时前活跃</view>
 			</view>
 		</view>
-		<view class="h_22">
+		<view class="{{idn==3?'h_22 fl':'h_22'}}">
 			<view class="h_23">
 				<p>应聘职位：</p>
 				<span>业务部经理</span>
 			</view>
-			<view class="h_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
+			<view class="h_23" wx:if="{{idn!=2}}">
+				<p>{{idn==3&&ind1==2?'入职时间：':'面试时间：'}}</p>
+				<span>2020年06月10号</span>
+			</view>
+			<view class="h2_23" wx:if="{{idn==3}}">
+				<p>服务模式：</p>
+				<span>{{ind1==1?'到面式':'到岗式'}}</span>
+			</view>
+			<view class="h_23" wx:if="{{ind==3}}">
+				<p>拒绝原因：</p>
+				<text>面试时间不合适\n2020.05.14 周四 2020.05.18 周一2020.05.19 周二；周三手足是的</text>
 			</view>
 		</view>
-	</view>
-	<view class="h_25" wx:if="{{idn1==2}}">
-		<view class="h_13">
-			<view class="fl h_14">
-				<view class="fl h_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h_16">
-					<view class="h_17">李先生</view>
-					<view class="h_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr h_19">
-				<view class="h_20">同意</view>
-				<view class="h_21">22小时前活跃</view>
-			</view>
-		</view>
-		<view class="h_22">
-			<view class="h_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-			<view class="h_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-		</view>
-		<view class="h_24">
+		<view class="h2_26 fr" wx:if="{{idn==3}}">离职</view> 
+		<view class="h_26" wx:if="{{ind==3}}">再邀请</view>
+		<view class="h_24" wx:if="{{ind==2||ind==4}}">
 			<ul>
-				<li>未面试</li>
-				<li>已面试</li>
+				<li>{{idn==1&&ind==2?'未面试':idn==1&&ind==4?'不合适':'未入职'}}</li>
+				<li>{{idn==1&&ind==2?'已面试':idn==1&&ind==4?'邀入职':'已入职'}}</li>
 			</ul>
 		</view>
 	</view>
-	<view class="h_12" wx:if="{{idn1==3}}">
-		<view class="h_13">
-			<view class="fl h_14">
-				<view class="fl h_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h_16">
-					<view class="h_17">李先生</view>
-					<view class="h_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr h_19">
-				<view class="h_20">已面试</view>
-				<view class="h_21">22小时前活跃</view>
-			</view>
-		</view>
-		<view class="h_22">
-			<view class="h_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-			<view class="h_23">
-				<p>面试时间：</p>
-				<span>2020年03月24日</span>
-			</view>
-			<view class="h_23">
-				<p>拒绝原因：</p>
-				<span>面试时间不合适
-					2020.05.14 周四 2020.05.18 周一2020.05.19 周二</span>
-			</view>
-		</view>
-	</view>
 
-	<view class="h_25" wx:if="{{idn1==3}}">
-		<view class="h_13">
-			<view class="fl h_14">
-				<view class="fl h_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h_16">
-					<view class="h_17">李先生</view>
-					<view class="h_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr h_19">
-				<view class="h_20">待回复</view>
-				<view class="h_21">22小时前活跃</view>
-			</view>
-		</view>
-		<view class="h_22">
-			<view class="h_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-			<view class="h_23">
-				<p>面试时间：</p>
-				<span>2020年03月24日</span>
-			</view>
-			<view class="h_23">
-				<p>拒绝原因：</p>
-				<span>面试时间不合适
-					2020.05.14 周四 2020.05.18 周一2020.05.19 周二</span>
-			</view>
-		</view>
-		<view class="h_26">再邀请</view>
-	</view>
 </view>
 <!-- end -->
 
-<!-- 入职进程 -->
-<view class="h1_11" wx:if="{{idn==2}}">
-	<view class="h1_12">
-		<view class="h1_13">
-			<view class="fl h1_14">
-				<view class="fl h1_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h1_16">
-					<view class="h1_17">李先生</view>
-					<view class="h1_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr h1_19">
-				<view class="h1_20">待回复</view>
-				<view class="h1_21">22小时前活跃</view>
-			</view>
-		</view>
-		<view class="h1_22">
-			<view class="h1_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-			<view class="h1_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-		</view>
-	</view>
-	<view class="h1_25">
-		<view class="h1_13">
-			<view class="fl h1_14">
-				<view class="fl h1_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h1_16">
-					<view class="h1_17">李先生</view>
-					<view class="h1_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr h1_19">
-				<view class="h1_20">待回复</view>
-				<view class="h1_21">22小时前活跃</view>
-			</view>
-		</view>
-		<view class="h1_22">
-			<view class="h1_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-			<view class="h1_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-		</view>
-		<view class="h1_24">
-			<ul>
-				<li>未面试</li>
-				<li>已面试</li>
-			</ul>
-		</view>
-	</view>
-	<view class="h1_12">
-		<view class="h1_13">
-			<view class="fl h1_14">
-				<view class="fl h1_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h1_16">
-					<view class="h1_17">李先生</view>
-					<view class="h1_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr h1_19">
-				<view class="h1_20">待回复</view>
-				<view class="h1_21">22小时前活跃</view>
-			</view>
-		</view>
-		<view class="h1_22">
-			<view class="h1_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-			<view class="h1_23">
-				<p>面试时间：</p>
-				<span>2020年03月24日</span>
-			</view>
-			<view class="h1_23">
-				<p>拒绝原因：</p>
-				<span>面试时间不合适
-					2020.05.14 周四 2020.05.18 周一2020.05.19 周二</span>
-			</view>
-		</view>
-	</view>
-
-	<view class="h1_25">
-		<view class="h1_13">
-			<view class="fl h1_14">
-				<view class="fl h1_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h1_16">
-					<view class="h1_17">李先生</view>
-					<view class="h1_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr h1_19">
-				<view class="h1_20">待回复</view>
-				<view class="h1_21">22小时前活跃</view>
-			</view>
-		</view>
-		<view class="h1_22">
-			<view class="h1_23">
-				<p>应聘职位：</p>
-				<span>业务部经理</span>
-			</view>
-			<view class="h1_23">
-				<p>面试时间：</p>
-				<span>2020年03月24日</span>
-			</view>
-			<view class="h1_23">
-				<p>拒绝原因：</p>
-				<span>面试时间不合适
-					2020.05.14 周四 2020.05.18 周一2020.05.19 周二</span>
-			</view>
-		</view>
-		<view class="h1_26">再邀请</view>
-	</view>
-</view>
-<!-- end -->
-
-<!-- 成功招聘 -->
-<view class="h2_11" wx:if="{{idn==3}}">
-	<view class="h2_12">
-		<view class="h2_13">
-			<view class="fl h2_14">
-				<view class="fl h2_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h2_16">
-					<view class="h2_17">李先生</view>
-					<view class="h2_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="">
-			<view class="h2_22 fl">
-				<view class="h2_23">
-					<p>应聘职位：</p>
-					<span>业务部经理</span>
-				</view>
-				<view class="h2_23">
-					<p>面试时间：</p>
-					<span>2020年03月24日</span>
-				</view>
-				<view class="h2_23">
-					<p>服务模式：</p>
-					<span>到面式</span>
-				</view>
-			</view>
-			<view class="h2_26 fr">离职</view>
-		</view>
-	</view>
-	<view class="h2_12">
-		<view class="h2_13">
-			<view class="fl h2_14">
-				<view class="fl h2_15">
-					<image src="../img/f004.png"></image>
-				</view>
-				<view class="fl h2_16">
-					<view class="h2_17">李先生</view>
-					<view class="h2_18">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="">
-			<view class="h2_22 fl">
-				<view class="h2_23">
-					<p>应聘职位：</p>
-					<span>业务部经理</span>
-				</view>
-				<view class="h2_23">
-					<p>面试时间：</p>
-					<span>2020年03月24日</span>
-				</view>
-				<view class="h2_23">
-					<p>服务模式：</p>
-					<span>到面式</span>
-				</view>
-			</view>
-
-		</view>
-	</view>
-</view>
 <!-- end -->
 <tabbars></tabbars>

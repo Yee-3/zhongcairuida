@@ -106,7 +106,7 @@
 		<p>我要分享</p>
 	</view>
 	<view class="f_06 fr" bindtap="tanchuang">
-		<p>立即投递</p>
+		<p>{{isTou?'已投递':'立即投递'}}</p>
 	</view>
 </view>
 

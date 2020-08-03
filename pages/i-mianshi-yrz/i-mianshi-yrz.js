@@ -15,6 +15,7 @@ Page({
 		}],
 		value: '请您写下您觉得合适的面试时间（不少于三个）',
 		valu: '请写下合适的面试时间：',
+		val: '',
 		idn: '1',
 		ind: '1',
 		ind1: '1',
@@ -102,7 +103,8 @@ Page({
 				id: that.data.id,
 				status: 'N',
 				type: type,
-				why: that.sel.data.ids
+				why: that.sel.data.ids,
+				whyValue:that.data.val
 			},
 			success(res) {
 				console.log(res)
@@ -228,6 +230,7 @@ Page({
 	quxiao2: function () {
 		this.setData({
 			style: 'display:none',
+			val:''
 		})
 	},
 	getDate: function (e) {
@@ -243,6 +246,12 @@ Page({
 			})
 		}
 
+	},
+	blur(e) {
+		console.log(e)
+		this.setData({
+			val: e.detail.value
+		})
 	},
 	toggleTitle(e) {
 		// console.log(e)

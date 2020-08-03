@@ -6,42 +6,50 @@ Page({
    */
   data: {
     app: getApp().globalData,
-    searchList:[],
-    hisList:[],
-    val:''
+    searchList: [],
+    hisList: [],
+    val: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   var that=this
-   this.data.app.http({
-     url:'/index/getSearch',
-     dengl:true,
-     method:'POST',
-     data:{},
-     success(res){
-       console.log(res)
-       that.setData({
-         searchList:res.data.rdata.searchDTO,
-         hisList:res.data.rdata.ctrlSearchDTO
-       })
-     }
-   })
+    var that = this
+    this.data.app.http({
+      url: '/index/getSearch',
+      dengl: true,
+      method: 'POST',
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          searchList: res.data.rdata.searchDTO,
+          hisList: res.data.rdata.ctrlSearchDTO
+        })
+      }
+    })
   },
-  search(e){
+  addValue(e) {
+    console.log(e)
     this.setData({
-      val:e.detail.value
+      val: e.currentTarget.dataset.value
+    })
+    this.search_s()
+  },
+
+  search(e) {
+    this.setData({
+      val: e.detail.value
     })
     console.log(this.data.val)
   },
-  search_s(){
+  search_s() {
     wx.navigateTo({
-      url: '../o-sousuojieguo-jl/o-sousuojieguo-jl?name='+this.data.val,
+      url: '../o-sousuojieguo-jl/o-sousuojieguo-jl?name=' + this.data.val,
     })
   },
-  
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

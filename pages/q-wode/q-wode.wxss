@@ -15,13 +15,15 @@
 .q_04 .title {
   height: 60rpx;
   line-height: 60rpx;
-  width: 120rpx;
+  /* width: 120rpx; */
   font-size: 50rpx;
   color: #000;
   font-weight: 600;
 }
 
-.q_05 {}
+.q_05 {
+  margin-left: 20rpx;
+}
 
 .q_05 image {
   width: 29rpx;

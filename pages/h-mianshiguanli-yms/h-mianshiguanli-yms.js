@@ -5,10 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    idn: '1',
-    idn1: '1',
-    idn2: '1',
-    idn3: '1',
+    idn: 1,
+    ind:1,
+    ind1: 1,
     isDel: false
   },
 
@@ -21,25 +20,24 @@ Page({
   toggleTitle(e) {
     console.log(e)
     this.setData({
-      idn: e.currentTarget.dataset.index
+      idn: e.currentTarget.dataset.index,
+      ind:1,
+      ind1:1
     })
   },
   toggleMin(e) {
     console.log(e)
-      this.setData({
-        idn1: e.currentTarget.dataset.index
-      })
+    this.setData({
+      ind: e.currentTarget.dataset.index
+    })
+    console.log(this.data.ind)
   },
   toggleMin1(e) {
       this.setData({
-        idn2: e.currentTarget.dataset.index
+        ind1: e.currentTarget.dataset.index
       }) 
   },
-  toggleMin2(e) {  
-    this.setData({
-        idn3: e.currentTarget.dataset.index
-      })
-  },
+ 
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

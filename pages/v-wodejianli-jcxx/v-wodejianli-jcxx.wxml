@@ -173,21 +173,19 @@
 
 	<view class="v_08"></view>
 
-	<view class="v_03">
+	<!-- <view class="v_03">
 		<view class="v_04">户口</view>
 		<view class="v_05">
 			<view class="v_06 fl">
 				<view class="section">
-					<!-- <picker value="{{index}}" range="{{array}}"> -->
 					<view class="picker"><input placeholder="请输入" data-value="{{vulue}}" data-ty="4" bindblur="blur" value="{{reg_value}}"  /></view>
-					<!-- </picker> -->
 				</view>
 			</view>
 			<view class="v_07 fr">
 				<image src="../img/f068.png"></image>
 			</view>
 		</view>
-	</view>
+	</view> -->
 
 	<view class="v_03">
 		<view class="v_04">婚姻状况</view>

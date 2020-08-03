@@ -7,7 +7,8 @@ Page({
   data: {
     dianhua: 'display:none',
     app: getApp().globalData,
-    kefuPhone:{}
+    kefuPhone:{},
+    user:{}
   },
 
   /**
@@ -16,10 +17,15 @@ Page({
   onLoad: function (options) {
     const app = getApp().globalData
     // app.http({  
-    //     url: '/selects/company_nature',
+    //     url: '/oauth/login',
     //     dengl:true,
+    //     success
 
     // })
+    this.setData({
+      user:wx.getStorageSync('userInfo').ctrlResumeDTO
+    })
+    console.log(wx.getStorageSync('userInfo'))
     var that=this
     this.data.app.http({
       url:'/Other/hotline',
@@ -70,7 +76,8 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
+        wx.removeStorageSync('userInfo')
+        console.log(wx.getStorageSync('userInfo'))
       }
     })
   },
@@ -87,7 +94,7 @@ Page({
   },
   phone() {
     wx.makePhoneCall({
-      phoneNumber: '400-061235'
+      phoneNumber: this.data.kefuPhone.phone
     })
   },
   zhaopin() {

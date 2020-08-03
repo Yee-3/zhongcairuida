@@ -8,7 +8,7 @@ Page({
     style: 'display:none',
     app: getApp().globalData,
     detaCont: {},
-    isShow:true,
+    isShow: true,
 
     latitude: "",
     longitude: "",
@@ -26,7 +26,7 @@ Page({
       },
       clickable: true
     }],
-
+    isTou:false
   },
 
   /**
@@ -38,17 +38,18 @@ Page({
     this.data.app.http({
       url: '/index/getPosition',
       dengl: true,
-      method:'POST',
+      method: 'POST',
       data: {
         id: options.id,
-        limit:10,
-        page:1,
-        type:2
+        limit: 10,
+        page: 1,
+        type: 2
       },
       success(res) {
         console.log(res)
         that.setData({
-          detaCont: res.data.rdata[0]
+          detaCont: res.data.rdata[0],
+          isTou:res.data.rdata[0].signUp
         })
       }
     })
@@ -63,7 +64,7 @@ Page({
         that.setData({
           latitude: res.latitude,
           longitude: res.longitude,
- 
+
         })
       }
     })
@@ -98,27 +99,49 @@ Page({
   detail(e) {
     console.log(e)
     wx.navigateTo({
-      url: '../za-xinzeng-qyzsxq/z-xinzeng-qyzsxq?id='+e.currentTarget.dataset.comid,
+      url: '../za-xinzeng-qyzsxq/z-xinzeng-qyzsxq?id=' + e.currentTarget.dataset.comid,
     })
   },
   tanchuang: function () {
-    var that=this
+    var that = this
     this.data.app.http({
-      url:'/index/getResumes',
-      dengl:true,
-      method:'POST',
-      success(res){
-        console.log(res)
-        if(res.data.rdata==true){
-
-        }else{
+      url: '/index/getResumes',
+      dengl: true,
+      method: 'POST',
+      success(res) {
+        // console.log(res)
+        if (res.data.rdata == true) {
+          console.log('cjemhhshs')
+          that.data.app.http({
+            url: '/index/sendResumes',
+            dengl: true,
+            method: 'POST',
+            data: {
+              company: that.data.detaCont.companyId,
+              position: that.data.detaCont.name
+            },
+            success(res) {
+              console.log(res)
+              console.log(res.data.rdata)
+              if(res.data.code==200){
+                wx.showToast({
+                  title: '投递成功'
+                })
+                console.log('chengshjj')
+                that.setData({
+                  isTou:true
+                })
+              }
+            }
+          })
+        } else {
           this.setData({
             style: 'display:block'
           })
         }
       }
     })
-    
+
   },
   quxiao1: function () {
     this.setData({
@@ -130,9 +153,9 @@ Page({
       url: '../s-wodejianli/s-wodejianli',
     })
   },
-  show(){
+  show() {
     this.setData({
-      isShow:false
+      isShow: false
     })
   },
   /**
@@ -146,22 +169,22 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-  var that=this
-    setTimeout(() => {  
-      let query = wx.createSelectorQuery();  
-      query.select('.content').boundingClientRect(rect=>{  
-        let clientHeight = rect.height;  
-        let clientWidth = rect.width;  
-        let ratio = 750 / clientWidth;  
-        let height =parseInt (clientHeight * ratio);  
-        console.log(height,clientHeight,clientWidth);  
-        if(height<197){
+    var that = this
+    setTimeout(() => {
+      let query = wx.createSelectorQuery();
+      query.select('.content').boundingClientRect(rect => {
+        let clientHeight = rect.height;
+        let clientWidth = rect.width;
+        let ratio = 750 / clientWidth;
+        let height = parseInt(clientHeight * ratio);
+        console.log(height, clientHeight, clientWidth);
+        if (height < 197) {
           that.setData({
-            isShow:false
+            isShow: false
           })
         }
-      }).exec();  
-    }, 300)  
+      }).exec();
+    }, 300)
   },
 
   /**

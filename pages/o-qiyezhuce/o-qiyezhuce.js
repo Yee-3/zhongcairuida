@@ -178,6 +178,16 @@ Page({
       })
     }
   },
+  phone() {
+    wx.makePhoneCall({
+      phoneNumber: '400-061235'
+    })
+  },
+  qzduan(){
+    wx.switchTab({
+      url: '../m-shouye/m-shouye',
+    })
+  },
   zhiZhao() {
     var _this = this
     wx.chooseImage({
