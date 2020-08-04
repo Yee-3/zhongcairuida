@@ -78,6 +78,40 @@
 					"pathName": "pages/q-wode/q-wode",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
+					"pathName": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/p-qiyeduan/p-qiyeduan",
+					"pathName": "pages/p-qiyeduan/p-qiyeduan",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
+					"pathName": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
+					"pathName": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/k-qiyezhongxin/k-qiyezhongxin",
+					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
+					"scene": null
 				}
 			]
 		}

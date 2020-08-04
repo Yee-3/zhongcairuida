@@ -185,7 +185,7 @@ Page({
   },
   detail() {
     wx.navigateTo({
-      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq',
+      url: '../c-hailiangjianlixq/c-hailiangjianlixq',
     })
   },
   /**

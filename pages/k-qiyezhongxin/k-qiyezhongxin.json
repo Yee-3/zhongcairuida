@@ -1,5 +1,6 @@
 {
   "usingComponents": {
     "tabbars":"../components/tabbar/tab"
-  }
+  },
+  "navigationBarTitleText": "企业中心"
 }

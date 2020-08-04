@@ -1,3 +1,6 @@
 {
-  "usingComponents": { "tabbars":"../components/tabbar/tab"}
+  "usingComponents": { 
+    "tabbars":"../components/tabbar/tab"
+  },
+  "navigationBarTitleText": "进程管理"
 }

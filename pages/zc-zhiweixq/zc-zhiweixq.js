@@ -26,7 +26,7 @@ Page({
       },
       clickable: true
     }],
-    isTou:false
+    isTou: false
   },
 
   /**
@@ -49,7 +49,7 @@ Page({
         console.log(res)
         that.setData({
           detaCont: res.data.rdata[0],
-          isTou:res.data.rdata[0].signUp
+          isTou: res.data.rdata[0].signUp,
         })
       }
     })
@@ -103,45 +103,50 @@ Page({
     })
   },
   tanchuang: function () {
-    var that = this
-    this.data.app.http({
-      url: '/index/getResumes',
-      dengl: true,
-      method: 'POST',
-      success(res) {
-        // console.log(res)
-        if (res.data.rdata == true) {
-          console.log('cjemhhshs')
-          that.data.app.http({
-            url: '/index/sendResumes',
-            dengl: true,
-            method: 'POST',
-            data: {
-              company: that.data.detaCont.companyId,
-              position: that.data.detaCont.name
-            },
-            success(res) {
-              console.log(res)
-              console.log(res.data.rdata)
-              if(res.data.code==200){
-                wx.showToast({
-                  title: '投递成功'
-                })
-                console.log('chengshjj')
-                that.setData({
-                  isTou:true
-                })
+    if (!this.data.isTou) {
+      var that = this
+      this.data.app.http({
+        url: '/index/getResumes',
+        dengl: true,
+        method: 'POST',
+        success(res) {
+          // console.log(res)
+          if (res.data.rdata == true) {
+            console.log('cjemhhshs')
+            that.data.app.http({
+              url: '/index/sendResumes',
+              dengl: true,
+              method: 'POST',
+              data: {
+                company: that.data.detaCont.companyId,
+                position: that.data.detaCont.name
+              },
+              success(res) {
+                console.log(res)
+                console.log(res.data.rdata)
+                if (res.data.code == 200) {
+                  wx.showToast({
+                    title: '投递成功'
+                  })
+                  console.log('chengshjj')
+                  that.setData({
+                    isTou: true
+                  })
+                }
               }
-            }
-          })
-        } else {
-          this.setData({
-            style: 'display:block'
-          })
+            })
+          } else {
+            this.setData({
+              style: 'display:block'
+            })
+          }
         }
-      }
-    })
-
+      })
+    }else{
+      wx.showToast({
+        title: '您已投递成功！'
+      })
+    }
   },
   quxiao1: function () {
     this.setData({

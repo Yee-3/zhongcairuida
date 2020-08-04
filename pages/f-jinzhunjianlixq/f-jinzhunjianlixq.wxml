@@ -132,9 +132,47 @@
 	</view>
 </view>
 
-<view class="f_01">
+<view class="f_01" wx:if="{{isHz}}">
 	<ul>
 		<li>不合适</li>
-		<li>邀面试</li>
+		<li bindtap="invit">邀面试</li>
 	</ul>
+</view>
+
+<view class="f_01"  wx:if="{{!isHz}}"><view class="s_24" bindtap="invit">电话咨询</view></view>
+<!-- 邀请面试-职位弹框 -->
+<view class="mask" wx:if="{{isMask}}"></view>
+<view class="mask_Mar" wx:if="{{isMask}}">
+	<view class="mar_top">
+		<view class="mar_title">选择所招聘的职位</view>
+		<!-- <view class="mar_bot"> -->
+		<scroll-view scroll-y="true" style="height:{{ height+'rpx'}}">
+			<view class="e_03" wx:for="{{2}}">
+				<view class="e_04">北京市赴京招聘（可控工资；高额返费）</view>
+				<view class="d_10">
+					<p>本科</p><span>|</span>
+					<p>北京</p><span>|</span>
+					<p>7k-8k</p>
+					<!-- </view> -->
+				</view>
+			</view>
+		</scroll-view>
+		<view class="but">
+			<button class="queren" size="mini" style="font-weight:normal;" bindtap="confirm">确认</button>
+		</view>
+	</view>
+</view>
+	<date-picker id="time" value="{{datePickerValue}}" isShow="{{datePickerIsShow}}" bindsureclick="datePickerOnSureClick" />
+<view class="f_08" wx:if="{{isTwo}}">
+	<view class="f_07">
+		<view class="f_14">
+			<p>您还没与平台达成合作</p>
+			<view><span>请联系客服</span><span style="color: #0286ff;">122121</span></view>
+		</view>
+		<view class="f_11">
+			<view class="f_12 fl" bindtap="quxiao2">取消</view>
+			<view class="f_13 fr" bindtap="phone">拨打</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
 </view>
