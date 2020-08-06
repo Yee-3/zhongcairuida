@@ -64,7 +64,7 @@ Page({
       time = new Date().getTime(),
       city = '';
     if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
-      this.getLocate();
+     that.getLocate();
     } else { //如果未满30分钟，那么直接从本地缓存里取值
       that.setData({
         mapValue: cityOrTime.city

@@ -111,6 +111,28 @@
 					"id": -1,
 					"name": "pages/k-qiyezhongxin/k-qiyezhongxin",
 					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/m-qiyezhuce/m-qiyezhuce",
+					"pathName": "pages/m-qiyezhuce/m-qiyezhuce",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/q-wode/q-wode",
+					"pathName": "pages/q-wode/q-wode",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/o-qiyezhuce/o-qiyezhuce",
+					"pathName": "pages/o-qiyezhuce/o-qiyezhuce",
+					"query": "",
 					"scene": null
 				}
 			]

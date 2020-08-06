@@ -18,7 +18,7 @@ Component({
           pagePath: "pages/p-qiyeduan/p-qiyeduan",
           text: "简历中心",
           iconPath: "../../img/d1_1.png",
-          selectedIconPath: "../..//img/d1_11.png"
+          selectedIconPath: "../../img/d1_11.png"
         },
         {
           pagePath: "pages/h-mianshiguanli-yms/h-mianshiguanli-yms",

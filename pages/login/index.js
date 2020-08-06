@@ -22,13 +22,20 @@ Page({
     path: '',
     iv: '',
     encryptedData: '',
-    img: '../img/f051.png'
+    img: '../img/f051.png',
+    type:1,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
-  onLoad: function (options) {},
+  onLoad: function (options) {
+    if(options.id){
+      this.setData({
+        type:2
+      })
+    }
+  },
   //不登陆
   noLogin() {
     wx.reLaunch({
@@ -68,7 +75,8 @@ Page({
                 data: JSON.stringify({
                   code: code,
                   encryptedData: res.encryptedData,
-                  iv: res.iv
+                  iv: res.iv,
+                  type:_this.data.types
                 }),
                 success(res) {
 

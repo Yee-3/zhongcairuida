@@ -4,7 +4,7 @@
 			<p>公司名称</p>
 		</view>
 		<view class="fr a_04">
-			<input placeholder="请输入" />
+			<input placeholder="请输入" data-type="1" value="{{comVal}}" data-value="{{value}}" bindblur="blur"  />
 		</view>
 	</view>
 	<view class="a_02">
@@ -46,7 +46,7 @@
 			<p>公司地址</p>
 		</view>
 		<view class="fr a_04">
-			<input placeholder="请输入" />
+			<input placeholder="请输入" data-type="2" value="{{mapVal}}" data-value="{{value}}" bindblur="blur"/>
 		</view>
 	</view>
 
@@ -92,13 +92,13 @@
 		<view class="fl a_03"><em>*</em>
 			<p>公司描述</p>
 		</view>
-		<view class="fr a_04">
-			<input placeholder="请输入" />
+		<view class="fr a_04" bindtap="desc">
+			<input style="overflow:hidden; white-space:nowrap; text-overflow:ellipsis; " placeholder="请输入" value="{{val}}" disabled/>
 		</view>
 	</view>
 	<view class="o_02">
-		<view class="a_03"><em>*</em>
-			<p>公司描述</p>
+		<view class="a_03" style="width:100%"><em>*</em>
+			<p>上传营业执照</p>
 		</view>
 		<view class="o_05" bindtap="zhiZhao">
 			<image src="{{zhi_img}}"></image>

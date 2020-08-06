@@ -17,13 +17,16 @@ Page({
     zhi_img: '../img/q072.png',
     imgValue: '请上传',
     app: getApp().globalData,
-
+    val:'',
+    mapVal:'',
+    comVal:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     this.nature = this.selectComponent("#nature");
     this.cls = this.selectComponent("#cls");
     this.scale = this.selectComponent("#scale");
@@ -183,9 +186,32 @@ Page({
       phoneNumber: '400-061235'
     })
   },
+  blur(e) {
+		console.log(e)
+		var type = e.currentTarget.dataset.type,
+			that = this,
+			value = e.detail.value
+		if (type == 1) {
+			that.setData({
+				comVal: value
+      })
+      console.log(value)
+		}
+		if (type == 2) {
+			that.setData({
+				mapVal: value
+			})
+    }
+	},
+	
   qzduan(){
     wx.switchTab({
       url: '../m-shouye/m-shouye',
+    })
+  },
+  desc(){
+    wx.navigateTo({
+      url: '../n-qiyezhuce-gsms/n-qiyezhuce-gsms',
     })
   },
   zhiZhao() {

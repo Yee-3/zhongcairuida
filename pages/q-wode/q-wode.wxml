@@ -31,8 +31,7 @@
 				<view class="q_12 fl"><image src="../img/f059.png"></image></view>
 				<view class="q_13 fl">绑定简历</view>
 			</view>
-			<view class="fr">
-				
+			<view class="fr">		
 				<view class="q_15 fl"><image src="../img/f052.png"></image></view>
 			</view>
 		</view>
@@ -82,16 +81,4 @@
 		</view>
 	</view>
 </view>
-
-
-
-
-
-
-
-
-
-
-
-
-
+<toggle id="tog" bind:confirm="confirm"  confirmText="跳转" cancelText="注册" bind:cancel="cancel" content="{{content}}"></toggle>

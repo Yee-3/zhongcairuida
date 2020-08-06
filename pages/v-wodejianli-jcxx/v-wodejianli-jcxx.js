@@ -45,6 +45,7 @@ Page({
     reg_value: '',
     phone_value: '',
     emil_value: '',
+    id: ''
   },
 
   /**
@@ -55,68 +56,115 @@ Page({
     var that = this
     if (wx.getStorageSync('userInfo').ctrlResumeDTO) {
       var list = wx.getStorageSync('userInfo').ctrlResumeDTO
+
       this.setData({
-        img: list.url?list.url:'../img/f067.png',
-        name_value: list.name?list.name:'请输入',
-        date_value: list.time?list.time:'请选择',
-        type_content: list.statusName?list.statusName:'',
-        valu2: list.schoolName?list.schoolName:'',
-        phone_value: list.phone?list.phone:'',
+        img: list.url ? list.url : '../img/f067.png',
+        name_value: list.name ? list.name : '请输入',
+        date_value: list.time ? list.time : '请选择',
+        valu2: list.schoolName ? list.schoolName : '请选择',
+        phone_value: list.phone ? list.phone : '请输入',
+        edu: list.school ? list.school : '',
+        id: list.id,
+        money_value: list.address ? list.address : '请输入',
+        home_value: list.address ? list.address : '请输入',
+        mar: list.marriage ? list.marriage : '',
+        emil_value: list.email ? list.email : ''
       })
+      if (list.sex) {
+        var six_val = (list.sex == 1) ? '男' : '女'
+        this.setData({
+          six_val: six_val,
+        })
+      }
       this.spring.setData({
-        mar: status
-      })
-      this.spring.setData({
-        edu: list.school
-      })
-      // 求职状态
-      this.data.app.http({
-        url: '/selects/resume_status',
-        dengl: true,
-        data: {},
-        success(res) {
-          that.setData({
-            springContent: res.data.rdata
-          })
-        }
-      })
-      // 最高学历
-      this.data.app.http({
-        url: '/selects/school_record',
-        dengl: true,
-        data: {},
-        success(res) {
-          console.log(res)
-          that.setData({
-            eduction: res.data.rdata
-          })
-        }
-      })
-      // 婚姻状况
-      this.data.app.http({
-        url: '/selects/resume_marriage',
-        dengl: true,
-        data: {},
-        success(res) {
-          console.log(res)
-          that.setData({
-            marr: res.data.rdata
-          })
-        }
-      })
-      // 工作时间
-      this.data.app.http({
-        url: '/selects/work_exe',
-        dengl: true,
-        data: {},
-        success(res) {
-          console.log(res)
-          that.setData({
-            yearList: res.data.rdata
-          })
-        }
+        mar: list.status ? list.status : ''
       })
     }
+    // 求职状态
+    this.data.app.http({
+      url: '/selects/resume_status',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          springContent: res.data.rdata
+        })
+        if (list.status) {
+          res.data.rdata.map(function (val, i) {
+            if (val.value == list.status) {
+              that.setData({
+                type_content: val.label,
+              })
+            }
+          })
+        }
+      }
+    })
+    // 最高学历
+    this.data.app.http({
+      url: '/selects/school_record',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          eduction: res.data.rdata
+        })
+        if (list.school) {
+          res.data.rdata.map(function (val, i) {
+            if (val.value == list.school) {
+
+              that.setData({
+                valu2: val.label,
+                edu: val.value
+              })
+            }
+          })
+        }
+      }
+    })
+    // 婚姻状况
+    this.data.app.http({
+      url: '/selects/resume_marriage',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          marr: res.data.rdata
+        })
+        if (list.marriage) {
+          res.data.rdata.map(function (val, i) {
+            if (val.value == list.marriage) {
+              that.setData({
+                valu: val.label,
+                mar: val.value
+              })
+            }
+          })
+        }
+      }
+    })
+    // 工作时间
+    this.data.app.http({
+      url: '/selects/work_exe',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          yearList: res.data.rdata
+        })
+        if (list.workTime) {
+          res.data.rdata.map(function (val, i) {
+            if (val.value == list.workTime) {
+              that.setData({
+                yearValue: val.label,
+                year_time: val.value
+              })
+            }
+          })
+        }
+      }
+    })
+
   },
   blur(e) {
     var type = e.currentTarget.dataset.ty,
@@ -170,29 +218,45 @@ Page({
   },
   submit() {
     var that = this,
-      date = this.data.date.substring(0, 4) + '-' + this.data.date.substring(5, 7) + '-' + this.data.date.substring(8, 10)
+      date = this.data.date_value.substring(0, 4) + '/' + this.data.date_value.substring(5, 7) + '/' + this.data.date_value.substring(8, 10)
+    var data = {
+      address: this.data.home_value,
+      time: date,
+      name: this.data.name_value,
+      phone: this.data.phone_value,
+      email: this.data.emil_value,
+      money: this.data.money_value,
+      url: this.data.img,
+      status: this.spring.data.mar,
+      school: this.data.edu,
+      workTime: this.data.year_time,
+      marriage: this.data.mar,
+      sex: this.data.six,
+      id: this.data.id
+    }
     this.data.app.http({
       url: '/resume/saveOrUpdateResumes',
       dengl: true,
       method: 'POST',
-      data: {
-        address: that.data.home_value,
-        time: date,
-        name: that.data.name_value,
-        phone: that.data.phone_value,
-        email: that.data.email_value,
-        money: that.data.money_value,
-        url: that.data.img,
-        status: that.spring.data.mar,
-        school: that.data.edu,
-        workTime: that.data.year_time,
-        marriage: that.data.mar,
-        sex: that.data.six
-
-
-      },
+      data: data,
       success(res) {
-        console.log(res)
+        if (res.data.code == 200) {
+          var userInfo = wx.getStorageSync('userInfo')
+          userInfo.ctrlResumeDTO = data
+          wx.setStorageSync('userInfo', userInfo)
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2];
+          prevPage.setData({
+            user: wx.getStorageSync('userInfo').ctrlResumeDTO
+          })
+          wx.navigateBack({
+            success(res) {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
+          })
+        }
       }
     })
   },
@@ -227,7 +291,6 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         that.setData({
           springContent: res.data.rdata
         })
@@ -237,7 +300,6 @@ Page({
 
   },
   handleConfirmDialog() {
-    // console.log(this.spring.data.mar)
     this.spring.show()
     var index = this.spring.data.index
     this.setData({
@@ -278,7 +340,7 @@ Page({
   },
   con1() {
     this.hidden()
-    if (this.data.mar == 1) {
+    if (this.data.six == 1) {
       this.setData({
         six_val: '男'
       })
@@ -297,7 +359,6 @@ Page({
   // --end--
   // 学历
   toggle(e) {
-    console.log(e)
     this.setData({
       edu: e.currentTarget.dataset.edu,
       edu_index: e.currentTarget.dataset.index,
@@ -335,7 +396,6 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        // console.log(res)
         // tempFilePath可以作为img标签的src属性显示图片
         _this.setData({
           img: res.tempFilePaths
@@ -392,8 +452,6 @@ Page({
   },
 
   datePickerOnSureClick: function (e) {
-    console.log('datePickerOnSureClick');
-    console.log(e);
     this.setData({
       date_value: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
       datePickerValue: e.detail.value,

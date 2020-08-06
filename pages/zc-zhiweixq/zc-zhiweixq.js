@@ -46,7 +46,7 @@ Page({
         type: 2
       },
       success(res) {
-        console.log(res)
+        console.log(res.data.rdata[0].signUp)
         that.setData({
           detaCont: res.data.rdata[0],
           isTou: res.data.rdata[0].signUp,
@@ -119,7 +119,7 @@ Page({
               method: 'POST',
               data: {
                 company: that.data.detaCont.companyId,
-                position: that.data.detaCont.name
+                position: that.data.detaCont.id
               },
               success(res) {
                 console.log(res)

@@ -103,7 +103,7 @@
 </view>
 <view class="f_04">
 	<view class="f_05 fl">
-		<p>我要分享</p>
+		<button open-type="share" style="font-size:28rpx;font-weight: normal;text-align: center;padding:0">我要分享</button>
 	</view>
 	<view class="f_06 fr" bindtap="tanchuang">
 		<p>{{isTou?'已投递':'立即投递'}}</p>

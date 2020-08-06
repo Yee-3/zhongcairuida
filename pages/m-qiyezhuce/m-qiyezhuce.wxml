@@ -3,7 +3,7 @@
 	<view class="m_06">
 	<view class="m_03">
 		<view class="m_04 fl"><span>*</span><p>真实姓名</p></view>
-		<view class="m_05 fr"><input placeholder="请输入" /></view>
+		<view class="m_05 fr"><input placeholder="请输入" data-type="1" value="{{nameVal}}" data-value="{{value}}" bindblur="blur" /></view>
 	</view>
 	<view class="m_03">
 		<view class="m_04 fl"><span>*</span><p>性别</p></view>
@@ -32,15 +32,15 @@
 	<!-- ---end---- -->
 	<view class="m_03">
 		<view class="m_04 fl"><span>*</span><p>担任职位</p></view>
-		<view class="m_05 fr"><input placeholder="请输入" /></view>
+		<view class="m_05 fr"><input placeholder="请输入" data-type="2" value="{{zhiVal}}" data-value="{{value}}" bindblur="blur" /></view>
 	</view>
 	<view class="m_03">
 		<view class="m_04 fl"><span>*</span><p>常用邮箱</p></view>
-		<view class="m_05 fr"><input placeholder="请输入" /></view>
+		<view class="m_05 fr"><input placeholder="请输入" data-type="3" value="{{emilVal}}" data-value="{{value}}" bindblur="blur"/></view>
 	</view>
 	<view class="m_03">
 		<view class="m_04 fl"><span>*</span><p>联系电话</p></view>
-		<view class="m_05 fr"><input placeholder="请输入" /></view>
+		<view class="m_05 fr"><input placeholder="请输入" data-type="4" value="{{phoneVal}}" data-value="{{value}}" bindblur="blur" /></view>
 	</view></view>
 </view>
 
@@ -48,7 +48,7 @@
 <view class="m_07" bindtap="next">下一步</view>
 
 <view class="m_08">
-	<p>前往求职端</p><span>|</span><p>联系客服</p>
+	<p bindtap="qzduan">前往求职端</p><span>|</span><p>联系客服</p>
 </view>
 
 

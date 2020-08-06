@@ -118,4 +118,5 @@
 		</view>
 	</view>
 </view>
+<toggle id="tog" bind:confirm="confirm"  confirmText="确定" cancelText="取消" bind:cancel="cancel" content="{{content}}"></toggle>
 <tabbars></tabbars>

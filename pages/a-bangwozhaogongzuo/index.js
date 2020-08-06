@@ -29,8 +29,8 @@ Page({
     ind_three: 'x',
     app: getApp().globalData,
     phoneValue: '',
-    nameValue:'',
-    id:''
+    nameValue: '',
+    id: ''
   },
 
   /**
@@ -102,18 +102,18 @@ Page({
   // 校验手机号
   jiaoyan(e) {
     console.log(e)
-    
-    if(!this.data.app.checkPhone(e.detail.value)){
+
+    if (!this.data.app.checkPhone(e.detail.value)) {
       wx.showToast({
         title: '请输入正确的手机号',
         icon: 'none'
       })
-    }else{
+    } else {
       this.setData({
         phoneValue: e.detail.value
       })
     }
-   
+
   },
   hide() {
     var two = this.data.isTwo
@@ -137,7 +137,7 @@ Page({
   toggle1(e) {
     this.setData({
       ind1: e.currentTarget.dataset['index'],
-      ind_three:'x'
+      ind_three: 'x'
     })
   },
   toggle_three(e) {
@@ -155,7 +155,7 @@ Page({
       that = this
     this.setData({
       classValue: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name,
-      id:that.data.posi_id
+      id: that.data.posi_id
     })
 
   },
@@ -213,30 +213,44 @@ Page({
       classValue: this.data.classContent[index].name
     })
   },
-  name(e){
+  name(e) {
     this.setData({
       nameValue: e.detail.value
     })
     console.log(this.data.nameValue)
   },
-  submit(){
-    var that=this
+  submit() {
+    var that = this
     this.data.app.http({
-      url:'/index/lookingWork',
-      dengl:true,
-      method:'POST',
-      data:{
-        address:that.data.mapValue?that.data.mapValue:'',
-        money:that.data.num?that.data.num:'',
-        name:that.data.nameValue?that.data.nameValue:'',
-        position:that.data.id?that.data.id:'',
-        status:that.data.num1?that.data.num1:'',
-        time:that.data.num2?that.data.num2:'',
-        workType:that.data.indexs?that.data.indexs:''
+      url: '/index/lookingWork',
+      dengl: true,
+      method: 'POST',
+      data: {
+        address: that.data.mapValue ? that.data.mapValue : '',
+        money: that.data.num ? that.data.num : '',
+        name: that.data.nameValue ? that.data.nameValue : '',
+        position: that.data.id ? that.data.id : '',
+        status: that.data.num1 ? that.data.num1 : '',
+        time: that.data.num2 ? that.data.num2 : '',
+        workType: that.data.indexs ? that.data.indexs : ''
       },
-      success(res){
+      success(res) {
         console.log(res)
-
+        // if (res.data.code==200){
+        //   var pages = getCurrentPages();
+        //   var prevPage = pages[pages.length - 2];
+        //   console.log(this.data.val)
+        //   prevPage.setData({
+        //     val: that.data.val
+        //   })
+        //   wx.navigateBack({
+        //     success(res) {
+        //       var page = getCurrentPages().pop();
+        //       if (page == undefined || page == null) return;
+        //       page.onLoad();
+        //     }
+        //   })
+        // }
       }
     })
   },

@@ -1,4 +1,6 @@
 {
-  "usingComponents": {},
+  "usingComponents": {
+    "toggle": "../components/toggle/toggle"
+  },
   "navigationBarTitleText": "我的"
 }

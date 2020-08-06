@@ -7,14 +7,17 @@ Page({
   data: {
     dianhua: 'display:none',
     app: getApp().globalData,
-    kefuPhone:{},
-    user:{}
+    kefuPhone: {},
+    user: {},
+    show: true,
+    content: '您已注册企业端信息，是否重新注册？'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.tog = this.selectComponent("#tog");
     const app = getApp().globalData
     // app.http({  
     //     url: '/oauth/login',
@@ -23,18 +26,16 @@ Page({
 
     // })
     this.setData({
-      user:wx.getStorageSync('userInfo').ctrlResumeDTO
+      user: wx.getStorageSync('userInfo').ctrlResumeDTO
     })
-    console.log(wx.getStorageSync('userInfo'))
-    var that=this
+    var that = this
     this.data.app.http({
-      url:'/Other/hotline',
-      dengl:true,
-      data:{},
-      success(res){
-        console.log(res.data.rdata)
+      url: '/Other/hotline',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          kefuPhone:res.data.rdata
+          kefuPhone: res.data.rdata
         })
       }
     })
@@ -42,11 +43,11 @@ Page({
   },
 
   tanchuang_2: function () {
-    var that=this
+    var that = this
     this.setData({
       dianhua: 'display:block'
     })
-    
+
   },
   quxiao2: function () {
     this.setData({
@@ -56,14 +57,12 @@ Page({
   create() {
     wx.checkSession({
       success(res) {
-        console.log('success')
         wx.navigateTo({
           url: '../s-wodejianli/s-wodejianli',
         })
       },
       fail() {
         // var that = this;
-        console.log('失败')
         wx.navigateTo({
           url: '../login/index',
         })
@@ -77,7 +76,6 @@ Page({
       data: {},
       success(res) {
         wx.removeStorageSync('userInfo')
-        console.log(wx.getStorageSync('userInfo'))
       }
     })
   },
@@ -87,7 +85,6 @@ Page({
     })
   },
   base() {
-    console.log('222')
     wx.navigateTo({
       url: '../v-wodejianli-jcxx/v-wodejianli-jcxx',
     })
@@ -98,6 +95,67 @@ Page({
     })
   },
   zhaopin() {
+    this.tog.show()
+    // wx.redirectTo({
+    //   url: '../p-qiyeduan/p-qiyeduan',
+    // })
+  },
+  cancel() {
+    wx.redirectTo({
+      url: '../m-qiyezhuce/m-qiyezhuce',
+    })
+  },
+  confirm() {
+    this.tog.show()
+    // wx.removeStorage('Authorization')
+    // let _this = this;
+    // const app = getApp().globalData
+    // wx.login({
+    //   success(res) {
+    //     var code = res.code
+    //     wx.getUserInfo({
+    //       success: function (res) {       
+    //         if (code) {
+    //           _this.setData({
+    //             nickName: res.userInfo.nickName,
+    //             avatarUrl: res.userInfo.avatarUrl,
+    //             // iv: res.iv,
+    //             // encryptedData: res.encryptedData
+    //           })
+    //           app.http({
+    //             url: '/oauth/login',
+    //             method: 'POST',
+    //             dengl: false,
+    //             header: true,
+    //             type:2,
+    //             data: JSON.stringify({
+    //               code: code,
+    //               encryptedData: res.encryptedData,
+    //               iv: res.iv,
+    //               type:2,
+    //             }),
+    //             success(res) {
+    //               if (res.data.rdata) {
+    //                 wx.setStorageSync('Authorization', res.data.rdata.ctrlToken.token)
+    //                 wx.setStorageSync('userInfo', res.data.rdata)
+    //                   wx.showToast({
+    //                     title: '登录成功'
+    //                   })
+    //                 setTimeout(function () {
+    //                   wx.reLaunch({
+    //                     url: '../p-qiyeduan/p-qiyeduan'
+    //                   })
+    //                 }, 1000)
+    //               }
+    //             }
+    //           })
+    //         }
+    //       },
+    //       fail: function (err) {
+    //       }
+    //     })
+    //   }
+    // });
     wx.redirectTo({
       url: '../p-qiyeduan/p-qiyeduan',
     })

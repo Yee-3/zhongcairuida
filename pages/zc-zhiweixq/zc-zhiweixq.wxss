@@ -299,14 +299,22 @@
   box-sizing: border-box;
 }
 
-.f_05 {
+/* .f_05 {
   width: 200rpx;
   height: 90rpx;
   background: #ececec;
   text-align: center;
   border-radius: 20rpx;
-}
-
+} */
+.f_05 button {
+  font-weight: normal;
+    max-width: 200rpx;
+    max-height: 90rpx;
+    line-height: 90rpx;
+    background: #ececec;
+    text-align: center;
+    border-radius: 20rpx;
+  }
 .f_05 p {
   line-height: 90rpx;
   font-size: 28rpx;
