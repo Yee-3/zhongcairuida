@@ -190,7 +190,9 @@ page {
 .d_13 {
   margin-top: 20rpx;
 }
-
+.d_12 .d_13:not(:first-child){
+  margin-left: 37rpx;
+}
 .d_14 {
   width: 37rpx;
   height: 37rpx;

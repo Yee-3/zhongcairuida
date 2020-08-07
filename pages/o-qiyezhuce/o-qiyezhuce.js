@@ -17,9 +17,11 @@ Page({
     zhi_img: '../img/q072.png',
     imgValue: '请上传',
     app: getApp().globalData,
-    val:'',
-    mapVal:'',
-    comVal:''
+    val: '',
+    mapVal: '',
+    comVal: '',
+    comLogo: '',
+    content: {}
   },
 
   /**
@@ -27,10 +29,15 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    this.setData({
+      content: options
+    })
+    console.log(this.data.content)
     this.nature = this.selectComponent("#nature");
     this.cls = this.selectComponent("#cls");
     this.scale = this.selectComponent("#scale");
     var that = this
+    console.log(this.cls.data.mar)
     // 公司性质
     this.data.app.http({
       url: '/selects/company_nature',
@@ -82,7 +89,8 @@ Page({
     var _this = this
     var imgbox = this.data.imgbox
     var picid = e.currentTarget.dataset.pic
-    // console.log(imgbox)
+
+    console.log(imgbox)
     var n = 9
     if (9 > imgbox.length > 0) {
       n = 9 - imgbox.length;
@@ -97,13 +105,13 @@ Page({
         var tempFilePaths = res.tempFilePaths
         if (imgbox.length == 0) {
           imgbox = tempFilePaths
-          console.log(imgbox)
+          // console.log(imgbox)
         } else if (9 > imgbox.length) {
           imgbox = imgbox.concat(tempFilePaths)
         } else {
           imgbox[picid] = tempFilePaths[0];
         }
-        console.log(tempFilePaths)
+        // console.log(tempFilePaths)
         // tempFilePath可以作为img标签的src属性显示图片
         _this.setData({
           imgbox: imgbox
@@ -187,31 +195,31 @@ Page({
     })
   },
   blur(e) {
-		console.log(e)
-		var type = e.currentTarget.dataset.type,
-			that = this,
-			value = e.detail.value
-		if (type == 1) {
-			that.setData({
-				comVal: value
+    console.log(e)
+    var type = e.currentTarget.dataset.type,
+      that = this,
+      value = e.detail.value
+    if (type == 1) {
+      that.setData({
+        comVal: value
       })
       console.log(value)
-		}
-		if (type == 2) {
-			that.setData({
-				mapVal: value
-			})
     }
-	},
-	
-  qzduan(){
+    if (type == 2) {
+      that.setData({
+        mapVal: value
+      })
+    }
+  },
+
+  qzduan() {
     wx.switchTab({
       url: '../m-shouye/m-shouye',
     })
   },
-  desc(){
+  desc() {
     wx.navigateTo({
-      url: '../n-qiyezhuce-gsms/n-qiyezhuce-gsms',
+      url: '../n-qiyezhuce-gsms/n-qiyezhuce-gsms?nameVal='+this.data.content.nameVal+'&six='+this.data.content.six+'&zhiVal='+this.data.content.zhiVal+'&emilVal='+this.data.content.emilVal+'&phoneVal='+this.data.content.phoneVal,
     })
   },
   zhiZhao() {
@@ -223,7 +231,6 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths)
         _this.setData({
           zhi_img: tempFilePaths
         })
@@ -241,15 +248,49 @@ Page({
         const tempFilePaths = res.tempFilePaths
         console.log(tempFilePaths)
         _this.setData({
-          imgValue: '已上传'
+          imgValue: '已上传',
+          comLogo: tempFilePaths
         })
       }
     })
   },
   next() {
-    wx.switchTab({
-      url: '../k-qiyezhongxin/k-qiyezhongxin',
+    console.log(this.cls.data.edu)
+    var that = this
+    this.data.app.http({
+      url: '/company/saveCompany',
+      dengl: true,
+      method: 'POST',
+      data: {
+        companyDescribe: that.data.val ? that.data.val : '',
+        companyLogo: that.data.comLogo ? that.data.comLogo : '',
+        companyName: that.data.comVal ? that.data.comVal : '',
+        companyNature: this.nature.data.edu ? this.nature.data.edu : '',
+        companyType: this.cls.data.edu ? this.cls.data.edu : '',
+        companyUrl: that.data.zhi_img ? that.data.zhi_img : '',
+        companyNum:this.scale.data.edu ? this.scale.data.edu : '',
+        email: that.data.content.emilVal ? that.data.content.emilVal : '',
+        // id
+        name: that.data.content.nameVal ? that.data.content.nameVal : '',
+        office: that.data.imgbox ? that.data.imgbox : '',
+        phone: that.data.content.phoneVal ? that.data.content.phoneVal : '',
+        position: that.data.content.zhiVal ? that.data.content.zhiVal : '',
+        sex: that.data.content.six ? that.data.content.six : '',
+
+
+      },
+      success(res) {
+        console.log(res)
+        if(res.data.code==200){
+          wx.reLaunch({
+            url: '../p-qiyeduan/p-qiyeduan',
+          })
+        }
+      }
     })
+    // wx.switchTab({
+    //   url: '../k-qiyezhongxin/k-qiyezhongxin',
+    // })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

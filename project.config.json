@@ -25,7 +25,7 @@
 		}
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.11.1",
+	"libVersion": "2.12.0",
 	"appid": "wx4e6c0fd45e00eba3",
 	"projectname": "%E4%B8%AD%E6%89%8D%E7%91%9E%E8%BE%BE%EF%BC%88%E6%B1%82%E8%81%8C%E7%AB%AF%EF%BC%89",
 	"debugOptions": {
@@ -60,29 +60,15 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/i-mianshi-yrz/i-mianshi-yrz",
-					"pathName": "pages/i-mianshi-yrz/i-mianshi-yrz",
+					"name": "pages/o-qiyezhuce/o-qiyezhuce",
+					"pathName": "pages/o-qiyezhuce/o-qiyezhuce",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/k-qiyezhongxin/k-qiyezhongxin",
-					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/q-wode/q-wode",
-					"pathName": "pages/q-wode/q-wode",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
-					"pathName": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
+					"name": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
+					"pathName": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
 					"query": "",
 					"scene": null
 				},
@@ -90,48 +76,6 @@
 					"id": -1,
 					"name": "pages/p-qiyeduan/p-qiyeduan",
 					"pathName": "pages/p-qiyeduan/p-qiyeduan",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
-					"pathName": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
-					"pathName": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/k-qiyezhongxin/k-qiyezhongxin",
-					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/m-qiyezhuce/m-qiyezhuce",
-					"pathName": "pages/m-qiyezhuce/m-qiyezhuce",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/q-wode/q-wode",
-					"pathName": "pages/q-wode/q-wode",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/o-qiyezhuce/o-qiyezhuce",
-					"pathName": "pages/o-qiyezhuce/o-qiyezhuce",
 					"query": "",
 					"scene": null
 				}

@@ -52,8 +52,8 @@ Page({
     id: '',
     zwCom: true,
     zhCom: true,
+    work:{}
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -77,7 +77,8 @@ Page({
       success(res) {
         that.setData({
           imgList: res.data.rdata.ctrlBannerList,
-          selList: res.data.rdata.ctrlSelects
+          selList: res.data.rdata.ctrlSelects,
+          work:res.data.rdata.ctrlLookingwork
         })
       }
     })
@@ -425,8 +426,9 @@ Page({
     })
   },
   run() {
+    var work=this.data.work
     wx.navigateTo({
-      url: '../a-bangwozhaogongzuo/index',
+      url: '../a-bangwozhaogongzuo/index?id='+work.id+'&address='+work.address+'&money='+work.money+"&name="+work.name+'&phone='+work.phone+'&position='+work.position+'&status='+work.status+'&time='+work.time+'&workType='+work.workType,
     })
   },
   weizhi() {
@@ -801,7 +803,6 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
   },
 
   /**

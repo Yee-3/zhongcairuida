@@ -11,7 +11,7 @@
 		</view>
 	</view>
 	<view class="fr q_09">
-		<!-- <image src="{{baseUrl+resume.ctrlResumeDTO.url}}"></image> -->
+		<image src="{{resume.ctrlResumeDTO.url}}"></image>
 	</view>
 </view>
 

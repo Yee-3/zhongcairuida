@@ -176,12 +176,13 @@
 
 .q_03 {
   height: 60rpx;
+  /* width:100%; */
 }
 
 .q_04 input {
   height: 60rpx;
   line-height: 60rpx;
-  width: 120rpx;
+  width:400rpx;
   font-size: 50rpx;
   color: #000;
   font-weight: 600;

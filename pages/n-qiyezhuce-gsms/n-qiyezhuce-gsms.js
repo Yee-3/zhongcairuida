@@ -5,14 +5,18 @@ Page({
    * 页面的初始数据
    */
   data: {
-    val: ''
+    val: '',
+    content: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    console.log(options)
+    this.setData({
+      content: options
+    })
   },
   change(e) {
     console.log(e)
@@ -26,17 +30,18 @@ Page({
     var prevPage = pages[pages.length - 2];
     console.log(this.data.val)
     prevPage.setData({
-      val: that.data.val
+      val: that.data.val,
+      content: that.data.content
     })
     wx.navigateBack({
       success(res) {
         var page = getCurrentPages().pop();
         if (page == undefined || page == null) return;
-        page.onLoad();
+        // page.onLoad();
       }
     })
   },
- 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

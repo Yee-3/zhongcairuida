@@ -72,7 +72,7 @@ Page({
       })
       if (list.sex) {
         var six_val = (list.sex == 1) ? '男' : '女'
-        this.setData({
+        that.setData({
           six_val: six_val,
         })
       }
@@ -233,6 +233,24 @@ Page({
       marriage: this.data.mar,
       sex: this.data.six,
       id: this.data.id
+    },
+    data1 = {
+      address: this.data.home_value,
+      time: date,
+      name: this.data.name_value,
+      phone: this.data.phone_value,
+      email: this.data.emil_value,
+      money: this.data.money_value,
+      url: this.data.img,
+      status: this.spring.data.mar,
+      school: this.data.edu,
+      workTime: this.data.year_time,
+      marriage: this.data.mar,
+      sex: this.data.six,
+      id: this.data.id,
+      schoolName:this.data.valu2,
+      statusName:this.data.type_content,
+      workTimeName:this.data.yearValue,
     }
     this.data.app.http({
       url: '/resume/saveOrUpdateResumes',
@@ -242,7 +260,7 @@ Page({
       success(res) {
         if (res.data.code == 200) {
           var userInfo = wx.getStorageSync('userInfo')
-          userInfo.ctrlResumeDTO = data
+          userInfo.ctrlResumeDTO = data1
           wx.setStorageSync('userInfo', userInfo)
           var pages = getCurrentPages();
           var prevPage = pages[pages.length - 2];

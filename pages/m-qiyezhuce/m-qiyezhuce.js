@@ -14,7 +14,6 @@ Page({
     phoneVal:'',
     app: getApp().globalData
   },
-
   /**
    * 生命周期函数--监听页面加载
    */
@@ -29,6 +28,11 @@ Page({
   qzduan() {
     wx.switchTab({
       url: '../m-shouye/m-shouye',
+    })
+  },
+  phone() {
+    wx.makePhoneCall({
+      phoneNumber: '400-061235'
     })
   },
   con1() {
@@ -109,7 +113,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.hideHomeButton({
+      success: function () {
+        console.log("hide home success");
+      },
+      fail: function () {
+        console.log("hide home fail");
+      },
+      complete: function () {
+        console.log("hide home complete");
+      },
+    });
   },
 
   /**

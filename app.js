@@ -36,7 +36,7 @@ App({
     })
 
   },
-
+ 
   globalData: {
     userInfo: null,
     baseUrl: 'http://123.56.114.88:8089',

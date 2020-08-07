@@ -12,7 +12,9 @@ Page({
     datePickerValue: ['', '', ''],
     datePickerIsShow: false,
     isHz:true,
-    isTwo:false
+    isTwo:false,
+    app: getApp().globalData,
+    content:{},
   },
 
   /**
@@ -21,6 +23,46 @@ Page({
   onLoad: function (options) {
     this.setData({
       height: wx.getSystemInfoSync().windowHeight * 0.9,
+    })
+    var that=this
+    this.data.app.http({
+      url:'/indexCom/getResumeDetail',
+      dengl:true,
+      method:'POST',
+      data:{id:options.id},
+      success(res){
+        console.log(res)
+        var timer=res.data.rdata.ctrlWorkDTOS
+        var xiangTime=res.data.rdata.ctrlProjectDTOS
+        var schoolTime=res.data.rdata.ctrlSchoolDTOS
+        timer.map(function(val,i){
+          var startTime=val.startTime.substring(0,7).replace(/-/g,'/')
+          var endTime=val.endTime.substring(0,7).replace(/-/g,'/')
+          val.time=[startTime,endTime]
+        })
+        
+        xiangTime.map(function(val,i){
+          var startTime=val.startTime.substring(0,7).replace(/-/g,'/')
+          var endTime=val.endTime.substring(0,7).replace(/-/g,'/')
+          val.time=[startTime,endTime]
+        })
+        
+        schoolTime.map(function(val,i){
+          var startTime=val.startTime.substring(0,7).replace(/-/g,'/')
+          var endTime=val.endTime.substring(0,7).replace(/-/g,'/')
+          val.time=[startTime,endTime]
+        })
+        var arr=res.data.rdata.ctrlBookDTOS
+        arr.map(function(val,i){
+        var time=val.time.substring(0,4)+'年'+val.time.substring(5,7)+'月'
+          val.times=time
+        })
+        
+        that.setData({
+          content:res.data.rdata
+        })
+
+      }
     })
   },
   change: function (e) {

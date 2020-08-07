@@ -136,7 +136,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.hideHomeButton({
+      success: function () {
+        console.log("hide home success");
+      },
+      fail: function () {
+        console.log("hide home fail");
+      },
+      complete: function () {
+        console.log("hide home complete");
+      },
+    });
   },
 
   /**

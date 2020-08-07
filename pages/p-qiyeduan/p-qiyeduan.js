@@ -12,7 +12,9 @@ Page({
       contentrefresh: "正在加载...",
       contentnomore: "我也是有底线的~"
     },
+    app: getApp().globalData,
     recomList: [],
+    imgList: [],
   },
 
   /**
@@ -20,12 +22,60 @@ Page({
    */
   onLoad: function (options) {
     this.tab = this.selectComponent("#tab");
-  },
-  more(){
-    wx.navigateTo({
-      url: '../d-hailiangrencai/d-hailiangrencai?id=2',
+    var that = this
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/indexCom/getIndex',
+      data: {
+        limit: 1,
+        page: that.data.currentPage
+      },
+      dengl: true,
+      success(res) {
+        that.setData({
+          imgList: res.data.rdata.ctrlBannerList,
+          recomList: res.data.rdata.ctrlResumeList,
+        })
+        var arr = res.data.rdata.ctrlResumeList
+        var myDate = new Date()
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var arrs = val.ctrlProjectDTOS
+            if (arrs.length > 0) {
+              arrs.map(function (vals, is) {
+                console.log(vals)
+                var date1 = vals.startTime.substring(0, 10)
+                var date = vals.endTime.substring(0, 10)
+                let start = new Date(date1.replace(/\-/g, "/"));
+                let end = new Date(date.replace(/\-/g, "/"));
+                let startYear = start.getFullYear();
+                let startMonth = start.getMonth();
+                let endYear = end.getFullYear();
+                let endMonth = end.getMonth();
+                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
+                var val =(monthCount/12).toString().split(".")
+               var value=(val[0]==0?'':val[0]+'年')+(val[1]?val[1]+'个月':'')
+                vals.timeVal = value
+                // console.log(vals,value)
+              })
+            }
+          })
+        }
+        if (res.data.rdata.ctrlResumeList.length < 1) {
+          that.setData({
+            loadingType: 2
+          })
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
+      }
     })
   },
+  // more(){
+  //   wx.navigateTo({
+  //     url: '../d-hailiangrencai/d-hailiangrencai?id=2',
+  //   })
+  // },
   person() {
     wx.navigateTo({
       url: '../d-hailiangrencai/d-hailiangrencai',
@@ -41,9 +91,9 @@ Page({
       url: '../d-hailiangrencai/d-hailiangrencai?id=' + 1,
     })
   },
-  detail() {
+  detail(e) {
     wx.navigateTo({
-      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq',
+      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id,
     })
   },
   qyRen() {
@@ -154,7 +204,17 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    wx.hideHomeButton({
+      success: function () {
+        console.log("hide home success");
+      },
+      fail: function () {
+        console.log("hide home fail");
+      },
+      complete: function () {
+        console.log("hide home complete");
+      },
+    });
   },
 
   /**

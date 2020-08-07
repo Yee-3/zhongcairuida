@@ -30,7 +30,8 @@ Page({
     app: getApp().globalData,
     phoneValue: '',
     nameValue: '',
-    id: ''
+    id: '',
+    workId: ''
   },
 
   /**
@@ -39,16 +40,29 @@ Page({
   onLoad: function (options) {
     var app = getApp().globalData
     var that = this
+    console.log(options)
+    if(options){
+    this.setData({
+      workId: options.id,
+      nameValue: options.name ? options.name : '',
+      mapValue: options.address ? options.address : '',
+      phoneValue: options.phone ? options.phone : '',
+      num: options.money ? options.money : '',
+      indexs: options.workType ? options.workType : '',
+      num1: options.status ? options.status : '',
+      num2: options.time ? options.time : '',
+    })
+  }
     // 期望薪资
     app.http({
       url: '/selects/expect_money',
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         that.setData({
           money: res.data.rdata
         })
+
       }
     })
     // 求职状态
@@ -57,7 +71,6 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         that.setData({
           status: res.data.rdata
         })
@@ -73,6 +86,27 @@ Page({
         that.setData({
           zhiList: res.data.rdata[0].treeDTOS
         })
+        if (options.position) {
+          res.data.rdata[0].treeDTOS.map(function (val, i) {
+            console.log(val)
+            var arr = val
+            arr.treeDTOS.map(function (vals, is) {
+              console.log(vals)
+              var arrs = vals
+              arrs.treeDTOS.map(function (va, ii) {
+                if (options.position == va.id) {
+                  console.log(va)
+                  that.setData({
+                    ind_three: ii,
+                    classValue: va.name
+                  })
+                  console.log(that.data.classValue)
+                }
+              })
+
+            })
+          })
+        }
       }
     })
     // 到岗时间
@@ -92,7 +126,6 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         that.setData({
           work_type: res.data.rdata
         })
@@ -101,19 +134,9 @@ Page({
   },
   // 校验手机号
   jiaoyan(e) {
-    console.log(e)
-
-    if (!this.data.app.checkPhone(e.detail.value)) {
-      wx.showToast({
-        title: '请输入正确的手机号',
-        icon: 'none'
-      })
-    } else {
-      this.setData({
-        phoneValue: e.detail.value
-      })
-    }
-
+    this.setData({
+      phoneValue: e.detail.value
+    })
   },
   hide() {
     var two = this.data.isTwo
@@ -169,11 +192,9 @@ Page({
   },
 
   checkboxChange: function (e) {
-    console.log('checkbox发生change事件，携带value值为：', e.detail.value)
+    // console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   },
   active(e) {
-    // console.log(e.currentTarget.dataset.num)
-    // console.log(e)
     this.setData({
       num: e.currentTarget.dataset.num
     })
@@ -208,7 +229,6 @@ Page({
   confirm() {
     this.zhiwei()
     var index = this.data.ind1
-    console.log(this.data.classContent[index])
     this.setData({
       classValue: this.data.classContent[index].name
     })
@@ -217,42 +237,49 @@ Page({
     this.setData({
       nameValue: e.detail.value
     })
-    console.log(this.data.nameValue)
   },
   submit() {
-    var that = this
-    this.data.app.http({
-      url: '/index/lookingWork',
-      dengl: true,
-      method: 'POST',
-      data: {
-        address: that.data.mapValue ? that.data.mapValue : '',
-        money: that.data.num ? that.data.num : '',
-        name: that.data.nameValue ? that.data.nameValue : '',
-        position: that.data.id ? that.data.id : '',
-        status: that.data.num1 ? that.data.num1 : '',
-        time: that.data.num2 ? that.data.num2 : '',
-        workType: that.data.indexs ? that.data.indexs : ''
-      },
-      success(res) {
-        console.log(res)
-        // if (res.data.code==200){
-        //   var pages = getCurrentPages();
-        //   var prevPage = pages[pages.length - 2];
-        //   console.log(this.data.val)
-        //   prevPage.setData({
-        //     val: that.data.val
-        //   })
-        //   wx.navigateBack({
-        //     success(res) {
-        //       var page = getCurrentPages().pop();
-        //       if (page == undefined || page == null) return;
-        //       page.onLoad();
-        //     }
-        //   })
-        // }
-      }
-    })
+    if (!this.data.app.checkPhone(this.data.phoneValue)) {
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none'
+      })
+    } else {
+      var that = this
+      this.data.app.http({
+        url: '/index/lookingWork',
+        dengl: true,
+        method: 'POST',
+        data: {
+          address: that.data.mapValue ? that.data.mapValue : '',
+          money: that.data.num ? that.data.num : '',
+          name: that.data.nameValue ? that.data.nameValue : '',
+          position: that.data.id ? that.data.id : '',
+          status: that.data.num1 ? that.data.num1 : '',
+          time: that.data.num2 ? that.data.num2 : '',
+          workType: that.data.indexs ? that.data.indexs : '',
+          phone: that.data.phoneValue ? that.data.phoneValue : '',
+          id: that.data.workId ? that.data.workId : ''
+        },
+        success(res) {
+          if (res.data.code == 200) {
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2];
+            console.log(this.data.val)
+            prevPage.setData({
+              val: that.data.val
+            })
+            wx.navigateBack({
+              success(res) {
+                var page = getCurrentPages().pop();
+                if (page == undefined || page == null) return;
+                page.onLoad();
+              }
+            })
+          }
+        }
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成
