@@ -23,24 +23,30 @@ Page({
     iv: '',
     encryptedData: '',
     img: '../img/f051.png',
-    type:1,
+    type: 1,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    if(options.id){
+    if (options.type == 2) {
       this.setData({
-        type:2
+        type: 2
       })
     }
   },
   //不登陆
   noLogin() {
-    wx.reLaunch({
-      url: '/pages/m-shouye/m-shouye'
-    })
+    if (this.data.type == 1){
+      wx.reLaunch({
+        url: '/pages/m-shouye/m-shouye'
+      })
+    }else{
+      wx.reLaunch({
+        url: '../p-qiyeduan/p-qiyeduan'
+      })
+    }
   },
 
   //拿到用户信息
@@ -76,7 +82,7 @@ Page({
                   code: code,
                   encryptedData: res.encryptedData,
                   iv: res.iv,
-                  type:_this.data.types
+                  type: _this.data.type
                 }),
                 success(res) {
 
@@ -88,11 +94,19 @@ Page({
                       wx.showToast({
                         title: '登录成功'
                       })
-                    setTimeout(function () {
-                      wx.reLaunch({
-                        url: '../m-shouye/m-shouye'
-                      })
-                    }, 1000)
+                    if (_this.data.type == 1) {
+                      setTimeout(function () {
+                        wx.reLaunch({
+                          url: '../m-shouye/m-shouye'
+                        })
+                      }, 1000)
+                    } else {
+                      setTimeout(function () {
+                        wx.reLaunch({
+                          url: '../p-qiyeduan/p-qiyeduan'
+                        })
+                      }, 1000)
+                    }
                   }
                 }
               })

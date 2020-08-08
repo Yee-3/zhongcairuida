@@ -66,7 +66,7 @@
 .q_04 {
   height: 60rpx;
   line-height: 60rpx;
-  width: 120rpx;
+  /* width: 120rpx; */
   font-size: 50rpx;
   color: #fff;
   font-weight: 600;

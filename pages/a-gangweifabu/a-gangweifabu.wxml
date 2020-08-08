@@ -1,6 +1,16 @@
 <view class="a_01">
 	<view class="a_02">
 		<view class="fl a_03"><em>*</em>
+			<p>标题</p>
+		</view>
+		<view class="fr a_04">
+			<view class="section">
+				<input placeholder="请输入" value="{{titleValue}}" data-value="{{value}}" bindblur="blur" data-ty="1" />
+			</view>
+		</view>
+	</view>
+	<view class="a_02">
+		<view class="fl a_03"><em>*</em>
 			<p>职位名称</p>
 		</view>
 		<view class="fr a_04">
@@ -17,7 +27,7 @@
 			<p>招聘人数</p>
 		</view>
 		<view class="fr a_04">
-			<input placeholder="请输入" value="{{numValue}}" data-value="{{value}}" bindblur="blur" data-ty="1" />
+			<input placeholder="请输入" value="{{numValue}}" data-value="{{value}}" bindblur="blur" data-ty="2" />
 		</view>
 	</view>
 	<view class="a_02">
@@ -80,7 +90,7 @@
 		</view>
 		<view class="fr a_04">
 			<view class="section">
-				<input placeholder="请输入" value="{{mapValue}}" data-value="{{value}}" bindblur="blur" data-ty="2" />
+				<input placeholder="请输入" value="{{mapValue}}" data-value="{{value}}" bindblur="blur" data-ty="3" />
 			</view>
 		</view>
 	</view>
@@ -89,7 +99,7 @@
 			<p>工作职责</p>
 		</view>
 		<view class="a_05">
-			<textarea placeholder="请输入" value="{{workValue}}" data-value="{{value}}" bindblur="blur" data-ty="3" ></textarea>
+			<textarea placeholder="请输入" value="{{workValue}}" data-value="{{value}}" bindblur="blur" data-ty="4"></textarea>
 		</view>
 	</view>
 	<view class="a_06">
@@ -97,7 +107,7 @@
 			<p>任职要求</p>
 		</view>
 		<view class="a_05">
-			<textarea style="height:200rpx" placeholder="请输入" value="{{yqValue}}" data-value="{{value}}" bindblur="blur" data-ty="4" ></textarea>
+			<textarea style="height:200rpx" placeholder="请输入" value="{{yqValue}}" data-value="{{value}}" bindblur="blur" data-ty="5"></textarea>
 		</view>
 	</view>
 	<view class="a_07">
@@ -106,7 +116,7 @@
 				<p>职位福利</p>
 			</view>
 			<view class="fr a_04">
-				<view class="section" >
+				<view class="section">
 					<view class="picker" bindtap="welfare" data-type="5">{{wel_Value}}</view>
 				</view>
 			</view>
@@ -119,14 +129,14 @@
 			</ul>
 		</view>
 	</view>
-	<checkbox id="wel" title="职位福利" confirmText="确定" cancelText="取消" content="{{welContent}}"  bind:cancel="handleCancel" bind:confirm="handleConfirm">
+	<checkbox id="wel" title="职位福利" confirmText="确定" cancelText="取消" content="{{welContent}}" bind:cancel="handleCancel" bind:confirm="handleConfirm">
 	</checkbox>
 	<view class="a_06">
 		<view class="a_03"><em>*</em>
 			<p>薪资结构</p>
 		</view>
 		<view class="a_05">
-			<textarea placeholder="请输入" value="{{moneyValue}}" data-value="{{value}}" bindblur="blur" data-ty="5" ></textarea>
+			<textarea placeholder="请输入" value="{{moneyValue}}" data-value="{{value}}" bindblur="blur" data-ty="6"></textarea>
 		</view>
 	</view>
 	<view class="a_09">
@@ -144,6 +154,7 @@
 				<ul>
 					<li class="{{ty==1?'on':''}}" bindtap="types" data-index="1">到面式</li>
 					<li class="{{ty==2?'on':''}}" bindtap="types" data-index='2'>到岗式</li>
+					<li class="{{ty==3?'on':''}}" bindtap="types" data-index='3'>到岗式</li>
 				</ul>
 			</view>
 			<view class="w-clear"></view>
@@ -155,11 +166,11 @@
 			<view class="fr a_12">
 				<view class="page-section page-section-gap">
 					<view class="page-section-title"></view>
-					<switch name="switch" />
+					<switch name="switch" bindchange="switch1Change" />
 				</view>
 			</view>
 			<view class="w-clear"></view>
 		</view>
 	</view>
-	<view class="a_13">发布</view>
+	<view class="a_13" bindtap="submit">发布</view>
 </view>

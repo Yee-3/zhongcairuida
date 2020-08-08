@@ -5,122 +5,190 @@ Page({
    * 页面的初始数据
    */
   data: {
-    natureContent: [{
-        item: '全职'
-      },
-      {
-        item: '兼职'
-      },
-      {
-        item: '实习'
-      },
-      {
-        item: '全职/兼职'
-      }
-    ],
+    natureContent: [],
     style: '',
     zhiValue: '请选择',
     expValue: '请选择',
     eduValue: '请选择',
     salaValue: '请选择',
     nameValue: '请选择',
-    numValue:'',
-    mapValue:'',
-    workValue:'',
-    yqValue:'',
-    moneyValue:'',
+    numValue: '',
+    mapValue: '',
+    workValue: '',
+    yqValue: '',
+    moneyValue: '',
     welValue: '',
-    wel_Value:'请输入',
+    titleValue: '',
+    wel_Value: '请选择',
     experContent: [],
     type: '',
     educatContent: [],
     salaContent: [],
     welContent: [],
-    ty: '1',
+    ty: '',
     nameContent: [],
     app: getApp().globalData,
+    id:'',
+    welLi:[],
+    swicth:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var that=this
+    var that = this
     this.spring = this.selectComponent("#spring");
     this.exp = this.selectComponent("#exp");
     this.edu = this.selectComponent("#edu");
     this.sala = this.selectComponent("#sala");
     this.wel = this.selectComponent("#wel");
     this.name = this.selectComponent("#name");
+    console.log(options)
+    this.setData({
+      id:options.id
+    })
     // 职位
     this.data.app.http({
-      url:'/selects/position',
-      dengl:true,
-      data:{},
-      success(res){
+      url: '/selects/position',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          nameContent:res.data.rdata[0].treeDTOS
+          nameContent: res.data.rdata[0].treeDTOS
         })
       }
     })
     // 工作类型
     this.data.app.http({
-      url:'/selects/work_type',
-      dengl:true,
-      data:{},
-      success(res){
+      url: '/selects/work_type',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          natureContent:res.data.rdata
+          natureContent: res.data.rdata
         })
       }
     })
     // 工作经验
     this.data.app.http({
-      url:'/selects/work_exe',
-      dengl:true,
-      data:{},
-      success(res){
+      url: '/selects/work_exe',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          experContent:res.data.rdata
+          experContent: res.data.rdata
         })
       }
     })
-     // 学历要求
-     this.data.app.http({
-      url:'/selects/school_record',
-      dengl:true,
-      data:{},
-      success(res){
+    // 学历要求
+    this.data.app.http({
+      url: '/selects/school_record',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          educatContent:res.data.rdata
+          educatContent: res.data.rdata
         })
       }
     })
-     // 薪资要求
-     this.data.app.http({
-      url:'/selects/expect_money',
-      dengl:true,
-      data:{},
-      success(res){
+    // 薪资要求
+    this.data.app.http({
+      url: '/selects/expect_money',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          salaContent:res.data.rdata
+          salaContent: res.data.rdata
         })
       }
     })
     // 职位福利
     this.data.app.http({
-      url:'/selects/work_welfare',
-      dengl:true,
-      data:{},
-      success(res){
-        res.data.rdata.map(function(n){
-          n.dandu=false
+      url: '/selects/work_welfare',
+      dengl: true,
+      data: {},
+      success(res) {
+        res.data.rdata.map(function (n) {
+          n.dandu = false
         })
         that.setData({
-          welContent:res.data.rdata
+          welContent: res.data.rdata
         })
       }
     })
+  },
+  submit(){
+    var that=this
+    this.data.app.http({
+      type:true,
+      url:'/company/addOrUpdateJobPosition',
+      dengl:true,
+      method:'POST',
+      data:{
+        address:that.data.mapValue,
+        companyId:that.data.id,
+        describe:that.data.workValue,
+        money:that.sala.data.edu,
+        num:that.data.numValue,
+        positionType:1,
+        schoolRecord:that.edu.data.edu,
+        title:that.data.titleValue,
+        workExperience:that.exp.data.edu,
+        workType:that.spring.data.edu,
+        serviceType:that.data.ty,
+        requirements:that.data.yqValue?that.data.yqValue:'',
+        structure:that.data.moneyValue?that.data.moneyValue:'',
+        welfare:that.data.welLi?that.data.welLi:'',
+        first:that.data.swicth,
+        name:that.name.data.id
+      },
+      success(res){
+
+      }
+    })
+  },
+  blur(e) {
+    console.log(value)
+    var type = e.currentTarget.dataset.ty,
+      that = this,
+      value = e.detail.value
+    if (type == 1) {
+      that.setData({
+        titleValue: value
+      })
+    }
+    if (type == 2) {
+      that.setData({
+        numValue: value
+      })
+    }
+    if (type == 3) {
+      that.setData({
+        mapValue: value
+      })
+    }
+    if (type == 4) {
+      that.setData({
+        workValue: value
+      })
+    }
+    if (type == 5) {
+      that.setData({
+        yqValue: value
+      })
+    }
+    if (type == 6) {
+      that.setData({
+        moneyValue: value
+      })
+    }
+  },
+  switch1Change: function (e){
+    this.setData({
+      swicth:e.detail.value
+    })
+    console.log('switch1 发生 change 事件，携带值为', e.detail.value)
   },
   zhiwei(e) {
     console.log(e)
@@ -178,7 +246,7 @@ Page({
     } else if (this.data.type == 2) {
       this.exp.show()
       var index = this.exp.data.index
-    
+
       this.setData({
         expValue: this.data.experContent[index].label
       })
@@ -198,9 +266,16 @@ Page({
     } else {
       this.wel.show()
       // var that = this
-      this.setData({
-        welValue: this.wel.data.welList
+      // this.wel.data.welList.map(function(val,i){
+        console.log(this.wel.data.valList)
+      //   this.setData({
+        //   })
+        // })
+        this.setData({
+          welValue: this.wel.data.welList,
+          welLi:this.wel.data.valList
       })
+
       console.log(this.data.welValue)
     }
   },
@@ -211,13 +286,13 @@ Page({
       this.exp.show()
     } else if (this.data.type == 3) {
       this.edu.show()
-    } else if(this.data.type==4) {
+    } else if (this.data.type == 4) {
       this.sala.show()
-    }else{
+    } else {
       this.wel.show()
     }
   },
- confirm(){
+  confirm() {
     this.name.position()
     var index = this.name.data.ind,
       index2 = this.name.data.ind1,
@@ -232,7 +307,7 @@ Page({
       ty: e.currentTarget.dataset.index
     })
   },
-  zhiName(){
+  zhiName() {
     this.name.position()
   },
   naCancel() {
@@ -242,14 +317,14 @@ Page({
 
     })
   },
-  naConfirm(){
-   this.name.position()
-      var index = this.name.data.ind2
-      this.setData({
-        nameValue: this.data.sContent[index].item
-      })
+  naConfirm() {
+    this.name.position()
+    var index = this.name.data.ind2
+    this.setData({
+      nameValue: this.data.sContent[index].item
+    })
   },
-  welConfirm(){
+  welConfirm() {
 
   },
   /**

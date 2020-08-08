@@ -36,7 +36,8 @@ Component({
     edu: '',
     value: '',
     index:'',
-    welList:[]
+    welList:[],
+    valList:[]
   },
 
   /**
@@ -57,15 +58,18 @@ Component({
         index:e.currentTarget.dataset.index
       })
       var xArr = []
+      var valList = []
       for (var i = 0; i < this.data.content.length; i++) {
         if (this.data.content[i].dandu) {
           xArr.push(this.data.content[i])
+          valList.push(this.data.content[i].value)
         }
       }
       this.setData({
         welList: xArr,
+        valList:valList
       })
-      console.log(this.data.welList)
+      console.log(this.data.welList,this.data.valList)
       
     },
     show() {

@@ -34,9 +34,10 @@ Page({
       }
     })
   },
-  gangwei() {
+  gangwei(e) {
+    console.log(e)
     wx.navigateTo({
-      url: '../l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz',
+      url: '../l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz?id='+e.currentTarget.dataset.id,
     })
   },
   qiuzhi() {
@@ -46,62 +47,38 @@ Page({
     this.tog.show()
   },
   confirm() {
-    // wx.removeStorage('Authorization')
-    // let _this = this;
-    // const app = getApp().globalData
-    // wx.login({
-    //   success(res) {
-    //     var code = res.code
-    //     wx.getUserInfo({
-    //       success: function (res) {
-    //         // console.log(res)           
-    //         if (code) {
-    //           _this.setData({
-    //             nickName: res.userInfo.nickName,
-    //             avatarUrl: res.userInfo.avatarUrl,
-    //             // iv: res.iv,
-    //             // encryptedData: res.encryptedData
-    //           })
-    //           app.http({
-    //             url: '/oauth/login',
-    //             method: 'POST',
-    //             dengl: false,
-    //             header: true,
-    //             type:2,
-    //             data: JSON.stringify({
-    //               code: code,
-    //               encryptedData: res.encryptedData,
-    //               iv: res.iv,
-    //               type:2,
-    //             }),
-    //             success(res) {
-    //               if (res.data.rdata) {
-    //                 wx.setStorageSync('Authorization', res.data.rdata.ctrlToken.token)
-    //                 wx.setStorageSync('userInfo', res.data.rdata)
-    //                 console.log(wx.getStorageSync('Authorization')),
-    //                   wx.showToast({
-    //                     title: '登录成功'
-    //                   })
-    //                 setTimeout(function () {
-    //                   wx.reLaunch({
-    //                     url: '../p-qiyeduan/p-qiyeduan'
-    //                   })
-    //                 }, 1000)
-    //               }
-    //             }
-    //           })
-    //         }
-    //       },
-    //       fail: function (err) {
-    //         console.log(err)
-    //       }
-    //     })
-    //     console.log(res)
-    //   }
-    // });
+    this.data.app.http({
+      url: '/logout',
+      dengl: true,
+      data: {},
+      success(res) {
+        if(res.data.code==200){
+          wx.setStorageSync('Authorization','')
+          wx.setStorageSync('userInfo','')
+        }
+      }
+    })
     console.log('sdfadf')
     wx.switchTab({
       url: '../m-shouye/m-shouye',
+    })
+  },
+  tuichu() {
+    this.data.app.http({
+      url: '/logout',
+      dengl: true,
+      data: {},
+      success(res) {
+        if(res.data.code==200){
+          wx.setStorageSync('Authorization','')
+          wx.setStorageSync('userInfo','')
+          wx.showToast({
+            title: '您已退出登录'
+          })
+        }
+        // this.onLoad()
+        console.log(this.data.user)
+      }
     })
   },
   about() {
@@ -147,6 +124,20 @@ Page({
         console.log("hide home complete");
       },
     });
+    const app = getApp().globalData
+    var that = this
+    app.http({
+      type:true,
+      url: '/getCompany',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          user:res.data.rdata.ctrlCompany
+        })
+      }
+    })
   },
 
   /**

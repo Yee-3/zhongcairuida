@@ -25,6 +25,7 @@ Page({
     var that = this
     wx.showNavigationBarLoading()
     this.data.app.http({
+      type:true,
       url: '/indexCom/getIndex',
       data: {
         limit: 1,
@@ -32,15 +33,12 @@ Page({
       },
       dengl: true,
       success(res) {
-        that.setData({
-          imgList: res.data.rdata.ctrlBannerList,
-          recomList: res.data.rdata.ctrlResumeList,
-        })
+       
         var arr = res.data.rdata.ctrlResumeList
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var arrs = val.ctrlProjectDTOS
+            var arrs = val.ctrlWorkDTOS
             if (arrs.length > 0) {
               arrs.map(function (vals, is) {
                 console.log(vals)
@@ -55,12 +53,18 @@ Page({
                 let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
                 var val =(monthCount/12).toString().split(".")
                var value=(val[0]==0?'':val[0]+'年')+(val[1]?val[1]+'个月':'')
+               console.log(value)
                 vals.timeVal = value
-                // console.log(vals,value)
+                console.log(vals.timeVal,value)
               })
             }
           })
         }
+        that.setData({
+          imgList: res.data.rdata.ctrlBannerList,
+          recomList: res.data.rdata.ctrlResumeList,
+        })
+        console.log(res.data.rdata.ctrlResumeList)
         if (res.data.rdata.ctrlResumeList.length < 1) {
           that.setData({
             loadingType: 2

@@ -24,9 +24,11 @@ Component({
   data: {
     isAdd: false,
     isTwo: false,
-    ind: 0,
-    ind1: 0,
-    ind2: 0,
+    ind:'x',
+    ind1: 'x',
+    ind2: 'x',
+    id:'',
+    isTrue:false
   },
 
   /**
@@ -42,7 +44,9 @@ Component({
       this.setData({
         isTwo: !two,
         ind: e.currentTarget.dataset['index'],
-        zhiValue: that.data.content[index].treeDTOS[index2].treeDTOS[index3].name
+        // zhiValue: that.data.content[index].treeDTOS[index2].treeDTOS[index3].name
+        ind1:'x',
+        ind2:'x'
       })
     },
     toggle1(e) {
@@ -52,17 +56,20 @@ Component({
         that = this
       this.setData({
         ind1: e.currentTarget.dataset['index'],
-        zhiValue: that.data.content[index].treeDTOS[index2].treeDTOS[index3].name
+        // zhiValue: that.data.content[index].treeDTOS[index2].treeDTOS[index3].name
+        ind2:'x'
       })
     },
     toggle2(e) {
+      console.log(e)
       var index = this.data.ind,
         index2 = this.data.ind1,
         index3 = e.currentTarget.dataset['index'],
         that = this
       this.setData({
         ind2: e.currentTarget.dataset['index'],
-        zhiValue: that.data.content[index].treeDTOS[index2].treeDTOS[index3].name
+        zhiValue: that.data.content[index].treeDTOS[index2].treeDTOS[index3].name,
+        id:e.currentTarget.dataset['id'],
       })
     },
     position() {
@@ -89,17 +96,22 @@ Component({
       this.position()
       var two = this.data.isTwo
       this.setData({
-        isTwo: !two
       })
-      if (!this.data.isTwo) {
+      if (!this.data.isTrue) {
+        console.log(this.data.isTwo,2222222)
         this.setData({
-          ind1: 0,
-          ind2: 0
+          isTwo: false,
+          ind:'x',
+          ind1:'x',
+          ind2: 'x'
         })
       }
     },
     _confirm() {
       //触发成功回调
+      this.setData({
+        isTrue:true
+      })
       this.triggerEvent("confirm");
     }
   }

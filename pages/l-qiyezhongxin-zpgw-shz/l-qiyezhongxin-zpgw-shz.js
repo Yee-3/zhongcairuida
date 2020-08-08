@@ -5,18 +5,22 @@ Page({
    * 页面的初始数据
    */
   data: {
-    idn: '1'
+    idn: '1',
+    id:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+console.log(options)
+this.setData({
+  id:options.id
+})
   },
   release() {
     wx.navigateTo({
-      url: '../a-gangweifabu/a-gangweifabu',
+      url: '../a-gangweifabu/a-gangweifabu?id='+this.data.id,
     })
   },
   toggleShen(e) {

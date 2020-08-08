@@ -18,28 +18,6 @@ Page({
    */
   onLoad: function (options) {
     this.tog = this.selectComponent("#tog");
-    const app = getApp().globalData
-    // app.http({  
-    //     url: '/oauth/login',
-    //     dengl:true,
-    //     success
-
-    // })
-    this.setData({
-      user: wx.getStorageSync('userInfo').ctrlResumeDTO
-    })
-    var that = this
-    this.data.app.http({
-      url: '/Other/hotline',
-      dengl: true,
-      data: {},
-      success(res) {
-        that.setData({
-          kefuPhone: res.data.rdata
-        })
-      }
-    })
-
   },
 
   tanchuang_2: function () {
@@ -75,7 +53,15 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        wx.removeStorageSync('userInfo')
+        if(res.data.code==200){
+          wx.setStorageSync('Authorization','')
+          wx.setStorageSync('userInfo','')
+          wx.showToast({
+            title: '您已退出登录'
+          })
+        }
+        // this.onLoad()
+        console.log(this.data.user)
       }
     })
   },
@@ -107,55 +93,17 @@ Page({
   },
   confirm() {
     this.tog.show()
-    // wx.removeStorage('Authorization')
-    // let _this = this;
-    // const app = getApp().globalData
-    // wx.login({
-    //   success(res) {
-    //     var code = res.code
-    //     wx.getUserInfo({
-    //       success: function (res) {       
-    //         if (code) {
-    //           _this.setData({
-    //             nickName: res.userInfo.nickName,
-    //             avatarUrl: res.userInfo.avatarUrl,
-    //             // iv: res.iv,
-    //             // encryptedData: res.encryptedData
-    //           })
-    //           app.http({
-    //             url: '/oauth/login',
-    //             method: 'POST',
-    //             dengl: false,
-    //             header: true,
-    //             type:2,
-    //             data: JSON.stringify({
-    //               code: code,
-    //               encryptedData: res.encryptedData,
-    //               iv: res.iv,
-    //               type:2,
-    //             }),
-    //             success(res) {
-    //               if (res.data.rdata) {
-    //                 wx.setStorageSync('Authorization', res.data.rdata.ctrlToken.token)
-    //                 wx.setStorageSync('userInfo', res.data.rdata)
-    //                   wx.showToast({
-    //                     title: '登录成功'
-    //                   })
-    //                 setTimeout(function () {
-    //                   wx.reLaunch({
-    //                     url: '../p-qiyeduan/p-qiyeduan'
-    //                   })
-    //                 }, 1000)
-    //               }
-    //             }
-    //           })
-    //         }
-    //       },
-    //       fail: function (err) {
-    //       }
-    //     })
-    //   }
-    // });
+    this.data.app.http({
+      url: '/logout',
+      dengl: true,
+      data: {},
+      success(res) {
+        if(res.data.code==200){
+          wx.setStorageSync('Authorization','')
+          wx.setStorageSync('userInfo','')
+        }
+      }
+    })
     wx.redirectTo({
       url: '../p-qiyeduan/p-qiyeduan',
     })
@@ -176,7 +124,21 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const app = getApp().globalData
+    this.setData({
+      user: wx.getStorageSync('userInfo').ctrlResumeDTO
+    })
+    var that = this
+    app.http({
+      url: '/Other/hotline',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          kefuPhone: res.data.rdata
+        })
+      }
+    })
   },
 
   /**

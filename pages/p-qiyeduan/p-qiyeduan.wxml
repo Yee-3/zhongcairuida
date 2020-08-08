@@ -83,10 +83,10 @@
 			<view class="fl d_14">
 				<image src="../img/f0021.png"></image>
 			</view>
-			<view class="d_13" wx:for="{{item.ctrlProjectDTOS}}" wx:for-index="index2" wx:for-item="i">
+			<view class="d_13" wx:for="{{item.ctrlWorkDTOS}}" wx:for-index="index2" wx:for-item="i">
 				<view class="fl d_15">
-					<p>{{i.work}}·2019/09~2020/09</p>
-					<span>{{i.describe}}</span>
+					<p>{{i.company}}·{{i.timeVal}}</p>
+					<span>{{i.position}}</span>
 				</view>
 				<view class="w-clear"></view>
 			</view>

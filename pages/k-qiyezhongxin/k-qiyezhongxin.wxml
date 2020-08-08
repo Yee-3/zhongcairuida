@@ -6,29 +6,29 @@
 		<view class="k_02">
 			<view class="fl">
 				<view class="q_03">
-					<view class="q_04">姓名</view>
+					<view class="q_04">{{user.name?user.name:''}}</view>
 				</view>
 				<view class="q_06">
 					<view class="k_03 fl">
 						<image src="../img/q005.png"></image>	
 					</view>
-					<view class="q_08 fl">某某某公司</view>
+					<view class="q_08 fl">{{user.companyName?user.companyName:''}}</view>
 				</view>
 				<view class="q_06">
 					<view class="k_04 fl">
 						<image src="../img/f024.png"></image>
 					</view>
-					<view class="q_08 fl">14753701234</view>
+					<view class="q_08 fl">{{user.phone?user.phone:''}}</view>
 				</view>
 				<view class="q_06">
 					<view class="k_05 fl">
 						<image src="../img/f025.png"></image>
 					</view>
-					<view class="q_08 fl">dh9foafilk@gmail.com</view>
+					<view class="q_08 fl">{{user.email?user.email:''}}</view>
 				</view>
 			</view>
 			<view class="fr q_09">
-				<image src="../img/f051.png"></image>
+				<image src="{{user.companyUrl?user.companyUrl:''}}"></image>
 			</view>
 		</view>
 	</view>
@@ -46,7 +46,7 @@
 
 			</view>
 		</view>
-		<view class="q_11" bindtap="gangwei">
+		<view class="q_11" bindtap="gangwei" data-id="{{user.id}}">
 			<view class="fl">
 				<view class="q_12 fl">
 					<image src="../img/q059.png"></image>
@@ -99,7 +99,7 @@
 				</view>
 			</view>
 		</view>
-	<view class="q_20">退出登录</view>
+	<view class="q_20" bindtap="tuichu">退出登录</view>
 	</view>
 
 </view>
