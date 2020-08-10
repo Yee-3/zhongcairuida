@@ -256,6 +256,7 @@
 	background: rgba(0, 0, 0, 0.6);
 	/* border: 1px sol; */
 	z-index: 9998;
+	box-sizing: border-box;
 
 }
 
@@ -277,6 +278,7 @@
 	width: 240rpx;
 	height: 100%;
 	padding-top: 25rpx;
+	box-sizing: border-box;
 	/* background: red; */
 }
 
@@ -285,6 +287,8 @@
 	padding-top: 25rpx;
 	border-bottom-right-radius: 15rpx;
 	width: 340rpx;
+	box-sizing: border-box;
+
 }
 
 .img1 {

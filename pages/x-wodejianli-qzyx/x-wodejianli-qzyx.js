@@ -5,9 +5,9 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ind: 0,
-    ind1: 0,
-    ind2: 1,
+    ind: '',
+    ind1: '',
+    ind2: '',
     array: [1, 2, 3, 4],
     items: [{
       name: '',
@@ -17,10 +17,10 @@ Page({
     isInd: false,
     isTime: false,
     isTwo: false,
-    num: 1,
-    indexs: 1,
-    num1: 1,
-    num2: 1,
+    num: '',
+    indexs: '',
+    num1: '',
+    num2: '',
     num3: '',
     vauee: '请选择您期望的职位',
     type_value: '请选择',
@@ -50,7 +50,8 @@ Page({
     var that = this
     console.log(options)
     // this.data.content=options
-    this.setData({
+    if (options) {
+      this.setData({
         num: options.money,
         indexs: options.type,
         ind2: options.industry,
@@ -59,18 +60,20 @@ Page({
         ping_value: options.pingjia,
         id: options.id,
         posi_id: options.posit
-      }),
-      // 职位类别
-      this.data.app.http({
-        url: '/selects/position',
-        dengl: true,
-        data: {},
-        success(res) {
-          var arr = res.data.rdata[0].treeDTOS
-          that.setData({
-            zhiList: res.data.rdata[0].treeDTOS,
-            // time_value: label
-          })
+      })
+    }
+    // 职位类别
+    this.data.app.http({
+      url: '/selects/position',
+      dengl: true,
+      data: {},
+      success(res) {
+        var arr = res.data.rdata[0].treeDTOS
+        that.setData({
+          zhiList: res.data.rdata[0].treeDTOS,
+          // time_value: label
+        })
+        if (options.posit) {
           for (var i = 0; i < arr.length; i++) {
             for (var j = 0; j < arr[i].treeDTOS.length; j++) {
               for (var x = 0; x < arr[i].treeDTOS[j].treeDTOS.length; x++) {
@@ -87,23 +90,27 @@ Page({
               }
             }
           }
-
         }
-      })
+      }
+    })
     // 到岗时间
     this.data.app.http({
       url: '/selects/work_time',
       data: {},
       dengl: true,
       success(res) {
-        for (var i = 0; i < res.data.rdata.length; i++) {
-          if (options.time == res.data.rdata[i].value) {
-            var label = res.data.rdata[i].label
+        if (options.time) {
+          for (var i = 0; i < res.data.rdata.length; i++) {
+            if (options.time == res.data.rdata[i].value) {
+              var label = res.data.rdata[i].label
+              that.setData({
+                time_value: label
+              })
+            }
           }
         }
         that.setData({
           work_time: res.data.rdata,
-          time_value: label
         })
       }
     })
@@ -113,14 +120,18 @@ Page({
       data: {},
       dengl: true,
       success(res) {
-        for (var i = 0; i < res.data.rdata.length; i++) {
-          if (options.industry == res.data.rdata[i].value) {
-            var label = res.data.rdata[i].label
+        if (options.industry) {
+          for (var i = 0; i < res.data.rdata.length; i++) {
+            if (options.industry == res.data.rdata[i].value) {
+              var label = res.data.rdata[i].label
+              that.setData({
+                type_value: label
+              })
+            }
           }
         }
         that.setData({
           class_types: res.data.rdata,
-          type_value: label
         })
       }
     })
@@ -130,14 +141,18 @@ Page({
         dengl: true,
         data: {},
         success(res) {
-          for (var i = 0; i < res.data.rdata.length; i++) {
-            if (options.money == res.data.rdata[i].value) {
-              var label = res.data.rdata[i].label
+          if (options.money) {
+            for (var i = 0; i < res.data.rdata.length; i++) {
+              if (options.money == res.data.rdata[i].value) {
+                var label = res.data.rdata[i].label
+                that.setData({
+                  value_money: label
+                })
+              }
             }
           }
           that.setData({
             money: res.data.rdata,
-            value_money: label
           })
         }
 
@@ -149,15 +164,19 @@ Page({
         dengl: true,
         data: {},
         success(res) {
-          for (var i = 0; i < res.data.rdata.length; i++) {
-            if (options.type == res.data.rdata[i].value) {
-              var label = res.data.rdata[i].label
+          if(options.type){
+            for (var i = 0; i < res.data.rdata.length; i++) {
+              if (options.type == res.data.rdata[i].value) {
+                var label = res.data.rdata[i].label
+                that.setData({
+                  value_type: label
+                })
+              }
             }
-          }
+          }   
           console.log(label)
           that.setData({
             work_type: res.data.rdata,
-            value_type: label
           })
         }
 
@@ -167,46 +186,83 @@ Page({
   },
   tijiao() {
     var that = this
-    this.data.app.http({
-      url: '/resume/saveOrUpdateObjective',
-      dengl: true,
-      method: 'POST',
-      data: {
-        address: that.data.mapValue,
-        industry: that.data.ind2,
-        introduction: that.data.ping_value,
-        money: that.data.num,
-        position: that.data.posi_id,
-        time: that.data.num3,
-        type: that.data.indexs,
-        id: that.data.id
-      },
-      success(res) {
-        console.log(res)
-        if (res.data.rdata) {
-          // 及时更新上层页面
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          prevPage.setData({
-            resume: []
-          })
-          wx.navigateBack({
-            success(res) {
-              var page = getCurrentPages().pop();
-              if (page == undefined || page == null) return;
-              page.onLoad();
-            }
-          })
+    if (!that.data.num) {
+      wx.showToast({
+        title: '请选择期望薪资',
+        icon: 'none'
+      })
+    } else if (!that.data.indexs) {
+      wx.showToast({
+        title: '请选择类型',
+        icon: 'none'
+      })
+    } else if (!that.data.posi_id) {
+      wx.showToast({
+        title: '请选择职位类别',
+        icon: 'none'
+      })
+    } else if (!(that.data.mapValue!=请选择)) {
+      wx.showToast({
+        title: '请选择工作地点',
+        icon: 'none'
+      })
+    } else if (!that.data.ind2) {
+      wx.showToast({
+        title: '请选择行业',
+        icon: 'none'
+      })
+    } else if (!that.data.num3) {
+      wx.showToast({
+        title: '请选择到岗时间',
+        icon: 'none'
+      })
+    } else if (!(that.data.ping_value!='请输入')) {
+      wx.showToast({
+        title: '请输入自我评价',
+        icon: 'none'
+      })
+    } else {
+      this.data.app.http({
+        url: '/resume/saveOrUpdateObjective',
+        dengl: true,
+        method: 'POST',
+        data: {
+          address: that.data.mapValue,
+          industry: that.data.ind2,
+          introduction: that.data.ping_value,
+          money: that.data.num,
+          position: that.data.posi_id,
+          time: that.data.num3,
+          type: that.data.indexs,
+          id: that.data.id
+        },
+        success(res) {
+          console.log(res)
+          if (res.data.code == 200) {
+            // 及时更新上层页面
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; //上一个页面
+            prevPage.setData({
+              resume: []
+            })
+            wx.navigateBack({
+              success(res) {
+                var page = getCurrentPages().pop();
+                if (page == undefined || page == null) return;
+                page.onLoad();
+              }
+            })
+          }
         }
-      }
-    })
+      })
+    }
   },
   toggle(e) {
     var two = this.data.isTwo
     var index = e.currentTarget.dataset['index'],
-    index2 = 0,
-    index3 = 0,
-    that = this
+      index2 = 0,
+      index3 = 0,
+      that = this
     // console.log()
     this.setData({
       ind: e.currentTarget.dataset['index'],
@@ -216,9 +272,9 @@ Page({
   },
   toggle1(e) {
     var index = this.data.ind,
-    index2 =  e.currentTarget.dataset['index'],
-    index3 =0,
-    that = this
+      index2 = e.currentTarget.dataset['index'],
+      index3 = 0,
+      that = this
     this.setData({
       ind1: e.currentTarget.dataset['index'],
       value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
@@ -226,9 +282,9 @@ Page({
   },
   toggle_three(e) {
     var index = this.data.ind,
-    index2 = this.data.ind1,
-    index3 = e.currentTarget.dataset['index'],
-    that = this
+      index2 = this.data.ind1,
+      index3 = e.currentTarget.dataset['index'],
+      that = this
     this.setData({
       ind_three: e.currentTarget.dataset['index'],
       posi_id: e.currentTarget.dataset['id'],
@@ -242,7 +298,7 @@ Page({
       hangyeInd: e.currentTarget.dataset['index']
     })
   },
-  confirm_zhi(){
+  confirm_zhi() {
     this.setData({
       isAdd: false,
       isTwo: false
@@ -362,10 +418,10 @@ Page({
     this.setData({
       isTwo: !two
     })
-    if(!this.data.isTwo){
+    if (!this.data.isTwo) {
       this.setData({
-        ind1:0,
-        ind_three:0
+        ind1: 0,
+        ind_three: 0
       })
     }
   },

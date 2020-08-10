@@ -93,17 +93,17 @@ Page({
   },
   confirm() {
     this.tog.show()
-    this.data.app.http({
-      url: '/logout',
-      dengl: true,
-      data: {},
-      success(res) {
-        if(res.data.code==200){
-          wx.setStorageSync('Authorization','')
-          wx.setStorageSync('userInfo','')
-        }
-      }
-    })
+    // this.data.app.http({
+    //   url: '/logout',
+    //   dengl: true,
+    //   data: {},
+    //   success(res) {
+    //     if(res.data.code==200){
+    //       wx.setStorageSync('Authorization','')
+    //       wx.setStorageSync('userInfo','')
+    //     }
+    //   }
+    // })
     wx.redirectTo({
       url: '../p-qiyeduan/p-qiyeduan',
     })

@@ -63,7 +63,7 @@ Page({
           }
           prevPage.reword(data)
         } else {
-          page.onLoad();
+          // page.onLoad();
         }
         // delta = 1
       }

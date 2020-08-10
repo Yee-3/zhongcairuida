@@ -40,7 +40,7 @@ Page({
   onLoad: function (options) {
     var app = getApp().globalData
     var that = this
-    console.log(options)
+    // console.log(options)
     if(options){
     this.setData({
       workId: options.id,

@@ -6,13 +6,13 @@
 		<view class="k_02">
 			<view class="fl">
 				<view class="q_03">
-					<view class="q_04">{{user.name?user.name:''}}</view>
+					<view class="q_04">{{user.name?user.name:'暂无用户名'}}</view>
 				</view>
 				<view class="q_06">
 					<view class="k_03 fl">
-						<image src="../img/q005.png"></image>	
+						<image src="../img/q005.png"></image>
 					</view>
-					<view class="q_08 fl">{{user.companyName?user.companyName:''}}</view>
+					<view class="q_08 fl">{{user.companyName?user.companyName:'暂无公司信息'}}</view>
 				</view>
 				<view class="q_06">
 					<view class="k_04 fl">
@@ -28,13 +28,13 @@
 				</view>
 			</view>
 			<view class="fr q_09">
-				<image src="{{user.companyUrl?user.companyUrl:''}}"></image>
+				<image src="{{user.companyUrl?user.companyUrl:'../img/f051.png'}}"></image>
 			</view>
 		</view>
 	</view>
 
 	<view class="q_10">
-		<view class="q_11">
+		<view class="q_11" bindtap="auth">
 			<view class="fl">
 				<view class="q_12 fl">
 					<image src="../img/q058.png"></image>
@@ -99,7 +99,7 @@
 				</view>
 			</view>
 		</view>
-	<view class="q_20" bindtap="tuichu">退出登录</view>
+		<view class="q_20" bindtap="tuichu">退出登录</view>
 	</view>
 
 </view>
@@ -118,5 +118,5 @@
 		</view>
 	</view>
 </view>
-<toggle id="tog" bind:confirm="confirm"  confirmText="确定" cancelText="取消" bind:cancel="cancel" content="{{content}}"></toggle>
+<toggle id="tog" bind:confirm="confirm" confirmText="确定" cancelText="取消" bind:cancel="cancel" content="{{content}}"></toggle>
 <tabbars></tabbars>

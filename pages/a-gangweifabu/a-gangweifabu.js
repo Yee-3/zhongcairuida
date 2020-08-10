@@ -28,9 +28,11 @@ Page({
     ty: '',
     nameContent: [],
     app: getApp().globalData,
-    id:'',
-    welLi:[],
-    swicth:''
+    id: '',
+    welLi: [],
+    swicth: false,
+    cityValue: '请选择',
+    cityId: ''
   },
 
   /**
@@ -44,10 +46,12 @@ Page({
     this.sala = this.selectComponent("#sala");
     this.wel = this.selectComponent("#wel");
     this.name = this.selectComponent("#name");
-    console.log(options)
-    this.setData({
-      id:options.id
-    })
+    console.log(this.data.id)
+    if (options) {
+      this.setData({
+        id: options.id
+      })
+    }
     // 职位
     this.data.app.http({
       url: '/selects/position',
@@ -118,35 +122,100 @@ Page({
       }
     })
   },
-  submit(){
-    var that=this
-    this.data.app.http({
-      type:true,
-      url:'/company/addOrUpdateJobPosition',
-      dengl:true,
-      method:'POST',
-      data:{
-        address:that.data.mapValue,
-        companyId:that.data.id,
-        describe:that.data.workValue,
-        money:that.sala.data.edu,
-        num:that.data.numValue,
-        positionType:1,
-        schoolRecord:that.edu.data.edu,
-        title:that.data.titleValue,
-        workExperience:that.exp.data.edu,
-        workType:that.spring.data.edu,
-        serviceType:that.data.ty,
-        requirements:that.data.yqValue?that.data.yqValue:'',
-        structure:that.data.moneyValue?that.data.moneyValue:'',
-        welfare:that.data.welLi?that.data.welLi:'',
-        first:that.data.swicth,
-        name:that.name.data.id
-      },
-      success(res){
-
-      }
+  city() {
+    wx.navigateTo({
+      url: '../c-dingwei/c-dingw?id=' + this.data.id,
     })
+  },
+  submit() {
+    var that = this
+    console.log(this.data.swicth)
+    if (!that.data.titleValue) {
+      wx.showToast({
+        title: '请输入标题',
+        icon: 'none'
+      })
+    } else if (!that.name.data.id) {
+      wx.showToast({
+        title: '请选择招聘职位',
+        icon: 'none'
+      })
+    } else if (!that.data.numValue) {
+      wx.showToast({
+        title: '请输入招聘人数',
+        icon: 'none'
+      })
+    } else if (!that.spring.data.edu) {
+      wx.showToast({
+        title: '请选择职位性质',
+        icon: 'none'
+      })
+    } else if (!that.exp.data.edu) {
+      wx.showToast({
+        title: '请选择工作经验',
+        icon: 'none'
+      })
+    } else if (!that.edu.data.edu) {
+      wx.showToast({
+        title: '请选择学历要求',
+        icon: 'none'
+      })
+    } else if (!that.sala.data.edu) {
+      wx.showToast({
+        title: '请选择薪资详情',
+        icon: 'none'
+      })
+    } else if (!that.data.cityId) {
+      wx.showToast({
+        title: '请选择工作地点',
+        icon: 'none'
+      })
+    } else if (!that.data.mapValue) {
+      wx.showToast({
+        title: '请输入详细地址',
+        icon: 'none'
+      })
+    } else if (!that.data.workValue) {
+      wx.showToast({
+        title: '请输入工作职责',
+        icon: 'none'
+      })
+    } else if (!that.data.ty) {
+      wx.showToast({
+        title: '请选择服务类型',
+        icon: 'none'
+      })
+    } else {
+      this.data.app.http({
+        type: true,
+        url: '/company/addOrUpdateJobPosition',
+        dengl: true,
+        method: 'POST',
+        data: {
+          address: that.data.mapValue,
+          companyId: that.data.id,
+          describe: that.data.workValue,
+          money: that.sala.data.edu,
+          num: that.data.numValue,
+          positionType: 1,
+          schoolRecord: that.edu.data.edu,
+          title: that.data.titleValue,
+          workExperience: that.exp.data.edu,
+          workType: that.spring.data.edu,
+          serviceType: that.data.ty,
+          requirements: that.data.yqValue ? that.data.yqValue : '',
+          structure: that.data.moneyValue ? that.data.moneyValue : '',
+          welfare: that.data.welLi ? that.data.welLi : '',
+          first: that.data.swicth,
+          name: that.name.data.id,
+          district: that.data.cityId
+        },
+        success(res) {
+
+        }
+      })
+
+    }
   },
   blur(e) {
     console.log(value)
@@ -184,9 +253,9 @@ Page({
       })
     }
   },
-  switch1Change: function (e){
+  switch1Change: function (e) {
     this.setData({
-      swicth:e.detail.value
+      swicth: e.detail.value
     })
     console.log('switch1 发生 change 事件，携带值为', e.detail.value)
   },
@@ -267,13 +336,13 @@ Page({
       this.wel.show()
       // var that = this
       // this.wel.data.welList.map(function(val,i){
-        console.log(this.wel.data.valList)
+      console.log(this.wel.data.valList)
       //   this.setData({
-        //   })
-        // })
-        this.setData({
-          welValue: this.wel.data.welList,
-          welLi:this.wel.data.valList
+      //   })
+      // })
+      this.setData({
+        welValue: this.wel.data.welList,
+        welLi: this.wel.data.valList
       })
 
       console.log(this.data.welValue)

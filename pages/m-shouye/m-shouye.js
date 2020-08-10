@@ -64,7 +64,7 @@ Page({
       time = new Date().getTime(),
       city = '';
     if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
-     that.getLocate();
+     this.getLocate();
     } else { //如果未满30分钟，那么直接从本地缓存里取值
       that.setData({
         mapValue: cityOrTime.city
@@ -426,10 +426,16 @@ Page({
     })
   },
   run() {
-    var work=this.data.work
+    if(this.data.work){
+      var work=this.data.work
     wx.navigateTo({
       url: '../a-bangwozhaogongzuo/index?id='+work.id+'&address='+work.address+'&money='+work.money+"&name="+work.name+'&phone='+work.phone+'&position='+work.position+'&status='+work.status+'&time='+work.time+'&workType='+work.workType,
     })
+    }else{
+      wx.navigateTo({
+        url: '../a-bangwozhaogongzuo/index'
+      })
+    }
   },
   weizhi() {
     wx.navigateTo({

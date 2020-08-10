@@ -80,7 +80,7 @@ Page({
               })
             }
           }
-          
+
         }
       })
     }
@@ -265,44 +265,75 @@ Page({
     var that = this
     var date = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10)
     var date1 = this.data.date1.substring(0, 4) + '/' + this.data.date1.substring(5, 7) + '/' + this.data.date.substring(8, 10)
-    var id_ty=that.data.id_ty?that.data.id_ty:''
-    // if(that.data.id_ty)
-    this.data.app.http({
-      url: '/resume/saveOrUpdateWork',
-      dengl: true,
-      method: 'POST',
-      data: {
-        company: that.data.com_Type,
-        department: that.data.dep_Type,
-        describe: that.data.des_Type,
-        endTime: date1,
-        startTime: date,
-        industry: that.data.com_value,
-        position: that.data.value_Zhi,
-        resumeId: that.data.id,
-        money: that.data.money_Type,
-        type: that.data.types,
-        id: id_ty
-      },
-      success(res) {
-        console.log(res)
-        if (res.data.code==200) {
-          // 及时更新上层页面
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          prevPage.setData({
-            resume: []
-          })
-          wx.navigateBack({
-            success(res) {
-              var page = getCurrentPages().pop();
-              if (page == undefined || page == null) return;
-              page.onLoad();
-            }
-          })
+    var id_ty = that.data.id_ty ? that.data.id_ty : ''
+    if (!this.data.com_Type) {
+      wx.showToast({
+        title: '请输入公司名称',
+        icon: 'none'
+      })
+    } else if (!(this.data.date1 != '请选择' && this.data.date != '请选择')) {
+      wx.showToast({
+        title: '请选择起止时间',
+        icon: 'none'
+      })
+    } else if (!(this.data.value_Zhi != '请选择')) {
+      wx.showToast({
+        title: '请选择职位',
+        icon: 'none'
+      })
+    } else if (!this.data.types) {
+      wx.showToast({
+        title: '请选择工作类型',
+        icon: 'none'
+      })
+    } else if (!this.data.ind3) {
+      wx.showToast({
+        title: '请选择行业',
+        icon: 'none'
+      })
+    } else if (!(this.data.dep_Type != '请输入')) {
+      wx.showToast({
+        title: '请输入部门',
+        icon: 'none'
+      })
+    } else {
+      this.data.app.http({
+        url: '/resume/saveOrUpdateWork',
+        dengl: true,
+        method: 'POST',
+        data: {
+          company: that.data.com_Type,
+          department: that.data.dep_Type,
+          describe: that.data.des_Type,
+          endTime: date1,
+          startTime: date,
+          industry: that.data.com_value,
+          position: that.data.value_Zhi,
+          resumeId: that.data.id,
+          money: that.data.money_Type,
+          type: that.data.types,
+          id: id_ty
+        },
+        success(res) {
+          console.log(res)
+          if (res.data.code == 200) {
+            // 及时更新上层页面
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; //上一个页面
+            prevPage.setData({
+              resume: []
+            })
+            wx.navigateBack({
+              success(res) {
+                var page = getCurrentPages().pop();
+                if (page == undefined || page == null) return;
+                page.onLoad();
+              }
+            })
+          }
         }
-      }
-    })
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

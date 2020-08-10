@@ -34,6 +34,11 @@ Page({
       }
     })
   },
+  auth(){
+    wx.navigateTo({
+      url: '../m-qiyezhuce/m-qiyezhuce?id=1',
+    })
+  },
   gangwei(e) {
     console.log(e)
     wx.navigateTo({
@@ -47,17 +52,17 @@ Page({
     this.tog.show()
   },
   confirm() {
-    this.data.app.http({
-      url: '/logout',
-      dengl: true,
-      data: {},
-      success(res) {
-        if(res.data.code==200){
-          wx.setStorageSync('Authorization','')
-          wx.setStorageSync('userInfo','')
-        }
-      }
-    })
+    // this.data.app.http({
+    //   url: '/logout',
+    //   dengl: true,
+    //   data: {},
+    //   success(res) {
+    //     if(res.data.code==200){
+    //       wx.setStorageSync('Authorization','')
+    //       wx.setStorageSync('userInfo','')
+    //     }
+    //   }
+    // })
     console.log('sdfadf')
     wx.switchTab({
       url: '../m-shouye/m-shouye',

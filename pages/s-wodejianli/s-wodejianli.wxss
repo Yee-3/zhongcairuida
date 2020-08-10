@@ -130,12 +130,15 @@
 
 .s_20 {
   margin-top: 20rpx;
-  display: -webkit-box;  /*关键属性（必须有的）  */
-  -webkit-box-orient: vertical;   /*规定子元素的排列方向 */
-  -webkit-line-clamp:2; /*行数*/
+  display: -webkit-box;
+  /*关键属性（必须有的）  */
+  -webkit-box-orient: vertical;
+  /*规定子元素的排列方向 */
+  -webkit-line-clamp: 2;
+  /*行数*/
   /* 实现多余的文字隐藏并用省略号来代表被隐藏的文字    */
   overflow: hidden;
-  text-overflow:ellipsis; 
+  text-overflow: ellipsis;
 }
 
 .s_22 {
@@ -177,10 +180,13 @@
 .q_04 input {
   height: 60rpx;
   line-height: 60rpx;
-  width:150rpx;
+  width: 260rpx;
   font-size: 50rpx;
   color: #000;
   font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .q_05 {
@@ -221,13 +227,13 @@
   width: 140rpx;
   height: 140rpx;
 }
-.hidden{
- 
-}
-.hide{
+
+.hidden {}
+
+.hide {
   display: -webkit-box;
 }
 
-.show{
+.show {
   display: block
-} 
+}

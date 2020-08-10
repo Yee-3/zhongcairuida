@@ -62,25 +62,25 @@
 						<view class="m_08 fl">
 							<image src="../img/f043.png"></image>
 						</view>
-						<view class="m_09 fl">{{selList[0].label}}</view>
+						<view class="m_09 fl">{{selList[0].label?selList[0].label:'精准职位一键触达'}}</view>
 					</li>
 					<li>
 						<view class="m_08 fl">
 							<image src="../img/f044.png"></image>
 						</view>
-						<view class="m_09 fl">{{selList[1].label}}</view>
+						<view class="m_09 fl">{{selList[1].label?selList[1].label:'名企职位为您甄选'}}</view>
 					</li>
 					<li>
 						<view class="m_08 fl">
 							<image src="../img/f045.png"></image>
 						</view>
-						<view class="m_09 fl">{{selList[2].label}}</view>
+						<view class="m_09 fl">{{selList[2].label?selList[2].label:'高薪职位为您推荐'}}</view>
 					</li>
 					<li>
 						<view class="m_08 fl">
 							<image src="../img/f046.png"></image>
 						</view>
-						<view class="m_09 fl">{{selList[3].label}}</view>
+						<view class="m_09 fl">{{selList[3].label?selList[3].label:'专属顾问求职指导'}}</view>
 					</li>
 				</ul>
 			</view>

@@ -1,26 +1,27 @@
 <view class="s_01">
 	<view class="fl s_02">
 		<view class="q_03">
-			<view class="q_04 fl"><input value="{{resume.ctrlResumeDTO.name}}" placeholder="请输入姓名" /></view>
+			<view class="q_04 fl"><input value="{{resume.ctrlResumeDTO.name?resume.ctrlResumeDTO.name:'暂无用户名'}}" placeholder="请输入姓名" /></view>
 			<view class="q_05 fl"><image src="../img/f050.png"></image></view>
 		</view>
 		<view class="q_06">
-			<view class="s_03"><p>{{resume.ctrlResumeDTO.age}}岁</p><span>|</span><p>{{resume.ctrlResumeDTO.schoolName}}</p><span>|</span><p>{{resume.ctrlResumeDTO.worktypeName}}</p></view>
+			<view class="s_03"><p>{{resume.ctrlResumeDTO.age?resume.ctrlResumeDTO.age+'岁':'年龄'}}</p><span>|</span><p>{{resume.ctrlResumeDTO.schoolName?resume.ctrlResumeDTO.schoolName:'学历'}}</p><span>|</span><p>{{resume.ctrlResumeDTO.worktypeName?resume.ctrlResumeDTO.worktypeName:'工作类型'}}</p></view>
 			<view class="s_04">手机号码：{{resume.ctrlResumeDTO.phone}}</view>
 			<view class="s_04">求职状态：{{resume.ctrlResumeDTO.statusName}}</view>
 		</view>
 	</view>
 	<view class="fr q_09">
-		<image src="{{resume.ctrlResumeDTO.url}}"></image>
+		<image src="{{resume.ctrlResumeDTO.url?resume.ctrlResumeDTO.url:'../img/f051.png'}}"></image>
 	</view>
 </view>
 
-<view class="s_05" wx:for="{{resume.ctrlObjectiveDTOS}}">
+<view class="s_05" >
 	<view class="s_06">
 		<view class="fl s_07">求职意向</view>
 		<view class="fr s_08" bindtap="int"><image src="../img/f050.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
+	<view class="s_20" wx:for="{{resume.ctrlObjectiveDTOS}}">
 	<view class="s_09">
 		<view class="fl s_10">类型</view>
 		<view class="fr s_11">{{item.typeName}}</view>
@@ -40,6 +41,7 @@
 		<view class="fl s_10">期望薪资</view>
 		<view class="fr s_11">{{item.moneyName}}</view>
 		<view class="w-clear"></view>
+	</view>
 	</view>
 </view>
 

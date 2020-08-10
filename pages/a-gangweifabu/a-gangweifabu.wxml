@@ -89,6 +89,18 @@
 			<p>工作地点</p>
 		</view>
 		<view class="fr a_04">
+			<view class="section" bindtap="city">
+				<!-- <picker value="{{index}}" range="{{array}}"> -->
+				<view class="picker">{{cityValue}}</view>
+				<!-- </picker> -->
+			</view>
+		</view>
+	</view>
+	<view class="a_02">
+		<view class="fl a_03"><em>*</em>
+			<p>详细地址</p>
+		</view>
+		<view class="fr a_04">
 			<view class="section">
 				<input placeholder="请输入" value="{{mapValue}}" data-value="{{value}}" bindblur="blur" data-ty="3" />
 			</view>
@@ -103,7 +115,7 @@
 		</view>
 	</view>
 	<view class="a_06">
-		<view class="a_03"><em>*</em>
+		<view class="a_03">
 			<p>任职要求</p>
 		</view>
 		<view class="a_05">
@@ -112,7 +124,7 @@
 	</view>
 	<view class="a_07">
 		<view class="">
-			<view class="fl a_03"><em>*</em>
+			<view class="fl a_03">
 				<p>职位福利</p>
 			</view>
 			<view class="fr a_04">
@@ -132,7 +144,7 @@
 	<checkbox id="wel" title="职位福利" confirmText="确定" cancelText="取消" content="{{welContent}}" bind:cancel="handleCancel" bind:confirm="handleConfirm">
 	</checkbox>
 	<view class="a_06">
-		<view class="a_03"><em>*</em>
+		<view class="a_03">
 			<p>薪资结构</p>
 		</view>
 		<view class="a_05">
