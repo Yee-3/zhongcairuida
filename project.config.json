@@ -88,13 +88,6 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/k-qiyezhongxin/k-qiyezhongxin",
-					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/a-gangweifabu/a-gangweifabu",
 					"pathName": "pages/a-gangweifabu/a-gangweifabu",
 					"query": "",
@@ -111,6 +104,13 @@
 					"id": -1,
 					"name": "pages/l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz",
 					"pathName": "pages/l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/a-bangwozhaogongzuo/index",
+					"pathName": "pages/a-bangwozhaogongzuo/index",
 					"query": "",
 					"scene": null
 				}

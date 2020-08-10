@@ -229,9 +229,11 @@
 .mask1 {
 	position: fixed;
 	left: 30rpx;
-	bottom: 20rpx;
+	right: 30rpx;
+	bottom: 10%;
 	width: 690rpx;
 	height: 920rpx;
+	box-sizing: border-box;
 	/* background-color: red; */
 	color: #909090;
 	z-index: 999;
@@ -275,7 +277,7 @@
 }
 
 .mask_left {
-	width: 240rpx;
+	width: 230rpx;
 	height: 100%;
 	padding-top: 25rpx;
 	box-sizing: border-box;
@@ -286,7 +288,7 @@
 	background: #f6f6f6;
 	padding-top: 25rpx;
 	border-bottom-right-radius: 15rpx;
-	width: 340rpx;
+	width: 330rpx;
 	box-sizing: border-box;
 
 }
