@@ -201,7 +201,7 @@ Page({
         title: '请选择职位类别',
         icon: 'none'
       })
-    } else if (!(that.data.mapValue!=请选择)) {
+    } else if (!(that.data.mapValue!='请选择')) {
       wx.showToast({
         title: '请选择工作地点',
         icon: 'none'
