@@ -238,6 +238,7 @@
 	color: #909090;
 	z-index: 999;
 
+	overflow: hidden;
 }
 
 .m_top {
@@ -246,6 +247,7 @@
 	margin-bottom: 20rpx;
 	background-color: #fff;
 	border-radius: 15rpx;
+	/* overflow: hidden; */
 }
 
 .mask_02 {
@@ -263,9 +265,9 @@
 }
 
 .mask_02_01 {
-	position: fixed;
+	position: absolute;
 	width: 560rpx;
-	right: 30rpx;
+	right: 0;
 	height: 710rpx;
 	background: #ff4949;
 	/* border-bottom-left-radius: 20rpx; */
@@ -274,6 +276,7 @@
 	box-sizing: border-box;
 	z-index: 9999;
 	display: flex;
+	overflow: hidden;
 }
 
 .mask_left {

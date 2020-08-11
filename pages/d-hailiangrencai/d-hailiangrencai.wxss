@@ -14,7 +14,9 @@ page {
   top: 0;
   left: 0;
 }
-
+.d_12 .d_13:not(:first-child){
+  margin-left: 37rpx;
+}
 .l_01 ul li {
   float: left;
   height: 82rpx;
@@ -28,6 +30,12 @@ page {
   line-height: 82rpx;
   text-align: center;
   width: 100%;
+  
+}
+.image {
+  width: 18rpx;
+  height: 10rpx;
+  vertical-align:middle;
 }
 
 .l_03 {

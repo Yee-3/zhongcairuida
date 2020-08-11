@@ -5,7 +5,7 @@ Page({
    * 页面的初始数据
    */
   data: {
-    isF: true,
+    isF: false,
     isX: true,
     app: getApp().globalData,
     resume: {},
@@ -13,7 +13,12 @@ Page({
     time: [],
     times: [],
     schoolT: [],
-    book: []
+    book: [],
+    isShow: false,
+    isStatus: '',
+    sty: 'display:none',
+    style: 'display:none',
+    s:''
   },
 
   /**
@@ -22,51 +27,115 @@ Page({
   onLoad: function (options) {
     // console.log(this.data.baseUrl)
     let that = this
+   
     this.data.app.http({
       url: '/resume/getResume',
       dengl: true,
       data: {},
       success(res) {
         console.log(res.data.rdata)
-        var timer = res.data.rdata.ctrlWorkDTOS
-        var time = []
-        var times = []
-        var schoolT = []
-        var xiangTime = res.data.rdata.ctrlProjectDTOS
-        var schoolTime = res.data.rdata.ctrlSchoolDTOS
-        var book = []
-        for (var i = 0; i < timer.length; i++) {
-          time.push({
-            startTime: timer[i].startTime.substring(0, 10),
-            endTime: timer[i].endTime.substring(0, 10)
+        if (res.data.rdata) {
+          var timer = res.data.rdata.ctrlWorkDTOS
+          var time = []
+          var times = []
+          var schoolT = []
+          var xiangTime = res.data.rdata.ctrlProjectDTOS
+          var schoolTime = res.data.rdata.ctrlSchoolDTOS
+          var book = []
+          for (var i = 0; i < timer.length; i++) {
+            time.push({
+              startTime: timer[i].startTime.substring(0, 10),
+              endTime: timer[i].endTime.substring(0, 10)
+            })
+          }
+          for (var i = 0; i < xiangTime.length; i++) {
+            times.push({
+              startTime: xiangTime[i].startTime.substring(0, 10),
+              endTime: xiangTime[i].endTime.substring(0, 10)
+            })
+          }
+          for (var i = 0; i < schoolTime.length; i++) {
+            schoolT.push({
+              startTime: schoolTime[i].startTime.substring(0, 10),
+              endTime: schoolTime[i].endTime.substring(0, 10)
+            })
+          }
+          for (var i = 0; i < res.data.rdata.ctrlBookDTOS.length; i++) {
+            book.push({
+              time: res.data.rdata.ctrlBookDTOS[i].time.substring(0, 4) + '年' + res.data.rdata.ctrlBookDTOS[i].time.substring(5, 7) + '月',
+            })
+          }
+
+          that.setData({
+            resume: res.data.rdata,
+            time: time,
+            times: times,
+            schoolT: schoolT,
+            book: book,
+            isStatus: false,
+            sty:'display:none'
+
           })
-        }
-        for (var i = 0; i < xiangTime.length; i++) {
-          times.push({
-            startTime: xiangTime[i].startTime.substring(0, 10),
-            endTime: xiangTime[i].endTime.substring(0, 10)
-          })
-        }
-        for (var i = 0; i < schoolTime.length; i++) {
-          schoolT.push({
-            startTime: schoolTime[i].startTime.substring(0, 10),
-            endTime: schoolTime[i].endTime.substring(0, 10)
-          })
-        }
-        for (var i = 0; i < res.data.rdata.ctrlBookDTOS.length; i++) {
-          book.push({
-            time: res.data.rdata.ctrlBookDTOS[i].time.substring(0, 4) + '年' + res.data.rdata.ctrlBookDTOS[i].time.substring(5, 7) + '月',
+        } else {
+          that.setData({
+            isStatus: true,
+            sty:'display:block'
           })
         }
 
-        that.setData({
-          resume: res.data.rdata,
-          time: time,
-          times: times,
-          schoolT: schoolT,
-          book: book
-        })
       }
+    })
+    // setTimeout(() => {
+    //   let query = wx.createSelectorQuery();
+    //   query.select('.content').boundingClientRect(rect => {
+    //     let clientHeight = rect.height;
+    //     let clientWidth = rect.width;
+    //     let ratio = 750 / clientWidth;
+    //     let height = parseInt(clientHeight * ratio);
+    //     console.log(height, clientHeight, clientWidth);
+    //     if (height < 400) {
+    //       that.setData({
+    //         isF: false,
+    //         // s:'overflow:hidden'
+    //       })
+    //     }
+    //   }).exec();
+    // }, 300)
+  },
+  toudi(){
+    var that=this
+    this.data.app.http({
+      url:'/index/getResumes',
+      dengl:true,
+      method:'POST',
+      success(res){
+        if (res.data.rdata == true) {
+         wx.switchTab({
+           url: '../m-shouye/m-shouye',
+          })
+             
+        }else{
+          that.setData({
+            style:'display:block'
+          })
+        }
+console.log(res)
+      }
+    })
+  },
+  block(){
+    this.setData({
+      style:'display:none'
+    })
+  },
+  wanshan() {
+    wx.redirectTo({
+      url: '../v-wodejianli-jcxx/v-wodejianli-jcxx',
+    })
+  },
+  quxiao1(){
+    this.setData({
+      sty:'display:none'
     })
   },
   change: function (e) {
@@ -82,21 +151,24 @@ Page({
     })
   },
   int() {
-    // console.log(this.data.resume.ctrlObjectiveDTOS[0])
-    if (this.data.resume.ctrlObjectiveDTOS) {
+    if (this.data.isStatus) {
+      this.setData({
+        sty: 'display:block'
+      })
+    } else {
+      // console.log(this.data.resume.ctrlObjectiveDTOS[0])
       var cot = this.data.resume.ctrlObjectiveDTOS[0]
       wx.navigateTo({
         url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?money=' + cot.money + '&type=' + cot.type + '&industry=' + cot.industry + '&time=' + cot.time + '&address=' + cot.address + '&posit=' + cot.position + '&pingjia=' + cot.introduction + '&id=' + cot.id,
       })
-    } else {
-      wx.navigateTo({
-        url: '../x-wodejianli-qzyx/x-wodejianli-qzyx'
-      })
     }
   },
   work(e) {
-    console.log(e)
-    if (this.data.resume.ctrlResumeDTO) {
+    if (this.data.isStatus) {
+      this.setData({
+        sty: 'display:block'
+      })
+    } else {
       var id = this.data.resume.ctrlResumeDTO.id
       if (e.currentTarget.dataset.id) {
         wx.navigateTo({
@@ -107,14 +179,14 @@ Page({
           url: '../t-wodejianli-gzjl/t-wodejianli-gzjl?id=' + id,
         })
       }
-    } else {
-      wx.navigateTo({
-        url: '../t-wodejianli-gzjl/t-wodejianli-gzjl',
-      })
     }
   },
   project(e) {
-    if (this.data.resume.ctrlProjectDTOS) {
+    if (this.data.isStatus) {
+      this.setData({
+        sty: 'display:block'
+      })
+    } else {
       var arr = this.data.resume.ctrlProjectDTOS
       var id = this.data.resume.ctrlResumeDTO.id,
         i = e.currentTarget.dataset.index
@@ -127,14 +199,14 @@ Page({
           url: '../y-wodejianli-xmjl/y-wodejianli-xmjl?id=' + id,
         })
       }
-    } else {
-      wx.navigateTo({
-        url: '../y-wodejianli-xmjl/y-wodejianli-xmjl',
-      })
     }
   },
   education(e) {
-    if (this.data.resume.ctrlSchoolDTOS) {
+    if (this.data.isStatus) {
+      this.setData({
+        sty: 'display:block'
+      })
+    } else {
       var id = this.data.resume.ctrlResumeDTO.id,
         i = e.currentTarget.dataset.index
       var arr = this.data.resume.ctrlSchoolDTOS
@@ -147,14 +219,14 @@ Page({
           url: '../w-wodejianli-jyjl/w-wodejianli-jyjl?id=' + id,
         })
       }
-    } else {
-      wx.navigateTo({
-        url: '../w-wodejianli-jyjl/w-wodejianli-jyjl',
-      })
     }
   },
   honor(e) {
-    if (this.data.resume.ctrlBookDTOS) {
+    if (this.data.isStatus) {
+      this.setData({
+        sty: 'display:block'
+      })
+    } else {
       var id = this.data.resume.ctrlResumeDTO.id,
         i = e.currentTarget.dataset.index
       var arr = this.data.resume.ctrlBookDTOS
@@ -167,10 +239,6 @@ Page({
           url: '../u-wodejianli-hdzs/u-wodejianli-hdzs?id=' + id,
         })
       }
-    } else {
-      wx.navigateTo({
-        url: '../u-wodejianli-hdzs/u-wodejianli-hdzs'
-      })
     }
   },
 
@@ -185,7 +253,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    
   },
 
   /**

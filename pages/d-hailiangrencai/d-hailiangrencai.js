@@ -10,27 +10,37 @@ Page({
     animationData: {},
     animationMor: {},
     style: '',
-    app: getApp().globalData,
     zhiList: [],
     moneyList:[],
     expList:[],
-    codList:[]
+    codList:[],
+    currentPage: 1,
+    loadingType: 0,
+    contentText: {
+      contentdown: "上拉显示更多",
+      contentrefresh: "正在加载...",
+      contentnomore: "就这么多了~"
+    },
+    app: getApp().globalData,
+    recomList: [],
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var data={
+      limit: 1,
+      page: this.data.currentPage
+    }
+    this.reword(data)
     console.log(options)
     var that = this
     if (options.id == 1) {
       wx.setNavigationBarTitle({
         title: '即刻入职'
       })
-    }else if(options.id==2){
-      wx.setNavigationBarTitle({
-        title: '推荐人才'
-      })
+    }else{
     }
     this.zhiwei = this.selectComponent("#zhiwei");
     this.zonghe = this.selectComponent("#zonghe");
@@ -77,6 +87,115 @@ Page({
         that.setData({
           expList:res.data.rdata
         })
+      }
+    })
+  },
+  reword(data) {
+    var that = this
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/indexCom/getTalent',
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        console.log(res)
+        var arr = res.data.rdata
+        var myDate = new Date()
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var arrs = val.ctrlWorkDTOS
+            if (arrs.length > 0) {
+              arrs.map(function (vals, is) {
+                console.log(vals)
+                var date1 = vals.startTime.substring(0, 10)
+                var date = vals.endTime.substring(0, 10)
+                let start = new Date(date1.replace(/\-/g, "/"));
+                let end = new Date(date.replace(/\-/g, "/"));
+                let startYear = start.getFullYear();
+                let startMonth = start.getMonth();
+                let endYear = end.getFullYear();
+                let endMonth = end.getMonth();
+                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
+                var val = (monthCount / 12).toString().split(".")
+                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
+              })
+            }
+          })
+        }
+        console.log(res.data.rdata)
+        that.setData({
+          recomList: res.data.rdata
+        })
+
+        if (res.data.rdata.length <1) {
+          that.setData({
+            loadingType: 2
+          })
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+  jiazai(data) {
+    var that = this
+    this.setData({
+      currentPage: that.data.currentPage + 1
+    })
+    if (this.data.loadingType != 0) {
+      //loadingType!=0;直接返回
+      return false;
+    }
+    this.setData({
+      loadingType: 1
+    })
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/indexCom/getTalent',
+      dengl: true,
+      data: data,
+      method: 'POST',
+      success(res) {
+        that.setData({
+          recomList: that.data.recomList.concat(res.data.rdata)
+        })
+
+        var arr = res.data.rdata
+        var myDate = new Date()
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var arrs = val.ctrlWorkDTOS
+            if (arrs.length > 0) {
+              arrs.map(function (vals, is) {
+                console.log(vals)
+                var date1 = vals.startTime.substring(0, 10)
+                var date = vals.endTime.substring(0, 10)
+                let start = new Date(date1.replace(/\-/g, "/"));
+                let end = new Date(date.replace(/\-/g, "/"));
+                let startYear = start.getFullYear();
+                let startMonth = start.getMonth();
+                let endYear = end.getFullYear();
+                let endMonth = end.getMonth();
+                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
+                var val = (monthCount / 12).toString().split(".")
+                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
+                vals.timeVal = value
+              })
+            }
+          })
+        }
+        if (res.data.rdata.length < 1) {
+          that.setData({
+            loadingType: 2
+          })
+          wx.hideNavigationBarLoading()
+        } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
+        wx.hideNavigationBarLoading()
       }
     })
   },
@@ -227,7 +346,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this,
+    data = {
+      limit: 1,
+      page: that.data.currentPage
+    }
+  this.jiazai(data)
   },
 
   /**

@@ -10,7 +10,7 @@ Page({
     contentText: {
       contentdown: "上拉显示更多",
       contentrefresh: "正在加载...",
-      contentnomore: "我也是有底线的~"
+      contentnomore: "就这么多了~"
     },
     app: getApp().globalData,
     recomList: [],
@@ -25,7 +25,7 @@ Page({
     var that = this
     wx.showNavigationBarLoading()
     this.data.app.http({
-      type:true,
+      type: true,
       url: '/indexCom/getIndex',
       data: {
         limit: 1,
@@ -33,7 +33,7 @@ Page({
       },
       dengl: true,
       success(res) {
-       
+
         var arr = res.data.rdata.ctrlResumeList
         var myDate = new Date()
         if (arr.length > 0) {
@@ -51,11 +51,11 @@ Page({
                 let endYear = end.getFullYear();
                 let endMonth = end.getMonth();
                 let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
-                var val =(monthCount/12).toString().split(".")
-               var value=(val[0]==0?'':val[0]+'年')+(val[1]?val[1]+'个月':'')
-               console.log(value)
+                var val = (monthCount / 12).toString().split(".")
+                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
+                console.log(value)
                 vals.timeVal = value
-                console.log(vals.timeVal,value)
+                console.log(vals.timeVal, value)
               })
             }
           })
@@ -65,7 +65,7 @@ Page({
           recomList: res.data.rdata.ctrlResumeList,
         })
         console.log(res.data.rdata.ctrlResumeList)
-        if (res.data.rdata.ctrlResumeList.length < 1) {
+        if (res.data.rdata.ctrlResumeList.length < 10) {
           that.setData({
             loadingType: 2
           })
@@ -97,51 +97,12 @@ Page({
   },
   detail(e) {
     wx.navigateTo({
-      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id,
+      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id=' + e.currentTarget.dataset.id,
     })
   },
   qyRen() {
     wx.navigateTo({
       url: '../m-qiyezhuce/m-qiyezhuce',
-    })
-  },
-  reword(data) {
-    var that = this
-    wx.showNavigationBarLoading()
-    this.data.app.http({
-      url: '/index/getPosition',
-      dengl: true,
-      method: 'POST',
-      data: data,
-      success(res) {
-        function jiance(x) {
-          return x < 10 ? '0' + x : x
-        }
-        var arr = res.data.rdata
-        var myDate = new Date()
-        if (arr.length > 0) {
-          arr.map(function (val, i) {
-            var date1 = new Date(val.createTime.substring(0, 10))
-            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-            val.timeVal = value
-          })
-        }
-        console.log(arr, 88888)
-        console.log(res.data.rdata)
-        that.setData({
-          recomList: res.data.rdata
-        })
-
-        if (res.data.rdata.length < 10) {
-          that.setData({
-            loadingType: 2
-          })
-        }
-        wx.hideNavigationBarLoading();
-        wx.stopPullDownRefresh()
-      }
     })
   },
   jiazai(data) {
@@ -158,31 +119,39 @@ Page({
     })
     wx.showNavigationBarLoading()
     this.data.app.http({
-      url: '/index/getPosition',
+      url: '/indexCom/getIndex',
       dengl: true,
-      method: 'POST',
       data: data,
       success(res) {
-        console.log(res.data.rdata, 22222)
         that.setData({
-          recomList: that.data.recomList.concat(res.data.rdata)
+          recomList: that.data.recomList.concat(res.data.rdata.ctrlResumeList)
         })
 
-        function jiance(x) {
-          return x < 10 ? '0' + x : x
-        }
-        var arr = res.data.rdata
+        var arr = res.data.rdata.ctrlResumeList
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var date1 = new Date(val.createTime.substring(0, 10))
-            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-            val.timeVal = value
+            var arrs = val.ctrlWorkDTOS
+            if (arrs.length > 0) {
+              arrs.map(function (vals, is) {
+                console.log(vals)
+                var date1 = vals.startTime.substring(0, 10)
+                var date = vals.endTime.substring(0, 10)
+                let start = new Date(date1.replace(/\-/g, "/"));
+                let end = new Date(date.replace(/\-/g, "/"));
+                let startYear = start.getFullYear();
+                let startMonth = start.getMonth();
+                let endYear = end.getFullYear();
+                let endMonth = end.getMonth();
+                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
+                var val = (monthCount / 12).toString().split(".")
+                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
+                vals.timeVal = value
+              })
+            }
           })
         }
-        if (res.data.rdata.length < 10) {
+        if (res.data.rdata.ctrlResumeList.length < 10) {
           that.setData({
             loadingType: 2
           })
@@ -246,7 +215,12 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that = this,
+      data = {
+        limit: 1,
+        page: that.data.currentPage
+      }
+    this.jiazai(data)
   },
 
   /**

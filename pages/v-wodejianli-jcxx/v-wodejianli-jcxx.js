@@ -31,7 +31,6 @@ Page({
     app: getApp().globalData,
     eduction: [],
     marr: [],
-    app: getApp().globalData,
     edu_index: '',
     mar_index: '',
     isYear: false,
@@ -45,7 +44,9 @@ Page({
     reg_value: '',
     phone_value: '',
     emil_value: '',
-    id: ''
+    id: '',
+    idType: '',
+    list:{}
   },
 
   /**
@@ -54,32 +55,46 @@ Page({
   onLoad: function (options) {
     this.spring = this.selectComponent("#spring");
     var that = this
-    if (wx.getStorageSync('userInfo').ctrlResumeDTO) {
-      var list = wx.getStorageSync('userInfo').ctrlResumeDTO
-
+    if (options.id) {
       this.setData({
-        img: list.url ? list.url : '../img/f067.png',
-        name_value: list.name ? list.name : '请输入',
-        date_value: list.time ? list.time : '请选择',
-        valu2: list.schoolName ? list.schoolName : '请选择',
-        phone_value: list.phone ? list.phone : '请输入',
-        edu: list.school ? list.school : '',
-        id: list.id,
-        money_value: list.address ? list.address : '请输入',
-        home_value: list.address ? list.address : '请输入',
-        mar: list.marriage ? list.marriage : '',
-        emil_value: list.email ? list.email : ''
-      })
-      if (list.sex) {
-        var six_val = (list.sex == 1) ? '男' : '女'
-        that.setData({
-          six_val: six_val,
-        })
-      }
-      this.spring.setData({
-        mar: list.status ? list.status : ''
+        idType: 1
       })
     }
+    var list={}
+    this.data.app.http({
+      url: '/getResumes',
+      dengl: true,
+      data: {},
+      success(res) {
+        if (res.data.rdata.ctrlResume) {
+          list = res.data.rdata.ctrlResume
+          that.setData({
+            list:res.data.rdata.ctrlResume,
+            img: list.url ? list.url : '../img/f067.png',
+            name_value: list.name ? list.name : '',
+            date_value: list.time ? list.time : '',
+            valu2: list.schoolName ? list.schoolName : '请选择',
+            phone_value: list.phone ? list.phone : '请输入',
+            edu: list.school ? list.school : '',
+            id: list.id,
+            money_value: list.address ? list.address : '',
+            home_value: list.address ? list.address : '请输入',
+            mar: list.marriage ? list.marriage : '',
+            emil_value: list.email ? list.email : ''
+          })
+          if (list.sex) {
+            var six_val = (list.sex == 1) ? '男' : '女'
+            that.setData({
+              six_val: six_val,
+            })
+          }
+          that.spring.setData({
+            mar: list.status ? list.status : ''
+          })
+        }
+
+      }
+    })
     // 求职状态
     this.data.app.http({
       url: '/selects/resume_status',
@@ -89,9 +104,9 @@ Page({
         that.setData({
           springContent: res.data.rdata
         })
-        if (list.status) {
+        if (that.data.list.status) {
           res.data.rdata.map(function (val, i) {
-            if (val.value == list.status) {
+            if (val.value == that.data.list.status) {
               that.setData({
                 type_content: val.label,
               })
@@ -109,9 +124,9 @@ Page({
         that.setData({
           eduction: res.data.rdata
         })
-        if (list.school) {
+        if (that.data.list.school) {
           res.data.rdata.map(function (val, i) {
-            if (val.value == list.school) {
+            if (val.value == that.data.list.school) {
 
               that.setData({
                 valu2: val.label,
@@ -131,9 +146,9 @@ Page({
         that.setData({
           marr: res.data.rdata
         })
-        if (list.marriage) {
+        if (that.data.list.marriage) {
           res.data.rdata.map(function (val, i) {
-            if (val.value == list.marriage) {
+            if (val.value == that.data.list.marriage) {
               that.setData({
                 valu: val.label,
                 mar: val.value
@@ -152,9 +167,9 @@ Page({
         that.setData({
           yearList: res.data.rdata
         })
-        if (list.workTime) {
+        if (that.data.list.workTime) {
           res.data.rdata.map(function (val, i) {
-            if (val.value == list.workTime) {
+            if (val.value == that.data.list.workTime) {
               that.setData({
                 yearValue: val.label,
                 year_time: val.value
@@ -220,38 +235,38 @@ Page({
     var that = this,
       date = this.data.date_value.substring(0, 4) + '/' + this.data.date_value.substring(5, 7) + '/' + this.data.date_value.substring(8, 10)
     var data = {
-      address: this.data.home_value,
-      time: date,
-      name: this.data.name_value,
-      phone: this.data.phone_value,
-      email: this.data.emil_value,
-      money: this.data.money_value,
-      url: this.data.img,
-      status: this.spring.data.mar,
-      school: this.data.edu,
-      workTime: this.data.year_time,
-      marriage: this.data.mar,
-      sex: this.data.six,
-      id: this.data.id
-    },
-    data1 = {
-      address: this.data.home_value,
-      time: date,
-      name: this.data.name_value,
-      phone: this.data.phone_value,
-      email: this.data.emil_value,
-      money: this.data.money_value,
-      url: this.data.img,
-      status: this.spring.data.mar,
-      school: this.data.edu,
-      workTime: this.data.year_time,
-      marriage: this.data.mar,
-      sex: this.data.six,
-      id: this.data.id,
-      schoolName:this.data.valu2,
-      statusName:this.data.type_content,
-      workTimeName:this.data.yearValue,
-    }
+        address: this.data.home_value,
+        time: date,
+        name: this.data.name_value,
+        phone: this.data.phone_value,
+        email: this.data.emil_value,
+        money: this.data.money_value,
+        url: this.data.img,
+        status: this.spring.data.mar,
+        school: this.data.edu,
+        workTime: this.data.year_time,
+        marriage: this.data.mar,
+        sex: this.data.six,
+        id: this.data.id
+      },
+      data1 = {
+        address: this.data.home_value,
+        time: date,
+        name: this.data.name_value,
+        phone: this.data.phone_value,
+        email: this.data.emil_value,
+        money: this.data.money_value,
+        url: this.data.img,
+        status: this.spring.data.mar,
+        school: this.data.edu,
+        workTime: this.data.year_time,
+        marriage: this.data.mar,
+        sex: this.data.six,
+        id: this.data.id,
+        schoolName: this.data.valu2,
+        statusName: this.data.type_content,
+        workTimeName: this.data.yearValue,
+      }
     this.data.app.http({
       url: '/resume/saveOrUpdateResumes',
       dengl: true,
@@ -259,14 +274,8 @@ Page({
       data: data,
       success(res) {
         if (res.data.code == 200) {
-          var userInfo = wx.getStorageSync('userInfo')
-          userInfo.ctrlResumeDTO = data1
-          wx.setStorageSync('userInfo', userInfo)
           var pages = getCurrentPages();
           var prevPage = pages[pages.length - 2];
-          prevPage.setData({
-            user: wx.getStorageSync('userInfo').ctrlResumeDTO
-          })
           wx.navigateBack({
             success(res) {
               var page = getCurrentPages().pop();

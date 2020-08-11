@@ -85,11 +85,9 @@ Page({
                   type: _this.data.type
                 }),
                 success(res) {
-
                   console.log(res.data.rdata.ctrlToken.token, 2222)
-                  if (res.data.rdata) {
+                  if (res.data.code==200) {
                     wx.setStorageSync('Authorization', res.data.rdata.ctrlToken.token)
-                    wx.setStorageSync('userInfo', res.data.rdata)
                     console.log(wx.getStorageSync('Authorization')),
                       wx.showToast({
                         title: '登录成功'

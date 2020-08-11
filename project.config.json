@@ -88,15 +88,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/a-gangweifabu/a-gangweifabu",
-					"pathName": "pages/a-gangweifabu/a-gangweifabu",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/c-dingwei/c-dingw",
-					"pathName": "pages/c-dingwei/c-dingw",
+					"name": "pages/d-hailiangrencai/d-hailiangrencai",
+					"pathName": "pages/d-hailiangrencai/d-hailiangrencai",
 					"query": "",
 					"scene": null
 				},
@@ -104,13 +97,6 @@
 					"id": -1,
 					"name": "pages/l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz",
 					"pathName": "pages/l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/a-bangwozhaogongzuo/index",
-					"pathName": "pages/a-bangwozhaogongzuo/index",
 					"query": "",
 					"scene": null
 				}

@@ -146,12 +146,14 @@ Page({
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var date1 = new Date(val.createTime.substring(0, 10))
-            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-            val.timeVal = value
-          })
+            if (val.createTime) {
+              var date1 = new Date(val.createTime.substring(0, 10))
+              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+              val.timeVal = value
+            }
+            })
         }
         console.log(res.data.rdata)
         that.setData({
@@ -394,8 +396,8 @@ Page({
           page: that.data.currentPage,
           type: 2,
         }
-        this.reword(data)
-    }else{
+      this.reword(data)
+    } else {
       this.setData({
         ind5: '',
         ind6: '',
@@ -489,7 +491,7 @@ Page({
   },
   detail(e) {
     wx.navigateTo({
-      url: '../zc-zhiweixq/zc-zhiweixq?id='+e.currentTarget.dataset.id,
+      url: '../zc-zhiweixq/zc-zhiweixq?id=' + e.currentTarget.dataset.id,
     })
   },
   /**

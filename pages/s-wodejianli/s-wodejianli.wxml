@@ -45,13 +45,13 @@
 	</view>
 </view>
 
-<view class="s_05" >
+<view class="isF?'hide s_05':'show s_05' " >
 	<view class="s_06">
 		<view class="fl s_07">工作经历</view>
 		<view class="fr s_12" bindtap="work"><image src="../img/f063.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="{{isF?'hide s_20':'show s_20'}}" data-index="{{index}}" wx:for="{{resume.ctrlWorkDTOS}}" >
+	<view class="s_20" data-index="{{index}}" wx:for="{{resume.ctrlWorkDTOS}}" >
 		<view class="s_13">
 			<view class="fl s_14">{{item.company}}</view>
 			<view class="fr s_15" bindtap="work" data-id="{{item.id}}"><image src="../img/f050.png"></image></view>
@@ -60,12 +60,12 @@
 		<view class="s_16">{{time[index].startTime}}~{{time[index].endTime}}</view>
 		<view class="s_17">
 			<view class="s_18 fl">{{item.position}}</view>
-			<view class="s_19 fr">{{item.money}}元/月</view>
+			<view class="s_19 fr">{{item.money?item.money+'元/月':''}}</view>
 		</view>
 		<view class="s_21">{{item.describe}}</view>
 	</view>
 
-	<view class="s_22"  bindtap="change"><image src="{{isF?'../img/f064.png':'../img/f064-01.png'}}"></image></view>
+	<view class="s_22"  bindtap="change"><image src="{{isF?'../img/f064-01.png':'../img/f064.png'}}"></image></view>
 </view>
 
 <view class="s_05">
@@ -116,15 +116,48 @@
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{book[index].time	}}</view>
-		<view class="s_23"><image :src="{{item.url}}"></image></view>
+		<view class="s_23"><image src="{{item.url}}"></image></view>
 	</view>
 </view>
 
-<view class="s_24">去投递</view>
+<view class="s_24" bindtap="toudi">去投递</view>
+<view class="f_08" style="{{sty}}">
+	<view class="f_07">
+		<view class="zc_18">
+			<image src="../img/f077.png"></image>
+		</view>
+		<view class="zc_19">
+			<view class="zc_20">
+				<p>您还没有完善基本信息</p>
+				<span>请您先完善基本信息并绑定简历</span>
+			</view>
+			<view class="f_11">
+				<view class="f_12 fl" bindtap="quxiao1">朕知道了</view>
+				<view class="f_13 fr" bindtap="wanshan">完善信息</view>
+				<view class="w-clear"></view>
+			</view>
+		</view>
+	</view>
+</view>
 
-
-
-
+<view class="f_08" style="{{style}}">
+	<view class="f_07">
+		<view class="zc_18">
+			<image src="../img/f077.png"></image>
+		</view>
+		<view class="zc_19">
+			<view class="zc_20">
+				<p>您还没有补全简历</p>
+				<span>请您补全简历，再来投递吧</span>
+			</view>
+			<view class="f_11">
+				<!-- <view class="f_12 fl" bindtap="hidd">朕知道了</view> -->
+				<view class="f_13" style="margin: 0 auto;" bindtap="block">补全简历</view>
+				<view class="w-clear"></view>
+			</view>
+		</view>
+	</view>
+</view>
 
 
 

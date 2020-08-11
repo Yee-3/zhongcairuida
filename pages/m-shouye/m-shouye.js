@@ -740,7 +740,7 @@ Page({
         that.setData({
           recomList: res.data.rdata
         })
-        if (res.data.rdata.length < 10) {
+        if (res.data.rdata.length <= 10) {
           that.setData({
             loadingType: 2
           })
@@ -784,7 +784,7 @@ Page({
         that.setData({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
-        if (res.data.rdata.length < 10) {
+        if (res.data.rdata.length <= 10) {
           that.setData({
             loadingType: 2
           })

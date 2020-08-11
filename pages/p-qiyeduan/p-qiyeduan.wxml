@@ -60,7 +60,7 @@
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
-					<image src="{{item.url}}"></image>
+					<image src="{{item.url?item.url:'../img/f01.png'}}"></image>
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
@@ -69,10 +69,10 @@
 						<view class="w-clear"></view>
 					</view>
 					<view class="d_10">
-						<p>{{item.workTimeName}}</p><span>|</span>
-						<p>{{item.schoolName}}</p><span>|</span>
-						<p>{{item.ctrlObjectiveDTOS[0].address}}</p><span>|</span>
-						<p>{{item.ctrlObjectiveDTOS[0].moneyName}}</p>
+				<p>{{item.workTimeName?item.workTimeName:''}}</p><span wx:if="{{item.schoolName}}">|</span>
+						<p>{{item.schoolName?item.schoolName:''}}</p><span wx:if="{{item.ctrlObjectiveDTOS[0].address}}">|</span>
+						<p>{{item.ctrlObjectiveDTOS[0].address?item.ctrlObjectiveDTOS[0].address:''}}</p><span wx:if="{{item.ctrlObjectiveDTOS[0].moneyName}}">|</span>
+						<p>{{item.ctrlObjectiveDTOS[0].moneyName?item.ctrlObjectiveDTOS[0].moneyName:''}}</p>
 					</view>
 				</view>
 			</view>
@@ -80,7 +80,7 @@
 			<view class="w-clear"></view>
 		</view>
 		<view class="d_12">
-			<view class="fl d_14">
+			<view class="fl d_14" wx:if="{{item.ctrlWorkDTOS.length>0}}">
 				<image src="../img/f0021.png"></image>
 			</view>
 			<view class="d_13" wx:for="{{item.ctrlWorkDTOS}}" wx:for-index="index2" wx:for-item="i">
@@ -181,5 +181,7 @@
 		</view>
 	</view>
 </view>
-<view class="d_16">就这么多了~</view>
+<view class="d_16">
+		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
+	</view>
 <tabbars id="tab" bind:toggle="showTab"></tabbars>

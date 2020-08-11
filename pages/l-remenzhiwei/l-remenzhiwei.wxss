@@ -183,9 +183,9 @@ page {
 }
 
 .mask_02_01 {
-	position: fixed;
+	position: absolute;
 	width: 560rpx;
-	right: 30rpx;
+	right: 0;
 	height: 709rpx;
 	background: #ff4949;
 	/* border-bottom-left-radius: 20rpx; */

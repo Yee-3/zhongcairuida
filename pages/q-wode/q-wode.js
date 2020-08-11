@@ -18,6 +18,33 @@ Page({
    */
   onLoad: function (options) {
     this.tog = this.selectComponent("#tog");
+    var that=this
+    const app = getApp().globalData
+    var that = this
+    app.http({
+      url: '/Other/hotline',
+      dengl: true,
+      data: {},
+      success(res) {
+        that.setData({
+          kefuPhone: res.data.rdata
+        })
+      }
+    })
+    app.http({
+      url:'/getResumes',
+      dengl:true,
+      data:{},
+      success(res){
+        console.log(res)
+        if(wx.getStorageSync('Authorization')){
+          that.setData({
+            user:res.data.rdata.ctrlResume
+          })
+        }
+      }
+    })
+  
   },
 
   tanchuang_2: function () {
@@ -55,10 +82,14 @@ Page({
       success(res) {
         if(res.data.code==200){
           wx.setStorageSync('Authorization','')
-          wx.setStorageSync('userInfo','')
+          // wx.setStorageSync('userInfo','')
           wx.showToast({
             title: '您已退出登录'
           })
+          // if (!this.data.user) {
+            //刷新当前页面的数据
+            getCurrentPages()[getCurrentPages().length - 1].onLoad()
+          // }
         }
         // this.onLoad()
         console.log(this.data.user)
@@ -124,21 +155,8 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    const app = getApp().globalData
-    this.setData({
-      user: wx.getStorageSync('userInfo').ctrlResumeDTO
-    })
-    var that = this
-    app.http({
-      url: '/Other/hotline',
-      dengl: true,
-      data: {},
-      success(res) {
-        that.setData({
-          kefuPhone: res.data.rdata
-        })
-      }
-    })
+   
+
   },
 
   /**

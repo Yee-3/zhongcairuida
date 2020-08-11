@@ -46,11 +46,11 @@
 		</view>
 	</view>
 	
-	<view class="h_10" wx:if="{{idn==1}}">
+	<view class="h_10" wx:if="{{idn==1}}" wx:for="{{passList}}">
 		<view class="h_11">
-			<view class="fl h_12">行政助理</view>
+			<view class="fl h_12">{{item.title}}</view>
 			<view class="fl h_1333">已通过</view>
-			<view class="fr l_05">成功入职0人</view>
+			<view class="fr l_05">成功入职{{hiring?hiring:'0'}}人</view>
 		</view>
 		<view class="h_14">
 			<view class="fl h_15"><p>济南市天桥</p><span>|</span><p>5年</p><span>|</span><p>本科</p><span>|</span><p>5人</p><span>|</span><p>到岗式</p></view>

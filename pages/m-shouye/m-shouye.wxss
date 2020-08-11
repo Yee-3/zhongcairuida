@@ -444,7 +444,7 @@
 .mask_02 {
 	position: fixed;
 	width: 690rpx;
-	height: 710rpx;
+	height: 709rpx;
 	background: #ff4949;
 	border-bottom-left-radius: 15rpx;
 	border-bottom-right-radius: 15rpx;
@@ -455,10 +455,10 @@
 }
 
 .mask_02_01 {
-	position: fixed;
+	position: absolute;
 	width: 560rpx;
-	right: 30rpx;
-	height: 710rpx;
+	right: 0;
+	height: 709rpx;
 	background: #ff4949;
 	/* border-bottom-left-radius: 20rpx; */
 	border-bottom-right-radius: 15rpx;
@@ -466,6 +466,7 @@
 	box-sizing: border-box;
 	z-index: 9999;
 	display: flex;
+	overflow: hidden;
 }
 
 .mask_left {

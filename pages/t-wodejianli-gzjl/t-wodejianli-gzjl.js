@@ -42,6 +42,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this
     this.setData({
       id: options.id,
@@ -251,6 +252,7 @@ Page({
       })
     }
     if (type == 3) {
+      console.log(that.data.des_Type)
       that.setData({
         des_Type: value
       })
@@ -291,13 +293,13 @@ Page({
         title: '请选择行业',
         icon: 'none'
       })
-    } else if (!(this.data.dep_Type != '请输入')) {
+    } else if (!this.data.dep_Type) {
       wx.showToast({
         title: '请输入部门',
         icon: 'none'
       })
     } else {
-      this.data.app.http({
+      that.data.app.http({
         url: '/resume/saveOrUpdateWork',
         dengl: true,
         method: 'POST',

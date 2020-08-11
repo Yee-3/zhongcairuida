@@ -102,7 +102,7 @@
 	</view>
 	<view class="r_02">
 		<view class="r_03">工作描述：</view>
-		<view class="t_05"><textarea data-ty="3" bindblur="blur" data-value="{{value}}" placeholder="请输入" value="{{des_Type}}"></textarea></view>
+		<view class="t_05"><textarea data-ty="3" bindinput="blur" data-value="{{value}}" placeholder="请输入" value="{{des_Type}}"></textarea></view>
 	</view>
 </view>
 

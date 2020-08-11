@@ -136,7 +136,7 @@ Page({
               }
             })
           } else {
-            this.setData({
+            that.setData({
               style: 'display:block'
             })
           }

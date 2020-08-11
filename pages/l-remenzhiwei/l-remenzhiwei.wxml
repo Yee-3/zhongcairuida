@@ -136,9 +136,9 @@
 		</view>
 		<view class="h_14">
 			<view class="fl h_15">
-				<p>{{item.cityName}}{{item.districtName}}</p><span>|</span>
-				<p>{{item.workExperienceName}}</p><span>|</span>
-				<p>{{item.schoolRecordName}}</p>
+				<p>{{item.cityName?item.cityName:''}}{{item.districtName?item.districtName:''}}</p><span wx:if="{{item.cityName&&item.districtName}}">|</span>
+				<p>{{item.workExperienceName?item.workExperienceName:''}}</p><span>|</span>
+				<p>{{item.schoolRecordName?item.schoolRecordName:''}}</p>
 			</view>
 			<view class="fr h_16">{{item.timeVal}}</view>
 		</view>

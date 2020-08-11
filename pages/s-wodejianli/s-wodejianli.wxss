@@ -130,15 +130,7 @@
 
 .s_20 {
   margin-top: 20rpx;
-  display: -webkit-box;
-  /*关键属性（必须有的）  */
-  -webkit-box-orient: vertical;
-  /*规定子元素的排列方向 */
-  -webkit-line-clamp: 2;
-  /*行数*/
-  /* 实现多余的文字隐藏并用省略号来代表被隐藏的文字    */
-  overflow: hidden;
-  text-overflow: ellipsis;
+  
 }
 
 .s_22 {
@@ -229,11 +221,101 @@
 }
 
 .hidden {}
-
-.hide {
+.hide{
+  overflow: hidden;
   display: -webkit-box;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+}
+.show{
+  display: block
+} 
+
+
+.f_07 {
+  width: 630rpx;
+  height: auto;
+  margin: 0 auto;
+  border-radius: 15rpx;
+  padding: 40rpx 0;
+  box-sizing: border-box;
+  margin-top: 50%;
 }
 
-.show {
-  display: block
+.f_08 {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+}
+
+.f_11 {
+  width: 380rpx;
+  margin: 0 auto;
+  margin-top: 31rpx;
+  background: #fff;
+}
+
+.f_12 {
+  width: 170rpx;
+  height: 66rpx;
+  background: #ececec;
+  text-align: center;
+  font-size: 26rpx;
+  color: #333;
+  line-height: 66rpx;
+  border-radius: 40rpx;
+}
+
+.f_13 {
+  width: 170rpx;
+  height: 66rpx;
+  background: #0286ff;
+  text-align: center;
+  font-size: 26rpx;
+  color: #fff;
+  line-height: 66rpx;
+  border-radius: 40rpx;
+}
+
+.zc_18 {
+  margin: 0 auto;
+  width: 492rpx;
+  display: block;
+  height: 240rpx;
+}
+
+.zc_18 image {
+  width: 492rpx;
+  height: 250rpx;
+  display: block;
+}
+
+.zc_19 {
+  background: #fff;
+  width: 492rpx;
+  margin: 0 auto;
+  text-align: center;
+  padding-bottom: 60rpx;
+  border-bottom-left-radius: 20rpx;
+  border-bottom-right-radius: 20rpx;
+}
+.zc_20 p {
+  font-size: 30rpx;
+  color: #000;
+  display: block;
+  margin-bottom: 20rpx;
+}
+
+.zc_20 span {
+  font-size: 26rpx;
+  color: #666;
+  display: block;
 }
