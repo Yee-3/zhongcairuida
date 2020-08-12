@@ -19,7 +19,7 @@ Component({
    */
   data: {
     isCon:false,
-    ind:'1',
+    ind:'0',
     value:'综合排序',
   },
 
@@ -40,17 +40,13 @@ Component({
         this.setData({
            ind:e.currentTarget.dataset.index
         })
-        if(this.data.ind==1){
+        if(this.data.ind==0){
           this.setData({
             value:'综合排序'
          })
-        }else if(this.data.ind==2){
-          this.setData({
-            value:'最新发布优先'
-         })
         }else{
           this.setData({
-            value:'距离排序'
+            value:'最近活跃'
          })
         }
         this.triggerEvent("confirm");

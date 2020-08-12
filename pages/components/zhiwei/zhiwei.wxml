@@ -1,5 +1,5 @@
 <!--pages/components/zhiwei/zhiwei.wxml-->
-<view class="mask" wx:if="{{isAdd}}" style="{{styleT}}"></view>
+<view class="mask" wx:if="{{isAdd}}" style="{{styleT}}" bindtap="hidden"></view>
 <view class="mask1" wx:if="{{isAdd}}" style="{{style}}">
 	<view class="m_top">
 		<!-- <view class="title">职位</view> -->

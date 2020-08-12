@@ -157,7 +157,7 @@ Page({
   },
   search(e) {
     console.log(this.data.location)
-  var that=this
+    var that = this
     this.setData({
       currentPage: 1,
       name: e.detail.value
@@ -235,8 +235,33 @@ Page({
     this.toggleZhi()
     this.setData({
       currentPage: 1,
-      zhType: true
+      zwType: true
     })
+    if (this.data.morType) {
+      this.more.setData({
+        ind5:'',
+        ind6:'',
+        ind7:'',
+      })
+      this.setData({
+        morType:false
+      })
+    }else if(this.data.zhType){
+      this.zonghe.setData({
+        ind:''
+      })
+      this.setData({
+        zhType:false
+      })
+    }else if(this.data.gsType){
+      this.gongsi.setData({
+        ind3: '',
+        ind4: '',
+      })
+      this.setData({
+        gsType:false
+      })
+    }
     var that = this,
       id = this.zhiwei.data.id ? this.zhiwei.data.id : '',
       name = this.data.name ? this.data.name : '',
@@ -308,12 +333,43 @@ Page({
       })
     }
   },
+  // 综合筛选
   togValue() {
+    var that=this
     this.setData({
       value: this.zonghe.data.value,
       currentPage: 1,
-      zhType: true
+      zhType: true,
     })
+    if (this.data.morType) {
+      that.more.setData({
+        ind5:'',
+        ind6:'',
+        ind7:'',
+      })
+      this.setData({
+        morType:false
+      })
+    }else if(this.data.zwType){
+      that.zhiwei.setData({
+        isAdd: false,
+        isTwo:false,
+        ind1: 'x',
+        ind2: 'x',
+        ind: 'x',
+      })
+      this.setData({
+        zwType:false
+      })
+    }else if(this.data.gsType){
+      this.gongsi.setData({
+        ind3: '',
+        ind4: '',
+      })
+      this.setData({
+        gsType:false
+      })
+    }
     this.toggleZong()
     var that = this,
       ind = '',
@@ -375,6 +431,35 @@ Page({
       currentPage: 1,
       gsType: true
     })
+    if (this.data.morType) {
+      this.more.setData({
+        ind5: '',
+        ind6: '',
+        ind7: '',
+      })
+      this.setData({
+        morType: false
+      })
+    }else if (this.data.zwType) {   
+
+      this.zhiwei.setData({
+        isAdd: false,
+        isTwo: false,
+        ind1: 'x',
+        ind2: 'x',
+        ind: 'x',
+      })
+      this.setData({
+        zwType: false
+      })
+    } else if (this.data.zhType) {
+      this.zonghe.setData({
+        ind: ''
+      })
+      this.setData({
+        zhType: false
+      })
+    }
     var that = this,
       ind3 = this.gongsi.data.ind3 ? this.gongsi.data.ind3 : '',
       ind4 = this.gongsi.data.ind4 ? this.gongsi.data.ind4 : '',
@@ -418,6 +503,35 @@ Page({
       currentPage: 1,
       morType: true
     })
+   if (this.data.zwType) {             
+		this.zhiwei.setData({
+			isAdd: false,
+			isTwo: false,
+			ind1: 'x',
+			ind2: 'x',
+			ind: 'x',
+		})
+		this.setData({
+			zwType: false
+		})
+		// 公司
+	} else if (this.data.gsType) {
+		this.gongsi.setData({
+			ind3: '',
+			ind4: '',
+		})
+		this.setData({
+			gsType: false
+		})
+		// 综合
+	} else if (this.data.zhType) {
+		this.zonghe.setData({
+			ind: ''
+		})
+		this.setData({
+			zhType: false
+		})
+	}
     var that = this,
       ind5 = this.more.data.ind5 ? this.more.data.ind5 : '',
       ind6 = this.more.data.ind6 ? this.more.data.ind6 : '',
@@ -481,13 +595,13 @@ Page({
         if (arr.length > 0) {
           arr.map(function (val, i) {
             console.log(val)
-            if(val.createTime){
-            var date1 = new Date(val.createTime.substring(0, 10))
-            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-            val.timeVal = value
-          }
+            if (val.createTime) {
+              var date1 = new Date(val.createTime.substring(0, 10))
+              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+              val.timeVal = value
+            }
           })
         }
         console.log(arr, 88888)
@@ -635,10 +749,10 @@ Page({
         address = ''
       if (that.zonghe.data.ind == 1) {
         ind = that.zonghe.data.ind,
-        address = that.data.location
+          address = that.data.location
       } else if (that.zonghe.data.ind == 2) {
         ind = that.zonghe.data.ind,
-        address = that.data.location
+          address = that.data.location
       } else if (that.zonghe.data.ind == 3) {
         address = that.data.location
       }

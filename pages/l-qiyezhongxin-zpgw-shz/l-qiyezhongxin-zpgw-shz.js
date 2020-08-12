@@ -16,7 +16,7 @@ Page({
     },
     app: getApp().globalData,
     recomList: [],
-    passList:[],
+    passList: [],
   },
 
   /**
@@ -25,68 +25,53 @@ Page({
   onLoad: function (options) {
     console.log(options)
     var that = this
- 
-      // this.setData({
-      //   id: options.id
-      // })
-    
-    this.data.app.http({
-      url: '/company/queryJobPosition',
-      dengl: true,
-      method: 'POST',
-      data: {
-        companyId:that.data.id,
-        limit:10,
-        page:1,
-        status:1
-      },
-      success(res) {
-        console.log(res)
-        that.setData({
-          passList:res.data.rdata
-        })
-      }
-    })
+
+    // this.setData({
+    //   id: options.id
+    // })
+
+    var data = {
+      companyId: that.data.id,
+      limit: 10,
+      page: this.data.currentPage,
+      status: 1
+    }
+    this.reword(data)
   },
   reword(data) {
     var that = this
     wx.showNavigationBarLoading()
     this.data.app.http({
-      url: '/indexCom/getTalent',
+      type: true,
+      url: '/company/queryJobPosition',
       dengl: true,
       method: 'POST',
       data: data,
       success(res) {
-        console.log(res)
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
         var arr = res.data.rdata
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
-            if (arrs.length > 0) {
-              arrs.map(function (vals, is) {
-                console.log(vals)
-                var date1 = vals.startTime.substring(0, 10)
-                var date = vals.endTime.substring(0, 10)
-                let start = new Date(date1.replace(/\-/g, "/"));
-                let end = new Date(date.replace(/\-/g, "/"));
-                let startYear = start.getFullYear();
-                let startMonth = start.getMonth();
-                let endYear = end.getFullYear();
-                let endMonth = end.getMonth();
-                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
-                var val = (monthCount / 12).toString().split(".")
-                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
-              })
+            console.log(val)
+            if (val.createTime) {
+              var date1 = new Date(val.createTime.substring(0, 10))
+              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+              val.timeVal = value
             }
           })
         }
+
         console.log(res.data.rdata)
         that.setData({
           recomList: res.data.rdata
         })
 
-        if (res.data.rdata.length <1) {
+        if (res.data.rdata.length < 1) {
           that.setData({
             loadingType: 2
           })
@@ -110,7 +95,8 @@ Page({
     })
     wx.showNavigationBarLoading()
     this.data.app.http({
-      url: '/indexCom/getTalent',
+      type: true,
+      url: '/company/queryJobPosition',
       dengl: true,
       data: data,
       method: 'POST',
@@ -119,27 +105,20 @@ Page({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
 
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
         var arr = res.data.rdata
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
-            if (arrs.length > 0) {
-              arrs.map(function (vals, is) {
-                console.log(vals)
-                var date1 = vals.startTime.substring(0, 10)
-                var date = vals.endTime.substring(0, 10)
-                let start = new Date(date1.replace(/\-/g, "/"));
-                let end = new Date(date.replace(/\-/g, "/"));
-                let startYear = start.getFullYear();
-                let startMonth = start.getMonth();
-                let endYear = end.getFullYear();
-                let endMonth = end.getMonth();
-                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
-                var val = (monthCount / 12).toString().split(".")
-                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
-                vals.timeVal = value
-              })
+            console.log(val)
+            if (val.createTime) {
+              var date1 = new Date(val.createTime.substring(0, 10))
+              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+              val.timeVal = value
             }
           })
         }
@@ -163,30 +142,44 @@ Page({
     })
   },
   toggleShen(e) {
+    var that = this
     console.log(e)
     this.setData({
       idn: e.currentTarget.dataset.index
     })
-    if( e.currentTarget.dataset.index==1){
-      this.data.app.http({
-        url: '/company/queryJobPosition',
-        dengl: true,
-        method: 'POST',
-        data: {
-          companyId:that.data.id,
-          limit:10,
-          page:1,
-          status:1
-        },
-        success(res) {
-          console.log(res)
-          that.setData({
-            passList:res.data.rdata
-          })
-        }
+    if (this.data.idn == 1) {
+      this.setData({
+        currentPage: 1
       })
-    }else if( e.currentTarget.dataset.index==2){
-      
+      var data = {
+        companyId: that.data.id,
+        limit: 10,
+        page: this.data.currentPage,
+        status: 1
+      }
+      this.jiazai(data)
+    } else if (this.data.idn == 2) {
+      this.setData({
+        currentPage: 1
+      })
+      var data = {
+        companyId: that.data.id,
+        limit: 10,
+        page: this.data.currentPage,
+        status: 0
+      }
+      this.jiazai(data)
+    } else {
+      this.setData({
+        currentPage: 1
+      })
+      var data = {
+        companyId: that.data.id,
+        limit: 10,
+        page: this.data.currentPage,
+        status: 2
+      }
+      this.jiazai(data)
     }
   },
   /**
@@ -228,7 +221,41 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
+    var that=this
+    if (e.currentTarget.dataset.index == 1) {
+      this.setData({
+        currentPage: 1
+      })
+      var data = {
+        companyId: that.data.id,
+        limit: 10,
+        page: this.data.currentPage,
+        status: 1
+      }
+      this.reword(data)
+    } else if (e.currentTarget.dataset.index == 2) {
+      this.setData({
+        currentPage: 1
+      })
+      var data = {
+        companyId: that.data.id,
+        limit: 10,
+        page: this.data.currentPage,
+        status: 0
+      }
+      this.reword(data)
+    } else {
+      this.setData({
+        currentPage: 1
+      })
+      var data = {
+        companyId: that.data.id,
+        limit: 10,
+        page: this.data.currentPage,
+        status: 2
+      }
+      this.reword(data)
+    }
   },
 
   /**

@@ -1,6 +1,6 @@
 {
   "usingComponents": {
-    "zonghe": "../components/zonghe/zonghe",
+    "zonghe": "../components/qiye_zonghe/zonghe",
     "zhiwei": "../components/zhiwei/zhiwei",
     "more": "../components/gengduo/more"
   },

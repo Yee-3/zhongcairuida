@@ -62,6 +62,12 @@ Component({
       })
     },
     cancel() {
+      this.setData({
+        ind5:'',
+        ind6:'',
+        ind7:'',
+        isAdd_F:false
+      })
       this.triggerEvent("cancel");
     },
     confirm() {

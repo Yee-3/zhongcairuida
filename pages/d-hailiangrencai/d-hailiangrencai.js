@@ -11,9 +11,9 @@ Page({
     animationMor: {},
     style: '',
     zhiList: [],
-    moneyList:[],
-    expList:[],
-    codList:[],
+    moneyList: [],
+    expList: [],
+    codList: [],
     currentPage: 1,
     loadingType: 0,
     contentText: {
@@ -23,69 +23,79 @@ Page({
     },
     app: getApp().globalData,
     recomList: [],
+    title_type: '',
+    morType: false,
+    zwType: false,
+    url:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    var data={
-      limit: 1,
-      page: this.data.currentPage
-    }
-    this.reword(data)
     console.log(options)
+    var data = {
+      limit: 5,
+      page: this.data.currentPage,
+      sort: 0
+    }
     var that = this
     if (options.id == 1) {
       wx.setNavigationBarTitle({
         title: '即刻入职'
       })
-    }else{
+      this.setData({
+        url:'/indexCom/getImmediate'
+      })
+    } else {
+      this.setData({
+        url:'/indexCom/getTalent'
+      })
     }
+    this.reword(data)
     this.zhiwei = this.selectComponent("#zhiwei");
     this.zonghe = this.selectComponent("#zonghe");
     this.more = this.selectComponent("#more");
     this.data.app.http({
-      url: '/selects/position',
+        url: '/selects/position',
+        dengl: true,
+        data: {},
+        success(res) {
+          that.setData({
+            zList: res.data.rdata[0].treeDTOS
+          })
+        }
+      }),
+      // 薪资
+      this.data.app.http({
+        url: '/selects/expect_money',
+        dengl: true,
+        data: {},
+        success(res) {
+          that.setData({
+            moneyList: res.data.rdata
+          })
+        }
+      })
+    // 学历
+    this.data.app.http({
+      url: '/selects/school_record',
       dengl: true,
       data: {},
       success(res) {
-        console.log(res.data.rdata)
         that.setData({
-          zList: res.data.rdata[0].treeDTOS
-        })
-      }
-    }),
-    // 薪资
-    this.data.app.http({
-      url:'/selects/expect_money',
-      dengl:true,
-      data:{},
-      success(res){
-        that.setData({
-          moneyList:res.data.rdata
-        })
-      }
-    })
-    // 学历
-    this.data.app.http({
-      url:'/selects/school_record',
-      dengl:true,
-      data:{},
-      success(res){
-        that.setData({
-          codList:res.data.rdata
+          codList: res.data.rdata
         })
       }
     })
     // 工作经验
     this.data.app.http({
-      url:'/selects/work_exe',
-      dengl:true,
-      data:{},
-      success(res){
+      url: '/selects/work_exe',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          expList:res.data.rdata
+          expList: res.data.rdata
         })
       }
     })
@@ -94,41 +104,38 @@ Page({
     var that = this
     wx.showNavigationBarLoading()
     this.data.app.http({
-      url: '/indexCom/getTalent',
+      type: 1,
+      url: that.data.url,
       dengl: true,
       method: 'POST',
       data: data,
       success(res) {
-        console.log(res)
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
         var arr = res.data.rdata
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
-            if (arrs.length > 0) {
-              arrs.map(function (vals, is) {
-                console.log(vals)
-                var date1 = vals.startTime.substring(0, 10)
-                var date = vals.endTime.substring(0, 10)
-                let start = new Date(date1.replace(/\-/g, "/"));
-                let end = new Date(date.replace(/\-/g, "/"));
-                let startYear = start.getFullYear();
-                let startMonth = start.getMonth();
-                let endYear = end.getFullYear();
-                let endMonth = end.getMonth();
-                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
-                var val = (monthCount / 12).toString().split(".")
-                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
-              })
+            if (val.createTime) {
+              var date1 = new Date(val.createTime.substring(0, 10))
+              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+              val.timeVal = value
             }
           })
         }
-        console.log(res.data.rdata)
+        // 回到顶部
+        wx.pageScrollTo({
+          scrollTop: 0,
+          duration: 300
+        })
         that.setData({
           recomList: res.data.rdata
         })
 
-        if (res.data.rdata.length <1) {
+        if (res.data.rdata.length < 5) {
           that.setData({
             loadingType: 2
           })
@@ -152,7 +159,8 @@ Page({
     })
     wx.showNavigationBarLoading()
     this.data.app.http({
-      url: '/indexCom/getTalent',
+      type: true,
+      url: that.data.url,
       dengl: true,
       data: data,
       method: 'POST',
@@ -161,31 +169,23 @@ Page({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
 
+        function jiance(x) {
+          return x < 10 ? '0' + x : x
+        }
         var arr = res.data.rdata
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
-            if (arrs.length > 0) {
-              arrs.map(function (vals, is) {
-                console.log(vals)
-                var date1 = vals.startTime.substring(0, 10)
-                var date = vals.endTime.substring(0, 10)
-                let start = new Date(date1.replace(/\-/g, "/"));
-                let end = new Date(date.replace(/\-/g, "/"));
-                let startYear = start.getFullYear();
-                let startMonth = start.getMonth();
-                let endYear = end.getFullYear();
-                let endMonth = end.getMonth();
-                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
-                var val = (monthCount / 12).toString().split(".")
-                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
-                vals.timeVal = value
-              })
+            if (val.createTime) {
+              var date1 = new Date(val.createTime.substring(0, 10))
+              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+              val.timeVal = value
             }
           })
         }
-        if (res.data.rdata.length < 1) {
+        if (res.data.rdata.length < 5) {
           that.setData({
             loadingType: 2
           })
@@ -199,7 +199,7 @@ Page({
       }
     })
   },
-  toggleZong() {
+  toggleZong(e) {
     if (this.zhiwei.data.isAdd) {
       this.toggleZhi()
     }
@@ -229,11 +229,40 @@ Page({
       })
     }
   },
+  // 综合筛选
   togValue() {
+    var that = this
     this.setData({
-      value: this.zonghe.data.value
+      value: this.zonghe.data.value,
+      currentPage: 1,
     })
+    if (this.data.zwType) {
+      var data = {
+        limit: 5,
+        page: this.data.currentPage,
+        position: this.zhiwei.data.id,
+        sort: this.zonghe.data.ind
+      }
+    } else if (this.data.morType) {
+      var data = {
+        limit: 5,
+        page: this.data.currentPage,
+        school: this.more.data.ind7 ? this.more.data.ind7 : '',
+        workTime: this.more.data.ind6 ? this.more.data.ind6 : '',
+        money: this.more.data.ind5 ? this.more.data.ind5 : '',
+        sort: this.zonghe.data.ind
+      }
+    } else {
+      var data = {
+        limit: 5,
+        page: this.data.currentPage,
+        sort: this.zonghe.data.ind
+      }
+
+    }
     this.toggleZong()
+    this.reword(data)
+
   },
   toggleZhi() {
     if (this.zonghe.data.isCon) {
@@ -265,16 +294,117 @@ Page({
       })
     }
   },
+  // 点击遮罩区隐藏
+  hidden() {
+    var that = this
+    var nowShow = this.zhiwei.data.isAdd
+    if (!this.zhiwei.isAdd) {
+      var animation = wx.createAnimation({
+        timingFunction: "ease"
+      })
+      this.animation = animation;
+      if (nowShow) {
+        animation.rotate(180).step();
+        this.setData({
+          animationData: animation.export()
+        })
+      } else {
+        animation.rotate(0).step();
+        this.setData({
+          animationData: animation.export()
+        })
+      }
+    }
+  },
+  zongHide() {
+    var nowShow = this.zonghe.data.isCon
+    if (!this.zonghe.data.isCon) {
+      var animation = wx.createAnimation({
+        timingFunction: "ease"
+      })
+      this.animation = animation;
+      if (nowShow) {
+        animation.rotate(180).step();
+        this.setData({
+          animationCon: animation.export()
+        })
+      } else {
+        animation.rotate(0).step();
+        this.setData({
+          animationCon: animation.export()
+        })
+      }
+    }
+
+  },
+  moCancel() {
+    var nowShow = this.more.data.isAdd_F;
+    //创建动画
+    var animation = wx.createAnimation({
+      timingFunction: "ease"
+    })
+    this.animation = animation;
+    if (nowShow) {
+      animation.rotate(180).step();
+      this.setData({
+        animationMor: animation.export()
+      })
+    } else {
+      animation.rotate(0).step();
+      this.setData({
+        animationMor: animation.export()
+      })
+    }
+    this.setData({
+      currentPage: 1,
+    })
+
+    if (this.data.morType) {
+      var data = {
+        limit: 5,
+        page: this.data.currentPage,
+        sort: 1
+      }
+      this.reword(data)
+      this.setData({
+        zwType:false
+      })
+    }
+  },
+  // 职位筛选
   tog() {
-    var that=this
+    this.setData({
+      currentPage: 1,
+      zwType: true,
+    })
+    if (this.data.morType) {
+      this.more.setData({
+        ind5: '',
+        ind6: '',
+        ind7: '',
+      })
+      this.setData({
+        morType: false
+      })
+    }
+    var that = this,
+      data = {
+        limit: 5,
+        page: this.data.currentPage,
+        position: this.zhiwei.data.id,
+        sort: this.zonghe.data.ind
+      }
     this.toggleZhi()
+    this.reword(data)
+
   },
   toggleMor() {
+    var that=this
     if (this.zhiwei.data.isAdd) {
-      this.toggleZhi()
+      that.toggleZhi()
     }
     if (this.zonghe.data.isCon) {
-      this.toggleZong()
+      that.toggleZong()
     }
     this.more.position2()
     this.more.setData({
@@ -299,8 +429,34 @@ Page({
       })
     }
   },
+  // 更多筛选
   togMore() {
+    this.setData({
+      currentPage: 1,
+      morType: true,
+    })
+    if (this.data.zwType) {
+      this.zhiwei.setData({
+        isTwo: false,
+        ind1: 'x',
+        ind2: 'x',
+        ind: 'x',
+      })
+      this.setData({
+        zwType: false
+      })
+    }
+
     this.toggleMor()
+    var data = {
+      limit: 5,
+      page: this.data.currentPage,
+      school: this.more.data.ind7 ? this.more.data.ind7 : '',
+      workTime: this.more.data.ind6 ? this.more.data.ind6 : '',
+      money: this.more.data.ind5 ? this.more.data.ind5 : '',
+      sort: this.zonghe.data.ind
+    }
+    this.reword(data)
   },
   detail() {
     wx.navigateTo({
@@ -346,12 +502,35 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var that = this,
-    data = {
-      limit: 1,
-      page: that.data.currentPage
+    var that = this
+    if (this.data.zwType) {
+      var data = {
+        limit: 5,
+        page: this.data.currentPage,
+        position: this.zhiwei.data.id,
+        sort: this.zonghe.data.ind
+      }
+      // this.toggleZhi()
+      this.jiazai(data)
+    } else if (this.data.morType) {
+      var data = {
+        limit: 5,
+        page: this.data.currentPage,
+        school: this.more.data.ind7 ? this.more.data.ind7 : '',
+        workTime: this.more.data.ind6 ? this.more.data.ind6 : '',
+        money: this.more.data.ind5 ? this.more.data.ind5 : '',
+        sort: this.zonghe.data.ind
+      }
+      this.jiazai(data)
+    }else{
+      var that = this,
+        data = {
+          limit: 5,
+          page: that.data.currentPage,
+          sort: this.zonghe.data.ind
+        }
+      this.jiazai(data)    
     }
-  this.jiazai(data)
   },
 
   /**

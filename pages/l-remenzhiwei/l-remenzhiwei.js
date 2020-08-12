@@ -153,7 +153,7 @@ Page({
               var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
               val.timeVal = value
             }
-            })
+          })
         }
         console.log(res.data.rdata)
         that.setData({
@@ -243,6 +243,28 @@ Page({
         zhCom: false
       })
     }
+    if (!this.data.zwCom) {
+      this.setData({
+        ind: 'x',
+        ind1: 'x',
+        ind2: 'x',
+        isTwo: false,
+        zwCom: true
+      })
+    } else if (!this.data.gsCom) {
+      this.setData({
+        ind3: '',
+        ind4: '',
+        gsCom: true
+      })
+    } else if (!this.data.moCom) {
+      this.setData({
+        ind5: '',
+        ind6: '',
+        ind7: '',
+        moCom: true
+      })
+    }
     var that = this,
       zong = this.data.m_zong ? this.data.m_zong : ''
     var data = {
@@ -286,311 +308,372 @@ Page({
       currentPage: 1,
       zwCom: false
     })
-    var that = this,
-      id = this.data.id ? this.data.id : '',
-      data = {
-        limit: 10,
-        page: that.data.currentPage,
-        type: 2,
-        positionId: id,
-      }
-    this.reword(data)
-  },
-  zCancel() {
-    this.position()
-    var that = this
-    if (!this.data.zwCom) {
-      this.setData({
-        currentPage: 1,
-        zwCom: true,
-        ind: 'x',
-        ind1: 'x',
-        ind2: 'x',
-        isTwo: false
-      })
-      var data = {
-        limit: 10,
-        page: that.data.currentPage,
-        type: 2,
-        positionId: ''
-      }
-      this.reword(data)
-    }
-  },
-  // 公司
-  gsConfirm() {
-    this.position1()
-    this.setData({
-      currentPage: 1,
-      gsCom: false
-    })
-    var that = this,
-      ind3 = this.data.ind3 ? this.data.ind3 : '',
-      ind4 = this.data.ind4 ? this.data.ind4 : '',
-      data = {
-        limit: 10,
-        page: that.data.currentPage,
-        type: 2,
-        omNum: ind4,
-        comType: ind3,
-      }
-    this.reword(data)
-  },
-  gsCancel() {
-    this.position1()
     if (!this.data.gsCom) {
       this.setData({
-        currentPage: 1,
-        gsCom: true,
         ind3: '',
-        ind4: ''
-      })
-      var that = this,
-        data = {
-          limit: 10,
-          page: that.data.currentPage,
-          type: 2,
-        }
-      this.reword(data)
-    } else {
-      this.setData({
         ind4: '',
-        ind3: '',
+        gsCom: true
       })
-    }
-  },
-  // 更多
-  moConfirm() {
-    this.position2()
-    this.setData({
-      currentPage: 1,
-      moCom: false
-    })
-    var that = this,
-      ind5 = this.data.ind5 ? this.data.ind5 : '',
-      ind6 = this.data.ind6 ? this.data.ind6 : '',
-      ind7 = this.data.ind7 ? this.data.ind7 : '',
-      data = {
-        limit: 10,
-        page: that.data.currentPage,
-        type: 2,
-        money: ind5,
-        exe: ind6,
-        school: ind7,
-      }
-    this.reword(data)
-  },
-  moCancel() {
-    this.position2()
-    if (!this.data.moCom) {
+    } else if (!this.data.moCom) {
       this.setData({
-        currentPage: 1,
         ind5: '',
         ind6: '',
         ind7: '',
-        moCom: true,
+        moCom: true
       })
-      var that = this,
-        data = {
-          limit: 10,
-          page: that.data.currentPage,
-          type: 2,
-        }
-      this.reword(data)
-    } else {
-      this.setData({
-        ind5: '',
-        ind6: '',
-        ind7: ''
-      })
-    }
-  },
-  // 更多
-  toggle(e) {
-    this.setData({
-      ind: e.currentTarget.dataset['index']
-
-    })
-    var two = this.data.isTwo
-    this.setData({
-      isTwo: !two
-    })
-  },
-  toggle1(e) {
-    this.setData({
-      ind1: e.currentTarget.dataset['index']
-    })
-  },
-  toggle2(e) {
-    this.setData({
-      ind2: e.currentTarget.dataset['index'],
-      id: e.currentTarget.dataset['id']
-    })
-  },
-  toggle3(e) {
-    this.setData({
-      ind3: e.currentTarget.dataset['index']
-    })
-  },
-  toggle4(e) {
-    this.setData({
-      ind4: e.currentTarget.dataset['index']
-    })
-  },
-  toggle5(e) {
-    this.setData({
-      ind5: e.currentTarget.dataset['index']
-    })
-  },
-  toggle6(e) {
-    this.setData({
-      ind6: e.currentTarget.dataset['index']
-    })
-  },
-  toggle7(e) {
-    this.setData({
-      ind7: e.currentTarget.dataset['index']
-    })
-  },
-  bindPickerChange: function (e) {
-    console.log(e.detail.value)
-    this.setData({
-      inda: e.detail.value
-    })
-  },
-  position() {
-    var add = this.data.isAdd
-    this.setData({
-      isAdd: !add
-    })
-  },
-  position1() {
-    var add_t = this.data.isAdd_T
-    this.setData({
-      isAdd_T: !add_t
-    })
-  },
-  position2() {
-    var add_f = this.data.isAdd_F
-    this.setData({
-      isAdd_F: !add_f
-    })
-  },
-  position3() {
-    var add_s = this.data.isAdd_S
-    this.setData({
-      isAdd_S: !add_s
-    })
-  },
-
-  hide() {
-    var two = this.data.isTwo
-    this.setData({
-      isTwo: !two
-    })
-  },
-  detail(e) {
-    wx.navigateTo({
-      url: '../zc-zhiweixq/zc-zhiweixq?id=' + e.currentTarget.dataset.id,
-    })
-  },
-  /**
-   * 生命周期函数--监听页面初次渲染完成
-   */
-  onReady: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面显示
-   */
-  onShow: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面隐藏
-   */
-  onHide: function () {
-
-  },
-
-  /**
-   * 生命周期函数--监听页面卸载
-   */
-  onUnload: function () {
-
-  },
-
-  /**
-   * 页面相关事件处理函数--监听用户下拉动作
-   */
-  onPullDownRefresh: function () {
-
-  },
-
-  /**
-   * 页面上拉触底事件的处理函数
-   */
-  onReachBottom: function () {
-    var that = this,
-      ind4 = this.data.ind4 ? this.data.ind4 : '',
-      ind3 = this.data.ind3 ? this.data.ind3 : '',
-      ind5 = this.data.ind5 ? this.data.ind5 : '',
-      ind6 = this.data.ind6 ? this.data.ind6 : '',
-      ind7 = this.data.ind7 ? this.data.ind7 : '',
-      id = this.data.id ? this.data.id : '',
-      zong = this.data.m_zong ? this.data.m_zong : ''
-    //  更多上拉
-    if (!this.data.moCom) {
-      var dat = {
-        limit: 10,
-        page: that.data.currentPage,
-        type: 2,
-        money: ind5,
-        exe: ind6,
-        school: ind7
-      }
-      this.jiazai(dat)
-      // 公司上拉
-    } else if (!this.data.gsCom) {
-      var dat = {
-        limit: 10,
-        page: that.data.currentPage,
-        type: 2,
-        comNum: ind4,
-        comType: ind3,
-      }
-      this.jiazha(dat)
-    } else if (!this.data.zwCom) {
-      data = {
-        limit: 10,
-        page: that.data.currentPage,
-        type: 2,
-        positionId: id
-      }
-      this.jiazai(data)
     } else if (!this.data.zhCom) {
+      this.setData({
+        m_zong: '1',
+        zhCom: true
+      })
+    }
+  
+  var that = this,
+    id = this.data.id ? this.data.id : '',
+    data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      positionId: id,
+    }
+  this.reword(data)
+},
+zCancel() {
+  this.position()
+  var that = this
+  if (!this.data.zwCom) {
+    this.setData({
+      currentPage: 1,
+      zwCom: true,
+      ind: 'x',
+      ind1: 'x',
+      ind2: 'x',
+      isTwo: false
+    })
+    var data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      positionId: ''
+    }
+    this.reword(data)
+  }
+},
+// 公司
+gsConfirm() {
+  this.position1()
+  this.setData({
+    currentPage: 1,
+    gsCom: false
+  })
+  if (!this.data.zwCom) {
+    this.setData({
+      ind: 'x',
+      ind1: 'x',
+      ind2: 'x',
+      isTwo: false,
+      zwCom: true
+    })
+  } else if (!this.data.moCom) {
+    this.setData({
+      ind5: '',
+      ind6: '',
+      ind7: '',
+      moCom:true
+    })
+  }else if(!this.data.zhCom){
+    this.setData({
+      m_zong:'1',
+      zhCom:true
+    })
+  }
+  var that = this,
+    ind3 = this.data.ind3 ? this.data.ind3 : '',
+    ind4 = this.data.ind4 ? this.data.ind4 : '',
+    data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      omNum: ind4,
+      comType: ind3,
+    }
+  this.reword(data)
+},
+gsCancel() {
+  this.position1()
+  if (!this.data.gsCom) {
+    this.setData({
+      currentPage: 1,
+      gsCom: true,
+      ind3: '',
+      ind4: ''
+    })
+    var that = this,
       data = {
         limit: 10,
         page: that.data.currentPage,
         type: 2,
-        sort: zong
       }
-    } else {
-      var dat = {
+    this.reword(data)
+  } else {
+    this.setData({
+      ind4: '',
+      ind3: '',
+    })
+  }
+},
+// 更多
+moConfirm() {
+  this.position2()
+  this.setData({
+    currentPage: 1,
+    moCom: false
+  })
+  if (!this.data.zwCom) {
+    this.setData({
+      ind: 'x',
+      ind1: 'x',
+      ind2: 'x',
+      isTwo: false,
+      zwCom: true
+    })
+  } else if (!this.data.gsCom) {
+    this.setData({
+      ind3: '',
+      ind4: '',
+      gsCom: true
+    })
+  } else if(!this.data.zhCom){
+    this.setData({
+      m_zong:'1',
+      zhCom:true
+    })
+  }
+  var that = this,
+    ind5 = this.data.ind5 ? this.data.ind5 : '',
+    ind6 = this.data.ind6 ? this.data.ind6 : '',
+    ind7 = this.data.ind7 ? this.data.ind7 : '',
+    data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      money: ind5,
+      exe: ind6,
+      school: ind7,
+    }
+  this.reword(data)
+},
+moCancel() {
+  this.position2()
+  if (!this.data.moCom) {
+    this.setData({
+      currentPage: 1,
+      ind5: '',
+      ind6: '',
+      ind7: '',
+      moCom: true,
+    })
+    var that = this,
+      data = {
         limit: 10,
         page: that.data.currentPage,
         type: 2,
       }
-      this.jiazai(dat)
-    }
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
-
+    this.reword(data)
+  } else {
+    this.setData({
+      ind5: '',
+      ind6: '',
+      ind7: ''
+    })
   }
+},
+// 更多
+toggle(e) {
+  this.setData({
+    ind: e.currentTarget.dataset['index']
+
+  })
+  var two = this.data.isTwo
+  this.setData({
+    isTwo: !two
+  })
+},
+toggle1(e) {
+  this.setData({
+    ind1: e.currentTarget.dataset['index']
+  })
+},
+toggle2(e) {
+  this.setData({
+    ind2: e.currentTarget.dataset['index'],
+    id: e.currentTarget.dataset['id']
+  })
+},
+toggle3(e) {
+  this.setData({
+    ind3: e.currentTarget.dataset['index']
+  })
+},
+toggle4(e) {
+  this.setData({
+    ind4: e.currentTarget.dataset['index']
+  })
+},
+toggle5(e) {
+  this.setData({
+    ind5: e.currentTarget.dataset['index']
+  })
+},
+toggle6(e) {
+  this.setData({
+    ind6: e.currentTarget.dataset['index']
+  })
+},
+toggle7(e) {
+  this.setData({
+    ind7: e.currentTarget.dataset['index']
+  })
+},
+bindPickerChange: function (e) {
+  console.log(e.detail.value)
+  this.setData({
+    inda: e.detail.value
+  })
+},
+position() {
+  var add = this.data.isAdd
+  this.setData({
+    isAdd: !add
+  })
+},
+position1() {
+  var add_t = this.data.isAdd_T
+  this.setData({
+    isAdd_T: !add_t
+  })
+},
+position2() {
+  var add_f = this.data.isAdd_F
+  this.setData({
+    isAdd_F: !add_f
+  })
+},
+position3() {
+  var add_s = this.data.isAdd_S
+  this.setData({
+    isAdd_S: !add_s
+  })
+},
+
+hide() {
+  var two = this.data.isTwo
+  this.setData({
+    isTwo: !two
+  })
+},
+detail(e) {
+  wx.navigateTo({
+    url: '../zc-zhiweixq/zc-zhiweixq?id=' + e.currentTarget.dataset.id,
+  })
+},
+/**
+ * 生命周期函数--监听页面初次渲染完成
+ */
+onReady: function () {
+
+},
+
+/**
+ * 生命周期函数--监听页面显示
+ */
+onShow: function () {
+
+},
+
+/**
+ * 生命周期函数--监听页面隐藏
+ */
+onHide: function () {
+
+},
+
+/**
+ * 生命周期函数--监听页面卸载
+ */
+onUnload: function () {
+
+},
+
+/**
+ * 页面相关事件处理函数--监听用户下拉动作
+ */
+onPullDownRefresh: function () {
+
+},
+
+/**
+ * 页面上拉触底事件的处理函数
+ */
+onReachBottom: function () {
+  var that = this,
+    ind4 = this.data.ind4 ? this.data.ind4 : '',
+    ind3 = this.data.ind3 ? this.data.ind3 : '',
+    ind5 = this.data.ind5 ? this.data.ind5 : '',
+    ind6 = this.data.ind6 ? this.data.ind6 : '',
+    ind7 = this.data.ind7 ? this.data.ind7 : '',
+    id = this.data.id ? this.data.id : '',
+    zong = this.data.m_zong ? this.data.m_zong : ''
+  //  更多上拉
+  if (!this.data.moCom) {
+    var dat = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      money: ind5,
+      exe: ind6,
+      school: ind7
+    }
+    this.jiazai(dat)
+    // 公司上拉
+  } else if (!this.data.gsCom) {
+    var dat = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      comNum: ind4,
+      comType: ind3,
+    }
+    this.jiazha(dat)
+  } else if (!this.data.zwCom) {
+    data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      positionId: id
+    }
+    this.jiazai(data)
+  } else if (!this.data.zhCom) {
+    data = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+      sort: zong
+    }
+  } else {
+    var dat = {
+      limit: 10,
+      page: that.data.currentPage,
+      type: 2,
+    }
+    this.jiazai(dat)
+  }
+},
+
+/**
+ * 用户点击右上角分享
+ */
+onShareAppMessage: function () {
+
+}
 })

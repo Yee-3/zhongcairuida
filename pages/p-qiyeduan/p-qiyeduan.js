@@ -119,6 +119,7 @@ Page({
     })
     wx.showNavigationBarLoading()
     this.data.app.http({
+      type: true,
       url: '/indexCom/getIndex',
       dengl: true,
       data: data,

@@ -1,5 +1,5 @@
 	<!-- 更多弹框 -->
-	<view class="mask3" wx:if="{{isAdd_F}}" style="{{styleT}}"></view>
+	<view class="mask3" wx:if="{{isAdd_F}}" style="{{styleT}}" ></view>
 	<view class="mask3_01" wx:if="{{isAdd_F}}" style="{{style}}">
 		<scroll-view class="mask3_top" scroll-y="true">
 			<view class="top3_t">
@@ -22,7 +22,7 @@
 			</view>
 		</scroll-view>
 		<view class="m_bottom">
-			<button class="b_left" bindtap="cancel">不限</button>
+			<button class="b_left" bindtap="cancel">{{(ind5||ind6||ind7)?'清空':'不限'}}</button>
 			<button class="b_right" bindtap="confirm">确认</button>
 		</view>
 	</view>

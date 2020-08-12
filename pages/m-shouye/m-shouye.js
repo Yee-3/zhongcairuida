@@ -172,6 +172,29 @@ Page({
         zhCom: false
       })
     }
+    // 点击其他筛选清空上一个筛选内容
+    if(!this.data.zwCom){
+      this.setData({
+        ind: 'x',
+        ind1: 'x',
+        ind2: 'x',
+        isTwo:false,
+        zwCom:true
+      })
+    }else  if(!this.data.gsCom){
+      this.setData({
+        ind3:'',
+        ind4:'',
+        gsCom:true
+      })
+    }else if(!this.data.moCom){
+      this.setData({
+        ind5:'',
+        ind6:'',
+        ind7:'',
+        moCom:true
+      })
+    }
     this.data.app.http({
       url: '/index/getPosition',
       dengl: true,
@@ -451,6 +474,26 @@ Page({
       currentPage: 1,
       zwCom: false
     })
+     // 点击其他筛选清空上一个筛选内容
+     if(!this.data.zhCom){
+      this.setData({
+        m_zong:'1',
+        zhCom:true
+      })
+    }else  if(!this.data.gsCom){
+      this.setData({
+        ind3:'',
+        ind4:'',
+        gsCom:true
+      })
+    }else if(!this.data.moCom){
+      this.setData({
+        ind5:'',
+        ind6:'',
+        ind7:'',
+        moCom:true
+      })
+    }
     this.data.app.http({
       url: '/index/getPosition',
       dengl: true,
@@ -607,6 +650,28 @@ Page({
       currentPage: 1,
       gsCom: false
     })
+     // 点击其他筛选清空上一个筛选内容
+     if(!this.data.zwCom){
+      this.setData({
+        ind: 'x',
+        ind1: 'x',
+        ind2: 'x',
+        isTwo:false,
+        zwCom:true
+      })
+    }else if(!this.data.zhCom){
+      this.setData({
+        m_zong:'1',
+        zhCom:true
+      })
+    }else if(!this.data.moCom){
+      this.setData({
+        ind5:'',
+        ind6:'',
+        ind7:'',
+        moCom:true
+      })
+    }
     this.data.app.http({
       url: '/index/getPosition',
       dengl: true,
@@ -712,6 +777,26 @@ Page({
       currentPage: 1,
       moCom: false
     })
+    if(!this.data.zwCom){
+      this.setData({
+        ind: 'x',
+        ind1: 'x',
+        ind2: 'x',
+        isTwo:false,
+        zwCom:true
+      })
+    }else if(!this.data.zhCom){
+      this.setData({
+        m_zong:'1',
+        zhCom:true
+      })
+    }else if(!this.data.gsCom){
+      this.setData({
+        ind3:'',
+        ind4:'',
+        gsCom:true
+      })
+    }
     this.data.app.http({
       url: '/index/getPosition',
       dengl: true,
