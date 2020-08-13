@@ -15,6 +15,7 @@ Page({
     app: getApp().globalData,
     recomList: [],
     imgList: [],
+    companyId:''
   },
 
   /**
@@ -23,6 +24,12 @@ Page({
   onLoad: function (options) {
     this.tab = this.selectComponent("#tab");
     var that = this
+    if(wx.getStorageSync('companyId')){
+
+      this.setData({
+        companyId:wx.getStorageSync('companyId')
+      })
+    }
     wx.showNavigationBarLoading()
     this.data.app.http({
       type: true,
@@ -33,7 +40,6 @@ Page({
       },
       dengl: true,
       success(res) {
-
         var arr = res.data.rdata.ctrlResumeList
         var myDate = new Date()
         if (arr.length > 0) {
@@ -86,8 +92,9 @@ Page({
     })
   },
   resume() {
+    var id=this.data.companyId
     wx.navigateTo({
-      url: '../e-jinzhunjianli/e-jinzhunjianli',
+      url: '../e-jinzhunjianli/e-jinzhunjianli?id='+id,
     })
   },
   entry() {
@@ -97,7 +104,7 @@ Page({
   },
   detail(e) {
     wx.navigateTo({
-      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id=' + e.currentTarget.dataset.id,
+      url:'../c-hailiangjianlixq/c-hailiangjianlixq?id=' + e.currentTarget.dataset.id,
     })
   },
   qyRen() {

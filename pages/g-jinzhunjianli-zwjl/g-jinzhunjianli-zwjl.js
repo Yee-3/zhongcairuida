@@ -5,16 +5,31 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    app: getApp().globalData,
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
+    this.data.app.http({
+      type: true,
+      url: '/indexCom/getAccurateResumeList',
+      dengl: true,
+      method:'POST',
+      data:{
+        limit:10,
+        page:1,
+        positionId:options.id
+      },
+      success(res){
+        console.log(res)
+      }
 
+    })
   },
-  detail(){
+  detail() {
     wx.navigateTo({
       url: '../f-jinzhunjianlixq/f-jinzhunjianlixq',
     })

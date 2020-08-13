@@ -37,6 +37,7 @@ Page({
       status: 1
     }
     this.reword(data)
+    console.log(this.data.recomList)
   },
   reword(data) {
     var that = this
@@ -48,21 +49,23 @@ Page({
       method: 'POST',
       data: data,
       success(res) {
-        function jiance(x) {
-          return x < 10 ? '0' + x : x
-        }
+        console.log(res.data.rdata,JSON.parse(res.data.rdata[0].welfare))
+        // function jiance(x) {
+        //   return x < 10 ? '0' + x : x
+        // }
         var arr = res.data.rdata
-        var myDate = new Date()
+        // var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            console.log(val)
-            if (val.createTime) {
-              var date1 = new Date(val.createTime.substring(0, 10))
-              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-              val.timeVal = value
-            }
+            // console.log(val)
+            // if (val.createTime) {
+            //   var date1 = new Date(val.createTime.substring(0, 10))
+            //   var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            //   var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            //   var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            //   val.timeVal = value
+            // }
+            val.wel=JSON.parse(val.welfare)
           })
         }
 
@@ -71,7 +74,7 @@ Page({
           recomList: res.data.rdata
         })
 
-        if (res.data.rdata.length < 1) {
+        if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
           })
@@ -105,24 +108,24 @@ Page({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
 
-        function jiance(x) {
-          return x < 10 ? '0' + x : x
-        }
+        // function jiance(x) {
+        //   return x < 10 ? '0' + x : x
+        // }
         var arr = res.data.rdata
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
             console.log(val)
-            if (val.createTime) {
-              var date1 = new Date(val.createTime.substring(0, 10))
-              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-              val.timeVal = value
-            }
+            // if (val.createTime) {
+            //   var date1 = new Date(val.createTime.substring(0, 10))
+            //   var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
+            //   var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
+            //   var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            //   val.timeVal = value
+            // }
           })
         }
-        if (res.data.rdata.length < 1) {
+        if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
           })
@@ -157,7 +160,7 @@ Page({
         page: this.data.currentPage,
         status: 1
       }
-      this.jiazai(data)
+      this.reword(data)
     } else if (this.data.idn == 2) {
       this.setData({
         currentPage: 1
@@ -168,7 +171,7 @@ Page({
         page: this.data.currentPage,
         status: 0
       }
-      this.jiazai(data)
+      this.reword(data)
     } else {
       this.setData({
         currentPage: 1
@@ -179,7 +182,7 @@ Page({
         page: this.data.currentPage,
         status: 2
       }
-      this.jiazai(data)
+      this.reword(data)
     }
   },
   /**
@@ -232,7 +235,7 @@ Page({
         page: this.data.currentPage,
         status: 1
       }
-      this.reword(data)
+      this.jiazai(data)
     } else if (e.currentTarget.dataset.index == 2) {
       this.setData({
         currentPage: 1
@@ -243,7 +246,7 @@ Page({
         page: this.data.currentPage,
         status: 0
       }
-      this.reword(data)
+      this.jiazai(data)
     } else {
       this.setData({
         currentPage: 1
@@ -254,7 +257,7 @@ Page({
         page: this.data.currentPage,
         status: 2
       }
-      this.reword(data)
+      this.jiazai(data)
     }
   },
 

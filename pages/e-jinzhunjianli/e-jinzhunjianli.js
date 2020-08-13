@@ -5,18 +5,35 @@ Page({
    * 页面的初始数据
    */
   data: {
-
+    app: getApp().globalData,
+    jlList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    var that = this
+    console.log(options)
+    this.data.app.http({
+      url: '/indexCom/getAccurateResume',
+      type: true,
+      dengl: true,
+      data: {
+        companyId:options.id
+      },
+      method: 'POST',
+      success(res) {
+        that.setData({
+          jlList: res.data.rdata
+        })
+      }
+    })
   },
-  jingzhun(){
+  jingzhun(e) {
+    console.log(e)
     wx.navigateTo({
-      url: '../g-jinzhunjianli-zwjl/g-jinzhunjianli-zwjl',
+      url: '../g-jinzhunjianli-zwjl/g-jinzhunjianli-zwjl?id='+e.currentTarget.dataset.id,
     })
   },
   /**

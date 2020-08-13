@@ -24,7 +24,7 @@
 </view>
 
 <view class="d_02">
-	<view class="d_03" bindtap="detail" wx:for="{{recomList}}">
+	<view class="d_03" bindtap="detail" data-id="{{item.id}}" wx:for="{{recomList}}">
 		<view class="">
 			<view class="fl d_04" >
 				<view class="fl d_05">

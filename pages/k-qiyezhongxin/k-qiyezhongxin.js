@@ -17,9 +17,22 @@ Page({
    */
   onLoad: function (options) {
     this.tog = this.selectComponent("#tog");
-    console.log(options,wx.getStorageSync('userInfo'))
-    this.setData({
-      user:wx.getStorageSync('userInfo').ctrlResumeDTO
+    const app = getApp().globalData
+    var that = this
+    app.http({
+      type:true,
+      url: '/getCompany',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        that.setData({
+          user:res.data.rdata.ctrlCompany
+        })
+        if(res.data.rdata.ctrlMemberinfo){
+          wx.setStorageSync('companyId',res.data.rdata.ctrlMemberinfo.companyId)
+        }
+      }
     })
     var that = this
     this.data.app.http({
@@ -76,7 +89,7 @@ Page({
       success(res) {
         if(res.data.code==200){
           wx.setStorageSync('Authorization','')
-          wx.setStorageSync('userInfo','')
+          wx.setStorageSync('companyId','')
           wx.showToast({
             title: '您已退出登录'
           })
@@ -87,7 +100,6 @@ Page({
     })
   },
   about() {
-    this.tog.show()
     wx.navigateTo({
       url: '../b-guanyuwomen/b-guanyuwomen',
     })
@@ -129,20 +141,7 @@ Page({
         console.log("hide home complete");
       },
     });
-    const app = getApp().globalData
-    var that = this
-    app.http({
-      type:true,
-      url: '/getCompany',
-      dengl: true,
-      data: {},
-      success(res) {
-        console.log(res)
-        that.setData({
-          user:res.data.rdata.ctrlCompany
-        })
-      }
-    })
+   
   },
 
   /**

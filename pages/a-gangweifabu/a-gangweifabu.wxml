@@ -41,7 +41,7 @@
 		</view>
 	</view>
 	<!-- 职位性质 -->
-	<spring-box id="spring" title="职位性质" confirmText="确定" cancelText="取消" style="{{style}}" content="{{natureContent}}" bind:cancel="handleCancel" bind:confirm="handleConfirm">
+	<spring-box id="spring" title="职位性质" style="position: relative;z-index:9999" confirmText="确定" cancelText="取消" style="{{style}}" content="{{natureContent}}" bind:cancel="handleCancel" bind:confirm="handleConfirm">
 	</spring-box>
 	<!-- end -->
 	<view class="a_02">
@@ -111,7 +111,7 @@
 			<p>工作职责</p>
 		</view>
 		<view class="a_05">
-			<textarea placeholder="请输入" value="{{workValue}}" data-value="{{value}}" bindblur="blur" data-ty="4"></textarea>
+			<textarea placeholder="请输入" wx:if="{{isHidden}}" value="{{workValue}}" data-value="{{value}}" bindblur="blur" data-ty="4"></textarea>
 		</view>
 	</view>
 	<view class="a_06">
@@ -119,7 +119,7 @@
 			<p>任职要求</p>
 		</view>
 		<view class="a_05">
-			<textarea style="height:200rpx" placeholder="请输入" value="{{yqValue}}" data-value="{{value}}" bindblur="blur" data-ty="5"></textarea>
+			<textarea style="height:200rpx"  wx:if="{{isHidden}}" placeholder="请输入" value="{{yqValue}}" data-value="{{value}}" bindblur="blur" data-ty="5"></textarea>
 		</view>
 	</view>
 	<view class="a_07">
@@ -148,7 +148,7 @@
 			<p>薪资结构</p>
 		</view>
 		<view class="a_05">
-			<textarea placeholder="请输入" value="{{moneyValue}}" data-value="{{value}}" bindblur="blur" data-ty="6"></textarea>
+			<textarea placeholder="请输入"  wx:if="{{isHidden}}" value="{{moneyValue}}" data-value="{{value}}" bindblur="blur" data-ty="6"></textarea>
 		</view>
 	</view>
 	<view class="a_09">

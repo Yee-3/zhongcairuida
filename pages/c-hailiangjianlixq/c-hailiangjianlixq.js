@@ -10,7 +10,8 @@ Page({
     datePickerValue: ['', '', ''],
     datePickerIsShow: false,
     isHz:true,
-    isTwo:false
+    isTwo:false,
+    detCon:{}
   },
 
   /**
@@ -20,7 +21,56 @@ Page({
     this.setData({
       height: wx.getSystemInfoSync().windowHeight * 0.9,
     })
-    // console.log((wx.getSystemInfoSync().windowHeight)*0.8)
+    var  app=getApp().globalData,
+    that=this
+    app.http({
+      url:'/indexCom/getResumeDetail',
+      type:true,
+      dengl:true,
+      method:'POST',
+      data:{
+        id:options.id
+      },
+      success(res){
+        console.log(res.data.rdata)
+        that.setData({
+          detCon:res.data.rdata
+        })
+        var arr=res.data.rdata.ctrlWorkDTOS
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+           var startTime=val.startTime.substring(0,7).replace('-','/')
+           var endTime=val.endTime.substring(0,7).replace('-','/')
+           val.valTime=startTime+'~'+endTime
+          })
+        }
+        var arr1=res.data.rdata.ctrlProjectDTOS
+        if (arr1.length > 0) {
+          arr.map(function (val, i) {
+           var startTime=val.startTime.substring(0,7).replace('-','/')
+           var endTime=val.endTime.substring(0,7).replace('-','/')
+           val.valTime=startTime+'~'+endTime
+          })
+        }
+        var arr2=res.data.rdata.ctrlSchoolDTOS
+        if (arr2.length > 0) {
+          arr.map(function (val, i) {
+           var startTime=val.startTime.substring(0,7).replace('-','/')
+           var endTime=val.endTime.substring(0,7).replace('-','/')
+           val.valTime=startTime+'~'+endTime
+          })
+        }
+        var arr3=res.data.rdata.ctrlBookDTOS
+        if (arr3.length > 0) {
+          arr.map(function (val, i) {
+            if(val.time){
+              var time=val.time.substring(0,4)+'年'+val.time.substring(5,7)+'月'
+              val.valTime=time
+            }
+          })
+        }
+      }
+    })
   },
   invit() {
     if(this.data.isHz){

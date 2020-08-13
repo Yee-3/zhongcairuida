@@ -2,7 +2,7 @@
 	<view class="q_02">
 		<view class="fl">
 			<view class="q_03">
-				<view class="q_04 fl"><view class="title">{{user.name?user.name:'登录/注册'}}</view></view>
+				<view class="q_04 fl"><view class="title">{{user.name?user.name:'暂无用户名'}}</view></view>
 				<view class="q_05 fl" bindtap="base"><image src="../img/f050.png"></image></view>
 			</view>
 			<view class="q_06">
@@ -53,7 +53,7 @@
 				<view class="q_15 fl"><image src="../img/f052.png"></image></view>
 			</view>
 		</view>
-		<view class="q_16" bindtap="zhaopin">
+		<view class="q_16" catchtap="zhaopin">
 			<view class="fl">
 				<view class="q_17 fl"><image src="../img/f062.png"></image></view>
 				<view class="q_18 fl">切换至招聘版</view>

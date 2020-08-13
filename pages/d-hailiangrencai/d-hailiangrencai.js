@@ -35,7 +35,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     var data = {
-      limit: 5,
+      limit: 10,
       page: this.data.currentPage,
       sort: 0
     }
@@ -135,7 +135,7 @@ Page({
           recomList: res.data.rdata
         })
 
-        if (res.data.rdata.length < 5) {
+        if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
           })
@@ -185,7 +185,7 @@ Page({
             }
           })
         }
-        if (res.data.rdata.length < 5) {
+        if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
           })
@@ -238,14 +238,14 @@ Page({
     })
     if (this.data.zwType) {
       var data = {
-        limit: 5,
+        limit: 10,
         page: this.data.currentPage,
         position: this.zhiwei.data.id,
         sort: this.zonghe.data.ind
       }
     } else if (this.data.morType) {
       var data = {
-        limit: 5,
+        limit: 10,
         page: this.data.currentPage,
         school: this.more.data.ind7 ? this.more.data.ind7 : '',
         workTime: this.more.data.ind6 ? this.more.data.ind6 : '',
@@ -254,7 +254,7 @@ Page({
       }
     } else {
       var data = {
-        limit: 5,
+        limit: 10,
         page: this.data.currentPage,
         sort: this.zonghe.data.ind
       }
@@ -361,7 +361,7 @@ Page({
 
     if (this.data.morType) {
       var data = {
-        limit: 5,
+        limit: 10,
         page: this.data.currentPage,
         sort: 1
       }
@@ -389,7 +389,7 @@ Page({
     }
     var that = this,
       data = {
-        limit: 5,
+        limit: 10,
         page: this.data.currentPage,
         position: this.zhiwei.data.id,
         sort: this.zonghe.data.ind
@@ -449,7 +449,7 @@ Page({
 
     this.toggleMor()
     var data = {
-      limit: 5,
+      limit: 10,
       page: this.data.currentPage,
       school: this.more.data.ind7 ? this.more.data.ind7 : '',
       workTime: this.more.data.ind6 ? this.more.data.ind6 : '',
@@ -458,9 +458,9 @@ Page({
     }
     this.reword(data)
   },
-  detail() {
+  detail(e) {
     wx.navigateTo({
-      url: '../c-hailiangjianlixq/c-hailiangjianlixq',
+      url: '../c-hailiangjianlixq/c-hailiangjianlixq?id='+e.currentTarget.dataset.id,
     })
   },
   /**
@@ -505,7 +505,7 @@ Page({
     var that = this
     if (this.data.zwType) {
       var data = {
-        limit: 5,
+        limit: 10,
         page: this.data.currentPage,
         position: this.zhiwei.data.id,
         sort: this.zonghe.data.ind
@@ -514,7 +514,7 @@ Page({
       this.jiazai(data)
     } else if (this.data.morType) {
       var data = {
-        limit: 5,
+        limit: 10,
         page: this.data.currentPage,
         school: this.more.data.ind7 ? this.more.data.ind7 : '',
         workTime: this.more.data.ind6 ? this.more.data.ind6 : '',
@@ -525,7 +525,7 @@ Page({
     }else{
       var that = this,
         data = {
-          limit: 5,
+          limit: 10,
           page: that.data.currentPage,
           sort: this.zonghe.data.ind
         }

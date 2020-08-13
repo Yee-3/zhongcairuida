@@ -38,7 +38,7 @@ Page({
   },
   con1() {
     this.hidden()
-    if (this.data.mar == 1) {
+    if (this.data.six == 1) {
       this.setData({
         six_val: '男'
       })

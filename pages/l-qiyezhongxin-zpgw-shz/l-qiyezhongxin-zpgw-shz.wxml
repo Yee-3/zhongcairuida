@@ -54,18 +54,18 @@
 		</view>
 		<view class="h_14">
 			<view class="fl h_15">
-				<p>济南市天桥</p><span>|</span>
-				<p>5年</p><span>|</span>
-				<p>本科</p><span>|</span>
-				<p>5人</p><span>|</span>
-				<p>到岗式</p>
+				<p>{{item.address}}</p><span>|</span>
+				<p>{{item.workExperience}}</p><span>|</span>
+				<p>{{item.schoolRecord}}</p><span>|</span>
+				<p>{{item.num+'人'}}</p><span>|</span>
+				<p>{{item.serviceType=='1'?'到岗式':item.serviceType=='2'?'到面式':'管家式'}}</p>
 			</view>
-			<view class="fr h_16">4天前</view>
+			<view class="fr h_16">{{item.updateStr}}</view>
 		</view>
-		<view class="h_17"><span>五险一金</span><span>带薪年假</span><span>高温补贴</span><span>定期体检</span></view>
+		<view class="h_17"><span wx:for="{{item.wel}}" wx:for-index="index2" wx:for-item="ite">{{ite}}</span></view>
 		<view class="l_02" wx:if="{{idn==3}}">
 			<view class="l_03">原因:</view>
-			<view class="l_04">招聘信息格式填写出错，请重新修改后再次发布！</view>
+			<view class="l_04">{{item.why?item.why:''}}</view>
 		</view>
 	</view>
 </view>
