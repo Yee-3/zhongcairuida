@@ -5,7 +5,10 @@
 		<view class="w-clear"></view>
 	</view>
 	<view class="g_17">
-		<view class="fl g_14"><p>杭州</p><p>4K-6K</p></view>
+		<view class="fl g_14">
+			<p>杭州</p>
+			<p>4K-6K</p>
+		</view>
 		<view class="fr g_15">应聘简历</view>
 		<view class="w-clear"></view>
 	</view>
@@ -13,7 +16,7 @@
 
 
 <view class="d_02">
-	<view class="d_03" bindtap="detail">
+	<view class="d_03" bindtap="detail" data-id="{{item.id}}" wx:for="{{conList}}">
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
@@ -21,21 +24,23 @@
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
-						<view class="fl d_08">刘女士</view>
-						<view class="fl d_091">产品经理</view>
+						<view class="fl d_08">{{item.name}}</view>
+						<view class="fl d_091">{{item.ctrlObjectiveDTOS[0].positionName}}</view>
 						<view class="w-clear"></view>
 					</view>
 					<view class="d_10">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
+						<p>{{item.workTimeName?item.workTimeName:''}}</p><span wx:if="{{item.schoolName}}">|</span>
+						<p>{{item.schoolName?item.schoolName:''}}</p><span wx:if="{{item.ctrlObjectiveDTOS[0].address}}">|</span>
+						<p>{{item.ctrlObjectiveDTOS[0].address?item.ctrlObjectiveDTOS[0].address:''}}</p><span wx:if="{{item.ctrlObjectiveDTOS[0].moneyName}}">|</span>
+						<p>{{item.ctrlObjectiveDTOS[0].moneyName?item.ctrlObjectiveDTOS[0].moneyName:''}}</p>
 					</view>
 				</view>
 			</view>
 			<view class="fr g_03">
 				<view class="g_02">
-					<view class="g_04"><image src="../img/f03.png"></image></view>
+					<view class="g_04">
+						<image src="../img/f03.png"></image>
+					</view>
 					<view class="g_05">新</view>
 				</view>
 				<view class="g_01">22小时前活跃</view>
@@ -43,121 +48,13 @@
 			<view class="w-clear"></view>
 		</view>
 		<view class="d_12">
-			<view class="d_13">
-				<view class="fl d_14">
-					<image src="../img/f0021.png"></image>
-				</view>
+			<view class="fl d_14" wx:if="{{item.ctrlWorkDTOS.length>0}}">
+				<image src="../img/f0021.png"></image>
+			</view>
+			<view class="d_13" wx:for="{{item.ctrlWorkDTOS}}" wx:for-index="index2" wx:for-item="i">
 				<view class="fl d_15">
-					<p>北京酷马科技有限公司·2年1个月</p>
-					<span>业务部经理</span>
-				</view>
-				<view class="w-clear"></view>
-			</view>
-			<view class="d_13">
-				<view class="fl d_14"></view>
-				<view class="fl d_15">
-					<p>北京酷马科技有限公司·2年1个月</p>
-					<span>业务部经理</span>
-				</view>
-				<view class="w-clear"></view>
-			</view>
-		</view>
-	</view>
-	<view class="d_03">
-		<view class="">
-			<view class="fl d_04">
-				<view class="fl d_05">
-					<image src="../img/f01.png"></image>
-				</view>
-				<view class="fl d_06">
-					<view class="d_07">
-						<view class="fl d_08">刘女士</view>
-						<view class="fl d_091">产品经理</view>
-						<view class="w-clear"></view>
-					</view>
-					<view class="d_10">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr g_03">
-				<view class="g_02">
-					<view class="g_04"><image src="../img/f03.png"></image></view>
-					<view class="g_05">新</view>
-				</view>
-				<view class="g_01">22小时前活跃</view>
-			</view>
-			<view class="w-clear"></view>
-		</view>
-		<view class="d_12">
-			<view class="d_13">
-				<view class="fl d_14">
-					<image src="../img/f0021.png"></image>
-				</view>
-				<view class="fl d_15">
-					<p>北京酷马科技有限公司·2年1个月</p>
-					<span>业务部经理</span>
-				</view>
-				<view class="w-clear"></view>
-			</view>
-			<view class="d_13">
-				<view class="fl d_14"></view>
-				<view class="fl d_15">
-					<p>北京酷马科技有限公司·2年1个月</p>
-					<span>业务部经理</span>
-				</view>
-				<view class="w-clear"></view>
-			</view>
-		</view>
-	</view>
-	<view class="d_03">
-		<view class="">
-			<view class="fl d_04">
-				<view class="fl d_05">
-					<image src="../img/f01.png"></image>
-				</view>
-				<view class="fl d_06">
-					<view class="d_07">
-						<view class="fl d_08">刘女士</view>
-						<view class="fl d_091">产品经理</view>
-						<view class="w-clear"></view>
-					</view>
-					<view class="d_10">
-						<p>10年</p><span>|</span>
-						<p>本科</p><span>|</span>
-						<p>北京</p><span>|</span>
-						<p>15k~30k</p>
-					</view>
-				</view>
-			</view>
-			<view class="fr g_03">
-				<view class="g_02">
-					<view class="g_04"><image src="../img/f03.png"></image></view>
-					<view class="g_05">新</view>
-				</view>
-				<view class="g_01">22小时前活跃</view>
-			</view>
-			<view class="w-clear"></view>
-		</view>
-		<view class="d_12">
-			<view class="d_13">
-				<view class="fl d_14">
-					<image src="../img/f0021.png"></image>
-				</view>
-				<view class="fl d_15">
-					<p>北京酷马科技有限公司·2年1个月</p>
-					<span>业务部经理</span>
-				</view>
-				<view class="w-clear"></view>
-			</view>
-			<view class="d_13">
-				<view class="fl d_14"></view>
-				<view class="fl d_15">
-					<p>北京酷马科技有限公司·2年1个月</p>
-					<span>业务部经理</span>
+					<p>{{i.company}}·{{i.timeVal}}</p>
+					<span>{{i.position}}</span>
 				</view>
 				<view class="w-clear"></view>
 			</view>

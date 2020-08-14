@@ -117,12 +117,22 @@ Page({
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            if (val.createTime) {
-              var date1 = new Date(val.createTime.substring(0, 10))
-              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-              val.timeVal = value
+            var arrs = val.ctrlWorkDTOS
+            if (arrs.length > 0) {
+              arrs.map(function (vals, is) {
+                console.log(vals)
+                var date1 =Date.parse(new Date(vals.startTime.replace(/\-/g, "/")))
+                var date = Date.parse(new Date(vals.endTime.replace(/\-/g, "/")))
+                var time=parseInt((date-date1)/ 1000 / 60 / 60 / 24)
+                // 天数
+                var time1=(time / 365).toString().split(".")
+                if(time1[1]){
+                  var ti=time1[1].toString().substring(0,1)
+                  time1[1]=Math.round(ti*1.2)
+                }
+                var value = (time1[0] == 0 ? '' : time1[0] + '年') + (time1[1]>0 ? time1[1]+ '个月' : '') 
+                vals.timeVal = value
+              })
             }
           })
         }
@@ -172,7 +182,7 @@ Page({
         function jiance(x) {
           return x < 10 ? '0' + x : x
         }
-        var arr = res.data.rdata
+        var arr = res.data.rdata.ctrlWorkDTOS
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {

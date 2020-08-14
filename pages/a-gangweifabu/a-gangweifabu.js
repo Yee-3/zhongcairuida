@@ -34,12 +34,14 @@ Page({
     cityValue: '请选择',
     cityId: '',
     isHidden:true,
+    countryId:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+   
     var that = this
     this.spring = this.selectComponent("#spring");
     this.exp = this.selectComponent("#exp");
@@ -47,7 +49,6 @@ Page({
     this.sala = this.selectComponent("#sala");
     this.wel = this.selectComponent("#wel");
     this.name = this.selectComponent("#name");
-    console.log(this.data.id)
     if (options) {
       this.setData({
         id: options.id
@@ -130,7 +131,6 @@ Page({
   },
   submit() {
     var that = this
-    console.log(this.data.swicth)
     if (!that.data.titleValue) {
       wx.showToast({
         title: '请输入标题',
@@ -209,7 +209,8 @@ Page({
           welfare: that.data.welLi ? that.data.welLi : '',
           first: that.data.swicth,
           name: that.name.data.id,
-          district: that.data.cityId
+          district: that.data.cityId,
+          city:that.data.countryId,
         },
         success(res) {
 
@@ -219,7 +220,6 @@ Page({
     }
   },
   blur(e) {
-    console.log(value)
     var type = e.currentTarget.dataset.ty,
       that = this,
       value = e.detail.value
@@ -258,10 +258,8 @@ Page({
     this.setData({
       swicth: e.detail.value
     })
-    console.log('switch1 发生 change 事件，携带值为', e.detail.value)
   },
   zhiwei(e) {
-    console.log(e)
     var that=this
     this.spring.show()
     this.setData({
@@ -329,7 +327,6 @@ Page({
         isHidden:true
       })
     } else if (this.data.type == 3) {
-      console.log()
       this.edu.show()
       var index = this.edu.data.index
       this.setData({
@@ -345,14 +342,11 @@ Page({
       })
     } else {
       this.wel.show()
-      console.log(this.wel.data.valList)
       this.setData({
         welValue: this.wel.data.welList,
         welLi: this.wel.data.valList,
         isHidden:true
       })
-
-      console.log(this.data.welValue)
     }
   },
   handleCancel() {

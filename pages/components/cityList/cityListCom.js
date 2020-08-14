@@ -47,7 +47,8 @@ Component({
     load2: 'national',
     ids: '',
     location: {},
-    cityId:''
+    cityId:'',
+    countryId:''
   },
 
   /**
@@ -62,7 +63,6 @@ Component({
         that = this;
       var city = this.data.citySel;
       var cityId=this.data.cityId
-      console.log(index,'区',e)
       switch (types) {
         case 'national':
           //全国  
@@ -98,7 +98,8 @@ Component({
         //点击后给父组件可以通过bindcitytap事件，获取到cityname的值，这是子组件给父组件传值和触发事件的方法
         this.triggerEvent('citytap', {
           cityname: city,
-          cityId:cityId
+          cityId:cityId,
+          countryId:this.data.countryId
         });
       } else {
         this.getLocate();
@@ -112,6 +113,8 @@ Component({
         Index = e.currentTarget.dataset.index || '',
         that = this;
       var city = this.data.citySel;
+    var country= wx.getStorageSync('locatecity')
+    var cId=country.countryId
       // 如果点击的是list
         if (types == 'list') {
           that.setData({
@@ -120,6 +123,7 @@ Component({
             id: e.currentTarget.dataset.id,
             hot2: false,
             load2: false,
+            countryId: e.currentTarget.dataset.index
           })
           // 点击的是hot列表
         } else if (types == 'new') {
@@ -129,13 +133,15 @@ Component({
             hot1: e.currentTarget.dataset.id,
             idn_nu: false,
             load2: false,
+            countryId:e.currentTarget.dataset.index
           })
         } else if (types == 'national') {
           that.getLocate()
           that.setData({
             load2: e.currentTarget.dataset.types,
             idn_nu: false,
-            hot2: false
+            hot2: false,
+            countryId:cId
           })
         }
      
@@ -154,20 +160,20 @@ Component({
         var x = val.address_component.city
         var id = val.ad_info.adcode
         that.setData({
-          location: val.location
+          location: val.location,
+          loacteId: id,
         })
         if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
-          // console.log(val.indexOf('市') - 1);
           val = x.slice(0, x.indexOf('市'));
         }
         that.setData({
           locateCity: val,
-          loacteId: id,
         });
         //把获取的定位和获取的时间放到本地存储
         wx.setStorageSync('locatecity', {
           city: val,
-          time: new Date().getTime()
+          time: new Date().getTime(),
+          countryId:id
         });
       });
 
@@ -175,7 +181,6 @@ Component({
 
   },
   ready() {
-
     let that = this,
       cityOrTime = wx.getStorageSync('locatecity') || {},
       time = new Date().getTime(),
@@ -184,9 +189,11 @@ Component({
       this.getLocate();
     } else { //如果未满30分钟，那么直接从本地缓存里取值
       that.setData({
-        locateCity: cityOrTime.city
+        locateCity: cityOrTime.city,
+        countryId:cityOrTime.countryId
       })
     }
+    console.log(this.data.countryId)
     new qqmap().getCity().then(function (val) {
       var name = that.data.locateCity
       var city = val.result[1]
@@ -269,7 +276,6 @@ Component({
           }
         }
       }
-      console.log(locate)
       that.setData({
         citylist: citys,
         newcity: hot,

@@ -6,38 +6,99 @@ Page({
    */
   data: {
     idn: 1,
-    ind:1,
+    ind: 1,
     ind1: 1,
-    isDel: false
+    isDel: false,
+    app: getApp().globalData,
+    companyId: '',
+    msList: []
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    this.setData({
+      companyId: wx.getStorageSync('companyId')
+    })
+    console.log(wx.getStorageSync('companyId'))
+    var that = this,
+      url = '/interviewManager/getInterviewList',
+      data = {
+        companyId: that.data.companyId,
+        status: 'Y'
+      }
+    this.reword(url, data)
+  },
+  reword(url, data) {
+    var that = this
+    this.data.app.http({
+      type: true,
+      url: url,
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          msList: res.data.rdata
+        })
+      }
+    })
   },
   toggleTitle(e) {
     console.log(e)
     this.setData({
       idn: e.currentTarget.dataset.index,
-      ind:1,
-      ind1:1
+      ind: 1,
+      ind1: 1
     })
+    var x = e.currentTarget.dataset.index,
+      // url = x == 1 ? '/interviewManager/getInterviewList' : x == 2 ? '/interviewManager/getInductionList' : '',
+      url ='interviewManager/getInterviewList',
+      that = this
+    var data = {
+      companyId: that.data.companyId,
+      status: 'Y'
+      // status: 'P'
+    }
+    this.reword(url, data)
+
   },
   toggleMin(e) {
     console.log(e)
     this.setData({
       ind: e.currentTarget.dataset.index
     })
+    var x = this.data.idn,
+      i = e.currentTarget.dataset.index,
+      that = this,
+      status = i == 1 ? 'p' : i == 2 ? 'Y' : i == 3 ? 'N' : 'S',
+      // url = x == 1 ? '/interviewManager/getInterviewList' : x == 2 ? '/interviewManager/getInductionList' : ''
+      url ='interviewManager/getInterviewList'
+    if (x == 1) {
+      var data = {
+        companyId: that.data.companyId,
+        // status: status
+        status:'Y'
+      }
+      that.reword(url, data)
+    } else if (x == 2) {
+      var data = {
+        companyId: that.data.companyId,
+        // status: status
+        status:'Y'
+      }
+      that.reword(url, data)
+    }
     console.log(this.data.ind)
   },
   toggleMin1(e) {
-      this.setData({
-        ind1: e.currentTarget.dataset.index
-      }) 
+    this.setData({
+      ind1: e.currentTarget.dataset.index
+    })
   },
- 
+
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

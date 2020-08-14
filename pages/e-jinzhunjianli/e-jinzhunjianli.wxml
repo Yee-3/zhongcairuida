@@ -1,5 +1,5 @@
 <view class="e_01">
-	<view class="e_02" bindtap="jingzhun" data-id="{{item.id}}" wx:for="{{jlList}}">
+	<view class="e_02" bindtap="jingzhun" data-id="{{item.id}}" data-name="{{item.title}}" data-money="{{item.money}}" data-num="{{item.memberCount}}" wx:for="{{jlList}}">
 		<view class="fl e_03">
 			<view class="e_04">{{item.title}}</view>
 			<view class="d_10">

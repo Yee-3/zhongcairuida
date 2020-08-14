@@ -12,13 +12,24 @@ Page({
     zhiVal:'',
     emilVal:'',
     phoneVal:'',
-    app: getApp().globalData
+    app: getApp().globalData,
+    phone:''
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    var that=this
+    this.data.app.http({
+      url:'/Other/hotline',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          phone:res.data.rdata.phone
+        })
+      }
+    })
   },
   // / 性别
   sixChange(e) {
@@ -33,7 +44,7 @@ Page({
   },
   phone() {
     wx.makePhoneCall({
-      phoneNumber: '400-061235'
+      phoneNumber: this.data.phone
     })
   },
   con1() {
@@ -55,7 +66,6 @@ Page({
     })
   },
   blur(e) {
-		console.log(e)
 		var type = e.currentTarget.dataset.type,
 			that = this,
 			value = e.detail.value
@@ -63,7 +73,6 @@ Page({
 			that.setData({
 				nameVal: value
       })
-      console.log(value)
 		}
 		if (type == 2) {
 			that.setData({
@@ -116,13 +125,10 @@ Page({
   onShow: function () {
     wx.hideHomeButton({
       success: function () {
-        console.log("hide home success");
       },
       fail: function () {
-        console.log("hide home fail");
       },
       complete: function () {
-        console.log("hide home complete");
       },
     });
   },

@@ -6,6 +6,14 @@ Page({
    */
   data: {
     app: getApp().globalData,
+    conList: [],
+    currentPage: 1,
+    loadingType: 0,
+    contentText: {
+      contentdown: "上拉显示更多",
+      contentrefresh: "正在加载...",
+      contentnomore: "我也是有底线的~"
+    },
   },
 
   /**
@@ -13,25 +21,60 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    wx.showNavigationBarLoading()
     this.data.app.http({
       type: true,
       url: '/indexCom/getAccurateResumeList',
       dengl: true,
-      method:'POST',
-      data:{
-        limit:10,
-        page:1,
-        positionId:options.id
+      method: 'POST',
+      data: {
+        limit: 10,
+        page: 1,
+        positionId: '842059342b88455bab2c62a22c404ca4'
+        // positionId:options.id
       },
-      success(res){
-        console.log(res)
+      success(res) {
+        console.log(res.data.rdata)
+        var arr = res.data.rdata
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var arrs = val.ctrlWorkDTOS
+            if (arrs.length > 0) {
+              arrs.map(function (vals, is) {
+                console.log(vals)
+                var date1 =Date.parse(new Date(vals.startTime.replace(/\-/g, "/")))
+                var date = Date.parse(new Date(vals.endTime.replace(/\-/g, "/")))
+                var time=parseInt((date-date1)/ 1000 / 60 / 60 / 24)
+                // 天数
+                var time1=(time / 365).toString().split(".")
+                if(time1[1]){
+                  var ti=time1[1].toString().substring(0,1)
+                  time1[1]=Math.round(ti*1.2)
+                }
+                var value = (time1[0] == 0 ? '' : time1[0] + '年') + (time1[1]>0 ? time1[1]+ '个月' : '') 
+                vals.timeVal = value
+              })
+            }
+          })
+        }
+        that.setData({
+          conList: res.data.rdata
+        })
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
       }
 
     })
   },
-  detail() {
+  detail(e) {
+    console.log(e)
     wx.navigateTo({
-      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq',
+      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id,
     })
   },
   /**
@@ -73,7 +116,72 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
+    var that = this
+    this.setData({
+      currentPage: that.data.currentPage + 1
+    })
+    if (this.data.loadingType != 0) {
+      //loadingType!=0;直接返回
+      return false;
+    }
+    this.setData({
+      loadingType: 1
+    })
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      url: '/index/getPosition',
+      dengl: true,
+      method: 'POST',
+      data: {
+        limit: 10,
+        page: that.data.currentPage,
+        positionId: '842059342b88455bab2c62a22c404ca4'
+      },
+      success(res) {
+        console.log(res.data.rdata, 22222)
+        that.setData({
+          conList: that.data.conList.concat(res.data.rdata)
+        })
+        var arr = res.data.rdata.ctrlResumeList
+        var myDate = new Date()
+        if (arr.length > 0) {
+          arr.map(function (val, i) {
+            var arrs = val.ctrlWorkDTOS
+            if (arrs.length > 0) {
+              arrs.map(function (vals, is) {
+                console.log(vals)
+                var date1 = vals.startTime.substring(0, 10)
+                var date = vals.endTime.substring(0, 10)
+                let start = new Date(date1.replace(/\-/g, "/"));
+                let end = new Date(date.replace(/\-/g, "/"));
+                let startYear = start.getFullYear();
+                let startMonth = start.getMonth();
+                let endYear = end.getFullYear();
+                let endMonth = end.getMonth();
+                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
+                var val = (monthCount / 12).toString().split(".")
+                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
+                console.log(value)
+                vals.timeVal = value
+                console.log(vals.timeVal, value)
+              })
+            }
+          })
+        }
 
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+          wx.hideNavigationBarLoading()
+        } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
+        wx.hideNavigationBarLoading()
+      }
+    })
   },
 
   /**

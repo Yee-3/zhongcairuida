@@ -58,7 +58,7 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.getLocation()
+    // this.getLocation()
     let that = this,
       cityOrTime = wx.getStorageSync('locatecity') || {},
       time = new Date().getTime(),

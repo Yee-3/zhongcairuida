@@ -21,23 +21,32 @@ Page({
     mapVal: '',
     comVal: '',
     comLogo: '',
-    content: {}
+    content: {},
+    phone:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.setData({
       content: options
     })
-    console.log(this.data.content)
     this.nature = this.selectComponent("#nature");
     this.cls = this.selectComponent("#cls");
     this.scale = this.selectComponent("#scale");
     var that = this
-    console.log(this.cls.data.mar)
+    var that=this
+    this.data.app.http({
+      url:'/Other/hotline',
+      dengl:true,
+      data:{},
+      success(res){
+        that.setData({
+          phone:res.data.rdata.phone
+        })
+      }
+    })
     // 公司性质
     this.data.app.http({
       url: '/selects/company_nature',
@@ -89,8 +98,6 @@ Page({
     var _this = this
     var imgbox = this.data.imgbox
     var picid = e.currentTarget.dataset.pic
-
-    console.log(imgbox)
     var n = 9
     if (9 > imgbox.length > 0) {
       n = 9 - imgbox.length;
@@ -105,13 +112,11 @@ Page({
         var tempFilePaths = res.tempFilePaths
         if (imgbox.length == 0) {
           imgbox = tempFilePaths
-          // console.log(imgbox)
         } else if (9 > imgbox.length) {
           imgbox = imgbox.concat(tempFilePaths)
         } else {
           imgbox[picid] = tempFilePaths[0];
         }
-        // console.log(tempFilePaths)
         // tempFilePath可以作为img标签的src属性显示图片
         _this.setData({
           imgbox: imgbox
@@ -147,7 +152,6 @@ Page({
       })
   },
   handleConfirm() {
-    console.log(4444343)
     if (this.data.type == 1) {
       this.nature.show()
       var index = this.nature.data.index
@@ -170,13 +174,11 @@ Page({
   },
   handleCancel() {
     var that = this
-    console.log(this.nature.data.index)
     if (this.data.type == 1) {
       this.nature.show()
       that.nature.setData({
         edu: ''
       })
-      console.log(this.nature.data.index)
     } else if (this.data.type == 2) {
       this.cls.show()
       this.cls.setData({
@@ -191,11 +193,10 @@ Page({
   },
   phone() {
     wx.makePhoneCall({
-      phoneNumber: '400-061235'
+      phoneNumber: this.data.phone
     })
   },
   blur(e) {
-    console.log(e)
     var type = e.currentTarget.dataset.type,
       that = this,
       value = e.detail.value
@@ -203,7 +204,6 @@ Page({
       that.setData({
         comVal: value
       })
-      console.log(value)
     }
     if (type == 2) {
       that.setData({
@@ -246,7 +246,6 @@ Page({
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
         const tempFilePaths = res.tempFilePaths
-        console.log(tempFilePaths)
         _this.setData({
           imgValue: '已上传',
           comLogo: tempFilePaths
@@ -255,7 +254,6 @@ Page({
     })
   },
   next() {
-    console.log(this.cls.data.edu)
     var that = this
     this.data.app.http({
       url: '/company/saveCompany',
@@ -280,7 +278,6 @@ Page({
 
       },
       success(res) {
-        console.log(res)
         if(res.data.code==200){
           wx.reLaunch({
             url: '../p-qiyeduan/p-qiyeduan',

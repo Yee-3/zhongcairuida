@@ -31,7 +31,8 @@ Page({
        cityValue: e.detail.cityname,
         id_adre: that.map.data.ids ? that.map.data.ids : '',
         cityId:e.detail.cityId,
-        id:that.data.id
+        id:that.data.id,
+        countryId:e.detail.countryId
       })
     var that = this
     const cityName = e.detail.cityname;
