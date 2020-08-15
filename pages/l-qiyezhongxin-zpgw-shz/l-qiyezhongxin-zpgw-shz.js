@@ -49,7 +49,6 @@ Page({
       method: 'POST',
       data: data,
       success(res) {
-        console.log(res.data.rdata,JSON.parse(res.data.rdata[0].welfare))
         // function jiance(x) {
         //   return x < 10 ? '0' + x : x
         // }
@@ -65,7 +64,9 @@ Page({
             //   var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
             //   val.timeVal = value
             // }
-            val.wel=JSON.parse(val.welfare)
+            if(val.welfare){
+              val.wel=JSON.parse(val.welfare)
+            }
           })
         }
 
