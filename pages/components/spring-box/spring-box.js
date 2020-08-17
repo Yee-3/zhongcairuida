@@ -42,15 +42,12 @@ Component({
   methods: {
     // 添加index
     toggle(e) {
-      console.log(e,2222)
-      // console.log(e.currentTarget.dataset['index'])
       this.setData({
         edu: e.currentTarget.dataset['index'],
         index: e.currentTarget.dataset['ind']
       })
     },
     show() {
-      console.log(this.data.style)
       var show = this.data.isShow
       this.setData({
         isShow: !show,

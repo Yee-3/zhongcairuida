@@ -34,14 +34,12 @@ Page({
         // positionId:options.id
       },
       success(res) {
-        console.log(res.data.rdata)
         var arr = res.data.rdata
         if (arr.length > 0) {
           arr.map(function (val, i) {
             var arrs = val.ctrlWorkDTOS
             if (arrs.length > 0) {
               arrs.map(function (vals, is) {
-                console.log(vals)
                 var date1 =Date.parse(new Date(vals.startTime.replace(/\-/g, "/")))
                 var date = Date.parse(new Date(vals.endTime.replace(/\-/g, "/")))
                 var time=parseInt((date-date1)/ 1000 / 60 / 60 / 24)
@@ -72,7 +70,6 @@ Page({
     })
   },
   detail(e) {
-    console.log(e)
     wx.navigateTo({
       url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id,
     })
@@ -138,7 +135,6 @@ Page({
         positionId: '842059342b88455bab2c62a22c404ca4'
       },
       success(res) {
-        console.log(res.data.rdata, 22222)
         that.setData({
           conList: that.data.conList.concat(res.data.rdata)
         })
@@ -149,7 +145,6 @@ Page({
             var arrs = val.ctrlWorkDTOS
             if (arrs.length > 0) {
               arrs.map(function (vals, is) {
-                console.log(vals)
                 var date1 = vals.startTime.substring(0, 10)
                 var date = vals.endTime.substring(0, 10)
                 let start = new Date(date1.replace(/\-/g, "/"));
@@ -161,9 +156,8 @@ Page({
                 let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
                 var val = (monthCount / 12).toString().split(".")
                 var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
-                console.log(value)
                 vals.timeVal = value
-                console.log(vals.timeVal, value)
+           
               })
             }
           })

@@ -118,7 +118,7 @@
 			</view>
 		</view>
 		<view class="h2_26 fr" data-id="{{item.memberCompanyId}}" bindtap="quit" wx:if="{{idn==3&&ind1==2}}">离职</view> 
-		<view class="h_26" wx:if="{{ind==3}}" bindtap="invitTo">再邀请</view>
+		<view class="h_26" wx:if="{{ind==3}}" data-id="{{item.memberCompanyId}}" bindtap="invitTo">再邀请</view>
 		<view class="h_24" wx:if="{{ind==2||ind==4}}">
 			<ul>
 				<li bindtap="refuse" data-id="{{item.memberCompanyId}}">{{idn==1&&ind==2?'未面试':idn==1&&ind==4?'不合适':'未入职'}}</li>

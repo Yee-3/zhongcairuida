@@ -11,7 +11,8 @@ Page({
     datePickerIsShow: false,
     isHz:true,
     isTwo:false,
-    detCon:{}
+    detCon:{},
+    id:''
   },
 
   /**
@@ -20,9 +21,33 @@ Page({
   onLoad: function (options) {
     this.setData({
       height: wx.getSystemInfoSync().windowHeight * 0.9,
+      id:wx.getStorageSync('companyId')
     })
     var  app=getApp().globalData,
-    that=this
+    that=this,
+    id=wx.getStorageSync('companyId')
+    console.log(id)
+    app.http({
+      type:true,
+      url:'/company/queryCooperate',
+      dengl:true,
+      data:{
+        companyId:id
+      },
+      method:'POST',
+      success (res){
+        console.log(res)
+        // if(res.data.rdata=='N'){
+        //   that.setData({
+        //     isHz:false
+        //   })
+        // }else{
+        //   that.setData({
+        //     isHz:true
+        //   })
+        // }
+      }
+    })
     app.http({
       url:'/indexCom/getResumeDetail',
       type:true,
@@ -32,7 +57,6 @@ Page({
         id:options.id
       },
       success(res){
-        console.log(res.data.rdata)
         that.setData({
           detCon:res.data.rdata
         })
@@ -74,9 +98,25 @@ Page({
   },
   invit() {
     if(this.data.isHz){
-    var mask=this.data.isMask
+    var mask=this.data.isMask,
+    that=this
     this.setData({
       isMask:!mask
+    })
+    this.data.app.http({
+      type:true,
+      url:'/company/queryJobPosition',
+      dengl:true,
+      method:'POST',
+      data:{
+        companyId:that.data.id,
+        limit:10,
+        page:1,
+        status:1
+      },
+      success(res){
+        console.log(res.data.rdata)
+      }
     })
   }else{
     var two=this.data.isTwo
@@ -123,6 +163,17 @@ Page({
         datePickerIsShow: false,
       })
     }
+    var that=this
+    this.data.app.http({
+      type:true,
+      url:'/company/invitation',
+      dengl:true,
+      data:{},
+      method:'POST',
+      success(res){
+
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

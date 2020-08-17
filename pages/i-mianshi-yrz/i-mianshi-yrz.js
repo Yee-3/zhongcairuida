@@ -107,7 +107,6 @@ Page({
 				whyValue:that.data.val
 			},
 			success(res) {
-				console.log(res)
 			}
 		})
 	},
@@ -125,7 +124,6 @@ Page({
 				type: type,
 			},
 			success(res) {
-				console.log(res)
 			}
 		})
 	},
@@ -154,7 +152,6 @@ Page({
 						}
 					})
 				}
-				console.log(res.data.rdata)
 				that.setData({
 					recomList: res.data.rdata
 				})
@@ -188,7 +185,6 @@ Page({
 			method: 'POST',
 			data: data,
 			success(res) {
-				console.log(res.data.rdata, 22222)
 				that.setData({
 					recomList: that.data.recomList.concat(res.data.rdata)
 				})
@@ -224,7 +220,6 @@ Page({
 		})
 	},
 	tanchuang: function (e) {
-		console.log(e)
 		this.setData({
 			style: 'display:block',
 			id: e.currentTarget.dataset.id
@@ -252,13 +247,11 @@ Page({
 
 	},
 	blur(e) {
-		console.log(e)
 		this.setData({
 			val: e.detail.value
 		})
 	},
 	toggleTitle(e) {
-		// console.log(e)
 		this.setData({
 			idn: e.currentTarget.dataset.index,
 			ind: 1

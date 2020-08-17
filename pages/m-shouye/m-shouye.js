@@ -52,7 +52,8 @@ Page({
     id: '',
     zwCom: true,
     zhCom: true,
-    work:{}
+    work: {},
+    style: 'display:none',
   },
   /**
    * 生命周期函数--监听页面加载
@@ -63,8 +64,8 @@ Page({
       cityOrTime = wx.getStorageSync('locatecity') || {},
       time = new Date().getTime(),
       city = '';
-    if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
-     this.getLocate();
+      if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
+        that.getLocation();
     } else { //如果未满30分钟，那么直接从本地缓存里取值
       that.setData({
         mapValue: cityOrTime.city
@@ -78,7 +79,7 @@ Page({
         that.setData({
           imgList: res.data.rdata.ctrlBannerList,
           selList: res.data.rdata.ctrlSelects,
-          work:res.data.rdata.ctrlLookingwork
+          work: res.data.rdata.ctrlLookingwork
         })
       }
     })
@@ -134,9 +135,9 @@ Page({
   getLocation() {
     let that = this;
     new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
-      var x = val.address_component.city
+      var x = val.address_component.city,
+      y=val.ad_info.adcode
       if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
-        // console.log(val.indexOf('市') - 1);
         val = x.slice(0, x.indexOf('市'));
       }
       that.setData({
@@ -145,7 +146,8 @@ Page({
       //把获取的定位和获取的时间放到本地存储
       wx.setStorageSync('locatecity', {
         city: val,
-        time: new Date().getTime()
+        time: new Date().getTime(),
+        countryId:y
       });
     });
   },
@@ -173,26 +175,26 @@ Page({
       })
     }
     // 点击其他筛选清空上一个筛选内容
-    if(!this.data.zwCom){
+    if (!this.data.zwCom) {
       this.setData({
         ind: 'x',
         ind1: 'x',
         ind2: 'x',
-        isTwo:false,
-        zwCom:true
+        isTwo: false,
+        zwCom: true
       })
-    }else  if(!this.data.gsCom){
+    } else if (!this.data.gsCom) {
       this.setData({
-        ind3:'',
-        ind4:'',
-        gsCom:true
+        ind3: '',
+        ind4: '',
+        gsCom: true
       })
-    }else if(!this.data.moCom){
+    } else if (!this.data.moCom) {
       this.setData({
-        ind5:'',
-        ind6:'',
-        ind7:'',
-        moCom:true
+        ind5: '',
+        ind6: '',
+        ind7: '',
+        moCom: true
       })
     }
     this.data.app.http({
@@ -216,7 +218,7 @@ Page({
           var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
           var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
           var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-          val.timeVal=value
+          val.timeVal = value
         })
         that.setData({
           recomList: res.data.rdata
@@ -262,7 +264,7 @@ Page({
             var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
             var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
             var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-            val.timeVal=value
+            val.timeVal = value
 
           })
           that.setData({
@@ -375,7 +377,6 @@ Page({
       data: {},
       dengl: true,
       success(res) {
-        console.log(res)
         that.setData({
           guimo: res.data.rdata
         })
@@ -386,7 +387,6 @@ Page({
       data: {},
       dengl: true,
       success(res) {
-        console.log(res)
         that.setData({
           xingzhi: res.data.rdata
         })
@@ -445,20 +445,48 @@ Page({
   },
   zhiDetail(e) {
     wx.navigateTo({
-      url: '../zc-zhiweixq/zc-zhiweixq?id='+e.currentTarget.dataset.id
+      url: '../zc-zhiweixq/zc-zhiweixq?id=' + e.currentTarget.dataset.id
     })
   },
   run() {
-    if(this.data.work){
-      var work=this.data.work
-    wx.navigateTo({
-      url: '../a-bangwozhaogongzuo/index?id='+work.id+'&address='+work.address+'&money='+work.money+"&name="+work.name+'&phone='+work.phone+'&position='+work.position+'&status='+work.status+'&time='+work.time+'&workType='+work.workType,
+    var that = this
+    var work = that.data.work
+    this.data.app.http({
+      url: '/index/getResumes',
+      dengl: true,
+      method: 'POST',
+      success(res) {
+        if (res.data.rdata == true) {
+          if (that.data.work) {
+            wx.navigateTo({
+              url: '../a-bangwozhaogongzuo/index?id=' + work.id + '&address=' + work.address + '&money=' + work.money + "&name=" + work.name + '&phone=' + work.phone + '&position=' + work.position + '&status=' + work.status + '&time=' + work.time + '&workType=' + work.workType,
+            })
+          } else {
+            wx.navigateTo({
+              url: '../a-bangwozhaogongzuo/index'
+            })
+          }
+        } else {
+          that.setData({
+            style: 'display:block'
+          })
+        }
+      }
     })
-    }else{
-      wx.navigateTo({
-        url: '../a-bangwozhaogongzuo/index'
-      })
-    }
+
+  }, 
+  block() {
+    wx.navigateTo({
+      url: '../s-wodejianli/s-wodejianli',
+    })
+    this.setData({
+      style: 'display:none'
+    })
+  },
+  quxiao1() {
+    this.setData({
+      style: 'display:none'
+    })
   },
   weizhi() {
     wx.navigateTo({
@@ -474,24 +502,24 @@ Page({
       currentPage: 1,
       zwCom: false
     })
-     // 点击其他筛选清空上一个筛选内容
-     if(!this.data.zhCom){
+    // 点击其他筛选清空上一个筛选内容
+    if (!this.data.zhCom) {
       this.setData({
-        m_zong:'1',
-        zhCom:true
+        m_zong: '1',
+        zhCom: true
       })
-    }else  if(!this.data.gsCom){
+    } else if (!this.data.gsCom) {
       this.setData({
-        ind3:'',
-        ind4:'',
-        gsCom:true
+        ind3: '',
+        ind4: '',
+        gsCom: true
       })
-    }else if(!this.data.moCom){
+    } else if (!this.data.moCom) {
       this.setData({
-        ind5:'',
-        ind6:'',
-        ind7:'',
-        moCom:true
+        ind5: '',
+        ind6: '',
+        ind7: '',
+        moCom: true
       })
     }
     this.data.app.http({
@@ -515,7 +543,7 @@ Page({
           var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
           var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
           var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-          val.timeVal=value
+          val.timeVal = value
         })
         that.setData({
           recomList: res.data.rdata
@@ -563,7 +591,7 @@ Page({
             var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
             var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
             var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-            val.timeVal=value
+            val.timeVal = value
           })
           that.setData({
             recomList: res.data.rdata
@@ -650,26 +678,26 @@ Page({
       currentPage: 1,
       gsCom: false
     })
-     // 点击其他筛选清空上一个筛选内容
-     if(!this.data.zwCom){
+    // 点击其他筛选清空上一个筛选内容
+    if (!this.data.zwCom) {
       this.setData({
         ind: 'x',
         ind1: 'x',
         ind2: 'x',
-        isTwo:false,
-        zwCom:true
+        isTwo: false,
+        zwCom: true
       })
-    }else if(!this.data.zhCom){
+    } else if (!this.data.zhCom) {
       this.setData({
-        m_zong:'1',
-        zhCom:true
+        m_zong: '1',
+        zhCom: true
       })
-    }else if(!this.data.moCom){
+    } else if (!this.data.moCom) {
       this.setData({
-        ind5:'',
-        ind6:'',
-        ind7:'',
-        moCom:true
+        ind5: '',
+        ind6: '',
+        ind7: '',
+        moCom: true
       })
     }
     this.data.app.http({
@@ -777,24 +805,24 @@ Page({
       currentPage: 1,
       moCom: false
     })
-    if(!this.data.zwCom){
+    if (!this.data.zwCom) {
       this.setData({
         ind: 'x',
         ind1: 'x',
         ind2: 'x',
-        isTwo:false,
-        zwCom:true
+        isTwo: false,
+        zwCom: true
       })
-    }else if(!this.data.zhCom){
+    } else if (!this.data.zhCom) {
       this.setData({
-        m_zong:'1',
-        zhCom:true
+        m_zong: '1',
+        zhCom: true
       })
-    }else if(!this.data.gsCom){
+    } else if (!this.data.gsCom) {
       this.setData({
-        ind3:'',
-        ind4:'',
-        gsCom:true
+        ind3: '',
+        ind4: '',
+        gsCom: true
       })
     }
     this.data.app.http({
@@ -893,8 +921,7 @@ Page({
   /**
    * 生命周期函数--监听页面显示
    */
-  onShow: function () {
-  },
+  onShow: function () {},
 
   /**
    * 生命周期函数--监听页面隐藏
@@ -960,10 +987,10 @@ Page({
       this.jiazai(data)
     } else if (!this.data.zhCom) {
       data = {
-          limit: 10,
-          page: that.data.currentPage,
-          type: 1,
-          sort: zong
+        limit: 10,
+        page: that.data.currentPage,
+        type: 1,
+        sort: zong
       }
     } else {
       var dat = {

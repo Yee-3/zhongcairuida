@@ -209,7 +209,6 @@ Component({
           location: val.location
         })
         if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
-          // console.log(val.indexOf('市') - 1);
           val = x.slice(0, x.indexOf('市'));
         }
         that.setData({
@@ -219,7 +218,8 @@ Component({
         //把获取的定位和获取的时间放到本地存储
         wx.setStorageSync('locatecity', {
           city: val,
-          time: new Date().getTime()
+          time: new Date().getTime(),
+          countryId:id
         });
       });
 

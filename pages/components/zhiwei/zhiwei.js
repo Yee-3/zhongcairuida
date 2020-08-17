@@ -42,7 +42,6 @@ Component({
       this.setData({
         isTwo: !two
       })
-      console.log(this.data.zhiList)
     },
     toggle1(e) {
       this.setData({
@@ -58,14 +57,12 @@ Component({
       this.triggerEvent("confirm");
     },
     position() {
-      console.log(111)
       var add = this.data.isAdd
       this.setData({
         isAdd: !add
       })
     },
     hide() {
-      console.log(222)
       var two = this.data.isTwo
       this.setData({
         isTwo: !two

@@ -61,7 +61,6 @@ Component({
       })
     },
     toggle2(e) {
-      console.log(e)
       var index = this.data.ind,
         index2 = this.data.ind1,
         index3 = e.currentTarget.dataset['index'],
@@ -98,7 +97,6 @@ Component({
       this.setData({
       })
       if (!this.data.isTrue) {
-        console.log(this.data.isTwo,2222222)
         this.setData({
           isTwo: false,
           ind:'x',

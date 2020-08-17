@@ -34,7 +34,6 @@ Page({
 				id: options.id
 			},
 			success(res) {
-				console.log(res)
 				that.setData({
 					detailCont: res.data.rdata,
 					date: res.data.rdata.createTime.substring(0, 10)
@@ -44,7 +43,6 @@ Page({
 
 	},
 	blur(e) {
-		console.log(e)
 		var type = e.currentTarget.dataset.ty,
 			that = this,
 			value = e.detail.value
@@ -73,7 +71,6 @@ Page({
 					position: that.data.id
 				},
 				success(res) {
-					console.log(res)
 					if (res.data.code == 200) {
 						that.setData({
 							style: 'display:none',

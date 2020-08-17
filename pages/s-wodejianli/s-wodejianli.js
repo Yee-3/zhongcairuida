@@ -18,7 +18,7 @@ Page({
     isStatus: '',
     sty: 'display:none',
     style: 'display:none',
-    s:''
+    s: ''
   },
 
   /**
@@ -27,7 +27,7 @@ Page({
   onLoad: function (options) {
     // console.log(this.data.baseUrl)
     let that = this
-   
+
     this.data.app.http({
       url: '/resume/getResume',
       dengl: true,
@@ -73,13 +73,13 @@ Page({
             schoolT: schoolT,
             book: book,
             isStatus: false,
-            sty:'display:none'
+            sty: 'display:none'
 
           })
         } else {
           that.setData({
             isStatus: true,
-            sty:'display:block'
+            sty: 'display:block'
           })
         }
 
@@ -102,30 +102,30 @@ Page({
     //   }).exec();
     // }, 300)
   },
-  toudi(){
-    var that=this
+  toudi() {
+    var that = this
     this.data.app.http({
-      url:'/index/getResumes',
-      dengl:true,
-      method:'POST',
-      success(res){
+      url: '/index/getResumes',
+      dengl: true,
+      method: 'POST',
+      success(res) {
         if (res.data.rdata == true) {
-         wx.switchTab({
-           url: '../m-shouye/m-shouye',
+          wx.switchTab({
+            url: '../m-shouye/m-shouye',
           })
-             
-        }else{
+
+        } else {
           that.setData({
-            style:'display:block'
+            style: 'display:block'
           })
         }
-console.log(res)
+        console.log(res)
       }
     })
   },
-  block(){
+  block() {
     this.setData({
-      style:'display:none'
+      style: 'display:none'
     })
   },
   wanshan() {
@@ -133,9 +133,9 @@ console.log(res)
       url: '../v-wodejianli-jcxx/v-wodejianli-jcxx',
     })
   },
-  quxiao1(){
+  quxiao1() {
     this.setData({
-      sty:'display:none'
+      sty: 'display:none'
     })
   },
   change: function (e) {
@@ -253,7 +253,7 @@ console.log(res)
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    
+
   },
 
   /**

@@ -36,7 +36,6 @@ Component({
       this.triggerEvent("zongHide")
     },
     toggleZ(e){
-      console.log(e)
         this.setData({
            ind:e.currentTarget.dataset.index
         })

@@ -11,59 +11,88 @@ Page({
     isMask: false,
     datePickerValue: ['', '', ''],
     datePickerIsShow: false,
-    isHz:true,
-    isTwo:false,
+    isHz: true,
+    isTwo: false,
     app: getApp().globalData,
-    content:{},
+    content: {},
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    var that = this
     this.setData({
       height: wx.getSystemInfoSync().windowHeight * 0.9,
     })
-    var that=this
+    var id = wx.getStorageSync('companyId')
+    console.log(id)
     this.data.app.http({
-      url:'/indexCom/getResumeDetail',
-      dengl:true,
-      method:'POST',
-      data:{id:options.id},
-      success(res){
+      type: true,
+      url: '/company/queryCooperate',
+      dengl: true,
+      data: {
+        companyId: id
+      },
+      method: 'POST',
+      success(res) {
         console.log(res)
-        var timer=res.data.rdata.ctrlWorkDTOS
-        var xiangTime=res.data.rdata.ctrlProjectDTOS
-        var schoolTime=res.data.rdata.ctrlSchoolDTOS
-        timer.map(function(val,i){
-          var startTime=val.startTime.substring(0,7).replace(/-/g,'/')
-          var endTime=val.endTime.substring(0,7).replace(/-/g,'/')
-          val.time=[startTime,endTime]
-        })
-        
-        xiangTime.map(function(val,i){
-          var startTime=val.startTime.substring(0,7).replace(/-/g,'/')
-          var endTime=val.endTime.substring(0,7).replace(/-/g,'/')
-          val.time=[startTime,endTime]
-        })
-        
-        schoolTime.map(function(val,i){
-          var startTime=val.startTime.substring(0,7).replace(/-/g,'/')
-          var endTime=val.endTime.substring(0,7).replace(/-/g,'/')
-          val.time=[startTime,endTime]
-        })
-        var arr=res.data.rdata.ctrlBookDTOS
-        arr.map(function(val,i){
-        var time=val.time.substring(0,4)+'年'+val.time.substring(5,7)+'月'
-          val.times=time
-        })
-        
+        if (res.data.rdata == 'N') {
+          that.setData({
+            isHz: false
+          })
+        } else {
+          that.setData({
+            isHz: true
+          })
+        }
+      }
+    })
+
+    this.data.app.http({
+      url: '/indexCom/getResumeDetail',
+      dengl: true,
+      method: 'POST',
+      data: {
+        id: options.id
+      },
+      success(res) {
+        if (res.data.rdata) {
+          var timer = res.data.rdata.ctrlWorkDTOS
+          var xiangTime = res.data.rdata.ctrlProjectDTOS
+          var schoolTime = res.data.rdata.ctrlSchoolDTOS
+          timer.map(function (val, i) {
+            var startTime = val.startTime.substring(0, 7).replace(/-/g, '/')
+            var endTime = val.endTime.substring(0, 7).replace(/-/g, '/')
+            val.time = [startTime, endTime]
+          })
+
+          xiangTime.map(function (val, i) {
+            var startTime = val.startTime.substring(0, 7).replace(/-/g, '/')
+            var endTime = val.endTime.substring(0, 7).replace(/-/g, '/')
+            val.time = [startTime, endTime]
+          })
+
+          schoolTime.map(function (val, i) {
+            var startTime = val.startTime.substring(0, 7).replace(/-/g, '/')
+            var endTime = val.endTime.substring(0, 7).replace(/-/g, '/')
+            val.time = [startTime, endTime]
+          })
+          var arr = res.data.rdata.ctrlBookDTOS
+          arr.map(function (val, i) {
+            var time = val.time.substring(0, 4) + '年' + val.time.substring(5, 7) + '月'
+            val.times = time
+          })
+        }
+
+
         that.setData({
-          content:res.data.rdata
+          content: res.data.rdata
         })
 
       }
     })
+
   },
   change: function (e) {
     var f = this.data.isF
@@ -78,35 +107,35 @@ Page({
     })
   },
   invit() {
-    if(this.data.isHz){
-    var mask=this.data.isMask
-    this.setData({
-      isMask:!mask
-    })
-  }else{
-    var two=this.data.isTwo
-    this.setData({
-      isTwo:!two
-    })
-  }
+    if (this.data.isHz) {
+      var mask = this.data.isMask
+      this.setData({
+        isMask: !mask
+      })
+    } else {
+      var two = this.data.isTwo
+      this.setData({
+        isTwo: !two
+      })
+    }
   },
-  phone(){
+  phone() {
     wx.makePhoneCall({
       phoneNumber: '1222222'
     })
   },
-  quxiao2: function() {
-		this.invit()
+  quxiao2: function () {
+    this.invit()
   },
-  confirm(e){
+  confirm(e) {
     this.invit()
     this.setData({
       datePickerIsShow: true,
       data_index: e.currentTarget.dataset.de
     });
   },
-   // 选择时间
-  
+  // 选择时间
+
   bindDateChange1: function (e) {
     this.setData({
       datePickerIsShow: true,

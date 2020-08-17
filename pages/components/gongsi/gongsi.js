@@ -35,7 +35,6 @@ Component({
       })
     },
     toggle3(e) {
-      console.log(e)
       this.setData({
         ind3: e.currentTarget.dataset['index']
       })

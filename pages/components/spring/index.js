@@ -36,7 +36,6 @@ Component({
    */
   methods: {
     toggle(e){
-      // console.log('111')
       this.setData({
         mar:e.currentTarget.dataset['val'],
         index:e.currentTarget.dataset['index'],

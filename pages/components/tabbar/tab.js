@@ -47,7 +47,6 @@ Component({
   methods: {
     redirectTo(e){
       let taburl = e.currentTarget.dataset.taburl;
-      console.log(e)
       if(taburl == this.data.curRoute) return
       wx.redirectTo({
         url:"/"+taburl

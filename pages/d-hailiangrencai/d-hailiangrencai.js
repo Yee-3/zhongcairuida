@@ -33,7 +33,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var data = {
       limit: 10,
       page: this.data.currentPage,
@@ -104,7 +103,7 @@ Page({
     var that = this
     wx.showNavigationBarLoading()
     this.data.app.http({
-      type: 1,
+      type: true,
       url: that.data.url,
       dengl: true,
       method: 'POST',
@@ -120,7 +119,6 @@ Page({
             var arrs = val.ctrlWorkDTOS
             if (arrs.length > 0) {
               arrs.map(function (vals, is) {
-                console.log(vals)
                 var date1 =Date.parse(new Date(vals.startTime.replace(/\-/g, "/")))
                 var date = Date.parse(new Date(vals.endTime.replace(/\-/g, "/")))
                 var time=parseInt((date-date1)/ 1000 / 60 / 60 / 24)

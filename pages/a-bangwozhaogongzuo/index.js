@@ -40,7 +40,6 @@ Page({
   onLoad: function (options) {
     var app = getApp().globalData
     var that = this
-    // console.log(options)
     if(options){
     this.setData({
       workId: options.id,
@@ -82,25 +81,20 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         that.setData({
           zhiList: res.data.rdata[0].treeDTOS
         })
         if (options.position) {
           res.data.rdata[0].treeDTOS.map(function (val, i) {
-            console.log(val)
             var arr = val
             arr.treeDTOS.map(function (vals, is) {
-              console.log(vals)
               var arrs = vals
               arrs.treeDTOS.map(function (va, ii) {
                 if (options.position == va.id) {
-                  console.log(va)
                   that.setData({
                     ind_three: ii,
                     classValue: va.name
                   })
-                  console.log(that.data.classValue)
                 }
               })
 
@@ -192,7 +186,6 @@ Page({
   },
 
   checkboxChange: function (e) {
-    // console.log('checkbox发生change事件，携带value值为：', e.detail.value)
   },
   active(e) {
     this.setData({
@@ -265,7 +258,6 @@ Page({
           if (res.data.code == 200) {
             var pages = getCurrentPages();
             var prevPage = pages[pages.length - 2];
-            console.log(this.data.val)
             prevPage.setData({
               val: that.data.val
             })

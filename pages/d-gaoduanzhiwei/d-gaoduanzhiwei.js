@@ -19,7 +19,6 @@ Page({
       data: {},
       dengl:true,
       success(res) {
-        console.log(res)
         that.setData({
           clas:res.data.rdata
         })

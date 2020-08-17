@@ -42,7 +42,6 @@ Component({
   methods: {
     // 添加index
     toggle(e) {
-      console.log(e)
       this.setData({
         edu: e.currentTarget.dataset['index'],
         index:e.currentTarget.dataset['value']

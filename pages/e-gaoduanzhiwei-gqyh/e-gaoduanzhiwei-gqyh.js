@@ -25,7 +25,6 @@ Page({
     this.setData({
       id:options.id
     })
-    console.log(options)
     wx.showNavigationBarLoading()
     this.data.app.http({
       url: '/position/height',
@@ -36,7 +35,6 @@ Page({
         id:options.id
       },
       success(res) {
-        console.log(res.data.rdata)
         that.setData({
           lisList: res.data.rdata
         })
@@ -55,7 +53,6 @@ Page({
     })
   },
   details(e) {
-    console.log(e)
     wx.navigateTo({
       url: '../f-gaoduanzhiwei-zexq/f-gaoduanzhiwei-zexq?id='+e.currentTarget.dataset.id,
     })
@@ -127,7 +124,6 @@ Page({
         id:that.data.id
       },
       success(res) {
-        console.log(res.data.rdata)
         that.setData({
           lisList: that.data.lisList.concat(res.data.rdata)
         })

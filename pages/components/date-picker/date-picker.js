@@ -65,7 +65,6 @@ Component({
             this.triggerEvent('sureclick', {
                 value: value,
             });
-            // console.log(value)
         },
         year_onChange: function(e) {
             //年改变，月要滑到一月，天要重新计算该年该月多少天

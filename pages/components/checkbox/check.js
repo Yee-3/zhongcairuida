@@ -46,7 +46,6 @@ Component({
   methods: {
     // 添加index
     toggle(e) {
-      // console.log(e.currentTarget.dataset['index'])
       var that = this
       var index = e.currentTarget.dataset.index
       // var edu = this.data.isEdu
@@ -69,11 +68,9 @@ Component({
         welList: xArr,
         valList:valList
       })
-      console.log(this.data.welList,this.data.valList)
       
     },
     show() {
-      console.log(this.data.style)
       var show = this.data.isShow
       this.setData({
         isShow: !show,

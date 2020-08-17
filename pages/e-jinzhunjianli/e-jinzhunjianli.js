@@ -14,7 +14,6 @@ Page({
    */
   onLoad: function (options) {
     var that = this
-    console.log(options)
     this.data.app.http({
       url: '/indexCom/getAccurateResume',
       type: true,
@@ -31,7 +30,6 @@ Page({
     })
   },
   jingzhun(e) {
-    console.log(e)
     wx.navigateTo({
       url: '../g-jinzhunjianli-zwjl/g-jinzhunjianli-zwjl?id='+e.currentTarget.dataset.id,
     })

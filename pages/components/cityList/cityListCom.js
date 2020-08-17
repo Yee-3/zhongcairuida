@@ -70,7 +70,6 @@ Component({
             idn3: index
           })
           city = val;
-          // console.log
           cityId=index;
           break;
         case 'new':
@@ -193,7 +192,6 @@ Component({
         countryId:cityOrTime.countryId
       })
     }
-    console.log(this.data.countryId)
     new qqmap().getCity().then(function (val) {
       var name = that.data.locateCity
       var city = val.result[1]
