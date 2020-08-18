@@ -64,8 +64,8 @@ Page({
       cityOrTime = wx.getStorageSync('locatecity') || {},
       time = new Date().getTime(),
       city = '';
-      if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
-        that.getLocation();
+    if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
+      that.getLocation();
     } else { //如果未满30分钟，那么直接从本地缓存里取值
       that.setData({
         mapValue: cityOrTime.city
@@ -111,11 +111,12 @@ Page({
         var arr = res.data.rdata
         var myDate = new Date()
         arr.map(function (val, i) {
-          var date1 = new Date(val.createTime.substring(0, 10))
-          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+          var date = Date.parse(new Date())
+          var day = parseInt((date - date1) / 1000)
+          var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
           val.timeVal = value
+
         })
         that.setData({
           recomList: res.data.rdata,
@@ -136,7 +137,7 @@ Page({
     let that = this;
     new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
       var x = val.address_component.city,
-      y=val.ad_info.adcode
+        y = val.ad_info.adcode.substring(0, 4) + '00'
       if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
         val = x.slice(0, x.indexOf('市'));
       }
@@ -147,7 +148,7 @@ Page({
       wx.setStorageSync('locatecity', {
         city: val,
         time: new Date().getTime(),
-        countryId:y
+        countryId: y
       });
     });
   },
@@ -214,11 +215,12 @@ Page({
         var arr = res.data.rdata
         var myDate = new Date()
         arr.map(function (val, i) {
-          var date1 = new Date(val.createTime.substring(0, 10))
-          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+          var date = Date.parse(new Date())
+          var day = parseInt((date - date1) / 1000)
+          var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
           val.timeVal = value
+
         })
         that.setData({
           recomList: res.data.rdata
@@ -260,10 +262,10 @@ Page({
           var arr = res.data.rdata
           var myDate = new Date()
           arr.map(function (val, i) {
-            var date1 = new Date(val.createTime.substring(0, 10))
-            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
             val.timeVal = value
 
           })
@@ -474,7 +476,7 @@ Page({
       }
     })
 
-  }, 
+  },
   block() {
     wx.navigateTo({
       url: '../s-wodejianli/s-wodejianli',
@@ -539,10 +541,10 @@ Page({
         var arr = res.data.rdata
         var myDate = new Date()
         arr.map(function (val, i) {
-          var date1 = new Date(val.createTime.substring(0, 10))
-          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+          var date = Date.parse(new Date())
+          var day = parseInt((date - date1) / 1000)
+          var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
           val.timeVal = value
         })
         that.setData({
@@ -587,10 +589,10 @@ Page({
           var arr = res.data.rdata
           var myDate = new Date()
           arr.map(function (val, i) {
-            var date1 = new Date(val.createTime.substring(0, 10))
-            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
             val.timeVal = value
           })
           that.setData({
@@ -643,10 +645,10 @@ Page({
           var arr = res.data.rdata
           var myDate = new Date()
           arr.map(function (val, i) {
-            var date1 = new Date(val.createTime.substring(0, 10))
-            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
             val.timeVal = value
 
           })
@@ -718,10 +720,10 @@ Page({
         var arr = res.data.rdata
         var myDate = new Date()
         arr.map(function (val, i) {
-          var date1 = new Date(val.createTime.substring(0, 10))
-          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+          var date = Date.parse(new Date())
+          var day = parseInt((date - date1) / 1000)
+          var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
           val.timeVal = value
         })
         that.setData({
@@ -769,10 +771,10 @@ Page({
           var arr = res.data.rdata
           var myDate = new Date()
           arr.map(function (val, i) {
-            var date1 = new Date(val.createTime.substring(0, 10))
-            var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+            var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
             val.timeVal = value
           })
           that.setData({
@@ -844,10 +846,10 @@ Page({
         var arr = res.data.rdata
         var myDate = new Date()
         arr.map(function (val, i) {
-          var date1 = new Date(val.createTime.substring(0, 10))
-          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+          var date = Date.parse(new Date())
+          var day = parseInt((date - date1) / 1000)
+          var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
           val.timeVal = value
         })
         that.setData({
@@ -888,10 +890,10 @@ Page({
         var arr = res.data.rdata
         var myDate = new Date()
         arr.map(function (val, i) {
-          var date1 = new Date(val.createTime.substring(0, 10))
-          var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-          var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-          var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+          var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+          var date = Date.parse(new Date())
+          var day = parseInt((date - date1) / 1000)
+          var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
           val.timeVal = value
         })
         that.setData({
@@ -978,7 +980,7 @@ Page({
       }
       this.jiazha(dat)
     } else if (!this.data.zwCom) {
-      data = {
+     var data = {
         limit: 1,
         page: that.data.currentPage,
         type: 1,
@@ -986,12 +988,13 @@ Page({
       }
       this.jiazai(data)
     } else if (!this.data.zhCom) {
-      data = {
+      var  data = {
         limit: 10,
         page: that.data.currentPage,
         type: 1,
         sort: zong
       }
+      this.jiazai(data)
     } else {
       var dat = {
         limit: 10,

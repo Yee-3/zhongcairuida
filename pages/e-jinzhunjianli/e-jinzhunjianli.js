@@ -31,7 +31,7 @@ Page({
   },
   jingzhun(e) {
     wx.navigateTo({
-      url: '../g-jinzhunjianli-zwjl/g-jinzhunjianli-zwjl?id='+e.currentTarget.dataset.id,
+      url: '../g-jinzhunjianli-zwjl/g-jinzhunjianli-zwjl?id='+e.currentTarget.dataset.id+'&money='+e.currentTarget.dataset.money+'&name='+e.currentTarget.dataset.name+'&num='+e.currentTarget.dataset.num+'&address='+e.currentTarget.dataset.addr,
     })
   },
   /**

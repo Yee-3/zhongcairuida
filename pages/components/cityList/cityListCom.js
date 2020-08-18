@@ -157,7 +157,9 @@ Component({
       let that = this;
       new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
         var x = val.address_component.city
-        var id = val.ad_info.adcode
+        console.log(val)
+        var id = val.ad_info.adcode.substring(0,4)+'00'
+        console.log(id)
         that.setData({
           location: val.location,
           loacteId: id,
@@ -184,8 +186,8 @@ Component({
       cityOrTime = wx.getStorageSync('locatecity') || {},
       time = new Date().getTime(),
       city = '';
-    if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
       this.getLocate();
+    if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
     } else { //如果未满30分钟，那么直接从本地缓存里取值
       that.setData({
         locateCity: cityOrTime.city,

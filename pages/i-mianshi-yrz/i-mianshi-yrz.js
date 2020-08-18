@@ -104,10 +104,9 @@ Page({
 				status: 'N',
 				type: type,
 				why: that.sel.data.ids,
-				whyValue:that.data.val
+				whyValue: that.data.val
 			},
-			success(res) {
-			}
+			success(res) {}
 		})
 	},
 	// 同意
@@ -123,8 +122,7 @@ Page({
 				status: 'Y',
 				type: type,
 			},
-			success(res) {
-			}
+			success(res) {}
 		})
 	},
 	reword(data) {
@@ -143,11 +141,11 @@ Page({
 				var myDate = new Date()
 				if (arr.length > 0) {
 					arr.map(function (val, i) {
-						if(val.createTime){
-							var date1 = new Date(val.createTime.substring(0, 10))
-							var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-							var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-							var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+						if (val.createTime) {
+							var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+							var date = Date.parse(new Date())
+							var day = parseInt((date - date1) / 1000)
+							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
 							val.timeVal = value
 						}
 					})
@@ -196,11 +194,11 @@ Page({
 				var myDate = new Date()
 				if (arr.length > 0) {
 					arr.map(function (val, i) {
-						if(val.createTime){
-							var date1 = new Date(val.createTime.substring(0, 10))
-							var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-							var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-							var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
+						if (val.createTime) {
+							var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
+							var date = Date.parse(new Date())
+							var day = parseInt((date - date1) / 1000)
+							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
 							val.timeVal = value
 						}
 					})
@@ -229,7 +227,7 @@ Page({
 	quxiao2: function () {
 		this.setData({
 			style: 'display:none',
-			val:''
+			val: ''
 		})
 	},
 	getDate: function (e) {

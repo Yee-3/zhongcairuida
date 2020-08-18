@@ -14,13 +14,20 @@ Page({
       contentrefresh: "正在加载...",
       contentnomore: "我也是有底线的~"
     },
+    titleCon:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this
+    if(options){
+      this.setData({
+        titleCon:options
+      })
+    }
     wx.showNavigationBarLoading()
     this.data.app.http({
       type: true,
@@ -30,8 +37,8 @@ Page({
       data: {
         limit: 10,
         page: 1,
-        positionId: '842059342b88455bab2c62a22c404ca4'
-        // positionId:options.id
+        // positionId: '842059342b88455bab2c62a22c404ca4'
+        positionId:options.id
       },
       success(res) {
         var arr = res.data.rdata
@@ -71,7 +78,7 @@ Page({
   },
   detail(e) {
     wx.navigateTo({
-      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id,
+      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id+'&positId='+this.data.titleCon.id,
     })
   },
   /**

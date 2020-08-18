@@ -348,17 +348,33 @@ Page({
   onReady: function () {
 
   },
-  dele() {
+  dele(e) {
     var del = this.data.isDel
     this.setData({
-      isDel: !del
+      isDel: !del,
+      // id: e.currentTarget.dataset.id
     })
   },
   del_cancle() {
     this.dele()
   },
+  // 删除
   del_confirm() {
-    this.dele
+    this.dele()
+    var that=this
+    this.data.app.http({
+      type:true,
+      url:'/interviewManager/delete',
+      dengl:true,
+      method:'POST',
+      data:{
+        // id:that.data.id
+      },
+      success(res){
+        console.log(res.data.rdata)
+    
+      }
+    })
   },
   /**
    * 生命周期函数--监听页面显示

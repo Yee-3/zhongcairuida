@@ -89,6 +89,9 @@
 
 .z_07 {
   margin-top: 10rpx;
+  display: flex;
+  flex-direction: row ;
+  flex-wrap: wrap;
 }
 
 .z_07 p {
@@ -100,7 +103,7 @@
   font-size: 26rpx;
   color: #999;
   display: inline-block;
-  padding: 0 16rpx;
+  padding: 0 5rpx;
 }
 
 
@@ -145,7 +148,7 @@
 .zc_15 ul li {
   display: block;
   float: left;
-  width: 130rpx;
+  min-width: 130rpx;
   height: 50rpx;
   background: #edf3ff;
   margin-right: 20rpx;
@@ -154,6 +157,7 @@
   text-align: center;
   line-height: 50rpx;
   border-radius: 6rpx;
+  margin-bottom: 20rpx;
 }
 
 .zc_16 {

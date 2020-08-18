@@ -17,7 +17,7 @@ export default class qqmap { //获取定位信息
           },
           success: function (res) {
             resolve(res.result); //返回城市
-            // console.log(res.result)
+            // console.log(res)
           },
           fail: function (res) {
             reject(res);

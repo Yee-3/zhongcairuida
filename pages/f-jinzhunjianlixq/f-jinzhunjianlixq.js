@@ -15,15 +15,21 @@ Page({
     isTwo: false,
     app: getApp().globalData,
     content: {},
+    date: '',
+    resumeId: '',
+    positionId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this
     this.setData({
       height: wx.getSystemInfoSync().windowHeight * 0.9,
+      id: wx.getStorageSync('companyId'),
+      positionId: options.positId
     })
     var id = wx.getStorageSync('companyId')
     console.log(id)
@@ -37,15 +43,15 @@ Page({
       method: 'POST',
       success(res) {
         console.log(res)
-        if (res.data.rdata == 'N') {
-          that.setData({
-            isHz: false
-          })
-        } else {
-          that.setData({
-            isHz: true
-          })
-        }
+        // if (res.data.rdata == 'N') {
+        //   that.setData({
+        //     isHz: false
+        //   })
+        // } else {
+        //   that.setData({
+        //     isHz: true
+        //   })
+        // }
       }
     })
 
@@ -87,7 +93,8 @@ Page({
 
 
         that.setData({
-          content: res.data.rdata
+          content: res.data.rdata,
+          resumeId: res.data.rdata.ctrlResumeDTO.id
         })
 
       }
@@ -107,17 +114,10 @@ Page({
     })
   },
   invit() {
-    if (this.data.isHz) {
-      var mask = this.data.isMask
-      this.setData({
-        isMask: !mask
-      })
-    } else {
-      var two = this.data.isTwo
-      this.setData({
-        isTwo: !two
-      })
-    }
+    var two = this.data.isTwo
+    this.setData({
+      isTwo: !two
+    })
   },
   phone() {
     wx.makePhoneCall({
@@ -128,7 +128,6 @@ Page({
     this.invit()
   },
   confirm(e) {
-    this.invit()
     this.setData({
       datePickerIsShow: true,
       data_index: e.currentTarget.dataset.de
@@ -144,17 +143,43 @@ Page({
   },
 
   datePickerOnSureClick: function (e) {
-    if (this.data.data_index == 1) {
-      this.setData({
-        date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
-        datePickerValue: e.detail.value,
-        datePickerIsShow: false,
+    this.setData({
+      date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+      datePickerValue: e.detail.value,
+      datePickerIsShow: false,
+    })
+    if (!this.data.date) {
+      wx.showToast({
+        title: '请选择面试时间',
+        icon: "none"
       })
     } else {
-      this.setData({
-        date1: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
-        datePickerValue: e.detail.value,
-        datePickerIsShow: false,
+      console.log(e, this.data.datePickerValue, )
+      var that = this
+      this.data.app.http({
+        type: true,
+        url: '/company/invitation',
+        dengl: true,
+        data: {
+          companyId: that.data.id,
+          positionId: that.data.positionId,
+          time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+          resumeId: that.data.resumeId
+        },
+        method: 'POST',
+        success(res) {
+          if (res.data.code == 200) {
+            wx.showToast({
+              title: '邀请成功',
+            })
+          } else {
+            wx.showToast({
+              title: '已邀请，请勿重复邀请',
+              icon: "none"
+            })
+          }
+          console.log(res)
+        }
       })
     }
   },

@@ -80,13 +80,6 @@
 					"scene": null
 				},
 				{
-					"id": 3,
-					"name": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
-					"pathName": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
-					"query": "",
-					"scene": null
-				},
-				{
 					"id": -1,
 					"name": "pages/p-qiyeduan/p-qiyeduan",
 					"pathName": "pages/p-qiyeduan/p-qiyeduan",
@@ -95,8 +88,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/m-shouye/m-shouye",
-					"pathName": "pages/m-shouye/m-shouye",
+					"name": "pages/l-remenzhiwei/l-remenzhiwei",
+					"pathName": "pages/l-remenzhiwei/l-remenzhiwei",
 					"query": "",
 					"scene": null
 				}

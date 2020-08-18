@@ -139,12 +139,13 @@
 		<view class="mar_title">选择所招聘的职位</view>
 		<!-- <view class="mar_bot"> -->
 		<scroll-view scroll-y="true" style="height:{{ height+'rpx'}}">
-			<view class="e_03" wx:for="{{2}}">
-				<view class="e_04">北京市赴京招聘（可控工资；高额返费）</view>
+		<!-- 需补充职位id -->
+			<view class="e_03" wx:for="{{positList}}" data-id="{{item.id}}" data-comId="{{item.companyId}}" bindtap="choice">
+				<view class="e_04">{{item.title}}</view>
 				<view class="d_10">
-					<p>本科</p><span>|</span>
-					<p>北京</p><span>|</span>
-					<p>7k-8k</p>
+					<p>{{item.schoolRecord}}</p><span>|</span>
+					<p>{{item.address}}</p><span>|</span>
+					<p>{{item.money}}</p>
 					<!-- </view> -->
 				</view>
 			</view>

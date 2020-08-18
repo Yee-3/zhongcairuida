@@ -135,7 +135,7 @@
 <view class="f_01" wx:if="{{isHz}}">
 	<ul>
 		<li>不合适</li>
-		<li  bindtap="confirm">邀面试</li>
+		<li bindtap="confirm">邀面试</li>
 	</ul>
 </view>
 

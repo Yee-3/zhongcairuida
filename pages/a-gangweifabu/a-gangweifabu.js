@@ -33,15 +33,15 @@ Page({
     swicth: false,
     cityValue: '请选择',
     cityId: '',
-    isHidden:true,
-    countryId:''
+    isHidden: true,
+    countryId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-   
+
     var that = this
     this.spring = this.selectComponent("#spring");
     this.exp = this.selectComponent("#exp");
@@ -210,10 +210,19 @@ Page({
           first: that.data.swicth,
           name: that.name.data.id,
           district: that.data.cityId,
-          city:that.data.countryId,
+          city: that.data.countryId,
         },
         success(res) {
-
+          if (res.data.code == 200) {
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; //上一个页面
+            wx.navigateBack({
+              success(res) {
+                if (page == undefined || page == null) return;
+                prevPage.onLoad();
+              }
+            })
+          }
         }
       })
 
@@ -260,11 +269,11 @@ Page({
     })
   },
   zhiwei(e) {
-    var that=this
+    var that = this
     this.spring.show()
     this.setData({
       type: e.currentTarget.dataset.type,
-      isHidden:!that.spring.data.isShow
+      isHidden: !that.spring.data.isShow
     })
     this.spring.setData({
       style: 'margin-right:17rpx'
@@ -273,7 +282,7 @@ Page({
   exper(e) {
     this.setData({
       type: e.currentTarget.dataset.type,
-      isHidden:false
+      isHidden: false
     })
     this.exp.show()
     this.exp.setData({
@@ -283,7 +292,7 @@ Page({
   educat(e) {
     this.setData({
       type: e.currentTarget.dataset.type,
-      isHidden:false
+      isHidden: false
     })
     this.edu.show()
     this.edu.setData({
@@ -293,7 +302,7 @@ Page({
   salary(e) {
     this.setData({
       type: e.currentTarget.dataset.type,
-      isHidden:false
+      isHidden: false
     })
     this.sala.show()
     this.sala.setData({
@@ -310,13 +319,13 @@ Page({
     })
   },
   handleConfirm() {
-    var that=this
+    var that = this
     if (this.data.type == 1) {
       this.spring.show()
       var index = this.spring.data.index
       this.setData({
         zhiValue: this.data.natureContent[index].label,
-        isHidden:true
+        isHidden: true
       })
     } else if (this.data.type == 2) {
       this.exp.show()
@@ -324,68 +333,68 @@ Page({
 
       this.setData({
         expValue: this.data.experContent[index].label,
-        isHidden:true
+        isHidden: true
       })
     } else if (this.data.type == 3) {
       this.edu.show()
       var index = this.edu.data.index
       this.setData({
         eduValue: this.data.educatContent[index].label,
-        isHidden:true
+        isHidden: true
       })
     } else if (this.data.type == 4) {
       this.sala.show()
       var index = this.sala.data.index
       this.setData({
         salaValue: this.data.salaContent[index].label,
-        isHidden:true
+        isHidden: true
       })
     } else {
       this.wel.show()
       this.setData({
         welValue: this.wel.data.welList,
         welLi: this.wel.data.valList,
-        isHidden:true
+        isHidden: true
       })
     }
   },
   handleCancel() {
     if (this.data.type == 1) {
       this.spring.show()
-      var that=this
+      var that = this
       this.setData({
-        isHidden:true
+        isHidden: true
       })
     } else if (this.data.type == 2) {
       this.exp.show()
-      var that=this
+      var that = this
       this.setData({
-        isHidden:true
+        isHidden: true
       })
     } else if (this.data.type == 3) {
       this.edu.show()
-      var that=this
+      var that = this
       this.setData({
-        isHidden:true
+        isHidden: true
       })
     } else if (this.data.type == 4) {
       this.sala.show()
-      var that=this
+      var that = this
       this.setData({
-        isHidden:true
+        isHidden: true
       })
     } else {
       this.wel.show()
-      var that=this
+      var that = this
       this.setData({
-        isHidden:true
+        isHidden: true
       })
     }
   },
-  cancel(){
-    var that=this
+  cancel() {
+    var that = this
     this.setData({
-      isHidden:true
+      isHidden: true
     })
   },
   confirm() {
@@ -396,7 +405,7 @@ Page({
       that = this
     this.setData({
       nameValue: that.data.nameContent[index].treeDTOS[index2].treeDTOS[index3].name,
-      isHidden:!that.name.data.isAdd
+      isHidden: !that.name.data.isAdd
     })
   },
   types(e) {
@@ -406,9 +415,9 @@ Page({
   },
   zhiName() {
     this.name.position()
-    var that=this
+    var that = this
     this.setData({
-      isHidden:!that.name.data.isAdd
+      isHidden: !that.name.data.isAdd
     })
   },
   naCancel() {

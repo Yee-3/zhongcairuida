@@ -78,7 +78,7 @@
 </view>
 <!-- 面试进程 -->
 <view class="h_11">
-	<view class="h_12" style="{{ind==2||ind==4||ind==3?'padding-bottom:0rpx;':''}}" bindlongtap="dele" wx:for="{{msList}}">
+	<view class="h_12" style="{{ind==2||ind==4||ind==3?'padding-bottom:0rpx;':''}}" data-id="{{item.memberCompanyId}}" bindlongtap="dele" wx:for="{{msList}}">
 		<view class="h_13">
 			<view class="fl h_14">
 				<view class="fl h_15">
