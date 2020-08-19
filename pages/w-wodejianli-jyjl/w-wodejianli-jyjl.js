@@ -39,8 +39,8 @@ Page({
         shcool_value:options.school,
         date:time,
         date1:time1,
-        des_value:options.describe,
-        pro_value:options.professional,
+        des_value:options.describe?options.describe:'',
+        pro_value:options.professional?options.professional:'',
         edu:options.record
       })
       console.log(this.data.shcool_value,this.data.des_value,this.data.pro_value)

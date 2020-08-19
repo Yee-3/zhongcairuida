@@ -74,7 +74,7 @@
 		<view class="fr s_12" bindtap="project"><image src="../img/f063.png"></image></view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="{{isX?'hide s_20':'show s_20'}}" wx:for="{{resume.ctrlProjectDTOS}}">
+	<view class="s_20" wx:for="{{resume.ctrlProjectDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.name}}</view>
 			<view class="fr s_15" bindtap="project" data-id="{{item.id}}" data-index="{{index}}"><image src="../img/f050.png"></image></view>

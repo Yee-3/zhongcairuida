@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    ind: '',
-    ind1: '',
+    ind: 'x',
+    ind1: 'x',
     ind2: '',
     array: [1, 2, 3, 4],
     items: [{
@@ -35,12 +35,13 @@ Page({
     hangyeInd: '',
     time_index: '',
     zhiList: [],
-    ind_three: 0,
+    ind_three: 'x',
     ping_value: '',
     value_money: '',
     value_type: '',
     id: '',
-    posi_id: ''
+    posi_id: '',
+    type_Id: ''
   },
 
   /**
@@ -48,18 +49,21 @@ Page({
    */
   onLoad: function (options) {
     var that = this
+    this.setData({
+      id: options.id,
+    })
     console.log(options)
     // this.data.content=options
-    if (options) {
+    if (options.type_id) {
       this.setData({
         num: options.money,
         indexs: options.type,
         ind2: options.industry,
         num3: options.time,
-        mapValue: options.address,
-        ping_value: options.pingjia,
-        id: options.id,
-        posi_id: options.posit
+        mapValue: options.address ? options.address : '',
+        ping_value: options.pingjia ? options.pingjia : '',
+        posi_id: options.posit,
+        type_Id: options.type_id ? options.type_id : ''
       })
     }
     // 职位类别
@@ -164,7 +168,7 @@ Page({
         dengl: true,
         data: {},
         success(res) {
-          if(options.type){
+          if (options.type) {
             for (var i = 0; i < res.data.rdata.length; i++) {
               if (options.type == res.data.rdata[i].value) {
                 var label = res.data.rdata[i].label
@@ -173,7 +177,7 @@ Page({
                 })
               }
             }
-          }   
+          }
           console.log(label)
           that.setData({
             work_type: res.data.rdata,
@@ -184,7 +188,13 @@ Page({
       })
 
   },
+  blur(e) {
+    this.setData({
+      ping_value: e.detail.value
+    })
+  },
   tijiao() {
+    console.log(this.data.ping_value)
     var that = this
     if (!that.data.num) {
       wx.showToast({
@@ -201,7 +211,7 @@ Page({
         title: '请选择职位类别',
         icon: 'none'
       })
-    } else if (!(that.data.mapValue!='请选择')) {
+    } else if (!(that.data.mapValue != '请选择')) {
       wx.showToast({
         title: '请选择工作地点',
         icon: 'none'
@@ -216,7 +226,7 @@ Page({
         title: '请选择到岗时间',
         icon: 'none'
       })
-    } else if (!(that.data.ping_value!='请输入')) {
+    } else if (!(that.data.ping_value != '请输入')) {
       wx.showToast({
         title: '请输入自我评价',
         icon: 'none'
@@ -234,7 +244,8 @@ Page({
           position: that.data.posi_id,
           time: that.data.num3,
           type: that.data.indexs,
-          id: that.data.id
+          resumeId: that.data.id,
+          id: that.data.type_Id
         },
         success(res) {
           console.log(res)
@@ -260,24 +271,22 @@ Page({
   toggle(e) {
     var two = this.data.isTwo
     var index = e.currentTarget.dataset['index'],
-      index2 = 0,
-      index3 = 0,
       that = this
     // console.log()
     this.setData({
       ind: e.currentTarget.dataset['index'],
       isTwo: !two,
-      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+      ind1:'x',
+      ind_three:'x'
     })
   },
   toggle1(e) {
     var index = this.data.ind,
       index2 = e.currentTarget.dataset['index'],
-      index3 = 0,
       that = this
     this.setData({
       ind1: e.currentTarget.dataset['index'],
-      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+      ind_three:'x'
     })
   },
   toggle_three(e) {

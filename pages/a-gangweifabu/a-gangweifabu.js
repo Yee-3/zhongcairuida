@@ -218,7 +218,7 @@ Page({
             var prevPage = pages[pages.length - 2]; //上一个页面
             wx.navigateBack({
               success(res) {
-                if (page == undefined || page == null) return;
+                if (prevPage == undefined || prevPage == null) return;
                 prevPage.onLoad();
               }
             })

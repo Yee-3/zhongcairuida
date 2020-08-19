@@ -150,17 +150,25 @@ Page({
       isX: !x
     })
   },
-  int() {
+  int(e) {
     if (this.data.isStatus) {
       this.setData({
         sty: 'display:block'
       })
     } else {
-      // console.log(this.data.resume.ctrlObjectiveDTOS[0])
-      var cot = this.data.resume.ctrlObjectiveDTOS[0]
-      wx.navigateTo({
-        url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?money=' + cot.money + '&type=' + cot.type + '&industry=' + cot.industry + '&time=' + cot.time + '&address=' + cot.address + '&posit=' + cot.position + '&pingjia=' + cot.introduction + '&id=' + cot.id,
-      })
+      var id = this.data.resume.ctrlResumeDTO.id
+      if (this.data.resume.ctrlObjectiveDTOS[0]) {
+        // console.log(this.data.resume.ctrlObjectiveDTOS[0])
+        var cot = this.data.resume.ctrlObjectiveDTOS[0]
+        wx.navigateTo({
+          url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?money=' + cot.money + '&type=' + cot.type + '&industry=' + cot.industry + '&time=' + cot.time + '&address=' + cot.address + '&posit=' + cot.position + '&pingjia=' + cot.introduction + '&type_id=' + cot.id+'&id='+id,
+        })
+
+      } else {
+        wx.navigateTo({
+          url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?id=' + id
+        })
+      }
     }
   },
   work(e) {
@@ -212,7 +220,7 @@ Page({
       var arr = this.data.resume.ctrlSchoolDTOS
       if (e.currentTarget.dataset.id) {
         wx.navigateTo({
-          url: '../w-wodejianli-jyjl/w-wodejianli-jyjl?id=' + id + '&sId=' + e.currentTarget.dataset.id + '&describe=' + arr[i].describe + '&endTime=' + arr[i].endTime + '&startTime=' + arr[i].startTime + '&professional=' + arr[i].professionalName + '&record=' + arr[i].record + '&school=' + arr[i].school
+          url: '../w-wodejianli-jyjl/w-wodejianli-jyjl?id=' + id + '&sId=' + e.currentTarget.dataset.id + '&describe=' + arr[i].describe + '&endTime=' + arr[i].endTime + '&startTime=' + arr[i].startTime + '&professional=' + arr[i].professional + '&record=' + arr[i].record + '&school=' + arr[i].school
         })
       } else {
         wx.navigateTo({

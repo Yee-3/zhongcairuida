@@ -17,9 +17,9 @@ Page({
     isAdd: false,
     isTwo: false,
     isInd: false,
-    ind: '',
-    ind1: 0,
-    ind2: 0,
+    ind: 'x',
+    ind1: 'x',
+    ind2: 'x',
     ind3: '0',
     data_index: '',
     app: getApp().globalData,
@@ -124,23 +124,21 @@ Page({
   toggle(e) {
     var two = this.data.isTwo
     var index = e.currentTarget.dataset['index'],
-      index2 = 0,
-      index3 = 0,
       that = this
     this.setData({
       ind: e.currentTarget.dataset['index'],
       isTwo: !two,
-      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+      ind1:'x',
+      ind2:'x'
     })
   },
   toggle1(e) {
     var index = this.data.ind,
       index2 = e.currentTarget.dataset['index'],
-      index3 = 0,
       that = this
     this.setData({
       ind1: e.currentTarget.dataset['index'],
-      value_zhi: that.data.zhiList[index].treeDTOS[index2].treeDTOS[index3].name
+      ind2:'x'
     })
   },
   toggle2(e) {

@@ -30,7 +30,7 @@
 
 	<view class="r_02">
 		<view class="r_03">项目简介：</view>
-		<view class="t_05"><textarea placeholder="请输入" data-value="{{vulue}}" data-ty="3" bindblur="blur" value="{{int_value}}"></textarea></view>
+		<view class="t_05"><textarea placeholder="请输入" data-value="{{vulue}}" data-ty="3" bindinput="blur" value="{{int_value}}"></textarea></view>
 	</view>
 </view>
 
