@@ -43,13 +43,33 @@ Page({
 	 */
 	onLoad: function (options) {
 		this.sel = this.selectComponent("#select");
-		var data = {
-			limit: 10,
-			page: this.data.currentPage,
-			type: 2,
-			signUp: 'Y'
+		var that = this
+		var val = this.data.ind == 1 ? 'P' : this.data.ind == 2 ? 'Y' : this.data.ind == 3 ? 'N' : ''
+		if (this.data.idn == 1) {
+			var data = {
+				limit: 10,
+				page: that.data.currentPage,
+				type: 2,
+				signUp: val
+			}
+			this.reword(data)
+		} else if (this.data.idn == 2) {
+			var data = {
+				limit: 10,
+				page: that.data.currentPage,
+				type: 2,
+				interview: val
+			}
+			this.reword(data)
+		} else {
+			var data = {
+				limit: 10,
+				page: that.data.currentPage,
+				type: 2,
+				entry: val
+			}
+			this.reword(data)
 		}
-		this.reword(data)
 		var that = this
 		//获取当前的地理位置、速度
 		// 获取当前位置地图
@@ -95,6 +115,7 @@ Page({
 		var that = this
 		this.setData
 		var type = this.data.idn == 2 ? 1 : this.data.idn == 3 ? 2 : ''
+		var way=this.sel.data.ids==1?'0':'1'
 		this.data.app.http({
 			url: '/index/updateStatus',
 			dengl: true,
@@ -103,10 +124,21 @@ Page({
 				id: that.data.id,
 				status: 'N',
 				type: type,
-				why: that.sel.data.ids,
+				why: way,
 				whyValue: that.data.val
 			},
-			success(res) {}
+			success(res) {
+				if (res.data.code == 200) {
+					that.setData({
+						style: 'display:none',
+						val: ''
+					})
+					that.sel.setData({
+						ids: '1'
+					})
+					that.onLoad()
+				}
+			}
 		})
 	},
 	// 同意
@@ -122,7 +154,11 @@ Page({
 				status: 'Y',
 				type: type,
 			},
-			success(res) {}
+			success(res) {
+				if (res.data.code == 200) {
+					that.onLoad()
+				}
+			}
 		})
 	},
 	reword(data) {
@@ -145,7 +181,10 @@ Page({
 							var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
 							var date = Date.parse(new Date())
 							var day = parseInt((date - date1) / 1000)
-							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' :
+								parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(
+									day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' :
+								parseInt(day / 60 / 60 / 24 / 30) + '月前'
 							val.timeVal = value
 						}
 					})
@@ -158,6 +197,10 @@ Page({
 					that.setData({
 						loadingType: 2
 					})
+				} else {
+					that.setData({
+						loadingType: 0
+					})
 				}
 				wx.hideNavigationBarLoading();
 				wx.stopPullDownRefresh()
@@ -169,6 +212,7 @@ Page({
 		this.setData({
 			currentPage: that.data.currentPage + 1
 		})
+		console.log(this.data.loadingType)
 		if (this.data.loadingType != 0) {
 			//loadingType!=0;直接返回
 			return false;
@@ -198,7 +242,10 @@ Page({
 							var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
 							var date = Date.parse(new Date())
 							var day = parseInt((date - date1) / 1000)
-							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' :
+								parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(
+									day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' :
+								parseInt(day / 60 / 60 / 24 / 30) + '月前'
 							val.timeVal = value
 						}
 					})
@@ -421,7 +468,7 @@ Page({
 				type: 2,
 				signUp: 'Y'
 			}
-			this.reword(data)
+			this.jiazai(data)
 		} else if (idn == 2) {
 			if (ind == 1) {
 				var data = {
@@ -430,7 +477,7 @@ Page({
 					type: 2,
 					interview: 'P'
 				}
-				this.reword(data)
+				this.jiazai(data)
 			} else if (ind == 2) {
 				var data = {
 					limit: 10,
@@ -438,7 +485,7 @@ Page({
 					type: 2,
 					interview: 'Y'
 				}
-				this.reword(data)
+				this.jiazai(data)
 			} else {
 				var data = {
 					limit: 10,
@@ -446,7 +493,7 @@ Page({
 					type: 2,
 					interview: 'N'
 				}
-				this.reword(data)
+				this.jiazai(data)
 			}
 		} else {
 			if (ind == 1) {
@@ -456,7 +503,7 @@ Page({
 					type: 2,
 					entry: 'P'
 				}
-				this.reword(data)
+				this.jiazai(data)
 			} else if (ind == 2) {
 				var data = {
 					limit: 10,
@@ -464,7 +511,7 @@ Page({
 					type: 2,
 					entry: 'Y'
 				}
-				this.reword(data)
+				this.jiazai(data)
 			} else {
 				var data = {
 					limit: 10,
@@ -472,7 +519,7 @@ Page({
 					type: 2,
 					entry: 'N'
 				}
-				this.reword(data)
+				this.jiazai(data)
 			}
 		}
 	},

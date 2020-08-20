@@ -99,6 +99,12 @@
 					"pathName": "pages/q-wode/q-wode",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/k-qiyezhongxin/k-qiyezhongxin",
+					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
+					"scene": null
 				}
 			]
 		}

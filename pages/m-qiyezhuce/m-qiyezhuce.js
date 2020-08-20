@@ -13,13 +13,37 @@ Page({
     emilVal:'',
     phoneVal:'',
     app: getApp().globalData,
-    phone:''
+    phone:'',
+    xiuG:false
   },
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that=this
+    if(options.id){
+      this.data.app.http({
+        type:true,
+        url:'/company/queryCompany',
+        dengl:true,
+        method:'POST',
+        data:{},
+        success(res){
+          console.log(res.data.rdata)
+          var cont=res.data.rdata
+          that.setData({
+            nameVal:cont.name,
+            six:cont.sex,
+            six_val:cont.sex==1?'男':'女',
+            zhiVal:cont.position,
+            emilVal:cont.email,
+            phoneVal:cont.phone,
+            xiuG:true
+          })
+        }
+      })
+    }
     this.data.app.http({
       url:'/Other/hotline',
       dengl:true,
@@ -107,7 +131,7 @@ Page({
       })
     }else{
       wx.navigateTo({
-        url: '../o-qiyezhuce/o-qiyezhuce?nameVal='+this.data.nameVal+'&six='+this.data.six+'&zhiVal='+this.data.zhiVal+'&emilVal='+this.data.emilVal+'&phoneVal='+this.data.phoneVal,
+        url: '../o-qiyezhuce/o-qiyezhuce?nameVal='+this.data.nameVal+'&six='+this.data.six+'&zhiVal='+this.data.zhiVal+'&emilVal='+this.data.emilVal+'&phoneVal='+this.data.phoneVal+'&xiuG='+this.data.xiuG,
       })
     }
     

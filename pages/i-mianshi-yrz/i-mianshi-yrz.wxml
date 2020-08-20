@@ -76,12 +76,12 @@
 		</view>
 		<view class="h_18" wx:if="{{(idn==2||idn==3)&&ind==3}}">
 			<view class="h_19 fl">原因：</view>
-			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.auditType?item.ctrlMemberCompanies.auditType:''):(item.ctrlMemberCompanies.auditType1?item.ctrlMemberCompanies.auditType1:'')}}</view>
+			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.whyStatus==0?'时间原因':'其他原因'):(item.ctrlMemberCompanies.auditType1?item.ctrlMemberCompanies.auditType1:'')}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="h_18" wx:if="{{(idn==2||idn==3)&&ind==3}}">
 			<view class="h_19 fl">详细：</view>
-			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.whyStatus?item.ctrlMemberCompanies.whyStatus:''):(item.ctrlMemberCompanies.whyInduction?item.ctrlMemberCompanies.whyInduction:'')}}</view>
+			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.way?item.ctrlMemberCompanies.way:''):(item.ctrlMemberCompanies.whyInduction?item.ctrlMemberCompanies.whyInduction:'')}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<!-- 投递列表显示 -->
@@ -121,8 +121,8 @@
 		<!-- 面试状态待确认、入职状态待确认显示 -->
 		<view class="h_21" wx:if="{{(idn==2||idn==3)&&ind==1}}">
 			<ul>
-				<li bindtap="tanchuang" data-id="{{item.id}}">取消</li>
-				<li bindtap="tongyi" data-id="{{item.id}}">同意</li>
+				<li bindtap="tanchuang" data-id="{{item.ctrlMemberCompanies.id}}">取消</li>
+				<li bindtap="tongyi" data-id="{{item.ctrlMemberCompanies.id}}">同意</li>
 			</ul>
 		</view>
 	</view>

@@ -43,6 +43,10 @@ Page({
           that.setData({
             loadingType: 2
           })
+        } else {
+          that.setData({
+            loadingType: 0
+          })
         }
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()

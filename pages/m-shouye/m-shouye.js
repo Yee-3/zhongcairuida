@@ -126,6 +126,10 @@ Page({
           that.setData({
             loadingType: 2
           })
+        } else {
+          that.setData({
+            loadingType: 0
+          })
         }
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
@@ -229,6 +233,10 @@ Page({
           that.setData({
             loadingType: 2,
           })
+        } else {
+          that.setData({
+            loadingType: 0
+          })
         }
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
@@ -276,7 +284,11 @@ Page({
             that.setData({
               loadingType: 2
             })
-          }
+          } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
         }
@@ -554,6 +566,10 @@ Page({
           that.setData({
             loadingType: 2
           })
+        } else {
+          that.setData({
+            loadingType: 0
+          })
         }
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
@@ -602,7 +618,11 @@ Page({
             that.setData({
               loadingType: 2
             })
-          }
+          } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
         }
@@ -659,7 +679,11 @@ Page({
             that.setData({
               loadingType: 2
             })
-          }
+          } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
         }
@@ -733,6 +757,10 @@ Page({
           that.setData({
             loadingType: 2
           })
+        } else {
+          that.setData({
+            loadingType: 0
+          })
         }
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
@@ -784,7 +812,11 @@ Page({
             that.setData({
               loadingType: 2
             })
-          }
+          } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
         }
@@ -858,6 +890,10 @@ Page({
         if (res.data.rdata.length <= 10) {
           that.setData({
             loadingType: 2
+          })
+        } else {
+          that.setData({
+            loadingType: 0
           })
         }
         wx.hideNavigationBarLoading();

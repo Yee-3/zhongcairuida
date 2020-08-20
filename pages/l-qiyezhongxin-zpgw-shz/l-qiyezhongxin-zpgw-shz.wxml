@@ -69,11 +69,11 @@
 		</view>
 	</view>
 </view>
-<view class="d_16" wx:if="{{loadingType!=2}}">
-		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
-	</view>
 
 
 <view class="l_06" bindtap="release">
 	<view class="l_07">发布职位</view>
 </view>
+<view class="d_16" wx:if="{{loadingType!=2}}">
+		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
+	</view>

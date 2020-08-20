@@ -28,7 +28,7 @@
 				</view>
 			</view>
 			<view class="fr q_09">
-				<image src="{{user.companyUrl?user.companyUrl:'../img/f051.png'}}"></image>
+				<image src="{{user.companyLogo?user.companyLogo:'../img/f051.png'}}"></image>
 			</view>
 		</view>
 	</view>

@@ -14,6 +14,7 @@ Page({
     msList: [],
     datePickerValue: ['', '', ''],
     datePickerIsShow: false,
+    date:'',
     currentPage: 1,
     loadingType: 0,
     contentText: {
@@ -32,10 +33,11 @@ Page({
       companyId: wx.getStorageSync('companyId')
     })
     var that = this,
-      url = '/interviewManager/getInterviewList',
+      x = this.data.idn,
+      url = x == 1 ? '/interviewManager/getInterviewList' : x == 2 ? '/interviewManager/getInductionList' : '/interviewManager/getSuccessList',
       data = {
         companyId: that.data.companyId,
-        status: 'S'
+        status: 'P'
       }
     this.reword(url, data)
   },
@@ -60,6 +62,10 @@ Page({
         if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
+          })
+        } else {
+          that.setData({
+            loadingType: 0
           })
         }
         wx.hideNavigationBarLoading();
@@ -133,8 +139,8 @@ Page({
       i = e.currentTarget.dataset.index,
       that = this,
       status = i == 1 ? 'p' : i == 2 ? 'Y' : i == 3 ? 'N' : 'S',
-      url = x == 1 ? '/interviewManager/getInterviewList' : '/interviewManager/getInductionList' 
-      // url = 'interviewManager/getInterviewList'
+      url = x == 1 ? '/interviewManager/getInterviewList' : '/interviewManager/getInductionList'
+    // url = 'interviewManager/getInterviewList'
     if (x == 1) {
       var data = {
         companyId: that.data.companyId,
@@ -186,12 +192,12 @@ Page({
             }
           }
         })
-      }else{
+      } else {
         that.setData({
           datePickerIsShow: true
         })
       }
-    }else{
+    } else {
       // 已入职
       this.data.app.http({
         type: true,
@@ -285,19 +291,12 @@ Page({
   },
 
   datePickerOnSureClick: function (e) {
-    if (this.data.data_index == 1) {
       this.setData({
         date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
         datePickerValue: e.detail.value,
         datePickerIsShow: false,
       })
-    } else {
-      this.setData({
-        date1: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
-        datePickerValue: e.detail.value,
-        datePickerIsShow: false,
-      })
-    }
+    
     var that = this
     // 再次面试
     if (!this.data.datePickerValue) {
@@ -307,14 +306,15 @@ Page({
       })
     } else {
       if (this.data.idn == 1) {
-        var url=that.data.ind==3?'/interviewManager/interviewTryAgain':that.data.ind==4?'/interviewManager/interviewPass':''
+        var url = that.data.ind == 3 ? '/interviewManager/interviewTryAgain' : that.data.ind == 4 ? '/interviewManager/interviewPass' : ''
         that.data.app.http({
           type: true,
-          url:url,
+          url: url,
           dengl: true,
           method: 'POST',
           data: {
             id: that.data.id,
+            time:`${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`
           },
           success(res) {
             if (res.data.code == 200) {
@@ -329,7 +329,8 @@ Page({
           dengl: true,
           method: 'POST',
           data: {
-            id: that.data.id
+            id: that.data.id,
+            time:`${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`
           },
           success(res) {
             console.log(res)
@@ -349,10 +350,11 @@ Page({
 
   },
   dele(e) {
+    console.log(e)
     var del = this.data.isDel
     this.setData({
       isDel: !del,
-      // id: e.currentTarget.dataset.id
+      id: e.currentTarget.dataset.id
     })
   },
   del_cancle() {
@@ -360,19 +362,22 @@ Page({
   },
   // 删除
   del_confirm() {
-    this.dele()
-    var that=this
+    this.setData({
+      isDel: false
+    })
+    var that = this
     this.data.app.http({
-      type:true,
-      url:'/interviewManager/delete',
-      dengl:true,
-      method:'POST',
-      data:{
-        // id:that.data.id
+      type: true,
+      url: '/interviewManager/delete',
+      dengl: true,
+      method: 'POST',
+      data: {
+        id: that.data.id
       },
-      success(res){
-        console.log(res.data.rdata)
-    
+      success(res) {
+        if (res.data.code == 200) {
+          that.onLoad()
+        }
       }
     })
   },

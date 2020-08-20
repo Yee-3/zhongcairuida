@@ -13,7 +13,7 @@ Page({
     scalValue: '请选择',
     isImg: false,
     img: '',
-    imgbox: '',
+    imgbox: [],
     zhi_img: '../img/q072.png',
     imgValue: '请上传',
     app: getApp().globalData,
@@ -22,21 +22,58 @@ Page({
     comVal: '',
     comLogo: '',
     content: {},
-    phone:''
+    phone:'',
+    xiuG:'',
+    id:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.setData({
-      content: options
-    })
+    console.log(options)
     this.nature = this.selectComponent("#nature");
     this.cls = this.selectComponent("#cls");
     this.scale = this.selectComponent("#scale");
     var that = this
     var that=this
+    this.setData({
+      content: options
+    })
+    if(options.xiuG=='true'){
+      this.data.app.http({
+        type:true,
+        url:'/company/queryCompany',
+        dengl:true,
+        method:'POST',
+        data:{},
+        success(res){
+          var cont=res.data.rdata
+          that.setData({
+            comVal:cont.companyName,
+            comLogo:cont.companyLogo,
+            natValue:'',
+            mapVal:cont.address,
+            imgbox:cont.office.split(','),
+            imgValue:cont.companyLogo?'已上传':'请上传',
+            val:cont.companyDescribe,
+            zhi_img:cont.companyUrl,
+            xiuG:true,
+            id:cont.id
+          })
+          that.nature.setData({
+            edu:cont.companyNature
+          })
+          that.cls.setData({
+            edu:cont.companyType
+          })
+          that.scale.setData({
+            edu:cont.companyNum
+          })
+        }
+      })
+    }
+   
     this.data.app.http({
       url:'/Other/hotline',
       dengl:true,
@@ -56,6 +93,16 @@ Page({
         that.setData({
           natureContent: res.data.rdata
         })
+        if(that.nature.data.edu){
+          var arr=res.data.rdata
+          arr.map(function(val,i){
+            if(that.nature.data.edu==val.value){
+              that.setData({
+                natValue:val.label
+              })
+            }
+          })
+        }
       }
     })
     // 工作类型
@@ -67,6 +114,16 @@ Page({
         that.setData({
           classContent: res.data.rdata
         })
+        if(that.cls.data.edu){
+          var arr=res.data.rdata
+          arr.map(function(val,i){
+            if(that.cls.data.edu==val.value){
+              that.setData({
+                clsValue:val.label
+              })
+            }
+          })
+        }
       }
     })
 
@@ -79,6 +136,16 @@ Page({
         that.setData({
           numContent: res.data.rdata
         })
+        if(that.scale.data.edu){
+          var arr=res.data.rdata
+          arr.map(function(val,i){
+            if(that.scale.data.edu==val.value){
+              that.setData({
+                scalValue:val.label
+              })
+            }
+          })
+        }
       }
     })
 
@@ -254,37 +321,86 @@ Page({
     })
   },
   next() {
-    var that = this
-    this.data.app.http({
-      url: '/company/saveCompany',
-      dengl: true,
-      method: 'POST',
-      data: {
-        companyDescribe: that.data.val ? that.data.val : '',
-        companyLogo: that.data.comLogo ? that.data.comLogo : '',
-        companyName: that.data.comVal ? that.data.comVal : '',
-        companyNature: this.nature.data.edu ? this.nature.data.edu : '',
-        companyType: this.cls.data.edu ? this.cls.data.edu : '',
-        companyUrl: that.data.zhi_img ? that.data.zhi_img : '',
-        companyNum:this.scale.data.edu ? this.scale.data.edu : '',
-        email: that.data.content.emilVal ? that.data.content.emilVal : '',
-        // id
-        name: that.data.content.nameVal ? that.data.content.nameVal : '',
-        office: that.data.imgbox ? that.data.imgbox : '',
-        phone: that.data.content.phoneVal ? that.data.content.phoneVal : '',
-        position: that.data.content.zhiVal ? that.data.content.zhiVal : '',
-        sex: that.data.content.six ? that.data.content.six : '',
+    var that = this,
+    url=this.data.xiuG?'/company/updateCompany':'/company/saveCompany'
+    if(!this.data.comVal){
+      wx.showToast({
+        title: '请输入公司名称',
+        icon: 'none'
+      })
+    }else if(this.data.imgValue=='请上传'){
+      wx.showToast({
+        title: '请上传公司LOGO',
+        icon: 'none'
+      })
+    }else if(!this.nature.data.edu){
+      wx.showToast({
+        title: '请选择公司性质',
+        icon: 'none'
+      })
+    }else if(!this.cls.data.edu){
+      wx.showToast({
+        title: '请选择公司类别',
+        icon: 'none'
+      })
+    }else if(!this.data.mapVal){
+      wx.showToast({
+        title: '请输入公司地址',
+        icon: 'none'
+      })
+    }else if(!this.data.imgbox){
+      wx.showToast({
+        title: '请上传公司环境',
+        icon: 'none'
+      })
+    }else if(!this.scale.data.edu){
+      wx.showToast({
+        title: '请选择企业规模',
+        icon: 'none'
+      })
+    }else if(!this.data.val){
+      wx.showToast({
+        title: '请输入公司描述',
+        icon: 'none'
+      })
+    }else if(!this.data.zhi_img){
+      wx.showToast({
+        title: '请上传营业执照',
+        icon: 'none'
+      })
+    }else{
 
-
-      },
-      success(res) {
-        if(res.data.code==200){
-          wx.reLaunch({
-            url: '../p-qiyeduan/p-qiyeduan',
-          })
+      this.data.app.http({
+        url: url,
+        dengl: true,
+        method: 'POST',
+        data: {
+          companyDescribe: that.data.val ? that.data.val : '',
+          companyLogo: that.data.comLogo ? that.data.comLogo : '',
+          companyName: that.data.comVal ? that.data.comVal : '',
+          companyNature: this.nature.data.edu ? this.nature.data.edu : '',
+          companyType: this.cls.data.edu ? this.cls.data.edu : '',
+          companyUrl: that.data.zhi_img ? that.data.zhi_img : '',
+          companyNum:this.scale.data.edu ? this.scale.data.edu : '',
+          email: that.data.content.emilVal ? that.data.content.emilVal : '',
+          id:that.data.id?that.data.id:'',
+          name: that.data.content.nameVal ? that.data.content.nameVal : '',
+          office: that.data.imgbox ? that.data.imgbox : '',
+          phone: that.data.content.phoneVal ? that.data.content.phoneVal : '',
+          position: that.data.content.zhiVal ? that.data.content.zhiVal : '',
+          sex: that.data.content.six ? that.data.content.six : '',
+          address:that.data.mapVal
+  
+        },
+        success(res) {
+          if(res.data.code==200){
+            wx.reLaunch({
+              url: '../p-qiyeduan/p-qiyeduan',
+            })
+          }
         }
-      }
-    })
+      })
+    }
     // wx.switchTab({
     //   url: '../k-qiyezhongxin/k-qiyezhongxin',
     // })

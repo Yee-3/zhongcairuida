@@ -5,8 +5,8 @@ Page({
    * 页面的初始数据
    */
   data: {
-    idn: '1',
-    id: '452612374886469632',
+    idn: 1,
+    id: '',
     currentPage: 1,
     loadingType: 0,
     contentText: {
@@ -26,15 +26,15 @@ Page({
     console.log(options)
     var that = this
 
-    // this.setData({
-    //   id: options.id
-    // })
-
+    this.setData({
+      id: options.id
+    })
+    var status = this.data.idn == 1 ? 1 : this.data.idn == 2 ? 0 : 2
     var data = {
       companyId: that.data.id,
       limit: 10,
       page: this.data.currentPage,
-      status: 1
+      status: status
     }
     this.reword(data)
     console.log(this.data.recomList)
@@ -49,28 +49,15 @@ Page({
       method: 'POST',
       data: data,
       success(res) {
-        // function jiance(x) {
-        //   return x < 10 ? '0' + x : x
-        // }
         var arr = res.data.rdata
-        // var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            // console.log(val)
-            // if (val.createTime) {
-            //   var date1 = new Date(val.createTime.substring(0, 10))
-            //   var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            //   var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            //   var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-            //   val.timeVal = value
-            // }
-            if(val.welfare){
-              val.wel=JSON.parse(val.welfare)
+            if (val.welfare) {
+              val.wel = JSON.parse(val.welfare)
             }
           })
         }
-
-        console.log(res.data.rdata)
+        console.log(res.data.rdata,that.data.loadingType)
         that.setData({
           recomList: res.data.rdata
         })
@@ -79,7 +66,12 @@ Page({
           that.setData({
             loadingType: 2
           })
+        }else{
+          that.setData({
+            loadingType: 0
+          })
         }
+        console.log(that.data.loadingType,res.data.rdata.length)
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
       }
@@ -90,6 +82,7 @@ Page({
     this.setData({
       currentPage: that.data.currentPage + 1
     })
+    console.log(that.data.loadingType)
     if (this.data.loadingType != 0) {
       //loadingType!=0;直接返回
       return false;
@@ -97,6 +90,7 @@ Page({
     this.setData({
       loadingType: 1
     })
+    console.log(that.data.loadingType)
     wx.showNavigationBarLoading()
     this.data.app.http({
       type: true,
@@ -105,27 +99,18 @@ Page({
       data: data,
       method: 'POST',
       success(res) {
-        that.setData({
-          recomList: that.data.recomList.concat(res.data.rdata)
-        })
-
-        // function jiance(x) {
-        //   return x < 10 ? '0' + x : x
-        // }
         var arr = res.data.rdata
-        var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
             console.log(val)
-            // if (val.createTime) {
-            //   var date1 = new Date(val.createTime.substring(0, 10))
-            //   var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-            //   var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-            //   var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-            //   val.timeVal = value
-            // }
+            if (val.welfare) {
+              val.wel = JSON.parse(val.welfare)
+            }
           })
         }
+        that.setData({
+          recomList: that.data.recomList.concat(res.data.rdata)
+        })
         if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
@@ -225,41 +210,51 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    var that=this
-    if (e.currentTarget.dataset.index == 1) {
-      this.setData({
-        currentPage: 1
-      })
-      var data = {
+    console.log('触发')
+    var that = this,
+      status = this.data.idn == 1 ? 1 : this.data.idn == 2 ? 0 : 2,
+      data = {
         companyId: that.data.id,
         limit: 10,
-        page: this.data.currentPage,
-        status: 1
+        page: that.data.currentPage,
+        status: status
       }
       this.jiazai(data)
-    } else if (e.currentTarget.dataset.index == 2) {
-      this.setData({
-        currentPage: 1
-      })
-      var data = {
-        companyId: that.data.id,
-        limit: 10,
-        page: this.data.currentPage,
-        status: 0
-      }
-      this.jiazai(data)
-    } else {
-      this.setData({
-        currentPage: 1
-      })
-      var data = {
-        companyId: that.data.id,
-        limit: 10,
-        page: this.data.currentPage,
-        status: 2
-      }
-      this.jiazai(data)
-    }
+
+    // if (this.data.idn == 1) {
+    //   this.setData({
+    //     currentPage: 1
+    //   })
+    //   var data = {
+    //     companyId: that.data.id,
+    //     limit: 10,
+    //     page: this.data.currentPage,
+    //     status: status
+    //   }
+    //   this.jiazai(data)
+    // } else if (this.data.idn == 2) {
+    //   this.setData({
+    //     currentPage: 1
+    //   })
+    //   var data = {
+    //     companyId: that.data.id,
+    //     limit: 10,
+    //     page: this.data.currentPage,
+    //     status: status
+    //   }
+    //   this.jiazai(data)
+    // } else {
+    //   this.setData({
+    //     currentPage: 1
+    //   })
+    //   var data = {
+    //     companyId: that.data.id,
+    //     limit: 10,
+    //     page: this.data.currentPage,
+    //     status: status
+    //   }
+    //   this.jiazai(data)
+    // }
   },
 
   /**

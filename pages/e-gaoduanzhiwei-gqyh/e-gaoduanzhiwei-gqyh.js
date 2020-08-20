@@ -44,7 +44,11 @@ Page({
             duration: 2000
           });
           that.setData({
-            loadingType: 3
+            loadingType: 2
+          })
+        } else {
+          that.setData({
+            loadingType: 0
           })
         }
         wx.hideNavigationBarLoading();
@@ -96,13 +100,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-
-  },
-
-  /**
-   * 用户点击右上角分享
-   */
-  onShareAppMessage: function () {
     var that = this
     that.setData({
       currentPage: that.data.currentPage + 1
@@ -131,6 +128,7 @@ Page({
           that.setData({
             loadingType: 2
           })
+          
           wx.hideNavigationBarLoading()
         } else {
           that.setData({
@@ -140,5 +138,12 @@ Page({
         wx.hideNavigationBarLoading()
       }
     })
+  },
+
+  /**
+   * 用户点击右上角分享
+   */
+  onShareAppMessage: function () {
+    
   }
 })
