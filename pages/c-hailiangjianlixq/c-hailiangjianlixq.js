@@ -17,7 +17,14 @@ Page({
     app: getApp().globalData,
     positList: [],
     date: '',
-    resumeId: ''
+    resumeId: '',
+    currentPage: 1,
+		loadingType: 0,
+		contentText: {
+			contentdown: "上拉显示更多",
+			contentrefresh: "正在加载...",
+			contentnomore: "没有更多数据了"
+		},
   },
 
   /**
@@ -102,6 +109,71 @@ Page({
       }
     })
   },
+  reword(data) {
+    var that = this
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      type: true,
+      url: '/company/queryJobPosition',
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        // 回到顶部
+        that.setData({
+          positList: res.data.rdata
+        })
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+        } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
+        wx.hideNavigationBarLoading();
+        wx.stopPullDownRefresh()
+      }
+    })
+  },
+  jiazai(data) {
+    var that = this
+    this.setData({
+      currentPage: that.data.currentPage + 1
+    })
+    if (this.data.loadingType != 0) {
+      //loadingType!=0;直接返回
+      return false;
+    }
+    this.setData({
+      loadingType: 1
+    })
+    wx.showNavigationBarLoading()
+    this.data.app.http({
+      type: true,
+      url: '/company/queryJobPosition',
+      dengl: true,
+      method: 'POST',
+      data: data,
+      success(res) {
+        that.setData({
+          positList: that.data.positList.concat(res.data.rdata)
+        })
+        if (res.data.rdata.length < 10) {
+          that.setData({
+            loadingType: 2
+          })
+          wx.hideNavigationBarLoading()
+        } else {
+          that.setData({
+            loadingType: 0
+          })
+        }
+        wx.hideNavigationBarLoading()
+      }
+    })
+  },
   choice(e) {
     console.log(e)
     this.setData({
@@ -113,26 +185,16 @@ Page({
       var mask = this.data.isMask,
         that = this
       this.setData({
-        isMask: !mask
+        isMask: !mask,
+        currentPage:1
       })
-      this.data.app.http({
-        type: true,
-        url: '/company/queryJobPosition',
-        dengl: true,
-        method: 'POST',
-        data: {
-          companyId: that.data.id,
-          limit: 10,
-          page: 1,
-          status: 1
-        },
-        success(res) {
-          console.log(res.data.rdata)
-          that.setData({
-            positList: res.data.rdata
-          })
-        }
-      })
+      var data={
+        companyId: that.data.id,
+        limit: 10,
+        page: this.data.currentPage,
+        status: 1
+      }
+     this.reword(data)
     } else {
       var two = this.data.isTwo
       this.setData({
@@ -162,6 +224,15 @@ Page({
       });
 
     }
+  },
+  scrll () {
+    var data={
+      companyId: this.data.id,
+      limit: 10,
+      page: this.data.currentPage,
+      status: 1
+    }
+    this.jiazai(data)
   },
   // 选择时间
 

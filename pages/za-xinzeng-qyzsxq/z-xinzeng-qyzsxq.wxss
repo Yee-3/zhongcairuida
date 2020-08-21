@@ -108,6 +108,8 @@
   box-sizing: border-box;
   background: #fff;
   line-height: 50rpx;
+  overflow: hidden;
+
 }
 
 .z_09 ul li {

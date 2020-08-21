@@ -138,7 +138,7 @@
 	<view class="mar_top">
 		<view class="mar_title">选择所招聘的职位</view>
 		<!-- <view class="mar_bot"> -->
-		<scroll-view scroll-y="true" style="height:{{ height+'rpx'}}">
+		<scroll-view scroll-y="true" style="height:{{ height+'rpx'}}" bindscrolltolower="scrll">
 		<!-- 需补充职位id -->
 			<view class="e_03" wx:for="{{positList}}" data-id="{{item.id}}" data-comId="{{item.companyId}}" bindtap="choice">
 				<view class="e_04">{{item.title}}</view>

@@ -22,7 +22,7 @@ Component({
         showPicker: false
     },
 
-    attached: function() {
+    attached: function () {
         /**
          * 初始化年月日
          */
@@ -52,8 +52,16 @@ Component({
     },
 
     methods: {
-        onTouchmask: function(event) {
+        hidden () {
+            this.setData({
+                isShow: false
+            })
         },
+        onTouchmask: function (event) {
+
+            // this.triggerEvent('click');
+        },
+        
         onCacnelClick(e) {
             this.triggerEvent('cancelclick', {});
         },
@@ -66,7 +74,7 @@ Component({
                 value: value,
             });
         },
-        year_onChange: function(e) {
+        year_onChange: function (e) {
             //年改变，月要滑到一月，天要重新计算该年该月多少天
             var days = [];
             var curYear = this.data.years[e.detail.value];
@@ -78,7 +86,7 @@ Component({
                 tempDayPos: [0],
             });
         },
-        month_onChange: function(e) {
+        month_onChange: function (e) {
             var days = [];
             var curYear = this.data.years[this.data.tempYearPos];
             var curMonth = this.data.months[e.detail.value];
@@ -89,7 +97,7 @@ Component({
                 tempDayPos: [0],
             });
         },
-        day_onChange: function(e) {
+        day_onChange: function (e) {
             this.setData({
                 tempDayPos: e.detail.value
             });

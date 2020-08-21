@@ -1,5 +1,5 @@
 <view wx:if="{{showPicker}}" class="date-picker">
-	<view class="date-picker-mask" catchtouchstart="onTouchmask"></view>
+	<view class="date-picker-mask"  bindtap="hidden"></view>
 	<view class="date-picker-content" catchtouchstart="onTouchmask">
 		<view class='title' catchtouchstart="onTouchmask">选择时间</view>
 		<view class="date-picker-content-center" catchtouchstart="onTouchmask">

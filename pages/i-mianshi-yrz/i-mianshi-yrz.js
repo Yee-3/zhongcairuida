@@ -115,7 +115,7 @@ Page({
 		var that = this
 		this.setData
 		var type = this.data.idn == 2 ? 1 : this.data.idn == 3 ? 2 : ''
-		var way=this.sel.data.ids==1?'0':'1'
+		var way=this.sel.data.ids==1?'1':'0'
 		this.data.app.http({
 			url: '/index/updateStatus',
 			dengl: true,
@@ -292,6 +292,7 @@ Page({
 
 	},
 	blur(e) {
+		console.log(this.data.val)
 		this.setData({
 			val: e.detail.value
 		})
@@ -419,6 +420,9 @@ Page({
 			ind1: e.currentTarget.dataset.index
 		})
 	},
+	ScrollLower: function () {
+   
+  },
 	/**
 	 * 生命周期函数--监听页面初次渲染完成
 	 */

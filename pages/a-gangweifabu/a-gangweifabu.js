@@ -41,7 +41,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
     var that = this
     this.spring = this.selectComponent("#spring");
     this.exp = this.selectComponent("#exp");
@@ -49,7 +48,7 @@ Page({
     this.sala = this.selectComponent("#sala");
     this.wel = this.selectComponent("#wel");
     this.name = this.selectComponent("#name");
-    if (options) {
+    if (options.id) {
       this.setData({
         id: options.id
       })

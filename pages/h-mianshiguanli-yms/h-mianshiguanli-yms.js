@@ -14,7 +14,7 @@ Page({
     msList: [],
     datePickerValue: ['', '', ''],
     datePickerIsShow: false,
-    date:'',
+    date: '',
     currentPage: 1,
     loadingType: 0,
     contentText: {
@@ -32,13 +32,21 @@ Page({
     this.setData({
       companyId: wx.getStorageSync('companyId')
     })
+
     var that = this,
       x = this.data.idn,
-      url = x == 1 ? '/interviewManager/getInterviewList' : x == 2 ? '/interviewManager/getInductionList' : '/interviewManager/getSuccessList',
-      data = {
-        companyId: that.data.companyId,
-        status: 'P'
-      }
+      url = x == 1 ? '/interviewManager/getInterviewList' : x == 2 ? '/interviewManager/getInductionList' : '/interviewManager/getSuccessList'
+    if (this.data.idn == 1 || this.data.idn == 2) {
+      var i = that.data.ind
+      var status = i == 1 ? 'p' : i == 2 ? 'Y' : i == 3 ? 'N' : 'S'
+    } else {
+      var i = that.data.ind1
+      var status = i == 1 ? '1' : '2'
+    }
+    var data = {
+      companyId: that.data.companyId,
+      status: status
+    }
     this.reword(url, data)
   },
   reword(url, data) {
@@ -74,7 +82,7 @@ Page({
       }
     })
   },
-  jiazai(data) {
+  jiazai(url, data) {
     var that = this
     this.setData({
       currentPage: that.data.currentPage + 1
@@ -194,7 +202,8 @@ Page({
         })
       } else {
         that.setData({
-          datePickerIsShow: true
+          datePickerIsShow: true,
+          id: e.currentTarget.dataset.id
         })
       }
     } else {
@@ -285,18 +294,18 @@ Page({
   },
   bindDateChange1: function (e) {
     this.setData({
-      datePickerIsShow: true,
-      data_index: e.currentTarget.dataset.de
+      datePickerIsShow: false,
+      // data_index: e.currentTarget.dataset.de
     });
   },
 
   datePickerOnSureClick: function (e) {
-      this.setData({
-        date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
-        datePickerValue: e.detail.value,
-        datePickerIsShow: false,
-      })
-    
+    this.setData({
+      date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+      datePickerValue: e.detail.value,
+      datePickerIsShow: false,
+    })
+
     var that = this
     // 再次面试
     if (!this.data.datePickerValue) {
@@ -314,7 +323,7 @@ Page({
           method: 'POST',
           data: {
             id: that.data.id,
-            time:`${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`
+            time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`
           },
           success(res) {
             if (res.data.code == 200) {
@@ -330,7 +339,7 @@ Page({
           method: 'POST',
           data: {
             id: that.data.id,
-            time:`${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`
+            time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`
           },
           success(res) {
             console.log(res)

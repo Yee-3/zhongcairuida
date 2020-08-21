@@ -38,7 +38,7 @@ Page({
     wx.navigateBack({
       success(res) {
         var page = getCurrentPages().pop(); 
-          page.onLoad();
+          // page.onLoad();
         // delta = 1
       }
     });

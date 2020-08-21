@@ -36,7 +36,7 @@ App({
     })
 
   },
- 
+
   globalData: {
     userInfo: null,
     baseUrl: 'http://123.56.114.88:8089',
@@ -44,9 +44,9 @@ App({
       // console.log(webUrl)
       // var webUrl='http://192.168.100.81:8089'
       var webUrl = 'http://123.56.114.88:8089'
-      if (obj.dengl) {                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
-        if(obj.type){
-          obj.data.type=obj.type
+      if (obj.dengl) {
+        if (obj.type) {
+          obj.data.type = obj.type
         }
         if (wx.getStorageSync('Authorization')) {
           wx.request({
@@ -66,7 +66,7 @@ App({
                 })
                 setTimeout(function () {
                   wx.navigateTo({
-                    url: '/pages/login/index?type='+(obj.type?'2':'')
+                    url: '/pages/login/index?type=' + (obj.type ? '2' : '')
                   })
                 }, 1000)
               }
@@ -81,7 +81,7 @@ App({
           setTimeout(function () {
             console.log(2222)
             wx.navigateTo({
-              url: '/pages/login/index?type='+(obj.type?'2':'')
+              url: '/pages/login/index?type=' + (obj.type ? '2' : '')
             })
           }, 1000)
         }

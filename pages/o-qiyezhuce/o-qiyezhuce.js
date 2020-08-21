@@ -22,9 +22,9 @@ Page({
     comVal: '',
     comLogo: '',
     content: {},
-    phone:'',
-    xiuG:'',
-    id:''
+    phone: '',
+    xiuG: '',
+    id: ''
   },
 
   /**
@@ -36,51 +36,51 @@ Page({
     this.cls = this.selectComponent("#cls");
     this.scale = this.selectComponent("#scale");
     var that = this
-    var that=this
+    var that = this
     this.setData({
       content: options
     })
-    if(options.xiuG=='true'){
+    if (options.xiuG == 'true') {
       this.data.app.http({
-        type:true,
-        url:'/company/queryCompany',
-        dengl:true,
-        method:'POST',
-        data:{},
-        success(res){
-          var cont=res.data.rdata
+        type: true,
+        url: '/company/queryCompany',
+        dengl: true,
+        method: 'POST',
+        data: {},
+        success(res) {
+          var cont = res.data.rdata
           that.setData({
-            comVal:cont.companyName,
-            comLogo:cont.companyLogo,
-            natValue:'',
-            mapVal:cont.address,
-            imgbox:cont.office.split(','),
-            imgValue:cont.companyLogo?'已上传':'请上传',
-            val:cont.companyDescribe,
-            zhi_img:cont.companyUrl,
-            xiuG:true,
-            id:cont.id
+            comVal: cont.companyName,
+            comLogo: cont.companyLogo,
+            natValue: '',
+            mapVal: cont.address,
+            imgbox: cont.office.split(','),
+            imgValue: cont.companyLogo ? '已上传' : '请上传',
+            val: cont.companyDescribe,
+            zhi_img: cont.companyUrl,
+            xiuG: true,
+            id: cont.id
           })
           that.nature.setData({
-            edu:cont.companyNature
+            edu: cont.companyNature
           })
           that.cls.setData({
-            edu:cont.companyType
+            edu: cont.companyType
           })
           that.scale.setData({
-            edu:cont.companyNum
+            edu: cont.companyNum
           })
         }
       })
     }
-   
+
     this.data.app.http({
-      url:'/Other/hotline',
-      dengl:true,
-      data:{},
-      success(res){
+      url: '/Other/hotline',
+      dengl: true,
+      data: {},
+      success(res) {
         that.setData({
-          phone:res.data.rdata.phone
+          phone: res.data.rdata.phone
         })
       }
     })
@@ -93,12 +93,12 @@ Page({
         that.setData({
           natureContent: res.data.rdata
         })
-        if(that.nature.data.edu){
-          var arr=res.data.rdata
-          arr.map(function(val,i){
-            if(that.nature.data.edu==val.value){
+        if (that.nature.data.edu) {
+          var arr = res.data.rdata
+          arr.map(function (val, i) {
+            if (that.nature.data.edu == val.value) {
               that.setData({
-                natValue:val.label
+                natValue: val.label
               })
             }
           })
@@ -114,12 +114,12 @@ Page({
         that.setData({
           classContent: res.data.rdata
         })
-        if(that.cls.data.edu){
-          var arr=res.data.rdata
-          arr.map(function(val,i){
-            if(that.cls.data.edu==val.value){
+        if (that.cls.data.edu) {
+          var arr = res.data.rdata
+          arr.map(function (val, i) {
+            if (that.cls.data.edu == val.value) {
               that.setData({
-                clsValue:val.label
+                clsValue: val.label
               })
             }
           })
@@ -136,12 +136,12 @@ Page({
         that.setData({
           numContent: res.data.rdata
         })
-        if(that.scale.data.edu){
-          var arr=res.data.rdata
-          arr.map(function(val,i){
-            if(that.scale.data.edu==val.value){
+        if (that.scale.data.edu) {
+          var arr = res.data.rdata
+          arr.map(function (val, i) {
+            if (that.scale.data.edu == val.value) {
               that.setData({
-                scalValue:val.label
+                scalValue: val.label
               })
             }
           })
@@ -184,12 +184,37 @@ Page({
         } else {
           imgbox[picid] = tempFilePaths[0];
         }
+        // console.log(imgbox)
+        var webUrl = 'http://123.56.114.88:8088/'
+        var baseUrl = 'http://123.56.114.88:8089'
         // tempFilePath可以作为img标签的src属性显示图片
-        _this.setData({
-          imgbox: imgbox
+        imgbox.map(function (val, i) {
+          wx.uploadFile({
+            url: baseUrl + '/Other/upload',
+            filePath: val,
+            name: 'img',
+            header: {
+              'content-type': 'multipart/form-data',
+              'Authorization': wx.getStorageSync('Authorization')
+            },
+            success: function (res) {
+              var path = JSON.parse(res.data)
+              if (res.statusCode == 200) {
+                var url = webUrl + path.rdata
+                imgbox[i] = url
+                _this.setData({
+                  imgbox: imgbox
+                })
+              }
+            },
+            fail: function (res) {
+              console.log(res)
+            }
+          })
         })
       }
     })
+    
   },
   showNat(e) {
     this.nature.show()
@@ -286,7 +311,7 @@ Page({
   },
   desc() {
     wx.navigateTo({
-      url: '../n-qiyezhuce-gsms/n-qiyezhuce-gsms?nameVal='+this.data.content.nameVal+'&six='+this.data.content.six+'&zhiVal='+this.data.content.zhiVal+'&emilVal='+this.data.content.emilVal+'&phoneVal='+this.data.content.phoneVal,
+      url: '../n-qiyezhuce-gsms/n-qiyezhuce-gsms?nameVal=' + this.data.content.nameVal + '&six=' + this.data.content.six + '&zhiVal=' + this.data.content.zhiVal + '&emilVal=' + this.data.content.emilVal + '&phoneVal=' + this.data.content.phoneVal,
     })
   },
   zhiZhao() {
@@ -297,12 +322,34 @@ Page({
       sourceType: ['album', 'camera'],
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
-        _this.setData({
-          zhi_img: tempFilePaths
+        var webUrl = 'http://123.56.114.88:8088/'
+        var baseUrl = 'http://123.56.114.88:8089'
+        wx.uploadFile({
+          url: baseUrl + '/Other/upload',
+          filePath: res.tempFilePaths[0],
+          name: 'img',
+          header: {
+            'content-type': 'multipart/form-data',
+            'Authorization': wx.getStorageSync('Authorization')
+          },
+          success: function (res) {
+            var path = JSON.parse(res.data)
+            if (res.statusCode == 200) {
+              _this.setData({
+                imgValue: '已上传',
+                zhi_img: webUrl + path.rdata
+              })
+            }
+          },
+          fail: function (res) {
+            console.log(res)
+          }
         })
       }
     })
+  },
+  upLoadFile(img) {
+
   },
   logoImg() {
     var _this = this
@@ -311,64 +358,83 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        const tempFilePaths = res.tempFilePaths
-        _this.setData({
-          imgValue: '已上传',
-          comLogo: tempFilePaths
+        console.log(res)
+        var webUrl = 'http://123.56.114.88:8088/'
+        var baseUrl = 'http://123.56.114.88:8089'
+        wx.uploadFile({
+          url: baseUrl + '/Other/upload',
+          filePath: res.tempFilePaths[0],
+          name: 'img',
+          header: {
+            'content-type': 'multipart/form-data',
+            'Authorization': wx.getStorageSync('Authorization')
+          },
+          success: function (res) {
+            var path = JSON.parse(res.data)
+            if (res.statusCode == 200) {
+              _this.setData({
+                imgValue: '已上传',
+                comLogo: webUrl + path.rdata
+              })
+              console.log(_this.data.comLogo)
+            }
+          },
+          fail: function (res) {
+            console.log(res)
+          }
         })
       }
     })
   },
   next() {
     var that = this,
-    url=this.data.xiuG?'/company/updateCompany':'/company/saveCompany'
-    if(!this.data.comVal){
+      url = this.data.xiuG ? '/company/updateCompany' : '/company/saveCompany'
+    if (!this.data.comVal) {
       wx.showToast({
         title: '请输入公司名称',
         icon: 'none'
       })
-    }else if(this.data.imgValue=='请上传'){
+    } else if (this.data.imgValue == '请上传') {
       wx.showToast({
         title: '请上传公司LOGO',
         icon: 'none'
       })
-    }else if(!this.nature.data.edu){
+    } else if (!this.nature.data.edu) {
       wx.showToast({
         title: '请选择公司性质',
         icon: 'none'
       })
-    }else if(!this.cls.data.edu){
+    } else if (!this.cls.data.edu) {
       wx.showToast({
         title: '请选择公司类别',
         icon: 'none'
       })
-    }else if(!this.data.mapVal){
+    } else if (!this.data.mapVal) {
       wx.showToast({
         title: '请输入公司地址',
         icon: 'none'
       })
-    }else if(!this.data.imgbox){
+    } else if (!this.data.imgbox) {
       wx.showToast({
         title: '请上传公司环境',
         icon: 'none'
       })
-    }else if(!this.scale.data.edu){
+    } else if (!this.scale.data.edu) {
       wx.showToast({
         title: '请选择企业规模',
         icon: 'none'
       })
-    }else if(!this.data.val){
+    } else if (!this.data.val) {
       wx.showToast({
         title: '请输入公司描述',
         icon: 'none'
       })
-    }else if(!this.data.zhi_img){
+    } else if (!this.data.zhi_img) {
       wx.showToast({
         title: '请上传营业执照',
         icon: 'none'
       })
-    }else{
+    } else {
 
       this.data.app.http({
         url: url,
@@ -381,19 +447,19 @@ Page({
           companyNature: this.nature.data.edu ? this.nature.data.edu : '',
           companyType: this.cls.data.edu ? this.cls.data.edu : '',
           companyUrl: that.data.zhi_img ? that.data.zhi_img : '',
-          companyNum:this.scale.data.edu ? this.scale.data.edu : '',
+          companyNum: this.scale.data.edu ? this.scale.data.edu : '',
           email: that.data.content.emilVal ? that.data.content.emilVal : '',
-          id:that.data.id?that.data.id:'',
+          id: that.data.id ? that.data.id : '',
           name: that.data.content.nameVal ? that.data.content.nameVal : '',
           office: that.data.imgbox ? that.data.imgbox : '',
           phone: that.data.content.phoneVal ? that.data.content.phoneVal : '',
           position: that.data.content.zhiVal ? that.data.content.zhiVal : '',
           sex: that.data.content.six ? that.data.content.six : '',
-          address:that.data.mapVal
-  
+          address: that.data.mapVal
+
         },
         success(res) {
-          if(res.data.code==200){
+          if (res.data.code == 200) {
             wx.reLaunch({
               url: '../p-qiyeduan/p-qiyeduan',
             })

@@ -423,9 +423,27 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        // tempFilePath可以作为img标签的src属性显示图片
-        _this.setData({
-          img: res.tempFilePaths
+        var webUrl = 'http://123.56.114.88:8088/'
+        var baseUrl = 'http://123.56.114.88:8089'
+        wx.uploadFile({
+          url: baseUrl + '/Other/upload',
+          filePath: res.tempFilePaths[0],
+          name: 'img',
+          header: {
+            'content-type': 'multipart/form-data',
+            'Authorization': wx.getStorageSync('Authorization')
+          },
+          success: function (res) {
+            var path = JSON.parse(res.data)
+            if (res.statusCode == 200) {
+              _this.setData({
+                img: webUrl + path.rdata
+              })
+            }
+          },
+          fail: function (res) {
+            console.log(res)
+          }
         })
       }
     })
