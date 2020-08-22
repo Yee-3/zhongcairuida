@@ -41,31 +41,15 @@ Page({
       dengl: true,
       success(res) {
         var arr = res.data.rdata.ctrlResumeList
-        var myDate = new Date()
-        if (arr.length > 0) {
-          arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
-            if (arrs.length > 0) {
-              arrs.map(function (vals, is) {
-                console.log(vals)
-                var date1 = vals.startTime.substring(0, 10)
-                var date = vals.endTime.substring(0, 10)
-                let start = new Date(date1.replace(/\-/g, "/"));
-                let end = new Date(date.replace(/\-/g, "/"));
-                let startYear = start.getFullYear();
-                let startMonth = start.getMonth();
-                let endYear = end.getFullYear();
-                let endMonth = end.getMonth();
-                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
-                var val = (monthCount / 12).toString().split(".")
-                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
-                console.log(value)
-                vals.timeVal = value
-                console.log(vals.timeVal, value)
-              })
-            }
-          })
-        }
+        arr.map(function (val, i) {
+          if(val.lastLogin){
+            var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            val.timeVal = value
+          }
+        })
         that.setData({
           imgList: res.data.rdata.ctrlBannerList,
           recomList: res.data.rdata.ctrlResumeList,
@@ -135,34 +119,21 @@ Page({
       dengl: true,
       data: data,
       success(res) {
+        var arr = res.data.rdata.ctrlResumeList
+        arr.map(function (val, i) {
+          if(val.lastLogin){
+            var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            val.timeVal = value
+          }
+        })
         that.setData({
           recomList: that.data.recomList.concat(res.data.rdata.ctrlResumeList)
         })
 
-        var arr = res.data.rdata.ctrlResumeList
-        var myDate = new Date()
-        if (arr.length > 0) {
-          arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
-            if (arrs.length > 0) {
-              arrs.map(function (vals, is) {
-                console.log(vals)
-                var date1 = vals.startTime.substring(0, 10)
-                var date = vals.endTime.substring(0, 10)
-                let start = new Date(date1.replace(/\-/g, "/"));
-                let end = new Date(date.replace(/\-/g, "/"));
-                let startYear = start.getFullYear();
-                let startMonth = start.getMonth();
-                let endYear = end.getFullYear();
-                let endMonth = end.getMonth();
-                let monthCount = (endYear - startYear) * 12 + endMonth - startMonth;
-                var val = (monthCount / 12).toString().split(".")
-                var value = (val[0] == 0 ? '' : val[0] + '年') + (val[1] ? val[1] + '个月' : '')
-                vals.timeVal = value
-              })
-            }
-          })
-        }
+    
         if (res.data.rdata.ctrlResumeList.length < 10) {
           that.setData({
             loadingType: 2
@@ -230,7 +201,7 @@ Page({
     var that = this,
       data = {
         limit: 1,
-        page: that.data.currentPage
+        page: that.data.currentPage+1
       }
     this.jiazai(data)
   },

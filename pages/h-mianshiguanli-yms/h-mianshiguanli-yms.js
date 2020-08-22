@@ -64,6 +64,16 @@ Page({
           scrollTop: 0,
           duration: 300
         })
+        var arr = res.data.rdata
+        arr.map(function (val, i) {
+          if(val.lastLogin){
+            var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            val.timeVal = value
+          }
+        })
         that.setData({
           msList: res.data.rdata
         })
@@ -102,6 +112,16 @@ Page({
       method: 'POST',
       data: data,
       success(res) {
+        var arr = res.data.rdata
+        arr.map(function (val, i) {
+          if(val.lastLogin){
+            var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            val.timeVal = value
+          }
+        })
         that.setData({
           msList: that.data.msList.concat(res.data.rdata)
         })

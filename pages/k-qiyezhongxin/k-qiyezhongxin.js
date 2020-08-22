@@ -9,7 +9,8 @@ Page({
     app: getApp().globalData,
     kefuPhone: {},
     user:{},
-    content: '是否切换为求职身份'
+    content: '是否切换为求职身份',
+    com_type:''
   },
 
   /**
@@ -44,6 +45,18 @@ Page({
         that.setData({
           kefuPhone: res.data.rdata
         })
+      }
+    })
+    this.data.app.http({
+      type:true,
+      url:'/company/queryAuthentication',
+      dengl:true,
+      data:{},
+      method:'POST',
+      success(res){
+       that.setData({
+        com_type:res.data.rdata
+       })
       }
     })
   },

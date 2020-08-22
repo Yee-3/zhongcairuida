@@ -160,7 +160,7 @@ Page({
         that.setData({
           positList: that.data.positList.concat(res.data.rdata)
         })
-        if (res.data.rdata.length < 10) {
+        if (res.data.rdata.length <10) {
           that.setData({
             loadingType: 2
           })
@@ -229,7 +229,7 @@ Page({
     var data={
       companyId: this.data.id,
       limit: 10,
-      page: this.data.currentPage,
+      page: this.data.currentPage+1,
       status: 1
     }
     this.jiazai(data)

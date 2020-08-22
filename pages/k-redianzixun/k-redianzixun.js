@@ -55,9 +55,13 @@ Page({
   },
   detail(e){
     console.log(e)
+    var ind=e.currentTarget.dataset.index
     wx.navigateTo({
       url: '../zd-zixunxq/zd-zixunxq?id='+e.currentTarget.dataset.id,
     })
+    var arr=this.data.hotList
+    arr[ind].view=1+ parseInt(arr[ind].view)
+    this.setData({hotList:arr})
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

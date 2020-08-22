@@ -50,7 +50,7 @@ Page({
 				limit: 10,
 				page: that.data.currentPage,
 				type: 2,
-				signUp: val
+				signUp: 'Y'
 			}
 			this.reword(data)
 		} else if (this.data.idn == 2) {
@@ -174,21 +174,16 @@ Page({
 					return x < 10 ? '0' + x : x
 				}
 				var arr = res.data.rdata
-				var myDate = new Date()
-				if (arr.length > 0) {
-					arr.map(function (val, i) {
-						if (val.createTime) {
-							var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
-							var date = Date.parse(new Date())
-							var day = parseInt((date - date1) / 1000)
-							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' :
-								parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(
-									day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' :
-								parseInt(day / 60 / 60 / 24 / 30) + '月前'
-							val.timeVal = value
-						}
-					})
-				}
+				console.log(res)
+        arr.map(function (val, i) {
+          if(val.ctrlMemberCompanies){
+            var date1 = Date.parse(new Date(val.ctrlMemberCompanies.updateTime.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            val.timeVal = value
+          }
+        })
 				that.setData({
 					recomList: res.data.rdata
 				})
@@ -196,10 +191,6 @@ Page({
 				if (res.data.rdata.length < 10) {
 					that.setData({
 						loadingType: 2
-					})
-				} else {
-					that.setData({
-						loadingType: 0
 					})
 				}
 				wx.hideNavigationBarLoading();
@@ -227,29 +218,20 @@ Page({
 			method: 'POST',
 			data: data,
 			success(res) {
+				var arr = res.data.rdata
+        arr.map(function (val, i) {
+          if(val.ctrlMemberCompanies){
+            var date1 = Date.parse(new Date(val.ctrlMemberCompanies.updateTime.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            val.timeVal = value
+          }
+        })
 				that.setData({
 					recomList: that.data.recomList.concat(res.data.rdata)
 				})
 
-				function jiance(x) {
-					return x < 10 ? '0' + x : x
-				}
-				var arr = res.data.rdata
-				var myDate = new Date()
-				if (arr.length > 0) {
-					arr.map(function (val, i) {
-						if (val.createTime) {
-							var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
-							var date = Date.parse(new Date())
-							var day = parseInt((date - date1) / 1000)
-							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' :
-								parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(
-									day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' :
-								parseInt(day / 60 / 60 / 24 / 30) + '月前'
-							val.timeVal = value
-						}
-					})
-				}
 				if (res.data.rdata.length < 10) {
 					that.setData({
 						loadingType: 2
@@ -468,7 +450,7 @@ Page({
 		if (idn == 1) {
 			var data = {
 				limit: 10,
-				page: that.data.currentPage,
+				page: that.data.currentPage+1,
 				type: 2,
 				signUp: 'Y'
 			}
@@ -477,7 +459,7 @@ Page({
 			if (ind == 1) {
 				var data = {
 					limit: 10,
-					page: that.data.currentPage,
+					page: that.data.currentPage+1,
 					type: 2,
 					interview: 'P'
 				}
@@ -485,7 +467,7 @@ Page({
 			} else if (ind == 2) {
 				var data = {
 					limit: 10,
-					page: that.data.currentPage,
+					page: that.data.currentPage+1,
 					type: 2,
 					interview: 'Y'
 				}
@@ -493,7 +475,7 @@ Page({
 			} else {
 				var data = {
 					limit: 10,
-					page: that.data.currentPage,
+					page: that.data.currentPage+1,
 					type: 2,
 					interview: 'N'
 				}
@@ -503,7 +485,7 @@ Page({
 			if (ind == 1) {
 				var data = {
 					limit: 10,
-					page: that.data.currentPage,
+					page: that.data.currentPage+1,
 					type: 2,
 					entry: 'P'
 				}
@@ -511,7 +493,7 @@ Page({
 			} else if (ind == 2) {
 				var data = {
 					limit: 10,
-					page: that.data.currentPage,
+					page: that.data.currentPage+1,
 					type: 2,
 					entry: 'Y'
 				}
@@ -519,7 +501,7 @@ Page({
 			} else {
 				var data = {
 					limit: 10,
-					page: that.data.currentPage,
+					page: that.data.currentPage+1,
 					type: 2,
 					entry: 'N'
 				}

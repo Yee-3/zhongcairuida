@@ -96,7 +96,7 @@
 			</view>
 			<view class="fr h_19" wx:if="{{idn==1||idn==2}}">
 				<view class="h_20">{{ind==1?'待回复':ind==2?'同意':ind==3?'已拒绝':'已面试'}}</view>
-				<view class="h_21">22小时前活跃</view>
+				<view class="h_21">{{item.timeVal}}活跃</view>
 			</view>
 		</view>
 		<view class="{{idn==3?'h_22 fl':'h_22'}}">

@@ -106,6 +106,12 @@
 					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/q-wode/q-wode",
+					"pathName": "pages/q-wode/q-wode",
+					"scene": null
 				}
 			]
 		}

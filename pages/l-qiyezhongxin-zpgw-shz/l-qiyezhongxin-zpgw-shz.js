@@ -56,7 +56,7 @@ Page({
             }
           })
         }
-        console.log(res.data.rdata,that.data.loadingType)
+        console.log(res.data.rdata, '拼接前')
         that.setData({
           recomList: res.data.rdata
         })
@@ -70,7 +70,6 @@ Page({
             loadingType: 0
           })
         }
-        console.log(that.data.loadingType,res.data.rdata.length)
         wx.hideNavigationBarLoading();
         wx.stopPullDownRefresh()
       }
@@ -78,51 +77,56 @@ Page({
   },
   jiazai(data) {
     var that = this
+    console.log(that.data.currentPage)
     this.setData({
       currentPage: that.data.currentPage + 1
     })
+    console.log(that.data.currentPage)
     console.log(that.data.loadingType)
     if (this.data.loadingType != 0) {
       //loadingType!=0;直接返回
       return false;
-    }
-    this.setData({
-      loadingType: 1
-    })
-    console.log(that.data.loadingType)
-    wx.showNavigationBarLoading()
-    this.data.app.http({
-      type: true,
-      url: '/company/queryJobPosition',
-      dengl: true,
-      data: data,
-      method: 'POST',
-      success(res) {
-        var arr = res.data.rdata
-        if (arr.length > 0) {
-          arr.map(function (val, i) {
-            console.log(val)
-            if (val.welfare) {
-              val.wel = JSON.parse(val.welfare)
-            }
-          })
-        }
-        that.setData({
-          recomList: that.data.recomList.concat(res.data.rdata)
-        })
-        if (res.data.rdata.length < 10) {
+    }else{
+      this.setData({
+        loadingType: 1
+      })
+      console.log(that.data.loadingType)
+      wx.showNavigationBarLoading()
+      this.data.app.http({
+        type: true,
+        url: '/company/queryJobPosition',
+        dengl: true,
+        data: data,
+        method: 'POST',
+        success(res) {
+          var arr = res.data.rdata
+          if (arr.length > 0) {
+            arr.map(function (val, i) {
+              if (val.welfare) {
+                val.wel = JSON.parse(val.welfare)
+              }
+            })
+          }
+          console.log(that.data.recomList, res.data.rdata)
           that.setData({
-            loadingType: 2
+            recomList: that.data.recomList.concat(res.data.rdata)
           })
+          console.log(that.data.recomList)
+          if (res.data.rdata.length <10) {
+            that.setData({
+              loadingType: 2
+            })
+            wx.hideNavigationBarLoading()
+          } else {
+            that.setData({
+              loadingType: 0
+            })
+          }
           wx.hideNavigationBarLoading()
-        } else {
-          that.setData({
-            loadingType: 0
-          })
         }
-        wx.hideNavigationBarLoading()
-      }
-    })
+      })
+    }
+   
   },
   release() {
     wx.navigateTo({
@@ -130,6 +134,7 @@ Page({
     })
   },
   toggleShen(e) {
+    console.log('执行点击事件001')
     var that = this
     console.log(e)
     this.setData({
@@ -215,45 +220,11 @@ Page({
       data = {
         companyId: that.data.id,
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         status: status
       }
-      this.jiazai(data)
+    this.jiazai(data)
 
-    // if (this.data.idn == 1) {
-    //   this.setData({
-    //     currentPage: 1
-    //   })
-    //   var data = {
-    //     companyId: that.data.id,
-    //     limit: 10,
-    //     page: this.data.currentPage,
-    //     status: status
-    //   }
-    //   this.jiazai(data)
-    // } else if (this.data.idn == 2) {
-    //   this.setData({
-    //     currentPage: 1
-    //   })
-    //   var data = {
-    //     companyId: that.data.id,
-    //     limit: 10,
-    //     page: this.data.currentPage,
-    //     status: status
-    //   }
-    //   this.jiazai(data)
-    // } else {
-    //   this.setData({
-    //     currentPage: 1
-    //   })
-    //   var data = {
-    //     companyId: that.data.id,
-    //     limit: 10,
-    //     page: this.data.currentPage,
-    //     status: status
-    //   }
-    //   this.jiazai(data)
-    // }
   },
 
   /**

@@ -633,7 +633,7 @@ Page({
     if (!this.data.moCom) {
       var dat = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         type: 2,
         money: ind5,
         exe: ind6,
@@ -644,7 +644,7 @@ Page({
     } else if (!this.data.gsCom) {
       var dat = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         type: 2,
         comNum: ind4,
         comType: ind3,
@@ -653,7 +653,7 @@ Page({
     } else if (!this.data.zwCom) {
       data = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         type: 2,
         positionId: id
       }
@@ -661,14 +661,14 @@ Page({
     } else if (!this.data.zhCom) {
       data = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         type: 2,
         sort: zong
       }
     } else {
       var dat = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         type: 2,
       }
       this.jiazai(dat)

@@ -113,27 +113,15 @@ Page({
           return x < 10 ? '0' + x : x
         }
         var arr = res.data.rdata
-        var myDate = new Date()
-        if (arr.length > 0) {
-          arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
-            if (arrs.length > 0) {
-              arrs.map(function (vals, is) {
-                var date1 =Date.parse(new Date(vals.startTime.replace(/\-/g, "/")))
-                var date = Date.parse(new Date(vals.endTime.replace(/\-/g, "/")))
-                var time=parseInt((date-date1)/ 1000 / 60 / 60 / 24)
-                // 天数
-                var time1=(time / 365).toString().split(".")
-                if(time1[1]){
-                  var ti=time1[1].toString().substring(0,1)
-                  time1[1]=Math.round(ti*1.2)
-                }
-                var value = (time1[0] == 0 ? '' : time1[0] + '年') + (time1[1]>0 ? time1[1]+ '个月' : '') 
-                vals.timeVal = value
-              })
-            }
-          })
-        }
+        arr.map(function (val, i) {
+          if(val.lastLogin){
+            var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            val.timeVal = value
+          }
+        })
         // 回到顶部
         wx.pageScrollTo({
           scrollTop: 0,
@@ -177,6 +165,16 @@ Page({
       data: data,
       method: 'POST',
       success(res) {
+        var arr = res.data.rdata
+        arr.map(function (val, i) {
+          if(val.lastLogin){
+            var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
+            var date = Date.parse(new Date())
+            var day = parseInt((date - date1) / 1000)
+            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            val.timeVal = value
+          }
+        })
         that.setData({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
@@ -518,7 +516,7 @@ Page({
     if (this.data.zwType) {
       var data = {
         limit: 10,
-        page: this.data.currentPage,
+        page: this.data.currentPage+1,
         position: this.zhiwei.data.id,
         sort: this.zonghe.data.ind
       }
@@ -527,7 +525,7 @@ Page({
     } else if (this.data.morType) {
       var data = {
         limit: 10,
-        page: this.data.currentPage,
+        page: this.data.currentPage+1,
         school: this.more.data.ind7 ? this.more.data.ind7 : '',
         workTime: this.more.data.ind6 ? this.more.data.ind6 : '',
         money: this.more.data.ind5 ? this.more.data.ind5 : '',
@@ -538,7 +536,7 @@ Page({
       var that = this,
         data = {
           limit: 10,
-          page: that.data.currentPage,
+          page: that.data.currentPage+1,
           sort: this.zonghe.data.ind
         }
       this.jiazai(data)    

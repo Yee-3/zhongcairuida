@@ -1,5 +1,5 @@
 <view class="k_01">
-	<view class="k_02" wx:for="{{hotList}}" bindtap="detail" data-id="{{item.id}}">
+	<view class="k_02" wx:for="{{hotList}}" bindtap="detail" data-id="{{item.id}}" data-index="{{index}}">
 		<view class="fl">
 			<view class="k_03">{{item.title}}</view>
 			<view class="e_05">

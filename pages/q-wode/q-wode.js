@@ -18,7 +18,7 @@ Page({
    */
   onLoad: function (options) {
     this.tog = this.selectComponent("#tog");
-    var that=this
+    var that = this
     const app = getApp().globalData
     var that = this
     app.http({
@@ -32,19 +32,19 @@ Page({
       }
     })
     app.http({
-      url:'/getResumes',
-      dengl:true,
-      data:{},
-      success(res){
+      url: '/getResumes',
+      dengl: true,
+      data: {},
+      success(res) {
         console.log(res)
-        if(wx.getStorageSync('Authorization')){
+        if (wx.getStorageSync('Authorization')) {
           that.setData({
-            user:res.data.rdata.ctrlResume
+            user: res.data.rdata.ctrlResume
           })
         }
       }
     })
-  
+
   },
 
   tanchuang_2: function () {
@@ -80,15 +80,15 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        if(res.data.code==200){
-          wx.setStorageSync('Authorization','')
+        if (res.data.code == 200) {
+          wx.setStorageSync('Authorization', '')
           // wx.setStorageSync('userInfo','')
           wx.showToast({
             title: '您已退出登录'
           })
           // if (!this.data.user) {
-            //刷新当前页面的数据
-            getCurrentPages()[getCurrentPages().length - 1].onLoad()
+          //刷新当前页面的数据
+          getCurrentPages()[getCurrentPages().length - 1].onLoad()
           // }
         }
         // this.onLoad()
@@ -112,10 +112,24 @@ Page({
     })
   },
   zhaopin() {
-    this.tog.show()
-    // wx.redirectTo({
-    //   url: '../p-qiyeduan/p-qiyeduan',
-    // })
+    var that = this
+    this.data.app.http({
+      url: '/index/queryCompany',
+      dengl: true,
+      method: 'POST',
+      data: {},
+      success(res) {
+        if (res.data.code == 200) {
+          that.tog.show()
+        } else {
+          wx.redirectTo({
+            url: '../m-qiyezhuce/m-qiyezhuce',
+          })
+        }
+      }
+
+    })
+
   },
   cancel() {
     wx.redirectTo({
@@ -155,7 +169,7 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-   
+
 
   },
 

@@ -42,7 +42,7 @@
 				<view class="q_13 fl">企业认证</view>
 			</view>
 			<view class="fr">
-				<view class="q_14 fl">已认证</view>
+				<view class="q_14 fl">{{com_type=='0'?'审核中':com_type=='1'?'已认证':'认证失败'}}</view>
 
 			</view>
 		</view>

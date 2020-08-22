@@ -726,7 +726,7 @@ Page({
     if (this.data.morType) {
       var data = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         location: that.data.location ? that.data.location : '',
         type: 2,
         money: ind5,
@@ -739,7 +739,7 @@ Page({
     } else if (this.data.gsType) {
       var data = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         location: that.data.location ? that.data.location : '',
         type: 2,
         omNum: ind4,
@@ -762,7 +762,7 @@ Page({
       }
       var data = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         type: 2,
         sort: ind,
         location: address,
@@ -773,7 +773,7 @@ Page({
         id = this.zhiwei.data.id ? this.zhiwei.data.id : '',
         data = {
           limit: 10,
-          page: that.data.currentPage,
+          page: that.data.currentPage+1,
           location: that.data.location ? that.data.location : '',
           type: 2,
           positionId: id,
@@ -783,7 +783,7 @@ Page({
     } else {
       var data = {
         limit: 10,
-        page: that.data.currentPage,
+        page: that.data.currentPage+1,
         type: 2,
         name: name,
         location: that.data.location ? that.data.location : '',

@@ -76,12 +76,12 @@
 		</view>
 		<view class="h_18" wx:if="{{(idn==2||idn==3)&&ind==3}}">
 			<view class="h_19 fl">原因：</view>
-			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.whyStatus==1?'时间原因':'其他原因'):(item.ctrlMemberCompanies.whyInduction==1?'时间原因':'其他原因')}}</view>
+			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.whyStatus==1?'时间原因':'其他原因'):(item.ctrlMemberCompanies.auditType1==1?'时间原因':'其他原因')}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="h_18" wx:if="{{(idn==2||idn==3)&&ind==3}}">
 			<view class="h_19 fl">详细：</view>
-			<view class="h_20 fl">{{item.ctrlMemberCompanies.why?item.ctrlMemberCompanies.why:''}}</view>
+			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.why?item.ctrlMemberCompanies.why:''):(item.ctrlMemberCompanies.whyInduction?item.ctrlMemberCompanies.whyInduction:'')}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<!-- 投递列表显示 -->

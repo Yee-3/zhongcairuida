@@ -214,11 +214,16 @@ Page({
         success(res) {
           if (res.data.code == 200) {
             var pages = getCurrentPages();
+            let currPage = pages[pages.length - 1]; //当前页面
             var prevPage = pages[pages.length - 2]; //上一个页面
+            prevPage.setData({
+              id:that.data.id
+            })
             wx.navigateBack({
               success(res) {
-                if (prevPage == undefined || prevPage == null) return;
-                prevPage.onLoad();
+                var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
               }
             })
           }
