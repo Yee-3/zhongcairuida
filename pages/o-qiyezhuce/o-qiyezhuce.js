@@ -24,7 +24,10 @@ Page({
     content: {},
     phone: '',
     xiuG: '',
-    id: ''
+    id: '',
+    latitude:'',
+    longitude:'',
+    name:''
   },
 
   /**
@@ -149,6 +152,23 @@ Page({
       }
     })
 
+  },
+  getLocation(e){
+    var that = this
+    wx.chooseLocation({
+      success: function (res) {
+        console.log(res.address,res)
+        console.log(res.latitude)
+        console.log(res.longitude)
+        console.log(res.name)
+        var location = res.address
+        that.setData({
+          longitude:res.longitude,
+          latitude:res.latitude,
+          mapVal:res.name
+        })
+      }
+    })
   },
   // 删除图片
   imgDelete1: function (e) {
@@ -311,7 +331,7 @@ Page({
   },
   desc() {
     wx.navigateTo({
-      url: '../n-qiyezhuce-gsms/n-qiyezhuce-gsms?nameVal=' + this.data.content.nameVal + '&six=' + this.data.content.six + '&zhiVal=' + this.data.content.zhiVal + '&emilVal=' + this.data.content.emilVal + '&phoneVal=' + this.data.content.phoneVal,
+      url: '../n-qiyezhuce-gsms/n-qiyezhuce-gsms?nameVal=' + this.data.content.nameVal + '&six=' + this.data.content.six + '&zhiVal=' + this.data.content.zhiVal + '&emilVal=' + this.data.content.emilVal + '&phoneVal=' + this.data.content.phoneVal+'&desc='+this.data.val,
     })
   },
   zhiZhao() {
@@ -455,8 +475,9 @@ Page({
           phone: that.data.content.phoneVal ? that.data.content.phoneVal : '',
           position: that.data.content.zhiVal ? that.data.content.zhiVal : '',
           sex: that.data.content.six ? that.data.content.six : '',
-          address: that.data.mapVal
-
+          address: that.data.mapVal,
+          longitude:that.data.longitude,
+          latitude:that.data.latitude,
         },
         success(res) {
           if (res.data.code == 200) {

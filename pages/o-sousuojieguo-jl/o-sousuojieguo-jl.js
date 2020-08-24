@@ -56,27 +56,18 @@ Page({
       time = new Date().getTime(),
       city = '';
     if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
-      this.getLocate();
+      this.getLocation();
     } else { //如果未满30分钟，那么直接从本地缓存里取值
       that.setData({
-        mapValue: cityOrTime.city
+        mapValue: cityOrTime.city,
+        location:cityOrTime.location
       })
 
     }
-    wx.getLocation({
-      type: 'wgs84',
-      success: function (res) {
-        console.log(res);
-        that.setData({
-          location: res.longitude + ',' + res.latitude
-        })
-        console.log(that.data.location)
-      },
-      fail: function (res) {
-        console.log(res);
-      }
-    })
+  
+    
     setTimeout(function () {
+      console.log( that.data.location)
       var data = {
         limit: 10,
         page: that.data.currentPage,
@@ -180,10 +171,6 @@ Page({
     new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
       var location = val.location
       var val = val.address_component.city
-      // if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
-      //   // console.log(val.indexOf('市') - 1);
-      //   val = x.slice(0, x.indexOf('市'));
-      // }
       that.setData({
         mapValue: val,
         location: location.lng + ',' + location.lat
@@ -191,7 +178,8 @@ Page({
       //把获取的定位和获取的时间放到本地存储
       wx.setStorageSync('locatecity', {
         city: val,
-        time: new Date().getTime()
+        time: new Date().getTime(),
+        location:location.lng + ',' + location.lat
       });
     });
   },

@@ -45,8 +45,8 @@
 		<view class="fl a_03"><em>*</em>
 			<p>公司地址</p>
 		</view>
-		<view class="fr a_04">
-			<input placeholder="请输入" data-type="2" value="{{mapVal}}" data-value="{{value}}" bindblur="blur"/>
+		<view class="fr a_04" bindtap='getLocation'>
+			<input placeholder="请选择" data-type="2" value="{{mapVal}}" disabled data-value="{{value}}" bindblur="blur"/>
 		</view>
 	</view>
 

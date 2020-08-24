@@ -6,7 +6,7 @@ Page({
    */
   data: {
     isF: false,
-    isX: true,
+    isX: false,
     app: getApp().globalData,
     resume: {},
     baseUrl: getApp().globalData.baseUrl,
@@ -18,7 +18,10 @@ Page({
     isStatus: '',
     sty: 'display:none',
     style: 'display:none',
-    s: ''
+    s: '',
+    height:'',
+    hidd:true,
+    hidd1:true,
   },
 
   /**
@@ -42,6 +45,28 @@ Page({
           var xiangTime = res.data.rdata.ctrlProjectDTOS
           var schoolTime = res.data.rdata.ctrlSchoolDTOS
           var book = []
+          if(res.data.rdata.ctrlWorkDTOS.length<=1){
+            that.setData({
+              hidd:false,
+              isF:true
+            })
+          }else{
+            that.setData({
+              hidd:true,
+              isF:false
+            })
+          }
+          if(res.data.rdata.ctrlProjectDTOS.length<=1){
+            that.setData({
+              hidd1:false,
+              isX:true
+            })
+          }else{
+            that.setData({
+              hidd1:true,
+              isX:false
+            })
+          }
           for (var i = 0; i < timer.length; i++) {
             time.push({
               startTime: timer[i].startTime.substring(0, 10),
@@ -65,7 +90,6 @@ Page({
               time: res.data.rdata.ctrlBookDTOS[i].time.substring(0, 4) + '年' + res.data.rdata.ctrlBookDTOS[i].time.substring(5, 7) + '月',
             })
           }
-
           that.setData({
             resume: res.data.rdata,
             time: time,
@@ -85,22 +109,17 @@ Page({
 
       }
     })
-    // setTimeout(() => {
-    //   let query = wx.createSelectorQuery();
-    //   query.select('.content').boundingClientRect(rect => {
-    //     let clientHeight = rect.height;
-    //     let clientWidth = rect.width;
-    //     let ratio = 750 / clientWidth;
-    //     let height = parseInt(clientHeight * ratio);
-    //     console.log(height, clientHeight, clientWidth);
-    //     if (height < 400) {
-    //       that.setData({
-    //         isF: false,
-    //         // s:'overflow:hidden'
-    //       })
-    //     }
-    //   }).exec();
-    // }, 300)
+      let query = wx.createSelectorQuery();
+      query.select('.s_06').boundingClientRect(rect => {
+        let clientHeight = rect.height;
+        let clientWidth = rect.width;
+        let ratio = 750 / clientWidth;
+        let height = parseInt(clientHeight * ratio);
+        console.log(height, clientHeight, clientWidth);
+       this.setData({
+         height:height+340+'rpx',
+       })
+      }).exec();
   },
   toudi() {
     var that = this

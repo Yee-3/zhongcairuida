@@ -61,15 +61,30 @@ Page({
     })
   },
   auth(){
-    wx.navigateTo({
-      url: '../m-qiyezhuce/m-qiyezhuce?id=1',
-    })
+    if(this.data.com_type==0){
+      wx.showToast({
+        title: '信息审核中！',
+        icon:"none"
+      })
+    }else{
+      wx.navigateTo({
+        url: '../m-qiyezhuce/m-qiyezhuce?id=1',
+      })
+    }
   },
   gangwei(e) {
     console.log(e)
-    wx.navigateTo({
-      url: '../l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz?id='+e.currentTarget.dataset.id,
-    })
+    if(this.data.com_type==0){
+      wx.showToast({
+        title: '信息审核中！',
+        icon:"none"
+      })
+    }else{
+      wx.navigateTo({
+        url: '../l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz?id='+e.currentTarget.dataset.id,
+      })
+
+    }
   },
   qiuzhi() {
     this.tog.show()

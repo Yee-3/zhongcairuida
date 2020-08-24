@@ -29,6 +29,7 @@
 }
 
 .r_05 {
+  position: fixed;
   width: 690rpx;
   height: 80rpx;
   background: #0286ff;
@@ -38,10 +39,39 @@
   line-height: 80rpx;
   border-radius: 15rpx;
   margin: 0 auto;
+  left: 30rpx;
   margin-top: 50rpx;
-  margin-bottom: 60rpx;
+bottom: 60rpx;
+}
+.bot_05 {
+  position: fixed;
+  width: 690rpx;
+  height: 80rpx;
+  left: 30rpx;
+  margin: 0 auto;
+  margin-top: 50rpx;
+  bottom: 60rpx;
 }
 
+.del {
+  background-color: #e5e5e5;
+  color: #909090;
+  width: 220rpx;
+  line-height: 80rpx;
+  border-radius: 10rpx;
+  text-align: center;
+
+}
+
+.sub {
+  background-color: #0286ff;
+  border-radius: 10rpx;
+  color: #fff;
+  width: 460rpx;
+  line-height: 80rpx;
+  text-align: center;
+
+}
 .t_01 {
   width: 690rpx;
   margin-top: 25rpx;

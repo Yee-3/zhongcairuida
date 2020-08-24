@@ -25,4 +25,9 @@
 	</view>
 </view>
 
-<view class="r_05" bindtap="submit">提交</view>
+<view class="r_05" bindtap="submit" wx:if="{{!isToggle}}">提交</view>
+
+<view class="bot_05" wx:if="{{isToggle}}">
+	<view class="del fl" bindtap="dele">删除</view>
+	<view class="sub fr" bindtap="submit">提交</view>
+</view>

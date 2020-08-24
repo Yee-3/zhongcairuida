@@ -2,10 +2,16 @@
 	<view class="fl s_02">
 		<view class="q_03">
 			<view class="q_04 fl"><input value="{{resume.ctrlResumeDTO.name?resume.ctrlResumeDTO.name:'暂无用户名'}}" placeholder="请输入姓名" /></view>
-			<view class="q_05 fl"><image src="../img/f050.png"></image></view>
+			<view class="q_05 fl">
+				<image src="../img/f050.png"></image>
+			</view>
 		</view>
 		<view class="q_06">
-			<view class="s_03"><p>{{resume.ctrlResumeDTO.age?resume.ctrlResumeDTO.age+'岁':'年龄'}}</p><span>|</span><p>{{resume.ctrlResumeDTO.schoolName?resume.ctrlResumeDTO.schoolName:'学历'}}</p><span>|</span><p>{{resume.ctrlResumeDTO.worktypeName?resume.ctrlResumeDTO.worktypeName:'工作类型'}}</p></view>
+			<view class="s_03">
+				<p>{{resume.ctrlResumeDTO.age?resume.ctrlResumeDTO.age+'岁':'年龄'}}</p><span>|</span>
+				<p>{{resume.ctrlResumeDTO.schoolName?resume.ctrlResumeDTO.schoolName:'学历'}}</p><span>|</span>
+				<p>{{resume.ctrlResumeDTO.worktypeName?resume.ctrlResumeDTO.worktypeName:'工作类型'}}</p>
+			</view>
 			<view class="s_04">手机号码：{{resume.ctrlResumeDTO.phone}}</view>
 			<view class="s_04">求职状态：{{resume.ctrlResumeDTO.statusName}}</view>
 		</view>
@@ -15,46 +21,55 @@
 	</view>
 </view>
 
-<view class="s_05" >
+<view class="s_05">
 	<view class="s_06">
 		<view class="fl s_07">求职意向</view>
-		<view class="fr s_08" bindtap="int"><image src="../img/f050.png"></image></view>
+		<view class="fr s_08" bindtap="int">
+			<image src="../img/f050.png"></image>
+		</view>
 		<view class="w-clear"></view>
 	</view>
 	<view class="s_20" wx:for="{{resume.ctrlObjectiveDTOS}}">
-	<view class="s_09">
-		<view class="fl s_10">类型</view>
-		<view class="fr s_11">{{item.typeName}}</view>
-		<view class="w-clear"></view>
-	</view>
-	<view class="s_09">
-		<view class="fl s_10">职位</view>
-		<view class="fr s_11">{{item.positionName}}</view>
-		<view class="w-clear"></view>
-	</view>
-	<view class="s_09">
-		<view class="fl s_10">工作地点</view>
-		<view class="fr s_11">{{item.address}}</view>
-		<view class="w-clear"></view>
-	</view>
-	<view class="s_09">
-		<view class="fl s_10">期望薪资</view>
-		<view class="fr s_11">{{item.moneyName}}</view>
-		<view class="w-clear"></view>
-	</view>
+		<view class="s_09">
+			<view class="fl s_10">类型</view>
+			<view class="fr s_11">{{item.typeName}}</view>
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_09">
+			<view class="fl s_10">职位</view>
+			<view class="fr s_11">{{item.positionName}}</view>
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_09">
+			<view class="fl s_10">工作地点</view>
+			<view class="fr s_11">{{item.address}}</view>
+			<view class="w-clear"></view>
+		</view>
+		<view class="s_09">
+			<view class="fl s_10">期望薪资</view>
+			<view class="fr s_11">{{item.moneyName}}</view>
+			<view class="w-clear"></view>
+		</view>
 	</view>
 </view>
 
-<view class="isF?'hide s_05':'show s_05' " >
+<view class="{{isF?'s_05':'s_05 hidden'}}">
+	<view class="s_22" bindtap="change" wx:if="{{hidd}}" style="padding-bottom: 15rpx;">
+		<image src="{{!isF?'../img/f064-01.png':'../img/f064.png'}}"></image>
+	</view>
 	<view class="s_06">
 		<view class="fl s_07">工作经历</view>
-		<view class="fr s_12" bindtap="work"><image src="../img/f063.png"></image></view>
+		<view class="fr s_12" bindtap="work">
+			<image src="../img/f063.png"></image>
+		</view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20" data-index="{{index}}" wx:for="{{resume.ctrlWorkDTOS}}" >
+	<view class="s_20 hi" data-index="{{index}}" wx:for="{{resume.ctrlWorkDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.company}}</view>
-			<view class="fr s_15" bindtap="work" data-id="{{item.id}}"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="work" data-id="{{item.id}}">
+				<image src="../img/f050.png"></image>
+			</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{time[index].startTime}}~{{time[index].endTime}}</view>
@@ -65,58 +80,77 @@
 		<view class="s_21">{{item.describe}}</view>
 	</view>
 
-	<view class="s_22"  bindtap="change"><image src="{{isF?'../img/f064-01.png':'../img/f064.png'}}"></image></view>
 </view>
 
-<view class="s_05">
+<view class="{{isX?'s_05':'s_05 hid_02'}}">
+	<view class="s_22" wx:if="{{hidd1}}" style="padding-bottom: 15rpx;" bindtap="change1">
+		<image src="{{!isX?'../img/f064-01.png':'../img/f064.png'}}"></image>
+	</view>
+
 	<view class="s_06">
 		<view class="fl s_07">项目经历</view>
-		<view class="fr s_12" bindtap="project"><image src="../img/f063.png"></image></view>
+		<view class="fr s_12" bindtap="project">
+			<image src="../img/f063.png"></image>
+		</view>
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20" wx:for="{{resume.ctrlProjectDTOS}}">
+	<view class="s_20 hi" wx:for="{{resume.ctrlProjectDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.name}}</view>
-			<view class="fr s_15" bindtap="project" data-id="{{item.id}}" data-index="{{index}}"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="project" data-id="{{item.id}}" data-index="{{index}}">
+				<image src="../img/f050.png"></image>
+			</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{times[index].startTime}}~{{times[index].endTime}}</view>
 		<view class="s_21">{{item.describe}}</view>
 	</view>
-	<view class="s_22" bindtap="change1"><image src="{{isX?'../img/f064.png':'../img/f064-01.png'}}"></image></view>
 </view>
 
 <view class="s_05">
 	<view class="s_06">
 		<view class="fl s_07">教育经历</view>
-		<view class="fr s_12" bindtap="education"><image src="../img/f063.png"></image></view>
+		<view class="fr s_12" bindtap="education">
+			<image src="../img/f063.png"></image>
+		</view>
 		<view class="w-clear"></view>
 	</view>
 	<view class="s_20" wx:for="{{resume.ctrlSchoolDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.school}}</view>
-			<view class="fr s_15" bindtap="education" data-id="{{item.id}}" data-index="{{index}}"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="education" data-id="{{item.id}}" data-index="{{index}}">
+				<image src="../img/f050.png"></image>
+			</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="s_16">{{schoolT[index].startTime}}~{{schoolT[index].endTime}}</view>
-		<view class="s_03"><p>{{item.recordName}}</p><span>|</span><p>{{item.professional}}</p></view>
+		<view class="s_03">
+			<p>{{item.recordName}}</p><span>|</span>
+			<p>{{item.professional}}</p>
+		</view>
 	</view>
 </view>
 
 <view class="s_05">
 	<view class="s_06">
 		<view class="fl s_07">获得证书</view>
-		<view class="fr s_12" bindtap="honor"><image src="../img/f063.png"></image></view>
+		<view class="fr s_12" bindtap="honor">
+			<image src="../img/f063.png"></image>
+		</view>
 		<view class="w-clear"></view>
 	</view>
 	<view class="s_20" wx:for="{{resume.ctrlBookDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.name}}</view>
-			<view class="fr s_15" bindtap="honor" data-id="{{item.id}}" data-index="{{index}}"><image src="../img/f050.png"></image></view>
+			<view class="fr s_15" bindtap="honor" data-id="{{item.id}}" data-index="{{index}}">
+				<image src="../img/f050.png"></image>
+			</view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="s_16">{{book[index].time	}}</view>
-		<view class="s_23"><image src="{{item.url}}"></image></view>
+		<view class="s_16">{{book[index].time }}</view>
+		<view class="s_23">
+			<image src="{{item.url}}"></image>
+		</view>
 	</view>
 </view>
 
@@ -158,16 +192,3 @@
 		</view>
 	</view>
 </view>
-
-
-
-
-
-
-
-
-
-
-
-
-

@@ -20,7 +20,8 @@ Page({
     pro_value:'',
     des_value:'',
     shcool_value:'',
-    opList:''
+    opList:'',
+    isToggle:false
   },
 
   /**
@@ -41,7 +42,8 @@ Page({
         date1:time1,
         des_value:options.describe?options.describe:'',
         pro_value:options.professional?options.professional:'',
-        edu:options.record
+        edu:options.record,
+        isToggle:true
       })
       console.log(this.data.shcool_value,this.data.des_value,this.data.pro_value)
     }
@@ -113,7 +115,7 @@ Page({
     var that=this,
     date = this.data.date.substring(0, 4) + '/' + this.data.date.substring(5, 7) + '/' + this.data.date.substring(8, 10),
     date1 = this.data.date1.substring(0, 4) + '/' + this.data.date1.substring(5, 7) + '/' + this.data.date1.substring(8, 10),
-    id=this.data.opList.sId?that.data.opList.sId:''
+    id=this.data.opList.sId?this.data.opList.sId:''
     console.log(this.data.shcool_value,this.data.des_value,this.data.pro_value)
 
     this.data.app.http({
@@ -149,6 +151,36 @@ Page({
         }
       }
       
+    })
+  },
+   // 删除
+   dele(){
+    var id=id=this.data.opList.sId?this.data.opList.sId:''
+    this.data.app.http({
+      url: '/resume/delSchool',
+      dengl: true,
+      method:'POST',
+      data: {
+        id:id
+      },
+      success(res) {
+        console.log(res)
+        if (res.data.code == 200) {
+          // 及时更新上层页面
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          // prevPage.setData({
+          //   resume: []
+          // })
+          wx.navigateBack({
+            success(res) {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
+          })
+        }
+      }
     })
   },
   // ---end---

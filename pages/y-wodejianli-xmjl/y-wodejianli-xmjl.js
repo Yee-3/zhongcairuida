@@ -14,7 +14,8 @@ Page({
     name_value: '',
     int_value: '',
     app: getApp().globalData,
-    idL:{}
+    idL:{},
+    isToggle:false
   },
 
   /**
@@ -34,7 +35,8 @@ Page({
         name_value:options.name,
         int_value:options.describe,
         date:time,
-        date1:time1
+        date1:time1,
+        isToggle:true
       })
       console.log()
     }
@@ -88,6 +90,36 @@ Page({
           prevPage.setData({
             resume: []
           })
+          wx.navigateBack({
+            success(res) {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
+          })
+        }
+      }
+    })
+  },
+   // 删除
+   dele(){
+    var id=this.data.idL.sId?this.data.idL.sId:''
+    this.data.app.http({
+      url: '/resume/delProject',
+      dengl: true,
+      method:'POST',
+      data: {
+        id:id
+      },
+      success(res) {
+        console.log(res)
+        if (res.data.code == 200) {
+          // 及时更新上层页面
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          // prevPage.setData({
+          //   resume: []
+          // })
           wx.navigateBack({
             success(res) {
               var page = getCurrentPages().pop();

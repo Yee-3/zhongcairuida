@@ -14,7 +14,26 @@
   font-size: 28rpx;
   color: #565656;
 }
+.hid_02{
+  overflow: hidden;
+  height:368rpx ;
+}
 
+.hidden{
+  overflow: hidden;
+  height:430rpx ;
+
+}
+.s_05 .hi:last-child {
+   margin-bottom: 45rpx;
+}
+.s_05 .hi{
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+}
 .s_03 span {
   font-size: 28rpx;
   color: #909090;
@@ -29,6 +48,7 @@
 
 
 .s_05 {
+  position: relative;
   width: 690rpx;
   margin: 0 auto;
   margin-top: 30rpx;
@@ -37,6 +57,7 @@
   padding: 10rpx 25rpx 20rpx 25rpx;
   box-sizing: border-box;
   border-radius: 15rpx;
+  
 }
 
 .s_07 {
@@ -136,11 +157,18 @@
 .s_22 {
   text-align: center;
   margin-top: 16rpx;
+   position: absolute;
+  bottom: 0;
+  padding-bottom: 15rx;
+  width: 100%;
+  background-color: #fff;
 }
 
 .s_22 image {
   width: 30rpx;
   height: 17rpx;
+  padding-right:25rpx ;
+
 }
 
 .s_23 {

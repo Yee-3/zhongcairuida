@@ -46,13 +46,15 @@
 	</view>
 </view>
 
-<view class="s_05">
+<view class="{{isF?'s_05':'s_05 hidden'}}">
+	<view class="s_22"  bindtap="change" wx:if="{{hidd}}" style="padding-bottom: 15rpx;">
+		<image src="{{!isF?'../img/f064-01.png':'../img/f064.png'}}"></image>
+	</view>
 	<view class="s_06">
 		<view class="fl s_07">工作经历</view>
-
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20" wx:for="{{detCon.ctrlWorkDTOS}}">
+	<view class="s_20 hi" wx:for="{{detCon.ctrlWorkDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.company}}</view>
 
@@ -65,18 +67,19 @@
 		</view>
 		<view class="s_21">{{item.describe}}</view>
 	</view>
-	<view class="s_22">
-		<image src="../img/f064.png"></image>
-	</view>
+
 </view>
 
-<view class="s_05">
+<view class="{{isX?'s_05':'s_05 hid_02'}}">
+<view class="s_22" wx:if="{{hidd1}}" style="padding-bottom: 15rpx;" bindtap="change1">
+		<image src="{{!isX?'../img/f064-01.png':'../img/f064.png'}}"></image>
+	</view>
 	<view class="s_06">
 		<view class="fl s_07">项目经历</view>
 
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20" wx:for="{{detCon.ctrlProjectDTOS}}">
+	<view class="s_20 hi" wx:for="{{detCon.ctrlProjectDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.name}}</view>
 
@@ -86,9 +89,7 @@
 		<view class="s_21">{{item.describe}}</view>
 	</view>
 
-	<view class="s_22">
-		<image src="../img/f064.png"></image>
-	</view>
+	
 </view>
 
 <view class="s_05">

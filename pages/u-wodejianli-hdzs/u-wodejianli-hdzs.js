@@ -15,6 +15,7 @@ Page({
     id:'',
     sId:'',
     app: getApp().globalData,
+    isToggle:false
   },
 
   /**
@@ -32,7 +33,8 @@ Page({
         name_value:options.name,
         date:time,
         img:options.url,
-        sId:options.sId
+        sId:options.sId,
+        isToggle:true
       })
       console.log(this.data.id)
     }
@@ -53,11 +55,29 @@ Page({
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
-        // console.log(res)
-        // tempFilePath可以作为img标签的src属性显示图片
-        _this.setData({
-          img : res.tempFilePaths
-        })
+         // tempFilePath可以作为img标签的src属性显示图片
+         var webUrl = 'http://123.56.114.88:8088/'
+         var baseUrl = 'http://123.56.114.88:8089'
+         wx.uploadFile({
+           url: baseUrl + '/Other/upload',
+           filePath: res.tempFilePaths[0],
+           name: 'img',
+           header: {
+             'content-type': 'multipart/form-data',
+             'Authorization': wx.getStorageSync('Authorization')
+           },
+           success: function (res) {
+             var path = JSON.parse(res.data)
+             if (res.statusCode == 200) {
+               _this.setData({
+                img: webUrl + path.rdata
+               })
+             }
+           },
+           fail: function (res) {
+             console.log(res)
+           }
+         })
       }
     })
   },
@@ -95,6 +115,36 @@ Page({
       }
     })
   },
+     // 删除
+     dele(){
+     var id=this.data.sId?this.data.sId:''
+      this.data.app.http({
+        url: '/resume/delBook',
+        dengl: true,
+        method:'POST',
+        data: {
+          id:id
+        },
+        success(res) {
+          console.log(res)
+          if (res.data.code == 200) {
+            // 及时更新上层页面
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2]; //上一个页面
+            // prevPage.setData({
+            //   resume: []
+            // })
+            wx.navigateBack({
+              success(res) {
+                var page = getCurrentPages().pop();
+                if (page == undefined || page == null) return;
+                page.onLoad();
+              }
+            })
+          }
+        }
+      })
+    },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

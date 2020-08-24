@@ -35,7 +35,8 @@ Page({
     des_Type: '',
     id: '',
     money_Type: '',
-    id_ty: ''
+    id_ty: '',
+    isToggle:false
   },
 
   /**
@@ -70,6 +71,7 @@ Page({
                 ind3: list[i].industry,
                 money_Type: list[i].money,
                 types: list[i].type,
+                isToggle:true
               })
               for (var i = 0; i < that.data.type_cont.length; i++) {
                 if (that.data.types == that.data.type_cont[i].value) {
@@ -117,6 +119,35 @@ Page({
         that.setData({
           comTypeList: res.data.rdata
         })
+      }
+    })
+  },
+  // 删除
+  dele(){
+    this.data.app.http({
+      url: '/resume/delWork',
+      dengl: true,
+      method:'POST',
+      data: {
+        id:this.data.id_ty
+      },
+      success(res) {
+        console.log(res)
+        if (res.data.code == 200) {
+          // 及时更新上层页面
+          var pages = getCurrentPages();
+          var prevPage = pages[pages.length - 2]; //上一个页面
+          // prevPage.setData({
+          //   resume: []
+          // })
+          wx.navigateBack({
+            success(res) {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
+          })
+        }
       }
     })
   },

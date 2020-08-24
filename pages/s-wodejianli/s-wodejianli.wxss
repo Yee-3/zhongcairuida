@@ -25,9 +25,21 @@
   color: #333;
   margin-top: 16rpx;
 }
+.hid_02{
+  overflow: hidden;
+  height:368rpx ;
+}
 
+.hidden{
+  overflow: hidden;
+  height:430rpx ;
+}
+.s_05 .hi:last-child {
+   margin-bottom: 45rpx;
+}
 
 .s_05 {
+ position: relative;
   width: 690rpx;
   margin: 0 auto;
   margin-top: 30rpx;
@@ -126,21 +138,33 @@
   font-size: 26rpx;
   color: #555;
   line-height: 42rpx;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
 }
 
 .s_20 {
   margin-top: 20rpx;
-  
+
 }
 
 .s_22 {
   text-align: center;
   margin-top: 16rpx;
+   position: absolute;
+  bottom: 0;
+  /* padding-bottom: 15rx; */
+  width: 100%;
+  background-color: #fff;
 }
 
 .s_22 image {
   width: 30rpx;
   height: 17rpx;
+  padding-right:25rpx ;
+
 }
 
 .s_23 {
@@ -220,8 +244,8 @@
   height: 140rpx;
 }
 
-.hidden {}
-.hide{
+
+.hide {
   overflow: hidden;
   display: -webkit-box;
   -webkit-box-orient: vertical;
@@ -229,9 +253,10 @@
   display: -webkit-box;
   -webkit-line-clamp: 4;
 }
-.show{
+
+.show {
   display: block
-} 
+}
 
 
 .f_07 {
@@ -307,6 +332,7 @@
   border-bottom-left-radius: 20rpx;
   border-bottom-right-radius: 20rpx;
 }
+
 .zc_20 p {
   font-size: 30rpx;
   color: #000;

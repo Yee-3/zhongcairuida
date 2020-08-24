@@ -17,6 +17,11 @@ Page({
     this.setData({
       content: options
     })
+    if (options.desc) {
+      this.setData({
+        val:options.desc
+      })
+    }
   },
   change(e) {
     console.log(e)
@@ -31,7 +36,7 @@ Page({
     console.log(this.data.val)
     prevPage.setData({
       val: that.data.val,
-      content: that.data.content
+      options: that.data.content
     })
     wx.navigateBack({
       success(res) {

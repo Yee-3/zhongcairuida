@@ -141,7 +141,8 @@ Page({
     let that = this;
     new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
       var x = val.address_component.city,
-        y = val.ad_info.adcode.substring(0, 4) + '00'
+        y = val.ad_info.adcode.substring(0, 4) + '00',
+        location = val.location
       if (x.indexOf('市') !== -1) { //这里是去掉“市”这个字
         val = x.slice(0, x.indexOf('市'));
       }
@@ -152,7 +153,8 @@ Page({
       wx.setStorageSync('locatecity', {
         city: val,
         time: new Date().getTime(),
-        countryId: y
+        countryId: y,
+        location:location.lng + ',' + location.lat
       });
     });
   },
