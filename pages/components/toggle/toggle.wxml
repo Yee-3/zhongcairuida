@@ -3,7 +3,7 @@
 <view class="mask" wx:if="{{isShow}}" bindtap='show'></view>
 <view class="maskCom" wx:if="{{isShow}}">
 	<view class="Con" style="{{padding}}">
-		<view class="conTitle">身份切换</view>
+		<view class="conTitle">{{title}}</view>
 		<view class="conCont">
 			{{content}}
 		</view>

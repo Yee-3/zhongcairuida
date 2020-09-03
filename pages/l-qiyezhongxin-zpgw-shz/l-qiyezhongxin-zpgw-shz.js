@@ -17,14 +17,33 @@ Page({
     app: getApp().globalData,
     recomList: [],
     passList: [],
+    isHz:false,
+    kefuPhone: {},
+    isHz_Type:''
+    // isTwo:''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
     var that = this
-
+    this.data.app.http({
+      type: true,
+      url: '/company/queryCooperate',
+      dengl: true,
+      data: {
+        companyId: options.id
+      },
+      method: 'POST',
+      success(res) {
+        console.log(res)
+          that.setData({
+            isHz_Type:res.data.rdata
+          })
+      }
+    })
     this.setData({
       id: options.id
     })
@@ -37,6 +56,17 @@ Page({
     }
     this.reword(data)
     console.log(this.data.recomList)
+    this.data.app.http({
+      url: '/Other/hotline',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          kefuPhone: res.data.rdata
+        })
+      }
+    })
   },
   reword(data) {
     var that = this
@@ -129,9 +159,15 @@ Page({
    
   },
   release() {
-    wx.navigateTo({
-      url: '../a-gangweifabu/a-gangweifabu?id=' + this.data.id,
-    })
+    if(this.data.isHz_Type=='Y'){
+      wx.navigateTo({
+        url: '../a-gangweifabu/a-gangweifabu?id=' + this.data.id,
+      })
+    }else{
+      this.setData({
+        isHz:true
+      })
+    }
   },
   toggleShen(e) {
     console.log('执行点击事件001')
@@ -174,6 +210,16 @@ Page({
       }
       this.reword(data)
     }
+  },
+  phone() {
+    wx.makePhoneCall({
+      phoneNumber: this.data.kefuPhone.phone
+    })
+  },
+  quxiao2: function () {
+    this.setData({
+      isHz:false
+    })
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

@@ -171,7 +171,7 @@
 			</view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="a_10">
+		<!-- <view class="a_10">
 			<view class="fl a_03"><em>*</em>
 				<p>是否初面</p>
 			</view>
@@ -182,7 +182,7 @@
 				</view>
 			</view>
 			<view class="w-clear"></view>
-		</view>
+		</view> -->
 	</view>
 	<view class="a_13" bindtap="submit">发布</view>
 </view>

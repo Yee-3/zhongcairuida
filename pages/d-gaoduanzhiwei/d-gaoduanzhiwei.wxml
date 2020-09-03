@@ -49,13 +49,13 @@
 				<view class="d_05">{{clas[6].label}}</view>
 			</view>
 		</li>
-		<!-- <li  data-index="7">
+		<li  data-index="7" data-index="{{clas[6].value}}">
 			<view class="d_02"><image src="../img/f019.jpg"></image></view>
 			<view class="d_03">
 				<view class="d_04"><image src="../img/f012.png"></image></view>
 				<view class="d_05">{{clas[7].label}}</view>
 			</view>
-		</li> -->
+		</li>
 	</ul>
 </view>
 

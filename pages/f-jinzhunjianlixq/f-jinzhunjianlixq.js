@@ -17,7 +17,13 @@ Page({
     content: {},
     date: '',
     resumeId: '',
-    positionId: ''
+    positionId: '',
+    isXuan: true,
+    itIndex: 'X',
+    isZhuce: '',
+    isType: '',
+    content: '您还未注册企业信息，请注册企业信息！',
+    kefuPhone:{}
   },
 
   /**
@@ -31,8 +37,40 @@ Page({
       id: wx.getStorageSync('companyId'),
       positionId: options.positId
     })
-    var id = wx.getStorageSync('companyId')
+    var id = wx.getStorageSync('companyId'),
+      app = getApp().globalData,
+      that = this
     console.log(id)
+    app.http({
+      type: true,
+      url: '/getCompany',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res)
+        if (res.data.rdata.ctrlCompany) {
+          console.log('注册企业信息')
+          that.setData({
+            isZhuce: true,
+          })
+          var type = res.data.rdata.ctrlCompany.audit
+          var types = res.data.rdata.ctrlCompany.cooperation
+          if (type == 1) {
+            that.setData({
+              isHz: types == 'Y' ? true : false,
+              isType: type,
+            })
+          }
+        } else {
+          console.log('未注册注册企业信息')
+          that.setData({
+            isHz: true,
+            isZhuce: false
+          })
+        }
+
+      }
+    })
     this.data.app.http({
       type: true,
       url: '/company/queryCooperate',
@@ -43,15 +81,15 @@ Page({
       method: 'POST',
       success(res) {
         console.log(res)
-        // if (res.data.rdata == 'N') {
-        //   that.setData({
-        //     isHz: false
-        //   })
-        // } else {
-        //   that.setData({
-        //     isHz: true
-        //   })
-        // }
+        if (res.data.rdata == 'N') {
+          that.setData({
+            isHz: false
+          })
+        } else {
+          that.setData({
+            isHz: true
+          })
+        }
       }
     })
 
@@ -99,7 +137,18 @@ Page({
 
       }
     })
-
+    this.data.app.http({
+      type: true,
+      url: '/Other/hotline',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          kefuPhone: res.data.rdata
+        })
+      }
+    })
   },
   change: function (e) {
     var f = this.data.isF
@@ -121,7 +170,7 @@ Page({
   },
   phone() {
     wx.makePhoneCall({
-      phoneNumber: '1222222'
+      phoneNumber: this.data.kefuPhone.phone
     })
   },
   quxiao2: function () {

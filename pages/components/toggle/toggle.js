@@ -9,6 +9,11 @@ Component({
       // 初始值
       value: '是否切换为招聘官身份'
     },
+    title: {
+      type: String,
+      // 初始值
+      value: '身份切换'
+    },
     confirmText: {
       type: String,
       value: '跳转'

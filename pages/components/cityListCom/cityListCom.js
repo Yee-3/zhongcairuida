@@ -239,94 +239,110 @@ Component({
         locateCity: cityOrTime.city
       })
     }
-    new qqmap().getCity().then(function (val) {
-      var name = that.data.locateCity
-      var city = val.result[1]
-      var city_coun = val.result[0]
-      var city_qu = val.result[2]
-      var cityList = []
-      var citys = []
-      var qita = []
-      var hot = []
-      var locate = []
-      // 将所有市放入列表中
-      for (var i = 0; i < city_coun.length; i++) {
-        var num = city_coun[i].id.substring(0, 2)
-        if (num == 11 || num == 12 || num == 31 || num == 50 || num == 71 || num == 81 || num == 82) {
-          cityList.push(city_coun[i])
-        }
-      }
-      for (var i = 0; i < city.length; i++) {
-        var num = city[i].id.substring(0, 2)
-        if (num != 11 && num != 12 && num != 31 && num != 50 && num != 71 && num != 81 && num != 82) {
-          cityList.push(city[i])
-        } else {
-          qita.push(city[i])
-        }
-      }
-      // 遍历出来结构
-      var letter = []
-      for (var i = 0; i < cityList.length; i++) {
-        var letts = cityList[i].pinyin[0].substring(0, 1)
-        letter.push(letts)
-      }
-      var letters = Array.from(new Set(letter)).sort()
-      for (var i = 0; i < letters.length; i++) {
-        var obj = {}
-        var data = []
-        obj.letter = letters[i].toUpperCase()
-        obj.data = data
-        citys.push(obj)
-        // 遍历城市数据信息
-        for (var j = 0; j < cityList.length; j++) {
-          var da = {}
-          var datas = []
-          var letts = cityList[j].pinyin[0].substring(0, 1)
-          da.id = cityList[j].id
-          da.cityName = cityList[j].name
-          da.data = datas
-          da.location = cityList[j].location
-          for (var x = 0; x < city_qu.length; x++) {
-            var qu = {}
-            qu.id = city_qu[x].id
-            qu.name = city_qu[x].fullname
-            if (cityList[j].id.substring(0, 4) == city_qu[x].id.substring(0, 4)) {
-              da.data.push(qu)
-            }
-          }
-          for (var y = 0; y < qita.length; y++) {
-            var qu = {}
-            qu.id = qita[y].id
-            qu.name = qita[y].fullname
-            if (cityList[j].id.substring(0, 2) == qita[y].id.substring(0, 2)) {
-              da.data.push(qu)
-            }
-          }
-          if (letters[i] == letts) {
-            // 遍历地区数据
-            citys[i].data.push(da)
-          }
-        }
-      }
-      // 热门城市
-      for (var i = 0; i < citys.length; i++) {
-        for (var j = 0; j < citys[i].data.length; j++) {
-          var x = citys[i].data[j].id
-          var y = citys[i].data[j].cityName
-          if (x == 110000 || x == 310000 || x == 420100 || x == 440300 || x == 440100) {
-            hot.push(citys[i].data[j])
-          }
-          if (name == y) {
-            locate.push(citys[i].data[j].data)
-          }
-        }
-      }
-      that.setData({
-        citylist: citys,
-        newcity: hot,
-        locate: locate
+    var list= wx.getStorageSync('list')
+    if(list){
+      this.setData({
+        citylist:list.citylist,
+        newcity:list.newcity,
+        locate:list.locate
       })
-    })
+    }else{
+      new qqmap().getCity().then(function (val) {
+        var name = that.data.locateCity
+        var city = val.result[1]
+        var city_coun = val.result[0]
+        var city_qu = val.result[2]
+        var cityList = []
+        var citys = []
+        var qita = []
+        var hot = []
+        var locate = []
+        // 将所有市放入列表中
+        for (var i = 0; i < city_coun.length; i++) {
+          var num = city_coun[i].id.substring(0, 2)
+          if (num == 11 || num == 12 || num == 31 || num == 50 || num == 71 || num == 81 || num == 82) {
+            cityList.push(city_coun[i])
+          }
+        }
+        for (var i = 0; i < city.length; i++) {
+          var num = city[i].id.substring(0, 2)
+          if (num != 11 && num != 12 && num != 31 && num != 50 && num != 71 && num != 81 && num != 82) {
+            cityList.push(city[i])
+          } else {
+            qita.push(city[i])
+          }
+        }
+        // 遍历出来结构
+        var letter = []
+        for (var i = 0; i < cityList.length; i++) {
+          var letts = cityList[i].pinyin[0].substring(0, 1)
+          letter.push(letts)
+        }
+        var letters = Array.from(new Set(letter)).sort()
+        for (var i = 0; i < letters.length; i++) {
+          var obj = {}
+          var data = []
+          obj.letter = letters[i].toUpperCase()
+          obj.data = data
+          citys.push(obj)
+          // 遍历城市数据信息
+          for (var j = 0; j < cityList.length; j++) {
+            var da = {}
+            var datas = []
+            var letts = cityList[j].pinyin[0].substring(0, 1)
+            da.id = cityList[j].id
+            da.cityName = cityList[j].name
+            da.data = datas
+            da.location = cityList[j].location
+            for (var x = 0; x < city_qu.length; x++) {
+              var qu = {}
+              qu.id = city_qu[x].id
+              qu.name = city_qu[x].fullname
+              if (cityList[j].id.substring(0, 4) == city_qu[x].id.substring(0, 4)) {
+                da.data.push(qu)
+              }
+            }
+            for (var y = 0; y < qita.length; y++) {
+              var qu = {}
+              qu.id = qita[y].id
+              qu.name = qita[y].fullname
+              if (cityList[j].id.substring(0, 2) == qita[y].id.substring(0, 2)) {
+                da.data.push(qu)
+              }
+            }
+            if (letters[i] == letts) {
+              // 遍历地区数据
+              citys[i].data.push(da)
+            }
+          }
+        }
+        // 热门城市
+        for (var i = 0; i < citys.length; i++) {
+          for (var j = 0; j < citys[i].data.length; j++) {
+            var x = citys[i].data[j].id
+            var y = citys[i].data[j].cityName
+            if (x == 110000 || x == 310000 || x == 420100 || x == 440300 || x == 440100) {
+              hot.push(citys[i].data[j])
+            }
+            if (name == y) {
+              locate.push(citys[i].data[j].data)
+            }
+          }
+        }
+        wx.setStorageSync('list',{
+          citylist:citys,
+          newcity:hot,
+          locate:locate
+        })
+        that.setData({
+          citylist: citys,
+          newcity: hot,
+          locate: locate
+        })
+        console.log(citys,hot,locate)
+      })
+    }
+   
     // 判断是否执行
     if (!this.data.showMap) {
       this.setData({

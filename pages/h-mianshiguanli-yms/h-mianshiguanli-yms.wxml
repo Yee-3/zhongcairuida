@@ -64,6 +64,9 @@
 			<li class="{{ind1==2?'on':''}}" data-index="2" bindtap="toggleMin1">
 				<view class="h_08">到岗式</view>
 			</li>
+				<li class="{{ind1==3?'on':''}}" data-index="3" bindtap="toggleMin1">
+				<view class="h_08">管家式</view>
+			</li>
 		</ul>
 	</view>
 </view>

@@ -8,9 +8,12 @@ Page({
     dianhua: 'display:none',
     app: getApp().globalData,
     kefuPhone: {},
-    user:{},
+    user: {},
     content: '是否切换为求职身份',
-    com_type:''
+    com_type: '',
+    com_cont: '',
+    isZhuce:'',
+    zhuContent:'请先注册企业信息'
   },
 
   /**
@@ -18,20 +21,34 @@ Page({
    */
   onLoad: function (options) {
     this.tog = this.selectComponent("#tog");
+    this.zhuce = this.selectComponent("#zhuce");
     const app = getApp().globalData
     var that = this
     app.http({
-      type:true,
+      type: true,
       url: '/getCompany',
       dengl: true,
       data: {},
       success(res) {
         console.log(res)
-        that.setData({
-          user:res.data.rdata.ctrlCompany
-        })
-        if(res.data.rdata.ctrlMemberinfo){
-          wx.setStorageSync('companyId',res.data.rdata.ctrlMemberinfo.companyId)
+        if (res.data.rdata.ctrlCompany) {
+          that.setData({
+            user: res.data.rdata.ctrlCompany
+          })
+          var type=res.data.rdata.ctrlCompany.audit
+          that.setData({
+            com_cont:type=='0'?'审核中':type=='1'?'已认证':'认证失败',
+            com_type:type,
+            isZhuce:true
+          })
+        }else{
+          that.setData({
+            com_cont:'未认证',
+            isZhuce:false
+          })
+        }
+        if (res.data.rdata.ctrlMemberinfo) {
+          wx.setStorageSync('companyId', res.data.rdata.ctrlMemberinfo.companyId)
         }
       }
     })
@@ -47,44 +64,50 @@ Page({
         })
       }
     })
-    this.data.app.http({
-      type:true,
-      url:'/company/queryAuthentication',
-      dengl:true,
-      data:{},
-      method:'POST',
-      success(res){
-       that.setData({
-        com_type:res.data.rdata
-       })
-      }
-    })
+
   },
-  auth(){
-    if(this.data.com_type==0){
-      wx.showToast({
-        title: '信息审核中！',
-        icon:"none"
-      })
-    }else{
-      wx.navigateTo({
-        url: '../m-qiyezhuce/m-qiyezhuce?id=1',
-      })
-    }
-  },
+  // auth(){
+  //   if(this.data.com_type==0){
+  //     wx.showToast({
+  //       title: '信息审核中！',
+  //       icon:"none"
+  //     })
+  //   }else{
+  //     wx.navigateTo({
+  //       url: '../m-qiyezhuce/m-qiyezhuce?id=1',
+  //     })
+  //   }
+  // },
   gangwei(e) {
     console.log(e)
-    if(this.data.com_type==0){
-      wx.showToast({
-        title: '信息审核中！',
-        icon:"none"
-      })
+    var that=this
+    if(this.data.isZhuce){
+      if(that.data.com_type!=1){
+        var type=that.data.com_type
+        var title=type==0?'企业信息审核中':'企业认证失败'
+        wx.showToast({
+          title: title,
+          icon:"none"
+        })
+      }else{
+        wx.navigateTo({
+          url: '../l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz?id=' + e.currentTarget.dataset.id,
+        })
+  
+      }
     }else{
-      wx.navigateTo({
-        url: '../l-qiyezhongxin-zpgw-shz/l-qiyezhongxin-zpgw-shz?id='+e.currentTarget.dataset.id,
-      })
-
+      this.zhuce.show()
     }
+  
+  },
+  zhuCancel() {
+    this.zhuce.show()
+  },
+  zhuConfirm() {
+    this.zhuce.show()
+    wx.redirectTo({
+      url: '../m-qiyezhuce/m-qiyezhuce',
+    })
   },
   qiuzhi() {
     this.tog.show()
@@ -115,9 +138,9 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        if(res.data.code==200){
-          wx.setStorageSync('Authorization','')
-          wx.setStorageSync('companyId','')
+        if (res.data.code == 200) {
+          wx.setStorageSync('Authorization', '')
+          wx.setStorageSync('companyId', '')
           wx.showToast({
             title: '您已退出登录'
           })
@@ -169,7 +192,7 @@ Page({
         console.log("hide home complete");
       },
     });
-   
+
   },
 
   /**

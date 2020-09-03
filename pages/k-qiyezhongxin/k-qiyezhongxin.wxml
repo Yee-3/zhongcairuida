@@ -42,7 +42,7 @@
 				<view class="q_13 fl">企业认证</view>
 			</view>
 			<view class="fr">
-				<view class="q_14 fl">{{com_type=='0'?'审核中':com_type=='1'?'已认证':'认证失败'}}</view>
+				<view class="q_14 fl">{{com_cont}}</view>
 
 			</view>
 		</view>
@@ -119,4 +119,5 @@
 	</view>
 </view>
 <toggle id="tog" bind:confirm="confirm" confirmText="确定" cancelText="取消" bind:cancel="cancel" content="{{content}}"></toggle>
+<toggle id="zhuce" bind:confirm="zhuConfirm" title="注册提示"  confirmText="注册" cancelText="取消" bind:cancel="zhuCancel" content="{{zhuContent}}"></toggle>
 <tabbars></tabbars>

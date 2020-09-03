@@ -74,22 +74,8 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/e-jinzhunjianli/e-jinzhunjianli",
-					"pathName": "pages/e-jinzhunjianli/e-jinzhunjianli",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/p-qiyeduan/p-qiyeduan",
 					"pathName": "pages/p-qiyeduan/p-qiyeduan",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/l-remenzhiwei/l-remenzhiwei",
-					"pathName": "pages/l-remenzhiwei/l-remenzhiwei",
 					"query": "",
 					"scene": null
 				},
@@ -109,8 +95,15 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/q-wode/q-wode",
-					"pathName": "pages/q-wode/q-wode",
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/p-qiyeduan/p-qiyeduan",
+					"pathName": "pages/p-qiyeduan/p-qiyeduan",
 					"query": "",
 					"scene": null
 				}

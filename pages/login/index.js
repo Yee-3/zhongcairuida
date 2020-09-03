@@ -53,7 +53,7 @@ Page({
   //登录
   getPerson(options) {
     let _this = this;
-console.log('执行')
+   console.log('执行')
     const app = getApp().globalData
     // wx.showLoading({
     //   title: '登录中...',
@@ -85,10 +85,9 @@ console.log('执行')
                   type: _this.data.type
                 }),
                 success(res) {
-                  console.log(res.data.rdata.ctrlToken.token, 2222)
+                  // console.log(res.data.rdata.ctrlToken.token, 2222,res)
                   if (res.data.code==200) {
                     wx.setStorageSync('Authorization', res.data.rdata.ctrlToken.token)
-                    console.log(wx.getStorageSync('Authorization')),
                       wx.showToast({
                         title: '登录成功'
                       })
@@ -105,6 +104,8 @@ console.log('执行')
                         })
                       }, 1000)
                     }
+                  }else{
+                    console.log(res)
                   }
                 }
               })

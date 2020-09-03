@@ -149,7 +149,7 @@
 	<view class="f_07">
 		<view class="f_14">
 			<p>您还没与平台达成合作</p>
-			<view><span>请联系客服</span><span style="color: #0286ff;">122121</span></view>
+			<view><span>请联系客服</span><span style="color: #0286ff;">{{kefuPhone.phone}}</span></view>
 		</view>
 		<view class="f_11">
 			<view class="f_12 fl" bindtap="quxiao2">取消</view>

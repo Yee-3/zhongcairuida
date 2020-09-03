@@ -377,7 +377,7 @@ Page({
       page: that.data.currentPage,
       type: 2,
       sort: ind,
-      location: address,
+      location: that.data.location,
       name: name
     }
     console.log(address)
@@ -590,6 +590,7 @@ Page({
 							var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
 							val.timeVal = value
             }
+            val.distance=(val.distance/1000).toFixed(1)
           })
         }
         console.log(arr, 88888)
@@ -632,10 +633,6 @@ Page({
       data: data,
       success(res) {
         console.log(res.data.rdata, 22222)
-        that.setData({
-          recomList: that.data.recomList.concat(res.data.rdata)
-        })
-
         function jiance(x) {
           return x < 10 ? '0' + x : x
         }
@@ -648,8 +645,12 @@ Page({
             var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
             var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
             val.timeVal = value
+             val.distance=(val.distance/1000).toFixed(1)
           })
         }
+        that.setData({
+          recomList: that.data.recomList.concat(res.data.rdata)
+        })
         if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2

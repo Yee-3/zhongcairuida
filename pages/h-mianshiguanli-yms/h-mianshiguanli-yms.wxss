@@ -269,7 +269,7 @@ page {
 
 .h_06_1 ul li {
   float: left;
-  width: 50%;
+  width: 33.33%;
 }
 
 .h_08_1 {

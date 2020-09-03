@@ -141,8 +141,8 @@
 		<!-- <view class="mar_bot"> -->
 		<scroll-view scroll-y="true" style="height:{{ height+'rpx'}}" bindscrolltolower="scrll">
 		<!-- 需补充职位id -->
-			<view class="e_03" wx:for="{{positList}}" data-id="{{item.id}}" data-comId="{{item.companyId}}" bindtap="choice">
-				<view class="e_04">{{item.title}}</view>
+			<view class="e_03" wx:for="{{positList}}" data-id="{{item.id}}" data-index="{{index}}" data-comId="{{item.companyId}}" bindtap="choice">
+				<view class="{{itIndex==index?'xuanOn':'e_04'}}" >{{item.title}}</view>
 				<view class="d_10">
 					<p>{{item.schoolRecord}}</p><span>|</span>
 					<p>{{item.address}}</p><span>|</span>
@@ -161,7 +161,7 @@
 	<view class="f_07">
 		<view class="f_14">
 			<p>您还没与平台达成合作</p>
-			<view><span>请联系客服</span><span style="color: #0286ff;">122121</span></view>
+			<view><span>请联系客服</span><span style="color: #0286ff;">{{kefuPhone.phone}}</span></view>
 		</view>
 		<view class="f_11">
 			<view class="f_12 fl" bindtap="quxiao2">取消</view>
@@ -170,3 +170,4 @@
 		</view>
 	</view>
 </view>
+<toggle id="tog" bind:confirm="zhuConfirm" title="注册提示"  confirmText="注册" cancelText="取消" bind:cancel="zhuCancel" content="{{content}}"></toggle>

@@ -19,22 +19,29 @@ Page({
     date: '',
     resumeId: '',
     currentPage: 1,
-		loadingType: 0,
-		contentText: {
-			contentdown: "上拉显示更多",
-			contentrefresh: "正在加载...",
-			contentnomore: "没有更多数据了"
+    loadingType: 0,
+    contentText: {
+      contentdown: "上拉显示更多",
+      contentrefresh: "正在加载...",
+      contentnomore: "没有更多数据了"
     },
-    isF:false,
-    isX:false,
-    hidd:true,
-    hidd1:true,
+    isF: false,
+    isX: false,
+    hidd: true,
+    hidd1: true,
+    isXuan: true,
+    itIndex: 'X',
+    isZhuce: '',
+    isType: '',
+    content: '您还未注册企业信息，请注册企业信息！',
+    kefuPhone:{}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.tog = this.selectComponent("#tog");
     this.setData({
       height: wx.getSystemInfoSync().windowHeight * 0.9,
       id: wx.getStorageSync('companyId')
@@ -45,25 +52,56 @@ Page({
     console.log(id)
     app.http({
       type: true,
-      url: '/company/queryCooperate',
+      url: '/getCompany',
       dengl: true,
-      data: {
-        companyId: id
-      },
-      method: 'POST',
+      data: {},
       success(res) {
         console.log(res)
-        // if(res.data.rdata=='N'){
-        //   that.setData({
-        //     isHz:false
-        //   })
-        // }else{
-        //   that.setData({
-        //     isHz:true
-        //   })
-        // }
+        if (res.data.rdata.ctrlCompany) {
+          console.log('注册企业信息')
+          that.setData({
+            isZhuce: true,
+          })
+          var type = res.data.rdata.ctrlCompany.audit
+          var types = res.data.rdata.ctrlCompany.cooperation
+          if (type == 1) {
+            that.setData({
+              isHz: types=='Y'?true:false,
+              isType: type,
+            })
+          }
+        } else {
+          console.log('未注册注册企业信息')
+          that.setData({
+            isHz: true,
+            isZhuce: false
+          })
+        }
+
       }
     })
+    // app.http({
+    //   type: true,
+    //   url: '/company/queryCooperate',
+    //   dengl: true,
+    //   data: {
+    //     companyId: id
+    //   },
+    //   method: 'POST',
+    //   success(res) {
+    //     console.log(res)
+    //     if(res.data.rdata=='N'){
+    //       that.setData({
+    //         isHz:false
+    //       })
+    //     }else{
+    //       that.setData({
+    //         isHz:true
+    //       })
+    //     }
+    //   }
+    // })
+
     app.http({
       url: '/indexCom/getResumeDetail',
       type: true,
@@ -77,26 +115,26 @@ Page({
         var arr1 = res.data.rdata.ctrlProjectDTOS
         var arr2 = res.data.rdata.ctrlSchoolDTOS
         var arr3 = res.data.rdata.ctrlBookDTOS
-        if(res.data.rdata.ctrlWorkDTOS.length<=1){
+        if (res.data.rdata.ctrlWorkDTOS.length <= 1) {
           that.setData({
-            hidd:false,
-            isF:true
+            hidd: false,
+            isF: true
           })
-        }else{
+        } else {
           that.setData({
-            hidd:true,
-            isF:false
+            hidd: true,
+            isF: false
           })
         }
-        if(res.data.rdata.ctrlProjectDTOS.length<=1){
+        if (res.data.rdata.ctrlProjectDTOS.length <= 1) {
           that.setData({
-            hidd1:false,
-            isX:true
+            hidd1: false,
+            isX: true
           })
-        }else{
+        } else {
           that.setData({
-            hidd1:true,
-            isX:false
+            hidd1: true,
+            isX: false
           })
         }
         if (arr.length > 0) {
@@ -136,6 +174,19 @@ Page({
         console.log(that.data.detCon)
       }
     })
+    app.http({
+      type:true,
+      url: '/Other/hotline',
+      dengl: true,
+      data: {},
+      success(res) {
+        console.log(res.data.rdata)
+        that.setData({
+          kefuPhone: res.data.rdata
+        })
+      }
+    })
+
   },
   change: function (e) {
     var f = this.data.isF
@@ -147,6 +198,18 @@ Page({
     var x = this.data.isX
     this.setData({
       isX: !x
+    })
+  },
+  zhuCancel() {
+    this.tog.show()
+    // wx.redirectTo({
+    //   url: '../m-qiyezhuce/m-qiyezhuce',
+    // })
+  },
+  zhuConfirm() {
+    this.tog.show()
+    wx.redirectTo({
+      url: '../m-qiyezhuce/m-qiyezhuce',
     })
   },
   reword(data) {
@@ -200,7 +263,7 @@ Page({
         that.setData({
           positList: that.data.positList.concat(res.data.rdata)
         })
-        if (res.data.rdata.length <10) {
+        if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
           })
@@ -216,35 +279,57 @@ Page({
   },
   choice(e) {
     console.log(e)
+    var that = this
     this.setData({
-      positionId: e.currentTarget.dataset.id
+      positionId: e.currentTarget.dataset.id,
+      itIndex: e.currentTarget.dataset.index
     })
+
   },
   invit() {
-    if (this.data.isHz) {
-      var mask = this.data.isMask,
-        that = this
-      this.setData({
-        isMask: !mask,
-        currentPage:1
-      })
-      var data={
-        companyId: that.data.id,
-        limit: 10,
-        page: this.data.currentPage,
-        status: 1
-      }
-     this.reword(data)
+    var that=this
+    if (!this.data.isZhuce) {
+      this.tog.show()
     } else {
-      var two = this.data.isTwo
-      this.setData({
-        isTwo: !two
-      })
+      // com_cont:type=='0'?'审核中':type=='1'?'已认证':'认证失败',
+      if(this.data.isType!=1){
+        var type=that.data.isType
+        var title=type==0?'企业信息审核中':'企业认证失败'
+        wx.showToast({
+          title: title,
+          icon:"none"
+        })
+      }else{
+        if (that.data.isHz) {
+          var mask = that.data.isMask,
+            that = that
+          that.setData({
+            isMask: !mask,
+            currentPage: 1,
+            itIndex: 'X'
+          })
+          var data = {
+            companyId: that.data.id,
+            limit: 10,
+            page: that.data.currentPage,
+            status: 1
+          }
+          that.reword(data)
+        } else {
+          var two = that.data.isTwo
+          that.setData({
+            isTwo: !two
+          })
+        }
+      }
+     
     }
+
   },
+  
   phone() {
     wx.makePhoneCall({
-      phoneNumber: '1222222'
+      phoneNumber: this.data.kefuPhone.phone
     })
   },
   quxiao2: function () {
@@ -265,11 +350,11 @@ Page({
 
     }
   },
-  scrll () {
-    var data={
+  scrll() {
+    var data = {
       companyId: this.data.id,
       limit: 10,
-      page: this.data.currentPage+1,
+      page: this.data.currentPage + 1,
       status: 1
     }
     this.jiazai(data)

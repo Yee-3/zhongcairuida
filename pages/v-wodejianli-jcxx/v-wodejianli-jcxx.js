@@ -13,7 +13,7 @@ Page({
     mar: '0',
     valu: '请选择',
     isSix: false,
-    six: '1',
+    six: '0',
     six_val: '请选择',
     isEdu: false,
     edu: 'x',
@@ -77,15 +77,16 @@ Page({
             phone_value: list.phone ? list.phone : '请输入',
             edu: list.school ? list.school : '',
             id: list.id,
-            money_value: list.address ? list.address : '',
+            // money_value: list.address ? list.address : '',
             home_value: list.address ? list.address : '请输入',
             mar: list.marriage ? list.marriage : '',
             emil_value: list.email ? list.email : ''
           })
           if (list.sex) {
-            var six_val = (list.sex == 1) ? '男' : '女'
+            var six_val = (list.sex == 0) ? '男' : '女'
             that.setData({
               six_val: six_val,
+              six:list.sex
             })
           }
           that.spring.setData({
@@ -240,7 +241,7 @@ Page({
         name: this.data.name_value,
         phone: this.data.phone_value,
         email: this.data.emil_value,
-        money: this.data.money_value,
+        // money: this.data.money_value,
         url: this.data.img,
         status: this.spring.data.mar,
         school: this.data.edu,
@@ -255,7 +256,7 @@ Page({
         name: this.data.name_value,
         phone: this.data.phone_value,
         email: this.data.emil_value,
-        money: this.data.money_value,
+        // money: this.data.money_value,
         url: this.data.img,
         status: this.spring.data.mar,
         school: this.data.edu,
@@ -367,7 +368,7 @@ Page({
   },
   con1() {
     this.hidden()
-    if (this.data.six == 1) {
+    if (this.data.six == 0) {
       this.setData({
         six_val: '男'
       })

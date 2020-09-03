@@ -81,4 +81,4 @@
 		</view>
 	</view>
 </view>
-<toggle id="tog" bind:confirm="confirm"  confirmText="跳转" cancelText="注册" bind:cancel="cancel" content="{{content}}"></toggle>
+<toggle id="tog" bind:confirm="confirm"  confirmText="跳转" cancelText="取消" bind:cancel="cancel" content="{{content}}"></toggle>

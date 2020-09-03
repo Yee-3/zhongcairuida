@@ -206,7 +206,7 @@ Page({
           requirements: that.data.yqValue ? that.data.yqValue : '',
           structure: that.data.moneyValue ? that.data.moneyValue : '',
           welfare: that.data.welLi ? that.data.welLi : '',
-          first: that.data.swicth,
+          // first: that.data.swicth,
           name: that.name.data.id,
           district: that.data.cityId,
           city: that.data.countryId,

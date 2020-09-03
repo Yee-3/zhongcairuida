@@ -10,7 +10,7 @@ Page({
     kefuPhone: {},
     user: {},
     show: true,
-    content: '您已注册企业端信息，是否重新注册？'
+    content: '是否切换为面试官身份'
   },
 
   /**
@@ -36,7 +36,6 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         if (wx.getStorageSync('Authorization')) {
           that.setData({
             user: res.data.rdata.ctrlResume
@@ -92,7 +91,6 @@ Page({
           // }
         }
         // this.onLoad()
-        console.log(this.data.user)
       }
     })
   },
@@ -132,9 +130,10 @@ Page({
 
   },
   cancel() {
-    wx.redirectTo({
-      url: '../m-qiyezhuce/m-qiyezhuce',
-    })
+    this.tog.show()
+    // wx.redirectTo({
+    //   url: '../m-qiyezhuce/m-qiyezhuce',
+    // })
   },
   confirm() {
     this.tog.show()

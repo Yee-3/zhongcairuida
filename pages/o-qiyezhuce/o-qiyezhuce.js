@@ -414,12 +414,14 @@ Page({
         title: '请输入公司名称',
         icon: 'none'
       })
-    } else if (this.data.imgValue == '请上传') {
-      wx.showToast({
-        title: '请上传公司LOGO',
-        icon: 'none'
-      })
-    } else if (!this.nature.data.edu) {
+    } 
+    // else if (this.data.imgValue == '请上传') {
+    //   wx.showToast({
+    //     title: '请上传公司LOGO',
+    //     icon: 'none'
+    //   })
+    // }
+     else if (!this.nature.data.edu) {
       wx.showToast({
         title: '请选择公司性质',
         icon: 'none'
