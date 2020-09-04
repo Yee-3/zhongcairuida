@@ -284,6 +284,11 @@ Component({
             }
           }
         }
+        wx.setStorageSync('list',{
+          citylist:citys,
+          newcity:hot,
+          locate:locate
+        })
         that.setData({
           citylist: citys,
           newcity: hot,

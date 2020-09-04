@@ -78,9 +78,7 @@
 		<view class="a_02">您期望的工作地点</view>
 		<view class="a_06">
 			<view class="section">
-				<!-- <picker value="{{index}}" range="{{array}}"> -->
 				<view class="picker" bindtap="weizhi">{{mapValue}}</view>
-				<!-- </picker> -->
 			</view>
 		</view>
 	</view>

@@ -41,7 +41,8 @@ Page({
         positionId:options.id
       },
       success(res) {
-        var arr = res.data.rdata
+        var arr = res.data.rdata==null?arr=[]:res.data.rdata
+       console.log(arr.length)
         if (arr.length > 0) {
           arr.map(function (val, i) {
             var arrs = val.ctrlWorkDTOS
@@ -65,7 +66,7 @@ Page({
         that.setData({
           conList: res.data.rdata
         })
-        if (res.data.rdata.length < 10) {
+        if (arr < 10) {
           that.setData({
             loadingType: 2
           })

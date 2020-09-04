@@ -131,7 +131,9 @@
 	</view>
 </view>
 
-<view class="f_01"><view class="s_24" bindtap="invit">{{isHz?'邀请面试':'电话咨询'}}</view></view>
+<view class="f_01">
+<view class="s_24" bindtap="invit">{{isHz?'邀请面试':'电话咨询'}}</view>
+</view>
 
 <!-- 邀请面试-职位弹框 -->
 <view class="mask" wx:if="{{isMask}}"></view>

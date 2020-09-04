@@ -44,7 +44,7 @@ Page({
     this.setData({
       workId: options.id,
       nameValue: options.name ? options.name : '',
-      mapValue: options.address ? options.address : '',
+      mapValue: options.address ? options.address : '请选择',
       phoneValue: options.phone ? options.phone : '',
       num: options.money ? options.money : '',
       indexs: options.workType ? options.workType : '',
