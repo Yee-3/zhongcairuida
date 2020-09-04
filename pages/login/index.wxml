@@ -14,7 +14,7 @@
     绑定微信手机号
 </button> -->
 
-	<button class='nologin' type='default' withCredentials="true" lang="zh_CN" bindtap="noLogin">
+	<!-- <button class='nologin' type='default' withCredentials="true" lang="zh_CN" bindtap="noLogin">
 		先去看看
-	</button>
+	</button> -->
 </view>

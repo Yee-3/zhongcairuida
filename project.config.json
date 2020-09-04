@@ -101,9 +101,9 @@
 					"scene": null
 				},
 				{
-					"id": -1,
-					"name": "pages/p-qiyeduan/p-qiyeduan",
-					"pathName": "pages/p-qiyeduan/p-qiyeduan",
+					"id": 6,
+					"name": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
+					"pathName": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
 					"query": "",
 					"scene": null
 				}

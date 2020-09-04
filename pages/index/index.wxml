@@ -1,0 +1,12 @@
+<!--pages/index/index.wxml-->
+<view class="content">
+	<!-- <view class="title">请选择进入的端口</view>
+	<button bindtap="qiuzhi">求职端</button>
+	<button bindtap="qiye">企业端</button> -->
+	<view class="qiye" bindtap="qiye">
+	<image src="../img/qiye_bag.png"></image>
+	</view>
+	<view class="qiuzhi" bindtap="qiuzhi">
+	<image src="../img/qiuzhi_bag.png"></image>
+	</view>
+</view>

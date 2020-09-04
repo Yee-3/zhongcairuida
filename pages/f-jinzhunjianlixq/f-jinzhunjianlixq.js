@@ -23,13 +23,14 @@ Page({
     isZhuce: '',
     isType: '',
     content: '您还未注册企业信息，请注册企业信息！',
-    kefuPhone:{}
+    kefuPhone: {}
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    this.tog = this.selectComponent("#tog");
     console.log(options)
     var that = this
     this.setData({
@@ -41,7 +42,7 @@ Page({
       app = getApp().globalData,
       that = this
     console.log(id)
-    app.http({
+    this.data.app.http({
       type: true,
       url: '/getCompany',
       dengl: true,
@@ -71,27 +72,27 @@ Page({
 
       }
     })
-    this.data.app.http({
-      type: true,
-      url: '/company/queryCooperate',
-      dengl: true,
-      data: {
-        companyId: id
-      },
-      method: 'POST',
-      success(res) {
-        console.log(res)
-        if (res.data.rdata == 'N') {
-          that.setData({
-            isHz: false
-          })
-        } else {
-          that.setData({
-            isHz: true
-          })
-        }
-      }
-    })
+    // this.data.app.http({
+    //   type: true,
+    //   url: '/company/queryCooperate',
+    //   dengl: true,
+    //   data: {
+    //     companyId: id
+    //   },
+    //   method: 'POST',
+    //   success(res) {
+    //     console.log(res)
+    //     if (res.data.rdata == 'N') {
+    //       that.setData({
+    //         isHz: false
+    //       })
+    //     } else {
+    //       that.setData({
+    //         isHz: true
+    //       })
+    //     }
+    //   }
+    // })
 
     this.data.app.http({
       url: '/indexCom/getResumeDetail',
@@ -177,10 +178,37 @@ Page({
     this.invit()
   },
   confirm(e) {
-    this.setData({
-      datePickerIsShow: true,
-      data_index: e.currentTarget.dataset.de
-    });
+    var that = this
+    if (!this.data.isZhuce) {
+      that.tog.show()
+    } else {
+      if (this.data.isType != 1) {
+        var type = that.data.isType
+        var title = type == 0 ? '企业信息审核中' : '企业认证失败'
+        wx.showToast({
+          title: title,
+          icon: "none"
+        })
+      } else {
+        that.setData({
+          datePickerIsShow: true,
+          data_index: e.currentTarget.dataset.de
+        });
+      }
+
+    }
+  },
+  zhuCancel() {
+    this.tog.show()
+    // wx.redirectTo({
+    //   url: '../m-qiyezhuce/m-qiyezhuce',
+    // })
+  },
+  zhuConfirm() {
+    this.tog.show()
+    wx.navigateTo({
+      url: '../m-qiyezhuce/m-qiyezhuce',
+    })
   },
   // 选择时间
 

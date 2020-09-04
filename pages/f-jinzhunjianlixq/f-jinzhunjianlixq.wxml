@@ -158,3 +158,4 @@
 		</view>
 	</view>
 </view>
+<toggle id="tog" bind:confirm="zhuConfirm" title="注册提示"  confirmText="注册" cancelText="取消" bind:cancel="zhuCancel" content="{{content}}"></toggle>

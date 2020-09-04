@@ -1,0 +1,37 @@
+/* pages/index/index.wxss */
+.title{
+  font-size: 20px;
+  margin-top: 50%;
+text-align: center;
+}
+
+button{
+  min-width: 180rpx;
+  line-height: 60rpx;
+  background-color: silver;
+  border-radius: 30rpx;
+  margin-top: 20rpx;
+}
+view{
+  text-align: center;
+}
+page{
+  background: #f6f6f6;
+}
+.content{
+  margin-top: 40rpx;
+}
+.content view:first-child{
+margin-bottom: 30rpx;
+}
+ image{
+  width: 690rpx;
+  height: 260rpx;
+  
+}
+.qiuzhi{
+  /* background-image: url(../img/qiuzhi_bag.png); */
+}
+/* button:first-child{
+  background: royalblue;
+} */
