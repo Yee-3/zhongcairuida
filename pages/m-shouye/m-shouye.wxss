@@ -723,7 +723,7 @@ white-space: nowrap;
   position: absolute;
   height: 85rpx;
   /* width: 690rpx; */
-  bottom:-20rpx;
+  bottom:0;
   right: 0;
 }
 .butImg image{
