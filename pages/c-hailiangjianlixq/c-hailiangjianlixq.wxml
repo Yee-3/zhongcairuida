@@ -47,7 +47,7 @@
 </view>
 
 <view class="{{isF?'s_05':'s_05 hidden'}}">
-	<view class="s_22"  bindtap="change" wx:if="{{hidd}}" style="padding-bottom: 15rpx;">
+	<view class="s_22" bindtap="change" wx:if="{{hidd}}" style="padding-bottom: 15rpx;">
 		<image src="{{!isF?'../img/f064-01.png':'../img/f064.png'}}"></image>
 	</view>
 	<view class="s_06">
@@ -71,7 +71,7 @@
 </view>
 
 <view class="{{isX?'s_05':'s_05 hid_02'}}">
-<view class="s_22" wx:if="{{hidd1}}" style="padding-bottom: 15rpx;" bindtap="change1">
+	<view class="s_22" wx:if="{{hidd1}}" style="padding-bottom: 15rpx;" bindtap="change1">
 		<image src="{{!isX?'../img/f064-01.png':'../img/f064.png'}}"></image>
 	</view>
 	<view class="s_06">
@@ -89,7 +89,7 @@
 		<view class="s_21">{{item.describe}}</view>
 	</view>
 
-	
+
 </view>
 
 <view class="s_05">
@@ -98,7 +98,7 @@
 
 		<view class="w-clear"></view>
 	</view>
-	<view class="s_20"  wx:for="{{detCon.ctrlSchoolDTOS}}">
+	<view class="s_20" wx:for="{{detCon.ctrlSchoolDTOS}}">
 		<view class="s_13">
 			<view class="fl s_14">{{item.school}}</view>
 
@@ -130,22 +130,35 @@
 		</view>
 	</view>
 </view>
-
-<view class="f_01">
-<view class="s_24" bindtap="invit">{{isHz?'邀请面试':'电话咨询'}}</view>
+<!-- <view class="f_01" wx:if="{{isHz}}">
+	<ul>
+		<li>分享</li>
+		<li bindtap="invit">邀面试</li>
+	</ul>
+</view> -->
+<view class="f_04" wx:if="{{isHz}}">
+	<view class="f_05 fl">
+		<button open-type="share" style="font-size:28rpx;font-weight: normal;text-align: center;padding:0">我要分享</button>
+	</view>
+	<view class="f_06 fr" bindtap="invit">
+		<p>邀面试</p>
+	</view>
+</view>
+<view class="f_01" wx:if="{{!isHz}}">
+	<view class="s_24" bindtap="invit">邀请面试</view>
 </view>
 
 <!-- 邀请面试-职位弹框 -->
-<view class="mask" wx:if="{{isMask}}"></view>
+<view class="mask" wx:if="{{isMask}}" bindtap="hidd"></view>
 <view class="mask_Mar" wx:if="{{isMask}}">
 	<view class="mar_top">
 		<view class="mar_title">选择所招聘的职位</view>
 		<!-- <view class="mar_bot"> -->
 		<scroll-view scroll-y="true" style="height:{{ height+'rpx'}}" bindscrolltolower="scrll">
-		<!-- 需补充职位id -->
-			<view class="e_03" wx:for="{{positList}}" data-id="{{item.id}}" data-index="{{index}}" data-comId="{{item.companyId}}" bindtap="choice">
-				<view class="{{itIndex==index?'xuanOn':'e_04'}}" >{{item.title}}</view>
-				<view class="d_10">
+			<!-- 需补充职位id -->
+			<view class="{{itIndex==index?'e_03_1':'e_03'}}" wx:for="{{positList}}" data-id="{{item.id}}" data-index="{{index}}" data-comId="{{item.companyId}}" bindtap="choice">
+				<view class="{{itIndex==index?'xuanOn':'e_04'}}">{{item.title}}</view>
+				<view class="{{itIndex==index?'d_10_1':'d_10'}}">
 					<p>{{item.schoolRecord}}</p><span>|</span>
 					<p>{{item.address}}</p><span>|</span>
 					<p>{{item.money}}</p>
@@ -172,4 +185,4 @@
 		</view>
 	</view>
 </view>
-<toggle id="tog" bind:confirm="zhuConfirm" title="注册提示"  confirmText="注册" cancelText="取消" bind:cancel="zhuCancel" content="{{content}}"></toggle>
+<toggle id="tog" bind:confirm="zhuConfirm" title="注册提示" confirmText="注册" cancelText="取消" bind:cancel="zhuCancel" content="{{content}}"></toggle>

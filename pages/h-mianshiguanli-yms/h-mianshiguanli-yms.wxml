@@ -113,7 +113,7 @@
 			</view>
 			<view class="h2_23" wx:if="{{idn==3}}">
 				<p>服务模式：</p>
-				<span>{{ind1==1?'到面式':'到岗式'}}</span>
+				<span>{{ind1==1?'到面式':ind1==2?'到岗式':'管家式'}}</span>
 			</view>
 			<view class="h_23" wx:if="{{ind==3}}">
 				<p>拒绝原因：</p>

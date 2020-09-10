@@ -11,7 +11,7 @@ Page({
     isMask: false,
     datePickerValue: ['', '', ''],
     datePickerIsShow: false,
-    isHz: true,
+    isHz: '',
     isTwo: false,
     app: getApp().globalData,
     content: {},
@@ -22,7 +22,7 @@ Page({
     itIndex: 'X',
     isZhuce: '',
     isType: '',
-    content: '您还未注册企业信息，请注册企业信息！',
+    neorong: '您还未注册企业信息，请注册企业信息！',
     kefuPhone: {}
   },
 
@@ -65,7 +65,7 @@ Page({
         } else {
           console.log('未注册注册企业信息')
           that.setData({
-            isHz: true,
+            isHz: false,
             isZhuce: false
           })
         }
@@ -190,10 +190,15 @@ Page({
           icon: "none"
         })
       } else {
-        that.setData({
-          datePickerIsShow: true,
-          data_index: e.currentTarget.dataset.de
-        });
+        if(this.data.isHz){
+          that.setData({
+            datePickerIsShow: true,
+            data_index: e.currentTarget.dataset.de
+          });
+        }else{
+          that.invit()
+        }
+        
       }
 
     }

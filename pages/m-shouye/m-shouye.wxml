@@ -257,7 +257,10 @@
 		</view>
 
 	</view>
-	<view class="loading-text" wx:if="{{loadingType==0||loadingType==1}}">
+	<view class="loading-text">
+		<view class="butImg">
+			<image src="../img/c1.png"></image>
+		</view>
 		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
 	</view>
 

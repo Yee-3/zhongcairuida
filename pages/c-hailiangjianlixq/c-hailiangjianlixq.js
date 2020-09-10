@@ -9,7 +9,7 @@ Page({
     isMask: false,
     datePickerValue: ['', '', ''],
     datePickerIsShow: false,
-    isHz: true,
+    isHz: '',
     isTwo: false,
     detCon: {},
     id: '',
@@ -34,7 +34,7 @@ Page({
     isZhuce: '',
     isType: '',
     content: '您还未注册企业信息，请注册企业信息！',
-    kefuPhone:{}
+    kefuPhone: {}
   },
 
   /**
@@ -57,23 +57,28 @@ Page({
       data: {},
       success(res) {
         console.log(res)
+        // 有企业信息
         if (res.data.rdata.ctrlCompany) {
           console.log('注册企业信息')
           that.setData({
-            isZhuce: true,
+            isZhuce: true, // 注册信息true
           })
           var type = res.data.rdata.ctrlCompany.audit
           var types = res.data.rdata.ctrlCompany.cooperation
-          if (type == 1) {
+          if (type != 1) {
             that.setData({
-              isHz: types=='Y'?true:false,
+              isHz: false
+            })
+          } else {
+            that.setData({
+              isHz: types == 'Y' ? true : false,
               isType: type,
             })
           }
         } else {
           console.log('未注册注册企业信息')
           that.setData({
-            isHz: true,
+            isHz: false,
             isZhuce: false
           })
         }
@@ -175,7 +180,7 @@ Page({
       }
     })
     app.http({
-      type:true,
+      type: true,
       url: '/Other/hotline',
       dengl: true,
       data: {},
@@ -287,22 +292,21 @@ Page({
 
   },
   invit() {
-    var that=this
+    var that = this
     if (!this.data.isZhuce) {
       this.tog.show()
     } else {
       // com_cont:type=='0'?'审核中':type=='1'?'已认证':'认证失败',
-      if(this.data.isType!=1){
-        var type=that.data.isType
-        var title=type==0?'企业信息审核中':'企业认证失败'
+      if (this.data.isType != 1) {
+        var type = that.data.isType
+        var title = type == 0 ? '企业信息审核中' : '企业认证失败'
         wx.showToast({
           title: title,
-          icon:"none"
+          icon: "none"
         })
-      }else{
+      } else {
         if (that.data.isHz) {
-          var mask = that.data.isMask,
-            that = that
+          var mask = that.data.isMask
           that.setData({
             isMask: !mask,
             currentPage: 1,
@@ -322,11 +326,11 @@ Page({
           })
         }
       }
-     
+
     }
 
   },
-  
+
   phone() {
     wx.makePhoneCall({
       phoneNumber: this.data.kefuPhone.phone
@@ -349,6 +353,12 @@ Page({
       });
 
     }
+  },
+  hidd() {
+    var mask = this.data.isMask
+    this.setData({
+      isMask: !mask,
+    })
   },
   scrll() {
     var data = {

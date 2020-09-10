@@ -42,7 +42,7 @@ App({
     baseUrl: 'http://123.56.114.88:8089',
     http(obj) {
       // console.log(webUrl)
-      // var webUrl='http://192.168.100.81:8089'
+      // var webUrl='http://192.168.100.82:8089'
       var webUrl = 'http://123.56.114.88:8089'
       if (obj.dengl) {
         if (obj.type) {

@@ -140,7 +140,7 @@
 </view>
 
 <view class="f_01" wx:if="{{!isHz}}">
-	<view class="s_24" bindtap="invit">电话咨询</view>
+	<view class="s_24" bindtap="confirm">邀请面试</view>
 </view>
 <!-- 邀请面试-职位弹框 -->
 
@@ -158,4 +158,4 @@
 		</view>
 	</view>
 </view>
-<toggle id="tog" bind:confirm="zhuConfirm" title="注册提示"  confirmText="注册" cancelText="取消" bind:cancel="zhuCancel" content="{{content}}"></toggle>
+<toggle id="tog" bind:confirm="zhuConfirm" title="注册提示"  confirmText="注册" cancelText="取消" bind:cancel="zhuCancel" content="{{neorong}}"></toggle>

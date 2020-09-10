@@ -192,7 +192,7 @@ Page({
     var url = '/interviewManager/getSuccessList',
       //  var url = '/interviewManager/getInterviewList',
       that = this,
-      status = e.currentTarget.dataset.index == 1 ? '1' : '2',
+      status = e.currentTarget.dataset.index == 1 ? 1 : e.currentTarget.dataset.index==2?2:3,
       data = {
         companyId: that.data.companyId,
         status: status
@@ -387,7 +387,11 @@ Page({
     })
   },
   del_cancle() {
-    this.dele()
+    console.log(e)
+    var del = this.data.isDel
+    this.setData({
+      isDel: !del,
+    })
   },
   // 删除
   del_confirm() {

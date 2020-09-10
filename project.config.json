@@ -106,6 +106,20 @@
 					"pathName": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/p-qiyeduan/p-qiyeduan",
+					"pathName": "pages/p-qiyeduan/p-qiyeduan",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/m-shouye/m-shouye",
+					"pathName": "pages/m-shouye/m-shouye",
+					"query": "",
+					"scene": null
 				}
 			]
 		}

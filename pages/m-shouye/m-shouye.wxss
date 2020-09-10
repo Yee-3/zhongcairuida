@@ -711,11 +711,25 @@ white-space: nowrap;
 }
 .loading-text{
   /* display: block; */
-  padding-bottom: 20rpx;
-	text-align: center;
-	font-size: 26rpx;
+	width: 690rpx;
+  text-align: center;
+  font-size: 24rpx;
+  color: #c5c5c5;
+  padding: 30rpx 0;
+  position: relative;
+  margin: 0 auto;
 }
-
+.butImg{
+  position: absolute;
+  height: 85rpx;
+  /* width: 690rpx; */
+  bottom:-20rpx;
+  right: 0;
+}
+.butImg image{
+  width: 404rpx;
+  height: 85rpx;
+}
 .mask2_top {
 	height: 720rpx;
 	background: #fff;
