@@ -6,13 +6,23 @@ Page({
    */
   data: {
     app :getApp().globalData,
-    valueCon:''
+    valueCon:'',
+    name:'',
+    title:'提交'
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    if(options){
+      this.setData({
+        name:options.name,
+        valueCon:options.phone,
+        title:'确认信息'
+      })
+    }
   },
   change(e){
     console.log(e)
@@ -40,13 +50,11 @@ Page({
           prevPage.setData({
             resume: []
           })
-          wx.navigateBack({
-            success(res) {
-              var page = getCurrentPages().pop();
-              if (page == undefined || page == null) return;
-              page.onLoad();
-            }
+          prevPage.onLoad()
+          wx.switchTab({
+            url: '../q-wode/q-wode',
           })
+          
         }
       }
     })

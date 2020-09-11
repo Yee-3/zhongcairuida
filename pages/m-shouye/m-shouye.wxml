@@ -258,10 +258,10 @@
 
 	</view>
 	<view class="loading-text">
-		<view class="butImg">
+		<view class="butImg" bindtap="userIn" wx:if="{{!isBot}}">
 			<image src="../img/c1.png"></image>
 		</view>
-		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
+		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : (!isBot?'~':contentText.contentnomore)}}
 	</view>
 
 </view>

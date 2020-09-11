@@ -10,7 +10,7 @@
 				<p>{{detCon.ctrlResumeDTO.schoolName}}</p><span>|</span>
 				<p>{{detCon.ctrlResumeDTO.worktypeName}}</p>
 			</view>
-			<view class="s_04">手机号码：{{detCon.ctrlResumeDTO.phone}}</view>
+			<!-- <view class="s_04">手机号码：{{detCon.ctrlResumeDTO.phone}}</view> -->
 			<view class="s_04">求职状态：{{detCon.ctrlResumeDTO.statusName}}</view>
 		</view>
 	</view>
@@ -141,7 +141,7 @@
 		<button open-type="share" style="font-size:28rpx;font-weight: normal;text-align: center;padding:0">我要分享</button>
 	</view>
 	<view class="f_06 fr" bindtap="invit">
-		<p>邀面试</p>
+		<p>邀请面试</p>
 	</view>
 </view>
 <view class="f_01" wx:if="{{!isHz}}">

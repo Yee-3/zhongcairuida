@@ -10,7 +10,7 @@
 				<p>{{content.ctrlResumeDTO.schoolName}}</p><span>|</span>
 				<p>{{content.ctrlResumeDTO.worktypeName}}</p>
 			</view>
-			<view class="s_04">手机号码：{{content.ctrlResumeDTO.phone}}</view>
+			<!-- <view class="s_04">手机号码：{{content.ctrlResumeDTO.phone}}</view> -->
 			<view class="s_04">求职状态：{{content.ctrlResumeDTO.statusName}}</view>
 		</view>
 	</view>

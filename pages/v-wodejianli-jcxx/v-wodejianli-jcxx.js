@@ -46,7 +46,7 @@ Page({
     emil_value: '',
     id: '',
     idType: '',
-    list:{}
+    list: {}
   },
 
   /**
@@ -60,7 +60,7 @@ Page({
         idType: 1
       })
     }
-    var list={}
+    var list = {}
     this.data.app.http({
       url: '/getResumes',
       dengl: true,
@@ -69,12 +69,12 @@ Page({
         if (res.data.rdata.ctrlResume) {
           list = res.data.rdata.ctrlResume
           that.setData({
-            list:res.data.rdata.ctrlResume,
+            list: res.data.rdata.ctrlResume,
             img: list.url ? list.url : '../img/f067.png',
             name_value: list.name ? list.name : '',
             date_value: list.time ? list.time : '',
             valu2: list.schoolName ? list.schoolName : '请选择',
-            phone_value: list.phone ? list.phone : '请输入',
+            phone_value: list.phone ? list.phone : '请输入 （元）',
             edu: list.school ? list.school : '',
             id: list.id,
             // money_value: list.address ? list.address : '',
@@ -86,100 +86,101 @@ Page({
             var six_val = (list.sex == 0) ? '男' : '女'
             that.setData({
               six_val: six_val,
-              six:list.sex
+              six: list.sex
             })
           }
           that.spring.setData({
             mar: list.status ? list.status : ''
           })
         }
+        // 求职状态
+        that.data.app.http({
+          url: '/selects/resume_status',
+          dengl: true,
+          data: {},
+          success(res) {
+            that.setData({
+              springContent: res.data.rdata
+            })
+            if (that.data.list.status) {
+              res.data.rdata.map(function (val, i) {
+                if (val.value == that.data.list.status) {
+                  that.setData({
+                    type_content: val.label,
+                  })
+                }
+              })
+            }
+          }
+        })
+        // 最高学历
+        that.data.app.http({
+          url: '/selects/school_record',
+          dengl: true,
+          data: {},
+          success(res) {
+            that.setData({
+              eduction: res.data.rdata
+            })
+            if (that.data.list.school) {
+              res.data.rdata.map(function (val, i) {
+                if (val.value == that.data.list.school) {
+
+                  that.setData({
+                    valu2: val.label,
+                    edu: val.value
+                  })
+                }
+              })
+            }
+          }
+        })
+        // 婚姻状况
+        that.data.app.http({
+          url: '/selects/resume_marriage',
+          dengl: true,
+          data: {},
+          success(res) {
+            that.setData({
+              marr: res.data.rdata
+            })
+            if (that.data.list.marriage) {
+              res.data.rdata.map(function (val, i) {
+                if (val.value == that.data.list.marriage) {
+                  that.setData({
+                    valu: val.label,
+                    mar: val.value
+                  })
+                }
+              })
+            }
+          }
+        })
+        // 工作时间
+        that.data.app.http({
+          url: '/selects/work_exe',
+          dengl: true,
+          data: {},
+          success(res) {
+            that.setData({
+              yearList: res.data.rdata
+            })
+            if (that.data.list.workTime) {
+              res.data.rdata.map(function (val, i) {
+                if (val.value == that.data.list.workTime) {
+                  that.setData({
+                    yearValue: val.label,
+                    year_time: val.value
+                  })
+                }
+              })
+            }
+          }
+        })
 
       }
     })
-    // 求职状态
-    this.data.app.http({
-      url: '/selects/resume_status',
-      dengl: true,
-      data: {},
-      success(res) {
-        that.setData({
-          springContent: res.data.rdata
-        })
-        if (that.data.list.status) {
-          res.data.rdata.map(function (val, i) {
-            if (val.value == that.data.list.status) {
-              that.setData({
-                type_content: val.label,
-              })
-            }
-          })
-        }
-      }
-    })
-    // 最高学历
-    this.data.app.http({
-      url: '/selects/school_record',
-      dengl: true,
-      data: {},
-      success(res) {
-        that.setData({
-          eduction: res.data.rdata
-        })
-        if (that.data.list.school) {
-          res.data.rdata.map(function (val, i) {
-            if (val.value == that.data.list.school) {
 
-              that.setData({
-                valu2: val.label,
-                edu: val.value
-              })
-            }
-          })
-        }
-      }
-    })
-    // 婚姻状况
-    this.data.app.http({
-      url: '/selects/resume_marriage',
-      dengl: true,
-      data: {},
-      success(res) {
-        that.setData({
-          marr: res.data.rdata
-        })
-        if (that.data.list.marriage) {
-          res.data.rdata.map(function (val, i) {
-            if (val.value == that.data.list.marriage) {
-              that.setData({
-                valu: val.label,
-                mar: val.value
-              })
-            }
-          })
-        }
-      }
-    })
-    // 工作时间
-    this.data.app.http({
-      url: '/selects/work_exe',
-      dengl: true,
-      data: {},
-      success(res) {
-        that.setData({
-          yearList: res.data.rdata
-        })
-        if (that.data.list.workTime) {
-          res.data.rdata.map(function (val, i) {
-            if (val.value == that.data.list.workTime) {
-              that.setData({
-                yearValue: val.label,
-                year_time: val.value
-              })
-            }
-          })
-        }
-      }
-    })
 
   },
   blur(e) {
@@ -207,86 +208,78 @@ Page({
       })
     }
     if (type == 5) {
-      if (!this.data.app.checkPhone(value)) {
-        wx.showToast({
-          title: '请输入正确的手机号',
-          icon: 'none'
-        })
-      } else {
-        that.setData({
+        this.setData({
           phone_value: value
         })
-      }
+      
 
     }
     if (type == 6) {
-      if (!this.data.app.checkEmail(value)) {
-        wx.showToast({
-          title: '请输入正确的邮箱',
-          icon: 'none'
-        })
-      } else {
-        that.setData({
+        this.setData({
           emil_value: value
         })
-      }
+      
     }
   },
   submit() {
     var that = this,
       date = this.data.date_value.substring(0, 4) + '/' + this.data.date_value.substring(5, 7) + '/' + this.data.date_value.substring(8, 10)
     var data = {
-        address: this.data.home_value,
-        time: date,
-        name: this.data.name_value,
-        phone: this.data.phone_value,
-        email: this.data.emil_value,
-        // money: this.data.money_value,
-        url: this.data.img,
-        status: this.spring.data.mar,
-        school: this.data.edu,
-        workTime: this.data.year_time,
-        marriage: this.data.mar,
-        sex: this.data.six,
-        id: this.data.id
-      },
-      data1 = {
-        address: this.data.home_value,
-        time: date,
-        name: this.data.name_value,
-        phone: this.data.phone_value,
-        email: this.data.emil_value,
-        // money: this.data.money_value,
-        url: this.data.img,
-        status: this.spring.data.mar,
-        school: this.data.edu,
-        workTime: this.data.year_time,
-        marriage: this.data.mar,
-        sex: this.data.six,
-        id: this.data.id,
-        schoolName: this.data.valu2,
-        statusName: this.data.type_content,
-        workTimeName: this.data.yearValue,
-      }
-    this.data.app.http({
-      url: '/resume/saveOrUpdateResumes',
-      dengl: true,
-      method: 'POST',
-      data: data,
-      success(res) {
-        if (res.data.code == 200) {
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2];
-          wx.navigateBack({
-            success(res) {
-              var page = getCurrentPages().pop();
-              if (page == undefined || page == null) return;
-              page.onLoad();
-            }
-          })
+      address: this.data.home_value,
+      time: date,
+      name: this.data.name_value,
+      phone: this.data.phone_value,
+      email: this.data.emil_value,
+      // money: this.data.money_value,
+      url: this.data.img,
+      status: this.spring.data.mar,
+      school: this.data.edu,
+      workTime: this.data.year_time,
+      marriage: this.data.mar,
+      sex: this.data.six,
+      id: this.data.id
+    }
+
+    if (!this.data.app.checkPhone(that.data.phone_value)) {
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none'
+      })
+    } else if (!this.data.app.checkEmail(that.data.emil_value)) {
+      wx.showToast({
+        title: '请输入正确的邮箱',
+        icon: 'none'
+      })
+    } else {
+      this.data.app.http({
+        url: '/resume/saveOrUpdateResumes',
+        dengl: true,
+        method: 'POST',
+        data: data,
+        success(res) {
+          if (res.data.code == 200) {
+            wx.showToast({
+              title: '上传成功，请确认信息！',
+              icon: 'none',
+              duration: 2000,
+            })
+            var pages = getCurrentPages();
+            var prevPage = pages[pages.length - 2];
+            prevPage.onLoad();
+            wx.navigateTo({
+              url: '../r-wode-bdjl/r-wode-bdjl?name=' + that.data.name_value + '&phone=' + that.data.phone_value,
+            })
+          } else {
+            wx.showToast({
+              title: '上传失败！',
+              icon: "none",
+              duration: 2000,
+            })
+          }
         }
-      }
-    })
+      })
+    }
+
   },
   // 参加工作时间
   yearShow() {
@@ -330,6 +323,7 @@ Page({
   handleConfirmDialog() {
     this.spring.show()
     var index = this.spring.data.index
+    console.log(this.spring.data.index)
     this.setData({
       type_content: this.data.springContent[index].label
     })
@@ -403,10 +397,11 @@ Page({
   con2() {
     var that = this
     var index = this.data.edu_index
-    this.educat()
+    // console.log(this.data.edu_index)
     this.setData({
       valu2: that.data.eduction[index].label
     })
+    this.educat()
   },
   // ---end---
   /**

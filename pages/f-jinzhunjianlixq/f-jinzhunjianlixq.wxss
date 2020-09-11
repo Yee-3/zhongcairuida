@@ -2,11 +2,14 @@
   width: 690rpx;
   margin: 0 auto;
   margin-top: 60rpx;
-  height: 270rpx;
+  /* height: 270rpx; */
+  height: 240rpx;
 }
 
 .s_02 {
-  height: 270rpx;
+  /* height: 270rpx; */
+  height: 240rpx;
+
 }
 
 .s_03 p {

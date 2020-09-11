@@ -20,6 +20,7 @@ page {
 .banner {
   width: 690rpx;
   height: 300rpx;
+  border-radius: 20rpx;
 }
 
 .top swiper-item {

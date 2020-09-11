@@ -120,6 +120,33 @@
 					"pathName": "pages/m-shouye/m-shouye",
 					"query": "",
 					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/s-wodejianli/s-wodejianli",
+					"pathName": "pages/s-wodejianli/s-wodejianli",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
+					"pathName": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/q-wode/q-wode",
+					"pathName": "pages/q-wode/q-wode",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "pages/i-mianshi-yrz/i-mianshi-yrz",
+					"pathName": "pages/i-mianshi-yrz/i-mianshi-yrz",
+					"scene": null
 				}
 			]
 		}

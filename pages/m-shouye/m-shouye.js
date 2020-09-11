@@ -43,7 +43,7 @@ Page({
     contentText: {
       contentdown: "上拉显示更多",
       contentrefresh: "正在加载...",
-      contentnomore: "~"
+      contentnomore: "没有更多数据了~"
     },
     recomList: [],
     selList: [],
@@ -54,6 +54,7 @@ Page({
     zhCom: true,
     work: {},
     style: 'display:none',
+    isBot: ''
   },
   /**
    * 生命周期函数--监听页面加载
@@ -81,6 +82,27 @@ Page({
           selList: res.data.rdata.ctrlSelects,
           work: res.data.rdata.ctrlLookingwork
         })
+      }
+    })
+    this.data.app.http({
+      url: '/resume/getResume',
+      data: {},
+      dengl: true,
+      success(res) {
+        console.log(res)
+        if (res.data.rdata == 'unll') {
+          that.setData({
+            isBot: false
+          })
+        } else if (res.data.rdata) {
+          that.setData({
+            isBot: true
+          })
+        } else {
+          that.setData({
+            isBot: false
+          })
+        }
       }
     })
     this.data.app.http({
@@ -154,9 +176,15 @@ Page({
         city: val,
         time: new Date().getTime(),
         countryId: y,
-        location:location.lng + ',' + location.lat
+        location: location.lng + ',' + location.lat
       });
     });
+  },
+  // 进入我的
+  userIn() {
+    wx.navigateTo({
+      url: '../s-wodejianli/s-wodejianli',
+    })
   },
   // 事件
   sixChange(e) {
@@ -245,6 +273,7 @@ Page({
       }
     })
   },
+ 
   cancel() {
     this.position3()
     var that = this
@@ -287,10 +316,10 @@ Page({
               loadingType: 2
             })
           } else {
-          that.setData({
-            loadingType: 0
-          })
-        }
+            that.setData({
+              loadingType: 0
+            })
+          }
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
         }
@@ -621,10 +650,10 @@ Page({
               loadingType: 2
             })
           } else {
-          that.setData({
-            loadingType: 0
-          })
-        }
+            that.setData({
+              loadingType: 0
+            })
+          }
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
         }
@@ -682,10 +711,10 @@ Page({
               loadingType: 2
             })
           } else {
-          that.setData({
-            loadingType: 0
-          })
-        }
+            that.setData({
+              loadingType: 0
+            })
+          }
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
         }
@@ -815,10 +844,10 @@ Page({
               loadingType: 2
             })
           } else {
-          that.setData({
-            loadingType: 0
-          })
-        }
+            that.setData({
+              loadingType: 0
+            })
+          }
           wx.hideNavigationBarLoading();
           wx.stopPullDownRefresh()
         }
@@ -1000,7 +1029,7 @@ Page({
     if (!this.data.moCom) {
       var dat = {
         limit: 10,
-        page: that.data.currentPage+1,
+        page: that.data.currentPage + 1,
         type: 1,
         money: ind5,
         exe: ind6,
@@ -1011,24 +1040,24 @@ Page({
     } else if (!this.data.gsCom) {
       var dat = {
         limit: 10,
-        page: that.data.currentPage+1,
+        page: that.data.currentPage + 1,
         type: 1,
         comNum: ind4,
         comType: ind3,
       }
       this.jiazha(dat)
     } else if (!this.data.zwCom) {
-     var data = {
+      var data = {
         limit: 1,
-        page: that.data.currentPage+1,
+        page: that.data.currentPage + 1,
         type: 1,
         positionId: id
       }
       this.jiazai(data)
     } else if (!this.data.zhCom) {
-      var  data = {
+      var data = {
         limit: 10,
-        page: that.data.currentPage+1,
+        page: that.data.currentPage + 1,
         type: 1,
         sort: zong
       }
@@ -1036,7 +1065,7 @@ Page({
     } else {
       var dat = {
         limit: 10,
-        page: that.data.currentPage+1,
+        page: that.data.currentPage + 1,
         type: 1,
       }
       this.jiazai(dat)

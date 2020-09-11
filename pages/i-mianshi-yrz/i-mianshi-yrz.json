@@ -2,5 +2,5 @@
   "usingComponents": {
     "Select": "../components/select/select"
   },
-   "navigationBarTitleText": "某某招聘网"
+   "navigationBarTitleText": "面试管理"
 }

@@ -43,7 +43,7 @@
 
 <view class="h_09">
 	<!-- 待确认面试状态 -->
-	<view class="h_10" wx:for="{{recomList}}">
+	<view class="h_10" wx:for="{{recomList}}" data-id="{{item.companyId}}" bindtap="conpanyIn">
 		<view class="h_11">
 			<view class="fl h_12">{{item.title}}</view>
 			<view class="fr h_13" wx:if="{{idn!=1}}">{{((idn==2||idn==3)&&ind==1)?'待确认':((idn==2||idn==3)&&ind==2)?'已同意':((idn==2||idn==3)&&ind==3)?'已取消':false}}</view>

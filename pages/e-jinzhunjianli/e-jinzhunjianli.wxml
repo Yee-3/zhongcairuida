@@ -10,9 +10,10 @@
 			</view>
 		</view>
 		<view class="fr e_05">
-			<view class="e_06">
+			<view class="e_06" style="position: relative;">
 				<view class="e_07 fl">应聘简历</view>
 				<view class="e_08 fr">{{item.memberCount}}</view>
+			<image src="../img/yuan.png" wx:if="{{!item.read}}"></image>
 			</view>
 			<view class="e_06">
 				<view class="e_07 fl">{{item.serviceType=='2'?'成功面试':'成功入职'}}</view>

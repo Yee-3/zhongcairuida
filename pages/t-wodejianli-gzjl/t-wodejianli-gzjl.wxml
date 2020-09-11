@@ -93,7 +93,7 @@
 	</view>
 	<view class="r_02">
 		<view class="r_03">薪资：</view>
-		<view class="r_04"><input data-ty="4" type="number" bindblur="blur" data-value="{{value}}" placeholder="请输入" value="{{money_Type}}" /></view>
+		<view class="r_04"><input data-ty="4" type="number" bindblur="blur" data-value="{{value}}" placeholder="请输入 （元）" value="{{money_Type}}" /></view>
 	</view>
 	<!-- --end-- -->
 	<view class="r_02">
