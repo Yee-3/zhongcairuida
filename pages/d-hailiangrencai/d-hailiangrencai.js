@@ -182,19 +182,7 @@ Page({
         function jiance(x) {
           return x < 10 ? '0' + x : x
         }
-        var arr = res.data.rdata.ctrlWorkDTOS
-        var myDate = new Date()
-        if (arr.length > 0) {
-          arr.map(function (val, i) {
-            if (val.createTime) {
-              var date1 = new Date(val.createTime.substring(0, 10))
-              var date = new Date(myDate.getFullYear() + '-' + jiance((myDate.getMonth() + 1)) + '-' + jiance(myDate.getDate()));
-              var day = parseInt((date - date1) / 1000 / 60 / 60 / 24)
-              var value = parseInt(day / 30) < 1 ? day + '天前' : parseInt(day / 30) + '月前'
-              val.timeVal = value
-            }
-          })
-        }
+       
         if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2

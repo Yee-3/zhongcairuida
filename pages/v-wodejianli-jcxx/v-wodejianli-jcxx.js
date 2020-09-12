@@ -208,17 +208,17 @@ Page({
       })
     }
     if (type == 5) {
-        this.setData({
-          phone_value: value
-        })
-      
+      this.setData({
+        phone_value: value
+      })
+
 
     }
     if (type == 6) {
-        this.setData({
-          emil_value: value
-        })
-      
+      this.setData({
+        emil_value: value
+      })
+
     }
   },
   submit() {
@@ -231,7 +231,7 @@ Page({
       phone: this.data.phone_value,
       email: this.data.emil_value,
       // money: this.data.money_value,
-      url: this.data.img,
+      url: this.data.img == '../img/f067.png' ? '' : this.data.img,
       status: this.spring.data.mar,
       school: this.data.edu,
       workTime: this.data.year_time,
@@ -239,7 +239,7 @@ Page({
       sex: this.data.six,
       id: this.data.id
     }
-
+    console.log(this.data.img)
     if (!this.data.app.checkPhone(that.data.phone_value)) {
       wx.showToast({
         title: '请输入正确的手机号',

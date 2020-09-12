@@ -43,15 +43,15 @@
 
 <view class="h_09">
 	<!-- 待确认面试状态 -->
-	<view class="h_10" wx:for="{{recomList}}" data-id="{{item.companyId}}" bindtap="conpanyIn">
-		<view class="h_11">
+	<view class="h_10" wx:for="{{recomList}}" data-id="{{item.companyId}}" >
+		<view class="h_11" bindtap="conpanyIn">
 			<view class="fl h_12">{{item.title}}</view>
 			<view class="fr h_13" wx:if="{{idn!=1}}">{{((idn==2||idn==3)&&ind==1)?'待确认':((idn==2||idn==3)&&ind==2)?'已同意':((idn==2||idn==3)&&ind==3)?'已取消':false}}</view>
 			<!-- 投递列表显示 -->
 			<view class="fr h_13" wx:if="{{idn==1}}">{{item.moneyName}}</view>
 		</view>
 
-		<view class="h_14">
+		<view class="h_14" bindtap="conpanyIn">
 			<view class="fl h_15">
 				<p>{{item.cityName}}{{item.districtName}}</p><span>|</span>
 				<p>{{item.workExperienceName}}</p><span>|</span>
@@ -60,32 +60,32 @@
 			<view class="fr h_16">{{item.timeVal}}</view>
 		</view>
 		<!-- 公司福利：面试状态-待确认、已取消；入职状态；投递列表 等显示 -->
-		<view class="h_17" wx:if="{{!(idn==2&&ind==2)}}">
+		<view class="h_17"  wx:if="{{!(idn==2&&ind==2)}}" bindtap="conpanyIn">
 			<button size="mini" style="font-size:24rpx" wx:for="{{item.welfareName}}" wx:for-index="ind" wx:for-item="ite">{{ite}}</button>
 		</view>
 
-		<view class="h_18" wx:if="{{!(idn==1||(idn==2&&ind==3)||(idn==3&&ind==3))}}">		 
+		<view class="h_18" bindtap="conpanyIn" wx:if="{{!(idn==1||(idn==2&&ind==3)||(idn==3&&ind==3))}}">		 
 			<view class="h_19 fl">{{idn==2?'面试时间：':'入职时间：'}}</view>
 			<view class="h_20 fl" style="{{idn==2&&ind==2?'color:#ff4949;':'color:#000'}}">{{idn==2?item.ctrlMemberCompanies.statTime:item.ctrlMemberCompanies.inductionTime}}</view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="h_18" wx:if="{{idn==3&&ind==2}}">
+		<view class="h_18" bindtap="conpanyIn" wx:if="{{idn==3&&ind==2}}">
 			<view class="h_19 fl">温馨提示：</view>
 			<view class="h_20 fl" style="color:#909090">请按照约定时间入职</view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="h_18" wx:if="{{(idn==2||idn==3)&&ind==3}}">
+		<view class="h_18" bindtap="conpanyIn" wx:if="{{(idn==2||idn==3)&&ind==3}}">
 			<view class="h_19 fl">原因：</view>
 			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.whyStatus==1?'时间原因':'其他原因'):(item.ctrlMemberCompanies.auditType1==1?'时间原因':'其他原因')}}</view>
 			<view class="w-clear"></view>
 		</view>
-		<view class="h_18" wx:if="{{(idn==2||idn==3)&&ind==3}}">
+		<view class="h_18" bindtap="conpanyIn" wx:if="{{(idn==2||idn==3)&&ind==3}}">
 			<view class="h_19 fl">详细：</view>
 			<view class="h_20 fl">{{idn==2?(item.ctrlMemberCompanies.why?item.ctrlMemberCompanies.why:''):(item.ctrlMemberCompanies.whyInduction?item.ctrlMemberCompanies.whyInduction:'')}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<!-- 投递列表显示 -->
-		<view class="j_01" wx:if="{{idn==1}}">
+		<view class="j_01" bindtap="conpanyIn" wx:if="{{idn==1}}">
 			<view class="j_02 fl">
 				<image src="{{item.companyLogo}}"></image>
 			</view>
@@ -98,7 +98,7 @@
 				<image src="../img/f027.png"></image>
 			</view> -->
 			<view class="map_container">
-				<map class='map' longitude='{{longitude}}' latitude='{{latitude}}' scale='{{scale}}' markers='{{markers}}' bindcontroltap="bindcontroltap" polyline='{{polyline}}' circles="{{circles}}" bindmarkertap='bindmarkertap' bindcontroltap='bindcontroltap' show-location></map>
+				<map class='map' longitude='{{longitude}}' latitude='{{latitude}}' scale='{{scale}}' markers='{{markers}}'  catchtap="defalu" bindcontroltap="bindcontroltap" polyline='{{polyline}}' circles="{{circles}}" bindmarkertap='bindmarkertap' show-location></map>
 			</view>
 			<view class="h_24">
 				<view class="h_27">
@@ -111,7 +111,7 @@
 				</view>
 				<view class="h_28">地址：{{item.address}}</view>
 			</view>
-			<view class="h_29" bindtap="onGuideTap" data-latitude='{{item.latitude}}' data-longitude='{{item.longitude}}' data-bankName='{{item.address}}'>
+			<view class="h_29" catchtap="onGuideTap" data-latitude='{{item.latitude}}' data-longitude='{{item.longitude}}' data-bankName='{{item.address}}'>
 				<image src="../img/f030.png"></image>
 			</view>
 			<view class="h_30">
@@ -121,8 +121,8 @@
 		<!-- 面试状态待确认、入职状态待确认显示 -->
 		<view class="h_21" wx:if="{{(idn==2||idn==3)&&ind==1}}">
 			<ul>
-				<li bindtap="tanchuang" data-id="{{item.ctrlMemberCompanies.id}}">取消</li>
-				<li bindtap="tongyi" data-id="{{item.ctrlMemberCompanies.id}}">同意</li>
+				<li catchtap="tanchuang" data-id="{{item.ctrlMemberCompanies.id}}">取消</li>
+				<li catchtap="tongyi" data-id="{{item.ctrlMemberCompanies.id}}">同意</li>
 			</ul>
 		</view>
 	</view>

@@ -35,7 +35,7 @@ Page({
 		longitude: "",
 		scale: 14,
 		markers: [],
-		id: ''
+		id: '',
 	},
 
 	/**
@@ -83,6 +83,11 @@ Page({
 
 				})
 			}
+		})
+	},
+	defa(){
+		this.setData({
+			fa
 		})
 	},
 	bindcontroltap(e) {

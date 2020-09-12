@@ -5,10 +5,11 @@ Page({
    * 页面的初始数据
    */
   data: {
-    app :getApp().globalData,
-    valueCon:'',
-    name:'',
-    title:'提交'
+    app: getApp().globalData,
+    valueCon: '',
+    name: '',
+    title: '提交',
+    shuaxin: false
   },
 
   /**
@@ -16,54 +17,63 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
-    if(options){
+    if (options) {
       this.setData({
-        name:options.name,
-        valueCon:options.phone,
-        title:'确认信息'
+        name: options.name,
+        valueCon: options.phone,
+        title: '确认信息',
+        shuaxin: true
       })
     }
   },
-  change(e){
+  change(e) {
     console.log(e)
     this.setData({
-      valueCon:e.detail.value
+      valueCon: e.detail.value
     })
-    
+
   },
   submit() {
-    var that=this
-    if(this.data.app.checkPhone(this.data.valueCon)){
-    that.data.app.http({
-      url:'/resume/binding',
-      dengl:true,
-      method:'post',
-      data:{
-        phone:that.data.valueCon
-      },
-      success(res){
-        console.log(res,that.data.valueCon)
-        if (res.data.code==200) {
-          // 及时更新上层页面
-          var pages = getCurrentPages();
-          var prevPage = pages[pages.length - 2]; //上一个页面
-          prevPage.setData({
-            resume: []
-          })
-          prevPage.onLoad()
-          wx.switchTab({
-            url: '../q-wode/q-wode',
-          })
-          
+    var that = this
+    if (this.data.app.checkPhone(this.data.valueCon)) {
+      that.data.app.http({
+        url: '/resume/binding',
+        dengl: true,
+        method: 'post',
+        data: {
+          phone: that.data.valueCon
+        },
+        success(res) {
+          console.log(res, that.data.valueCon)
+          if (res.data.code == 200) {
+            // 及时更新上层页面
+            var pages = getCurrentPages();
+            if (that.data.shuaxin) {
+              var prevPage = pages[pages.length - 3]; //上一个页面
+              prevPage.setData({
+                resume: []
+              })
+              prevPage.onLoad()
+            } else {
+              var prevPage = pages[pages.length - 2]; //上一个页面
+              prevPage.setData({
+                resume: []
+              })
+              prevPage.onLoad()
+            }
+            wx.switchTab({
+              url: '../q-wode/q-wode',
+            })
+
+          }
         }
-      }
-    })
-  }else{
-    wx.showToast({
-      title: '请输入正确的手机号',
-      icon: 'none'
-    })
-  }
+      })
+    } else {
+      wx.showToast({
+        title: '请输入正确的手机号',
+        icon: 'none'
+      })
+    }
   },
   /**
    * 生命周期函数--监听页面初次渲染完成

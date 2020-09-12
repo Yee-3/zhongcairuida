@@ -11,7 +11,7 @@
 			</view>
 		</view>
 		<view class="fr q_09">
-			<image src="{{user.url?user.url:'../img/f051.png'}}"></image>
+			<image src="{{user.url?user.url:(user.sex==0?'../img/f004.png':'../img/f051.png')}}"></image>
 		</view>
 	</view>
 	

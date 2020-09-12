@@ -111,23 +111,23 @@ Page({
     })
   },
   zhaopin() {
-    var that = this
-    this.data.app.http({
-      url: '/index/queryCompany',
-      dengl: true,
-      method: 'POST',
-      data: {},
-      success(res) {
-        if (res.data.code == 200) {
-          that.tog.show()
-        } else {
-          wx.redirectTo({
-            url: '../m-qiyezhuce/m-qiyezhuce',
-          })
-        }
-      }
+    this.tog.show()
+    // var that = this
+    // this.data.app.http({
+    //   url: '/index/queryCompany',
+    //   dengl: true,
+    //   method: 'POST',
+    //   data: {},
+    //   success(res) {
+    //     if (res.data.code == 200) {
+    //     } else {
+    //       wx.redirectTo({
+    //         url: '../m-qiyezhuce/m-qiyezhuce',
+    //       })
+    //     }
+    //   }
 
-    })
+    // })
 
   },
   cancel() {

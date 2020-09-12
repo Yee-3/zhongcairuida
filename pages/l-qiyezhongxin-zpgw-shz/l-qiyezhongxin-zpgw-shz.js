@@ -27,24 +27,28 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    if(options){
+      this.setData({
+        companyId:options.id
+      })
+    }
     var that = this
     this.data.app.http({
       type: true,
       url: '/company/queryCooperate',
       dengl: true,
       data: {
-        companyId: options.id
+        companyId: that.data.companyId
       },
       method: 'POST',
       success(res) {
-        console.log(res)
           that.setData({
             isHz_Type:res.data.rdata
           })
       }
     })
     this.setData({
-      id: options.id
+      id: that.data.companyId
     })
     var status = this.data.idn == 1 ? 1 : this.data.idn == 2 ? 0 : 2
     var data = {
@@ -54,13 +58,11 @@ Page({
       status: status
     }
     this.reword(data)
-    console.log(this.data.recomList)
     this.data.app.http({
       url: '/Other/hotline',
       dengl: true,
       data: {},
       success(res) {
-        console.log(res.data.rdata)
         that.setData({
           kefuPhone: res.data.rdata
         })
@@ -85,7 +87,6 @@ Page({
             }
           })
         }
-        console.log(res.data.rdata, '拼接前')
         that.setData({
           recomList: res.data.rdata
         })
@@ -106,12 +107,9 @@ Page({
   },
   jiazai(data) {
     var that = this
-    console.log(that.data.currentPage)
     this.setData({
       currentPage: that.data.currentPage + 1
     })
-    console.log(that.data.currentPage)
-    console.log(that.data.loadingType)
     if (this.data.loadingType != 0) {
       //loadingType!=0;直接返回
       return false;
@@ -119,7 +117,6 @@ Page({
       this.setData({
         loadingType: 1
       })
-      console.log(that.data.loadingType)
       wx.showNavigationBarLoading()
       this.data.app.http({
         type: true,
@@ -136,11 +133,9 @@ Page({
               }
             })
           }
-          console.log(that.data.recomList, res.data.rdata)
           that.setData({
             recomList: that.data.recomList.concat(res.data.rdata)
           })
-          console.log(that.data.recomList)
           if (res.data.rdata.length <10) {
             that.setData({
               loadingType: 2
@@ -169,9 +164,7 @@ Page({
     }
   },
   toggleShen(e) {
-    console.log('执行点击事件001')
     var that = this
-    console.log(e)
     this.setData({
       idn: e.currentTarget.dataset.index
     })
@@ -259,7 +252,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log('触发')
     var that = this,
       status = this.data.idn == 1 ? 1 : this.data.idn == 2 ? 0 : 2,
       data = {
