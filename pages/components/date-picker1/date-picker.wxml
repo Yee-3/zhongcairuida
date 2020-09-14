@@ -18,19 +18,9 @@
 					<view wx:for="{{days}}" wx:key="*this" style="height: 70rpx; text-align:center;  font-size: 26rpx; line-height:70rpx; color:#353535;">{{item}}日</view>
 				</picker-view-column>
 			</picker-view>
-			<picker-view class="date-picker-content-item" indicator-style="height: 70rpx; " value="{{tempHourPos}}" bindchange="hour_onChange">
-				<picker-view-column>
-					<view wx:for="{{hours}}" wx:key="*this" style="height: 70rpx; text-align:center;  font-size: 26rpx; line-height:70rpx; color:#353535;">{{item}}时</view>
-				</picker-view-column>
-			</picker-view>
-			<picker-view class="date-picker-content-item" indicator-style="height: 70rpx; " value="{{tempMinutePos}}" bindchange="minute_onChange">
-				<picker-view-column>
-					<view wx:for="{{minutes}}" wx:key="*this" style="height: 70rpx; text-align:center;  font-size: 26rpx; line-height:70rpx; color:#353535;">{{item}}分</view>
-				</picker-view-column>
-			</picker-view>
 		</view>
         <view class="line">
-        <view class="date-picker-content-line" wx:for="{{10}}" catchtouchstart="onTouchmask"></view>
+        <view class="date-picker-content-line" wx:for="{{6}}" catchtouchstart="onTouchmask"></view>
         </view>
         <button class="bot" size="mini" hover-class="hover-class" catchtouchend="onSureClick">确认</button>
 	</view>

@@ -44,7 +44,7 @@
 					</view>
 				</view>
 			</view>
-			<view class="d_11 fr">{{item.timeVal}}活跃</view>
+			<view class="d_11 fr">{{item.timeVal}}</view>
 			<view class="w-clear"></view>
 		</view>
 		<view class="d_12">

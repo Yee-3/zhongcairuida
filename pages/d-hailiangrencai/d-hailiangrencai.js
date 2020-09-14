@@ -114,11 +114,13 @@ Page({
         }
         var arr = res.data.rdata
         arr.map(function (val, i) {
+          console.log(val)
           if(val.lastLogin){
+            console.log(val)
             var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
             var date = Date.parse(new Date())
             var day = parseInt((date - date1) / 1000)
-            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            var value = day < 60 ? '刚刚活跃' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前活跃' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前活跃' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前活跃' : parseInt(day / 60 / 60 / 24 / 30) + '月前活跃'
             val.timeVal = value
           }
         })
@@ -167,11 +169,12 @@ Page({
       success(res) {
         var arr = res.data.rdata
         arr.map(function (val, i) {
+          console.log(val)
           if(val.lastLogin){
             var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
             var date = Date.parse(new Date())
             var day = parseInt((date - date1) / 1000)
-            var value = day < 60 ? '刚刚' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
+            var value = day < 60 ? '刚刚活跃' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前活跃' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前活跃' : parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前活跃' : parseInt(day / 60 / 60 / 24 / 30) + '月前活跃'
             val.timeVal = value
           }
         })

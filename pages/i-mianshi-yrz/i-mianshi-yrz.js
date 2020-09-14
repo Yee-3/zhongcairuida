@@ -8,13 +8,14 @@ Page({
 		style: 'display:none',
 		selectArray: [{
 			"id": "1",
-			"text": "面试时间不合适"
+			"text": "时间不合适"
 		}, {
 			"id": "2",
 			"text": "其他原因"
 		}],
-		value: '请您写下您觉得合适的面试时间（不少于三个）',
-		valu: '请写下合适的面试时间：',
+	
+		value: '请您写下您觉得合适的时间（不少于三个）',
+		valu: '请写下合适的时间：',
 		val: '',
 		idn: '1',
 		ind: '1',
@@ -272,9 +273,9 @@ Page({
 		})
 	},
 	getDate: function (e) {
-		if (e.detail.text == '面试时间不合适') {
+		if (e.detail.text == '时间不合适') {
 			this.setData({
-				value: '请您写下您觉得合适的面试时间（不少于三个）',
+				value: '请您写下您觉得合适的时间（不少于三个）',
 				valu: '请写下合适的面试时间：'
 			})
 		} else {

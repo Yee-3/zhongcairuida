@@ -12,7 +12,7 @@ Page({
     app: getApp().globalData,
     companyId: '',
     msList: [],
-    datePickerValue: ['', '', ''],
+    datePickerValue: ['', '', '','',''],
     datePickerIsShow: false,
     date: '',
     currentPage: 1,
@@ -321,7 +321,7 @@ Page({
 
   datePickerOnSureClick: function (e) {
     this.setData({
-      date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+      date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`,
       datePickerValue: e.detail.value,
       datePickerIsShow: false,
     })
@@ -343,7 +343,7 @@ Page({
           method: 'POST',
           data: {
             id: that.data.id,
-            time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`
+            time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`
           },
           success(res) {
             if (res.data.code == 200) {
@@ -359,7 +359,7 @@ Page({
           method: 'POST',
           data: {
             id: that.data.id,
-            time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`
+            time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`
           },
           success(res) {
             console.log(res)

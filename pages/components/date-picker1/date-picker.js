@@ -16,13 +16,9 @@ Component({
         years: [],
         months: [],
         days: [],
-        hours: [],
-        minutes: [],
         tempYearPos: [0],
         tempMonthPos: [0],
         tempDayPos: [0],
-        tempHourPos: [0],
-        tempMinutePos: [0],
         showPicker: false
     },
 
@@ -31,13 +27,9 @@ Component({
          * 初始化年月日
          */
         var date = new Date();
-        // var pickerNowHour = pickerNowDate.getHours();
-        // var pickerNowMinute = pickerNowDate.getMinutes();
         var years = [];
         var months = [];
         var days = [];
-        var hours = [];
-        var minutes = [];
 
         for (let i = 1900; i <= date.getFullYear(); i++) {
             years.push(i);
@@ -48,32 +40,19 @@ Component({
             month = i < 10 ? '0' + i : i;
             months.push(month);
         }
-        //获取小时和分钟的数组，设置默认值
-        for (let i = 0; i <= 24; i++) {
-            let hour = 0
-            hour = i < 10 ? '0' + i : i;
-            hours.push(hour);
-        }
-        for (let i = 0; i <= 60; i++) {
-            let minute = 0
-            minute = i < 10 ? '0' + i : i;
-            minutes.push(minute);
 
-        }
         days = this.getDays(date.getFullYear(), date.getMonth() + 1);
 
         this.setData({
             years: years,
             months: months,
-            days: days,
-            hours: hours,
-            minutes: minutes
+            days: days
         });
 
     },
 
     methods: {
-        hidden() {
+        hidden () {
             this.setData({
                 isShow: false
             })
@@ -82,7 +61,7 @@ Component({
 
             // this.triggerEvent('click');
         },
-
+        
         onCacnelClick(e) {
             this.triggerEvent('cancelclick', {});
         },
@@ -90,15 +69,10 @@ Component({
             var curYear = this.data.years[this.data.tempYearPos];
             var curMonth = this.data.months[this.data.tempMonthPos];
             var curDay = this.data.days[this.data.tempDayPos];
-            var curHour = this.data.hours[this.data.tempHourPos];
-            var curMinute = this.data.minutes[this.data.tempMinutePos];
-            var value = [curYear, curMonth, curDay,curHour,curMinute];
+            var value = [curYear, curMonth, curDay];
             this.triggerEvent('sureclick', {
                 value: value,
             });
-        },
-        addDatetimeZero: function (num) {
-            return new Array(2 - num.toString().length + 1).join("0") + num;
         },
         year_onChange: function (e) {
             //年改变，月要滑到一月，天要重新计算该年该月多少天
@@ -110,8 +84,6 @@ Component({
                 tempYearPos: e.detail.value,
                 tempMonthPos: [0],
                 tempDayPos: [0],
-                tempHourPos: [0],
-                tempMinutePos: [0]
             });
         },
         month_onChange: function (e) {
@@ -123,25 +95,11 @@ Component({
                 days: days,
                 tempMonthPos: e.detail.value,
                 tempDayPos: [0],
-                tempHourPos: [0],
-                tempMinutePos: [0]
             });
         },
         day_onChange: function (e) {
             this.setData({
-                tempDayPos: e.detail.value,
-                // tempHourPos:[0],
-                // tempMinutePos:[0]
-            });
-        },
-        hour_onChange(e) {
-            this.setData({
-                tempHourPos: e.detail.value
-            });
-        },
-        minute_onChange(e) {
-            this.setData({
-                tempMinutePos: e.detail.value
+                tempDayPos: e.detail.value
             });
         },
         onValue() {
@@ -177,8 +135,7 @@ Component({
             var tempYearPos = this.data.years.length - 1;
             var tempMonthPos = date.getMonth();
             var tempDayPos = date.getDate() - 1;
-            var tempHourPos = date.getHours();
-            var tempMinutePos = date.getMinutes();
+
             for (var i = 0; i < this.data.years.length; i++) {
                 var item = this.data.years[i];
                 if (item == this.data.value[0]) {
@@ -206,27 +163,12 @@ Component({
                     break;
                 }
             }
-            for (var i = 0; i < this.data.hours.length; i++) {
-                var item = this.data.hours[i];
-                if (item == this.data.value[1]) {
-                    tempHourPos = i;
-                    break;
-                }
-            }
-            for (var i = 0; i < this.data.minutes.length; i++) {
-                var item = this.data.minutes[i];
-                if (item == this.data.value[1]) {
-                    tempMinutePos = i;
-                    break;
-                }
-            }
+
             var data = {
                 days: days,
                 tempYearPos: [tempYearPos],
                 tempMonthPos: [tempMonthPos],
                 tempDayPos: [tempDayPos],
-                tempHourPos: [tempHourPos],
-                tempMinutePos: [tempMinutePos],
             }
             return data;
         },

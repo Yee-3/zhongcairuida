@@ -7,7 +7,7 @@ Page({
   data: {
     height: '',
     isMask: false,
-    datePickerValue: ['', '', ''],
+    datePickerValue: ['', '', '','',''],
     datePickerIsShow: false,
     isHz: '',
     isTwo: false,
@@ -379,8 +379,9 @@ Page({
   },
 
   datePickerOnSureClick: function (e) {
+    console.log(e)
     this.setData({
-      date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+      date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`,
       datePickerValue: e.detail.value,
       datePickerIsShow: false,
     })
@@ -399,7 +400,7 @@ Page({
         data: {
           companyId: that.data.id,
           positionId: that.data.positionId,
-          time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日`,
+          time:`${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`,
           resumeId: that.data.resumeId
         },
         method: 'POST',

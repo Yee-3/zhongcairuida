@@ -16,8 +16,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    if (options) {
+    if (options.phone) {
+      console.log(options.phone)
+
       this.setData({
         name: options.name,
         valueCon: options.phone,

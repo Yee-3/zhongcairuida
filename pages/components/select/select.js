@@ -7,7 +7,8 @@ Component({
     propArray: {
       type: Array,
 
-    }
+    },
+   
   },
 
   /**
@@ -15,7 +16,7 @@ Component({
    */
   data: {
     selectShow: false, //初始option不显示
-    nowText: "面试时间不合适", //初始内容
+    nowText: "时间不合适", //初始内容
     animationData: {}, //右边箭头的动画
     ids:1,
     nowIdx:0
