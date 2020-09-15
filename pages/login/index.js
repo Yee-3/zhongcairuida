@@ -8,7 +8,7 @@ Page({
     //登录状态 及其信息
     SessionKey: '',
     OpenId: '',
-    nickName: null,
+    nickName: '',
     avatarUrl: '',
     code: null,
     isCanUse: wx.getStorageSync('isCanUse') || true, //默认为true,
@@ -53,7 +53,7 @@ Page({
   //登录
   getPerson(options) {
     let _this = this;
-   console.log('执行')
+   console.log('执行',options)
     const app = getApp().globalData
     // wx.showLoading({
     //   title: '登录中...',
@@ -73,6 +73,7 @@ Page({
                 // iv: res.iv,
                 // encryptedData: res.encryptedData
               })
+              wx.setStorageSync('nickName', res.userInfo.nickName)
               app.http({
                 url: '/oauth/login',
                 method: 'POST',

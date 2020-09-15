@@ -133,7 +133,7 @@
 	<view class="f_07">
 		<view class="f_09">
 			<p>原因:</p>
-			<Select id="select" prop-array='{{selectArray}}' bind:myget='getDate'></Select>
+			<Select id="select" prop-array='{{idn==2?selectArray:ruzhiArray}}' nowText="{{idn==2?'面试时间不合适':'入职时间不合适'}}" bind:myget='getDate'></Select>
 		</view>
 		<view class="f_10">
 			<p>{{valu}}</p>

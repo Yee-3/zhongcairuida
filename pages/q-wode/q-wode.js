@@ -10,7 +10,8 @@ Page({
     kefuPhone: {},
     user: {},
     show: true,
-    content: '是否切换为面试官身份'
+    content: '是否切换为面试官身份',
+    name:''
   },
 
   /**
@@ -18,6 +19,9 @@ Page({
    */
   onLoad: function (options) {
     console.log(options)
+    this.setData({
+      name:wx.getStorageSync('nickName')
+    })
     this.tog = this.selectComponent("#tog");
     var that = this
     const app = getApp().globalData

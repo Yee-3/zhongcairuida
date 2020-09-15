@@ -1,6 +1,8 @@
 // pages/zc-zhiweixq/zc-zhiweixq.js
+var canvas = ""
+var leftMargin = "" //文字距离左边边距
+var topMargin = "" //文字距离右边边距
 Page({
-
   /**
    * 页面的初始数据
    */
@@ -26,15 +28,30 @@ Page({
       },
       clickable: true
     }],
-    isTou: false
+    isTou: false,
+    title: '',
+    des: '',
+    windowW: '',
+    windowH: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var that = this
+    wx.getSystemInfo({
+      success: function (res) {
+        console.log(res)
+      that.setData({
+       //设置宽高为屏幕宽，高为屏幕高的80%，因为文档比例为5:4
+       windowW: res.windowWidth,
+       windowH: res.windowWidth * 0.8
+      })
+      leftMargin = res.windowWidth
+      topMargin = res.windowWidth * 0.8
+      }
+    })
     this.data.app.http({
       url: '/index/getPosition',
       dengl: true,
@@ -46,11 +63,19 @@ Page({
         type: 2
       },
       success(res) {
-        console.log(res.data.rdata[0].signUp)
+        var des = res.data.rdata[0].cityName + '|' + res.data.rdata[0].schoolRecordName + '|' + res.data.rdata[0].workExperienceName
+        console.log(res.data.rdata)
         that.setData({
           detaCont: res.data.rdata[0],
           isTou: res.data.rdata[0].signUp,
+          title: res.data.rdata[0].title,
+          des: res.data.rdata[0].cityName + '|' + res.data.rdata[0].schoolRecordName + '|' + res.data.rdata[0].workExperienceName,
         })
+        canvas = wx.createCanvasContext('canvas')
+        that.addImage()
+        // this.tempFilePath()
+    
+
       }
     })
 
@@ -70,6 +95,30 @@ Page({
     })
 
   },
+  //画背景图
+ addImage: function () {
+  var context = wx.createContext();
+  var that = this;
+  var path = "../img/f021.png";
+  //将模板图片绘制到canvas,在开发工具中drawImage()函数有问题，不显示图片
+  //不知道是什么原因，手机环境能正常显示
+  canvas.drawImage(path, 0, 0, this.data.windowW, this.data.windowH);
+  this.addTitle()
+  this.addDesc()
+  canvas.draw()
+  },
+  addTitle(){
+    // 职位
+    canvas.setFillStyle('#fff') //文字颜色：默认黑色
+    canvas.setFontSize(19) //设置字体大小，默认10
+    canvas.fillText(this.data.title,leftMargin * 0.2, topMargin * 0.4) //绘制文本
+  },
+  addDesc(){
+    canvas.font = 'normal bold 20px sans-serif';
+    canvas.setFillStyle('#fff') //文字颜色：默认黑色
+    canvas.setFontSize(14) //设置字体大小，默认10
+    canvas.fillText(this.data.des, leftMargin * 0.2, topMargin * 0.5) //绘制文本
+  },
   bindcontroltap(e) {
     var that = this;
     if (e.controlId == 1) {
@@ -85,8 +134,6 @@ Page({
     var lat = Number(event.currentTarget.dataset.latitude);
     var lon = Number(event.currentTarget.dataset.longitude);
     var bankName = event.currentTarget.dataset.bankname;
-    console.log(lat);
-    console.log(lon);
     wx.openLocation({
       type: 'gcj02',
       latitude: lat,
@@ -97,7 +144,6 @@ Page({
   },
 
   detail(e) {
-    console.log(e)
     wx.navigateTo({
       url: '../za-xinzeng-qyzsxq/z-xinzeng-qyzsxq?id=' + e.currentTarget.dataset.comid,
     })
@@ -110,9 +156,7 @@ Page({
         dengl: true,
         method: 'POST',
         success(res) {
-          // console.log(res)
           if (res.data.rdata == true) {
-            console.log('cjemhhshs')
             that.data.app.http({
               url: '/index/sendResumes',
               dengl: true,
@@ -122,13 +166,10 @@ Page({
                 position: that.data.detaCont.id
               },
               success(res) {
-                console.log(res)
-                console.log(res.data.rdata)
                 if (res.data.code == 200) {
                   wx.showToast({
                     title: '投递成功'
                   })
-                  console.log('chengshjj')
                   that.setData({
                     isTou: true
                   })
@@ -142,7 +183,7 @@ Page({
           }
         }
       })
-    }else{
+    } else {
       wx.showToast({
         title: '您已投递成功！'
       })
@@ -182,7 +223,6 @@ Page({
         let clientWidth = rect.width;
         let ratio = 750 / clientWidth;
         let height = parseInt(clientHeight * ratio);
-        console.log(height, clientHeight, clientWidth);
         if (height < 197) {
           that.setData({
             isShow: false
@@ -223,7 +263,28 @@ Page({
   /**
    * 用户点击右上角分享
    */
-  onShareAppMessage: function () {
-
+  onShareAppMessage: function (res) {
+    var that = this;
+    return {
+      // desc: this.data.des,
+      title: this.data.title,
+      path: '路径',
+      imageUrl: '../img/f018.jpg',
+      // 可以更换分享的图片
+      success: function (res) {
+        // 转发成功
+        wx.showToast({
+          title: '分享成功',
+          icon: "none"
+        });
+      },
+      fail: function (res) {
+        // 转发失败
+        wx.showToast({
+          title: '分享失败',
+          icon: "none"
+        })
+      }
+    }
   }
 })

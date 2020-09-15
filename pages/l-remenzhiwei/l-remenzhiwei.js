@@ -61,7 +61,6 @@ Page({
         type: 2,
       }
     this.reword(data)
-    console.log(this.data.recomList)
     // 职位
     this.data.app.http({
       url: '/selects/position',
@@ -152,11 +151,9 @@ Page({
               var day = parseInt((date - date1) / 1000)
               var value = day < 60 ? day + '秒前' : day >= 60 && (parseInt(day / 60) < 60) ? parseInt(day / 60) + '分钟前' : parseInt(day / 60) > 60 && (parseInt(day / 60 / 60) < 24) ? parseInt(day / 60 / 60) + '小时前' :parseInt(day / 60 / 60) >= 24 && (parseInt(day / 60 / 60 / 24) < 30) ? parseInt(day / 60 / 60 / 24) + '天前' : parseInt(day / 60 / 60 / 24 / 30) + '月前'
               val.timeVal = value
-              console.log(date1, date, day, value)
             }
           })
         }
-        console.log(res.data.rdata)
         that.setData({
           recomList: res.data.rdata
         })
@@ -194,7 +191,6 @@ Page({
       method: 'POST',
       data: data,
       success(res) {
-        console.log(res.data.rdata, 22222)
         that.setData({
           recomList: that.data.recomList.concat(res.data.rdata)
         })
@@ -541,7 +537,6 @@ Page({
     })
   },
   bindPickerChange: function (e) {
-    console.log(e.detail.value)
     this.setData({
       inda: e.detail.value
     })

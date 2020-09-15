@@ -8,12 +8,18 @@ Page({
 		style: 'display:none',
 		selectArray: [{
 			"id": "1",
-			"text": "时间不合适"
+			"text": "面试时间不合适"
 		}, {
 			"id": "2",
 			"text": "其他原因"
 		}],
-	
+		ruzhiArray: [{
+			"id": "1",
+			"text": "入职时间不合适"
+		}, {
+			"id": "2",
+			"text": "其他原因"
+		}],
 		value: '请您写下您觉得合适的时间（不少于三个）',
 		valu: '请写下合适的时间：',
 		val: '',
@@ -37,6 +43,7 @@ Page({
 		scale: 14,
 		markers: [],
 		id: '',
+		refType:'0'
 	},
 
 	/**
@@ -262,7 +269,8 @@ Page({
 	tanchuang: function (e) {
 		this.setData({
 			style: 'display:block',
-			id: e.currentTarget.dataset.id
+			id: e.currentTarget.dataset.id,
+			refType:0
 		})
 	},
 
@@ -273,17 +281,36 @@ Page({
 		})
 	},
 	getDate: function (e) {
-		if (e.detail.text == '时间不合适') {
-			this.setData({
-				value: '请您写下您觉得合适的时间（不少于三个）',
-				valu: '请写下合适的面试时间：'
-			})
-		} else {
-			this.setData({
-				value: '请输入原因',
-				valu: '请输入原因',
-			})
+		var that=this
+		this.setData({
+			refType:e.detail.id
+		})
+		if(this.data.idn==2){
+			if (this.data.refType==0) {
+				that.setData({
+					value: '请您写下您觉得合适面试的时间（不少于三个）',
+					valu: '请写下合适的面试时间：'
+				})
+			} else {
+				that.setData({
+					value: '请输入原因',
+					valu: '请输入原因',
+				})
+			}
+		}else if(this.data.idn==3){
+			if (this.data.refType== 0) {
+				that.setData({
+					value: '请您写下您觉得合适入职的时间（不少于三个）',
+					valu: '请写下合适的入职时间：'
+				})
+			} else {
+				that.setData({
+					value: '请输入原因',
+					valu: '请输入原因',
+				})
+			}
 		}
+	
 
 	},
 	blur(e) {

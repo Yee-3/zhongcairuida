@@ -172,6 +172,7 @@ Page({
             }
           })
         }
+        console.log(res.data.rdata)
         that.setData({
           detCon: res.data.rdata,
           resumeId: res.data.rdata.ctrlResumeDTO.id
@@ -471,25 +472,25 @@ Page({
       
     ]
     var randomImg = shareimg[Math.floor(Math.random() * shareimg.length)];
-  //   return {
-  //     title: '标题',
-  //     desc: '',
-  //     path: '路径',
-  //     imageUrl: '../img/d1_1.png', // 可以更换分享的图片
-  //     success: function (res) {
-  //       // 转发成功
-  //       wx.showToast({
-  //         title: '分享成功',
-  //         icon: "none"
-  //       });
-  //     },
-  //     fail: function (res) {
-  //       // 转发失败
-  //       wx.showToast({
-  //         title: '分享失败',
-  //         icon: "none"
-  //       })
-  //     }
-  // }
+    return {
+      title: '职面|求职',
+      desc: '',
+      path: '路径',
+      imageUrl: '../img/f018.jpg', // 可以更换分享的图片
+      success: function (res) {
+        // 转发成功
+        wx.showToast({
+          title: '分享成功',
+          icon: "none"
+        });
+      },
+      fail: function (res) {
+        // 转发失败
+        wx.showToast({
+          title: '分享失败',
+          icon: "none"
+        })
+      }
+  }
 }
 })

@@ -60,76 +60,6 @@
 			"list": [
 				{
 					"id": -1,
-					"name": "pages/a-gangweifabu/a-gangweifabu",
-					"pathName": "pages/a-gangweifabu/a-gangweifabu",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/h-mianshiguanli-yms/h-mianshiguanli-yms",
-					"pathName": "pages/h-mianshiguanli-yms/h-mianshiguanli-yms",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/p-qiyeduan/p-qiyeduan",
-					"pathName": "pages/p-qiyeduan/p-qiyeduan",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/q-wode/q-wode",
-					"pathName": "pages/q-wode/q-wode",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/k-qiyezhongxin/k-qiyezhongxin",
-					"pathName": "pages/k-qiyezhongxin/k-qiyezhongxin",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/index/index",
-					"pathName": "pages/index/index",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": 6,
-					"name": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
-					"pathName": "pages/f-jinzhunjianlixq/f-jinzhunjianlixq",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/p-qiyeduan/p-qiyeduan",
-					"pathName": "pages/p-qiyeduan/p-qiyeduan",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
-					"pathName": "pages/v-wodejianli-jcxx/v-wodejianli-jcxx",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/q-wode/q-wode",
-					"pathName": "pages/q-wode/q-wode",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
 					"name": "pages/i-mianshi-yrz/i-mianshi-yrz",
 					"pathName": "pages/i-mianshi-yrz/i-mianshi-yrz",
 					"query": "",
@@ -139,20 +69,6 @@
 					"id": -1,
 					"name": "pages/p-qiyeduan/p-qiyeduan",
 					"pathName": "pages/p-qiyeduan/p-qiyeduan",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/i-mianshi-yrz/i-mianshi-yrz",
-					"pathName": "pages/i-mianshi-yrz/i-mianshi-yrz",
-					"query": "",
-					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
-					"pathName": "pages/c-hailiangjianlixq/c-hailiangjianlixq",
 					"query": "",
 					"scene": null
 				}
