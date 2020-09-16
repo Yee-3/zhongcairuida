@@ -16,7 +16,7 @@
 
 
 <view class="d_02">
-	<view class="d_03" bindtap="detail" data-id="{{item.id}}" wx:for="{{conList}}">
+	<view class="d_03" bindtap="detail" data-pushId="{{item.pushId}}" data-id="{{item.resumeData.id}}" wx:for="{{conList}}">
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
@@ -24,15 +24,15 @@
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">
-						<view class="fl d_08">{{item.name}}</view>
-						<view class="fl d_091">{{item.ctrlObjectiveDTOS[0].positionName}}</view>
+						<view class="fl d_08">{{item.resumeData.name}}</view>
+						<view class="fl d_091">{{item.resumeData.ctrlObjectiveDTOS[0].positionName}}</view>
 						<view class="w-clear"></view>
 					</view>
 					<view class="d_10">
-						<p>{{item.workTimeName?item.workTimeName:''}}</p><span wx:if="{{item.schoolName}}">|</span>
-						<p>{{item.schoolName?item.schoolName:''}}</p><span wx:if="{{item.ctrlObjectiveDTOS[0].address}}">|</span>
-						<p>{{item.ctrlObjectiveDTOS[0].address?item.ctrlObjectiveDTOS[0].address:''}}</p><span wx:if="{{item.ctrlObjectiveDTOS[0].moneyName}}">|</span>
-						<p>{{item.ctrlObjectiveDTOS[0].moneyName?item.ctrlObjectiveDTOS[0].moneyName:''}}</p>
+						<p>{{item.resumeData.workTimeName?item.resumeData.workTimeName:''}}</p><span wx:if="{{item.resumeData.schoolName}}">|</span>
+						<p>{{item.resumeData.schoolName?item.resumeData.schoolName:''}}</p><span wx:if="{{item.resumeData.ctrlObjectiveDTOS[0].address}}">|</span>
+						<p>{{item.resumeData.ctrlObjectiveDTOS[0].address?item.resumeData.ctrlObjectiveDTOS[0].address:''}}</p><span wx:if="{{item.resumeData.ctrlObjectiveDTOS[0].moneyName}}">|</span>
+						<p>{{item.resumeData.ctrlObjectiveDTOS[0].moneyName?item.resumeData.ctrlObjectiveDTOS[0].moneyName:''}}</p>
 					</view>
 				</view>
 			</view>
@@ -48,10 +48,10 @@
 			<view class="w-clear"></view>
 		</view>
 		<view class="d_12">
-			<view class="fl d_14" wx:if="{{item.ctrlWorkDTOS.length>0}}">
+			<view class="fl d_14" wx:if="{{item.resumeData.ctrlWorkDTOS.length>0}}">
 				<image src="../img/f0021.png"></image>
 			</view>
-			<view class="d_13" wx:for="{{item.ctrlWorkDTOS}}" wx:for-index="index2" wx:for-item="i">
+			<view class="d_13" wx:for="{{item.resumeData.ctrlWorkDTOS}}" wx:for-index="index2" wx:for-item="i">
 				<view class="fl d_15">
 					<p>{{i.company}}·{{i.timeVal}}</p>
 					<span>{{i.position}}</span>

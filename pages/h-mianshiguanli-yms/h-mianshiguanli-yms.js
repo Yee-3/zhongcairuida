@@ -343,7 +343,7 @@ Page({
           method: 'POST',
           data: {
             id: that.data.id,
-            time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`
+            time: `${e.detail.value[0]}-${e.detail.value[1]}-${e.detail.value[2]} ${e.detail.value[3]}:${e.detail.value[4]}:00`
           },
           success(res) {
             if (res.data.code == 200) {
@@ -359,7 +359,7 @@ Page({
           method: 'POST',
           data: {
             id: that.data.id,
-            time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`
+            time: `${e.detail.value[0]}-${e.detail.value[1]}-${e.detail.value[2]} ${e.detail.value[3]}:${e.detail.value[4]}:00`
           },
           success(res) {
             console.log(res)

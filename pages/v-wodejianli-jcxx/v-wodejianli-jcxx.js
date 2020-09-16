@@ -70,7 +70,7 @@ Page({
           list = res.data.rdata.ctrlResume
           that.setData({
             list: res.data.rdata.ctrlResume,
-            img: list.url ? list.url : '../img/f067.png',
+            img: list.url ? list.url : (list.sex==0?'../img/f004.png':'../img/f051.png'),
             name_value: list.name ? list.name : '',
             date_value: list.time ? list.time : '',
             valu2: list.schoolName ? list.schoolName : '请选择',
@@ -231,7 +231,7 @@ Page({
       phone: this.data.phone_value,
       email: this.data.emil_value,
       // money: this.data.money_value,
-      url: this.data.img == '../img/f067.png' ? '' : this.data.img,
+      url: this.data.img == '../img/f067.png'? '' : this.data.img,
       status: this.spring.data.mar,
       school: this.data.edu,
       workTime: this.data.year_time,

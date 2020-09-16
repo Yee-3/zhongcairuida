@@ -9,7 +9,7 @@ Page({
     isX: true,
     height: '',
     isMask: false,
-    datePickerValue: ['', '', '','',''],
+    datePickerValue: ['', '', '', '', ''],
     datePickerIsShow: false,
     isHz: '',
     isTwo: false,
@@ -23,20 +23,23 @@ Page({
     isZhuce: '',
     isType: '',
     neorong: '您还未注册企业信息，请注册企业信息！',
-    kefuPhone: {}
+    kefuPhone: {},
+    pushId: ''
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.tog = this.selectComponent("#tog");
     console.log(options)
+    this.tog = this.selectComponent("#tog");
+
     var that = this
     this.setData({
       height: wx.getSystemInfoSync().windowHeight * 0.9,
       id: wx.getStorageSync('companyId'),
-      positionId: options.positId
+      positionId: options.positId,
+      pushId: options.pushId
     })
     var id = wx.getStorageSync('companyId'),
       app = getApp().globalData,
@@ -190,18 +193,42 @@ Page({
           icon: "none"
         })
       } else {
-        if(this.data.isHz){
+        if (this.data.isHz) {
           that.setData({
             datePickerIsShow: true,
             data_index: e.currentTarget.dataset.de
           });
-        }else{
+        } else {
           that.invit()
         }
-        
+
       }
 
     }
+  },
+  jujue() {
+    var that = this
+    this.data.app.http({
+      type: true,
+      url: '/indexCom/disagreeAccurateResume',
+      method: 'POST',
+      dengl: true,
+      data: {
+        pushId: this.data.pushId
+      },
+      success(res) {
+        if(res.data.code==200){
+          wx.navigateBack({
+            success(res) {
+              var page = getCurrentPages().pop();
+              if (page == undefined || page == null) return;
+              page.onLoad();
+            }
+          })
+        }
+        console.log(res)
+      }
+    })
   },
   zhuCancel() {
     this.tog.show()
@@ -245,8 +272,9 @@ Page({
         data: {
           companyId: that.data.id,
           positionId: that.data.positionId,
-          time: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`,
-          resumeId: that.data.resumeId
+          time: `${e.detail.value[0]}-${e.detail.value[1]}-${e.detail.value[2]}-${e.detail.value[3]}-${e.detail.value[4]}`,
+          resumeId: that.data.resumeId,
+          pushId: this.data.pushId
         },
         method: 'POST',
         success(res) {

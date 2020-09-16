@@ -14,7 +14,8 @@ Page({
       contentrefresh: "正在加载...",
       contentnomore: "我也是有底线的~"
     },
-    titleCon:{}
+    titleCon:{},
+    id:''
   },
 
   /**
@@ -25,7 +26,8 @@ Page({
     var that = this
     if(options){
       this.setData({
-        titleCon:options
+        titleCon:options,
+        id:options.id
       })
     }
     wx.showNavigationBarLoading()
@@ -45,7 +47,8 @@ Page({
        console.log(arr.length)
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
+            console.log(val)
+            var arrs = val.resumeData.ctrlWorkDTOS
             if (arrs.length > 0) {
               arrs.map(function (vals, is) {
                 var date1 =Date.parse(new Date(vals.startTime.replace(/\-/g, "/")))
@@ -82,8 +85,9 @@ Page({
     })
   },
   detail(e) {
+    console.log(e)
     wx.navigateTo({
-      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id+'&positId='+this.data.titleCon.id,
+      url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id+'&positId='+this.data.titleCon.id+'&pushId='+e.currentTarget.dataset.pushid,
     })
   },
   /**
@@ -144,17 +148,16 @@ Page({
       data: {
         limit: 10,
         page: that.data.currentPage,
-        positionId: '842059342b88455bab2c62a22c404ca4'
+        positionId: that.data.id
       },
       success(res) {
-        that.setData({
-          conList: that.data.conList.concat(res.data.rdata)
-        })
-        var arr = res.data.rdata.ctrlResumeList
+       
+        var arr = res.data.rdata
         var myDate = new Date()
+      
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            var arrs = val.ctrlWorkDTOS
+            var arrs = val.resumeData.ctrlWorkDTOS
             if (arrs.length > 0) {
               arrs.map(function (vals, is) {
                 var date1 = vals.startTime.substring(0, 10)
@@ -174,7 +177,9 @@ Page({
             }
           })
         }
-
+        that.setData({
+          conList: that.data.conList.concat(res.data.rdata)
+        })
         if (res.data.rdata.length < 10) {
           that.setData({
             loadingType: 2
