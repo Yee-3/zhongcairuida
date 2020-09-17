@@ -6,13 +6,13 @@
 		<view class="k_02">
 			<view class="fl">
 				<view class="q_03">
-					<view class="q_04">{{user.name?user.name:'暂无用户名'}}</view>
+					<view class="q_04">{{user.name?user.name:users.nickName}}</view>
 				</view>
 				<view class="q_06">
 					<view class="k_03 fl">
 						<image src="../img/q005.png"></image>
 					</view>
-					<view class="q_08 fl">{{user.companyName?user.companyName:'暂无公司信息'}}</view>
+					<view class="q_08 fl">{{user.companyName?user.companyName:'未注册企业信息'}}</view>
 				</view>
 				<view class="q_06">
 					<view class="k_04 fl">
@@ -28,7 +28,7 @@
 				</view>
 			</view>
 			<view class="fr q_09">
-				<image src="{{user.companyLogo?user.companyLogo:'../img/f051.png'}}"></image>
+				<image src="{{user.companyLogo?user.companyLogo:users.avatarUrl}}"></image>
 			</view>
 		</view>
 	</view>

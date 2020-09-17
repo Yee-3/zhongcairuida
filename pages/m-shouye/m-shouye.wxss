@@ -402,6 +402,7 @@
 .j_02 image {
 	width: 46rpx;
 	height: 46rpx;
+	border-radius: 50%;
 }
 
 .j_03 {
@@ -720,15 +721,19 @@ white-space: nowrap;
   margin: 0 auto;
 }
 .butImg{
-  position: absolute;
-  height: 85rpx;
-  /* width: 690rpx; */
-  bottom:0;
-  right: 0;
+  position: fixed;
+height: 85rpx;
+bottom: 0;
+width: 690rpx;
+margin: 0 auto;
+left: 35rpx;
+
 }
 .butImg image{
   width: 404rpx;
-  height: 85rpx;
+	height: 85rpx;
+	float: right;
+
 }
 .mask2_top {
 	height: 720rpx;

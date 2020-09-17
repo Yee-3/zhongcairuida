@@ -44,7 +44,7 @@ Page({
       },
       success(res) {
         var arr = res.data.rdata==null?arr=[]:res.data.rdata
-       console.log(arr.length)
+       console.log(arr)
         if (arr.length > 0) {
           arr.map(function (val, i) {
             console.log(val)

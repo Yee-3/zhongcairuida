@@ -387,7 +387,6 @@ Page({
     })
   },
   del_cancle() {
-    console.log(e)
     var del = this.data.isDel
     this.setData({
       isDel: !del,

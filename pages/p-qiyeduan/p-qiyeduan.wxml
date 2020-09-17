@@ -93,6 +93,21 @@
 		</view>
 	</view>
 </view>
+<view class="f_08" wx:if="{{false}}">
+	<view class="f_07">
+		<view class="f_14">
+			<p>您还没与平台达成合作</p>
+			<view>
+			<p>想要查看精准简历，请联系客服：</p>
+			<span style="color: #0286ff;">{{kefuPhone.phone}}</span></view>
+		</view>
+		<view class="f_11">
+			<view class="f_12 fl" bindtap="quxiao2">取消</view>
+			<view class="f_13 fr" bindtap="phone">拨打</view>
+			<view class="w-clear"></view>
+		</view>
+	</view>
+</view>
 <view class="d_16">
 	{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
 

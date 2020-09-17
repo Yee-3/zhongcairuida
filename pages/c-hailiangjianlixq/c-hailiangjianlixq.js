@@ -175,9 +175,9 @@ Page({
         console.log(res.data.rdata)
         that.setData({
           detCon: res.data.rdata,
-          resumeId: res.data.rdata.ctrlResumeDTO.id
+          resumeId: res.data.rdata.ctrlResumeDTO.id,
+        
         })
-        console.log(that.data.detCon)
       }
     })
     app.http({
@@ -467,16 +467,11 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    var that = this;
-    var shareimg = [
-      
-    ]
-    var randomImg = shareimg[Math.floor(Math.random() * shareimg.length)];
+  
     return {
-      title: '职面|求职',
+      title: '职面|求职招聘找工作',
       desc: '',
-      path: '路径',
-      imageUrl: '../img/f018.jpg', // 可以更换分享的图片
+      imageUrl: '../img/share.png', // 可以更换分享的图片
       success: function (res) {
         // 转发成功
         wx.showToast({

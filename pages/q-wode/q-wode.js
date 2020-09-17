@@ -11,7 +11,7 @@ Page({
     user: {},
     show: true,
     content: '是否切换为面试官身份',
-    name:''
+    users:{}
   },
 
   /**
@@ -20,7 +20,7 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.setData({
-      name:wx.getStorageSync('nickName')
+      users:wx.getStorageSync('users')
     })
     this.tog = this.selectComponent("#tog");
     var that = this

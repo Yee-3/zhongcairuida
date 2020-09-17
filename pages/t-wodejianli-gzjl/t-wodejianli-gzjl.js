@@ -43,7 +43,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var that = this
     this.setData({
       id: options.id,
@@ -132,7 +131,6 @@ Page({
         id:this.data.id_ty
       },
       success(res) {
-        console.log(res)
         if (res.data.code == 200) {
           // 及时更新上层页面
           var pages = getCurrentPages();
@@ -217,7 +215,6 @@ Page({
     }
   },
   zhiDetail() {
-    console.log(3333)
     wx.navigateTo({
       url: '../zc-zhiweixq/zc-zhiweixq'
     })
@@ -281,7 +278,6 @@ Page({
       })
     }
     if (type == 3) {
-      console.log(that.data.des_Type)
       that.setData({
         des_Type: value
       })
@@ -346,7 +342,6 @@ Page({
           id: id_ty
         },
         success(res) {
-          console.log(res)
           if (res.data.code == 200) {
             // 及时更新上层页面
             var pages = getCurrentPages();

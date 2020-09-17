@@ -268,8 +268,8 @@ Page({
     return {
       // desc: this.data.des,
       title: this.data.title,
-      path: '路径',
-      imageUrl: '../img/f018.jpg',
+
+      imageUrl: '../img/share.png',
       // 可以更换分享的图片
       success: function (res) {
         // 转发成功

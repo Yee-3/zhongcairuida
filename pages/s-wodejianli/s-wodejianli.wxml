@@ -17,7 +17,7 @@
 		</view>
 	</view>
 	<view class="fr q_09">
-		<image src="{{resume.ctrlResumeDTO.url?resume.ctrlResumeDTO.url:'../img/f051.png'}}"></image>
+		<image src="{{resume.ctrlResumeDTO.url}}"></image>
 	</view>
 </view>
 
@@ -163,7 +163,7 @@
 		<view class="zc_19">
 			<view class="zc_20">
 				<p>您还没有完善基本信息</p>
-				<span>请您先完善基本信息并绑定简历</span>
+				<span>请您先完善基本信息并确认</span>
 			</view>
 			<view class="f_11">
 				<view class="f_12 fl" bindtap="quxiao1">朕知道了</view>

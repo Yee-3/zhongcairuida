@@ -2,16 +2,16 @@
 	<view class="q_02">
 		<view class="fl">
 			<view class="q_03">
-				<view class="q_04 fl"><view class="title">{{user.name?user.name:name}}</view></view>
+				<view class="q_04 fl"><view class="title">{{user.name?user.name:users.nickName}}</view></view>
 				<view class="q_05 fl" bindtap="base"><image src="../img/f050.png"></image></view>
 			</view>
 			<view class="q_06">
 				<view class="q_07 fl"><image src="../img/f049.png"></image></view>
-				<view class="q_08 fl">{{user.phone?user.phone:''}}</view>
+				<view class="q_08 fl">{{user.phone?users.phone:''}}</view>
 			</view>
 		</view>
 		<view class="fr q_09">
-			<image src="{{user.url?user.url:(user.sex==0?'../img/f004.png':'../img/f051.png')}}"></image>
+			<image src="{{user.url?user.url:users.avatarUrl}}"></image>
 		</view>
 	</view>
 	

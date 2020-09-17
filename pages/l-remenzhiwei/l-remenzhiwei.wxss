@@ -130,6 +130,7 @@ page {
 .j_02 image {
 	width: 46rpx;
 	height: 46rpx;
+	border-radius: 50%;
 }
 
 .j_03 {

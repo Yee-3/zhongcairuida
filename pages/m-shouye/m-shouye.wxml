@@ -258,12 +258,11 @@
 
 	</view>
 	<view class="loading-text">
-		<view class="butImg" bindtap="userIn" wx:if="{{!isBot}}">
-			<image src="../img/c1.png"></image>
-		</view>
 		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : (!isBot?'~':contentText.contentnomore)}}
 	</view>
-
+	<view class="butImg" bindtap="userIn" wx:if="{{!isBot}}" >
+			<image src="../img/c1.png"></image>
+		</view>
 </view>
 <view class="f_08" style="{{style}}">
 	<view class="f_07">
@@ -279,7 +278,7 @@
 				<!-- <view class="f_12 fl" bindtap="hidd">朕知道了</view> -->
 				<view class="f_11">
 					<view class="f_12 fl" bindtap="quxiao1">朕知道了</view>
-					<view class="f_13 fr" bindtap="block">完善信息</view>
+					<view class="f_13 fr" bindtap="block">补全简历</view>
 					<view class="w-clear"></view>
 				</view>
 				<view class="w-clear"></view>

@@ -31,6 +31,8 @@
   width: 100rpx;
   height: 100rpx;
   box-shadow: 0 0 7px rgba(0, 0, 0, 0.2);
+  border-radius: 10rpx;
+  overflow: hidden;
 }
 
 .z_04 image {

@@ -65,7 +65,7 @@ Page({
         var code = res.code
         wx.getUserInfo({
           success: function (res) {
-            // console.log(res)           
+            console.log(res)           
             if (code) {
               _this.setData({
                 nickName: res.userInfo.nickName,
@@ -73,7 +73,10 @@ Page({
                 // iv: res.iv,
                 // encryptedData: res.encryptedData
               })
-              wx.setStorageSync('nickName', res.userInfo.nickName)
+              wx.setStorageSync('users',{
+                'nickName':res.userInfo.nickName,
+                'avatarUrl':res.userInfo.avatarUrl
+              })
               app.http({
                 url: '/oauth/login',
                 method: 'POST',

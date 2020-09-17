@@ -74,15 +74,16 @@
 				},
 				{
 					"id": -1,
-					"name": "pages/p-qiyeduan/p-qiyeduan",
-					"pathName": "pages/p-qiyeduan/p-qiyeduan",
+					"name": "pages/q-wode/q-wode",
+					"pathName": "pages/q-wode/q-wode",
 					"query": "",
 					"scene": null
 				},
 				{
 					"id": -1,
-					"name": "pages/q-wode/q-wode",
-					"pathName": "pages/q-wode/q-wode",
+					"name": "pages/m-shouye/m-shouye",
+					"pathName": "pages/m-shouye/m-shouye",
+					"query": "",
 					"scene": null
 				}
 			]

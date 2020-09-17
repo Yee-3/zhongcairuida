@@ -20,6 +20,7 @@ Page({
     isHz:false,
     kefuPhone: {},
     isHz_Type:''
+    
     // isTwo:''
   },
 

@@ -21,7 +21,7 @@
 			<image src="../img/f032.jpg"></image>
 		</view>
 	</view>
-	<view class="loading-text">
+	<view class="loading-text"> 
 	{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : contentText.contentnomore}}
 	</view>
 </view>

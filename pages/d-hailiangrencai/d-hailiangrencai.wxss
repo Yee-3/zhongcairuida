@@ -80,6 +80,7 @@ page {
 .d_05 image {
   width: 90rpx;
   height: 90rpx;
+  border-radius: 50%;
 }
 
 .d_06 {

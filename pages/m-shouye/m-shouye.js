@@ -54,7 +54,7 @@ Page({
     zhCom: true,
     work: {},
     style: 'display:none',
-    isBot: ''
+    isBot: false
   },
   /**
    * 生命周期函数--监听页面加载

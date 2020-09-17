@@ -15,7 +15,8 @@ Page({
     app: getApp().globalData,
     recomList: [],
     imgList: [],
-    companyId:''
+    companyId:'',
+    kefuPhone: {},
   },
 
   /**
@@ -68,6 +69,29 @@ Page({
         wx.stopPullDownRefresh()
       }
     })
+    this.data.app.http({
+      url: '/Other/hotline',
+      dengl: true,
+      data: {},
+      type:true,
+      success(res) {
+        that.setData({
+          kefuPhone: res.data.rdata
+        })
+      }
+    })
+    // this.data.app.http({
+    //   type: true,
+    //   url: '/company/queryCooperate',
+    //   dengl: true,
+    //   data: {},
+    //   method:'POST',
+    //   success(res) {
+    //     console.log(res)
+       
+    //   }
+    // })
+    
   },
   // more(){
   //   wx.navigateTo({

@@ -8,7 +8,7 @@ Page({
     date_value: '请选择',
     datePickerValue: ['', '', ''],
     datePickerIsShow: false,
-    img: '../img/f067.png',
+    img: '',
     isMar: false,
     mar: '0',
     valu: '请选择',
@@ -69,8 +69,8 @@ Page({
         if (res.data.rdata.ctrlResume) {
           list = res.data.rdata.ctrlResume
           that.setData({
-            list: res.data.rdata.ctrlResume,
-            img: list.url ? list.url : (list.sex==0?'../img/f004.png':'../img/f051.png'),
+            list: res.data.rdata.ctrlResume,   
+            img: list.url?list.url:wx.getStorageSync('users').avatarUrl,
             name_value: list.name ? list.name : '',
             date_value: list.time ? list.time : '',
             valu2: list.schoolName ? list.schoolName : '请选择',
@@ -224,6 +224,7 @@ Page({
   submit() {
     var that = this,
       date = this.data.date_value.substring(0, 4) + '/' + this.data.date_value.substring(5, 7) + '/' + this.data.date_value.substring(8, 10)
+      var img=this.data.img?this.data.img:wx.getStorageSync('users').avatarUrl
     var data = {
       address: this.data.home_value,
       time: date,
@@ -231,7 +232,7 @@ Page({
       phone: this.data.phone_value,
       email: this.data.emil_value,
       // money: this.data.money_value,
-      url: this.data.img == '../img/f067.png'? '' : this.data.img,
+      url: img,
       status: this.spring.data.mar,
       school: this.data.edu,
       workTime: this.data.year_time,

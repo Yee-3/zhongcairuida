@@ -327,11 +327,13 @@ page {
 .q_09 {
   width: 140rpx;
   height: 140rpx;
+  
 }
 
 .q_09 image {
   width: 140rpx;
   height: 140rpx;
+  border-radius: 50%;
 }
 
 

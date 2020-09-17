@@ -464,7 +464,7 @@ Page({
         method: 'POST',
         data: {
           companyDescribe: that.data.val ? that.data.val : '',
-          companyLogo: that.data.comLogo ? that.data.comLogo : '',
+          companyLogo: that.data.comLogo ? that.data.comLogo : wx.getStorageSync('users').avatarUrl,
           companyName: that.data.comVal ? that.data.comVal : '',
           companyNature: this.nature.data.edu ? this.nature.data.edu : '',
           companyType: this.cls.data.edu ? this.cls.data.edu : '',

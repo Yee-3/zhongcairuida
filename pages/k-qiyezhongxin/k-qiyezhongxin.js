@@ -13,7 +13,8 @@ Page({
     com_type: '',
     com_cont: '',
     isZhuce:'',
-    zhuContent:'请先注册企业信息'
+    zhuContent:'请先注册企业信息',
+    users:{}
   },
 
   /**
@@ -24,6 +25,9 @@ Page({
     this.zhuce = this.selectComponent("#zhuce");
     const app = getApp().globalData
     var that = this
+    this.setData({
+      users:wx.getStorageSync('users')
+    })
     app.http({
       type: true,
       url: '/getCompany',
@@ -141,6 +145,7 @@ Page({
         if (res.data.code == 200) {
           wx.setStorageSync('Authorization', '')
           wx.setStorageSync('companyId', '')
+          wx.removeStorageSync('users')
           wx.showToast({
             title: '您已退出登录'
           })
