@@ -22,7 +22,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     var that = this
     if(options){
       this.setData({
@@ -44,10 +43,8 @@ Page({
       },
       success(res) {
         var arr = res.data.rdata==null?arr=[]:res.data.rdata
-       console.log(arr)
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            console.log(val)
             var arrs = val.resumeData.ctrlWorkDTOS
             if (arrs.length > 0) {
               arrs.map(function (vals, is) {
@@ -85,7 +82,6 @@ Page({
     })
   },
   detail(e) {
-    console.log(e)
     wx.navigateTo({
       url: '../f-jinzhunjianlixq/f-jinzhunjianlixq?id='+e.currentTarget.dataset.id+'&positId='+this.data.titleCon.id+'&pushId='+e.currentTarget.dataset.pushid,
     })

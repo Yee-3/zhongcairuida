@@ -49,17 +49,14 @@ Page({
     var app = getApp().globalData,
       that = this,
       id = wx.getStorageSync('companyId')
-    console.log(id)
     app.http({
       type: true,
       url: '/getCompany',
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         // 有企业信息
         if (res.data.rdata.ctrlCompany) {
-          console.log('注册企业信息')
           that.setData({
             isZhuce: true, // 注册信息true
           })
@@ -76,7 +73,6 @@ Page({
             })
           }
         } else {
-          console.log('未注册注册企业信息')
           that.setData({
             isHz: false,
             isZhuce: false
@@ -94,7 +90,6 @@ Page({
     //   },
     //   method: 'POST',
     //   success(res) {
-    //     console.log(res)
     //     if(res.data.rdata=='N'){
     //       that.setData({
     //         isHz:false
@@ -154,7 +149,6 @@ Page({
             var startTime = val.startTime.substring(0, 7).replace('-', '/')
             var endTime = val.endTime.substring(0, 7).replace('-', '/')
             val.valTime = startTime + '~' + endTime
-            console.log(val)
           })
         }
         if (arr2.length > 0) {
@@ -172,7 +166,6 @@ Page({
             }
           })
         }
-        console.log(res.data.rdata)
         that.setData({
           detCon: res.data.rdata,
           resumeId: res.data.rdata.ctrlResumeDTO.id,
@@ -186,7 +179,6 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res.data.rdata)
         that.setData({
           kefuPhone: res.data.rdata
         })
@@ -284,7 +276,6 @@ Page({
     })
   },
   choice(e) {
-    console.log(e)
     var that = this
     this.setData({
       positionId: e.currentTarget.dataset.id,
@@ -380,7 +371,6 @@ Page({
   },
 
   datePickerOnSureClick: function (e) {
-    console.log(e)
     this.setData({
       date: `${e.detail.value[0]}年${e.detail.value[1]}月${e.detail.value[2]}日${e.detail.value[3]}时${e.detail.value[4]}分`,
       datePickerValue: e.detail.value,
@@ -392,7 +382,6 @@ Page({
         icon: "none"
       })
     } else {
-      console.log(e, this.data.datePickerValue, )
       var that = this
       this.data.app.http({
         type: true,
@@ -416,7 +405,6 @@ Page({
               icon: "none"
             })
           }
-          console.log(res)
         }
       })
     }

@@ -15,8 +15,9 @@ Page({
     app: getApp().globalData,
     recomList: [],
     imgList: [],
-    companyId:'',
+    companyId: '',
     kefuPhone: {},
+    isHz: false
   },
 
   /**
@@ -25,10 +26,10 @@ Page({
   onLoad: function (options) {
     this.tab = this.selectComponent("#tab");
     var that = this
-    if(wx.getStorageSync('companyId')){
+    if (wx.getStorageSync('companyId')) {
 
       this.setData({
-        companyId:wx.getStorageSync('companyId')
+        companyId: wx.getStorageSync('companyId')
       })
     }
     wx.showNavigationBarLoading()
@@ -43,7 +44,7 @@ Page({
       success(res) {
         var arr = res.data.rdata.ctrlResumeList
         arr.map(function (val, i) {
-          if(val.lastLogin){
+          if (val.lastLogin) {
             var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
             var date = Date.parse(new Date())
             var day = parseInt((date - date1) / 1000)
@@ -55,7 +56,6 @@ Page({
           imgList: res.data.rdata.ctrlBannerList,
           recomList: res.data.rdata.ctrlResumeList,
         })
-        console.log(res.data.rdata.ctrlResumeList)
         if (res.data.rdata.ctrlResumeList.length < 10) {
           that.setData({
             loadingType: 2
@@ -73,25 +73,15 @@ Page({
       url: '/Other/hotline',
       dengl: true,
       data: {},
-      type:true,
+      type: true,
       success(res) {
         that.setData({
           kefuPhone: res.data.rdata
         })
       }
     })
-    // this.data.app.http({
-    //   type: true,
-    //   url: '/company/queryCooperate',
-    //   dengl: true,
-    //   data: {},
-    //   method:'POST',
-    //   success(res) {
-    //     console.log(res)
-       
-    //   }
-    // })
-    
+
+
   },
   // more(){
   //   wx.navigateTo({
@@ -104,9 +94,49 @@ Page({
     })
   },
   resume() {
-    var id=this.data.companyId
-    wx.navigateTo({
-      url: '../e-jinzhunjianli/e-jinzhunjianli?id='+id,
+    var id = this.data.companyId,
+      that = this
+    this.data.app.http({
+      type: true,
+      url: '/getCompany',
+      dengl: true,
+      data: {},
+      success(res) {
+        if (res.data.rdata.ctrlCompany) {
+          var type = res.data.rdata.ctrlCompany.audit
+          var types = res.data.rdata.ctrlCompany.cooperation
+          if (type == 1) {
+            if (types == 'Y') {
+              wx.navigateTo({
+                url: '../e-jinzhunjianli/e-jinzhunjianli?id=' + id,
+              })
+            } else {
+              that.setData({
+                isHz: true
+              })
+            }
+          } else {
+            that.setData({
+              isHz: true
+            })
+          }
+        } else {
+          that.setData({
+            isHz: true
+          })
+        }
+      }
+    })
+
+  },
+  phone() {
+    wx.makePhoneCall({
+      phoneNumber: this.data.kefuPhone.phone
+    })
+  },
+  cancle() {
+    this.setData({
+      isHz: false
     })
   },
   entry() {
@@ -116,7 +146,7 @@ Page({
   },
   detail(e) {
     wx.navigateTo({
-      url:'../c-hailiangjianlixq/c-hailiangjianlixq?id=' + e.currentTarget.dataset.id,
+      url: '../c-hailiangjianlixq/c-hailiangjianlixq?id=' + e.currentTarget.dataset.id,
     })
   },
   qyRen() {
@@ -145,7 +175,7 @@ Page({
       success(res) {
         var arr = res.data.rdata.ctrlResumeList
         arr.map(function (val, i) {
-          if(val.lastLogin){
+          if (val.lastLogin) {
             var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
             var date = Date.parse(new Date())
             var day = parseInt((date - date1) / 1000)
@@ -157,7 +187,7 @@ Page({
           recomList: that.data.recomList.concat(res.data.rdata.ctrlResumeList)
         })
 
-    
+
         if (res.data.rdata.ctrlResumeList.length < 10) {
           that.setData({
             loadingType: 2
@@ -185,15 +215,9 @@ Page({
    */
   onShow: function () {
     wx.hideHomeButton({
-      success: function () {
-        console.log("hide home success");
-      },
-      fail: function () {
-        console.log("hide home fail");
-      },
-      complete: function () {
-        console.log("hide home complete");
-      },
+      success: function () {},
+      fail: function () {},
+      complete: function () {},
     });
   },
 
@@ -225,7 +249,7 @@ Page({
     var that = this,
       data = {
         limit: 1,
-        page: that.data.currentPage+1
+        page: that.data.currentPage + 1
       }
     this.jiazai(data)
   },

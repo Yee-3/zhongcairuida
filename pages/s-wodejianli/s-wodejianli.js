@@ -19,18 +19,27 @@ Page({
     sty: 'display:none',
     style: 'display:none',
     s: '',
-    height:'',
-    hidd:true,
-    hidd1:true,
+    height: '',
+    hidd: true,
+    hidd1: true,
+    isType: false
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    // console.log(this.data.baseUrl)
+    console.log(options)
     let that = this
-
+    if (options) {
+      this.setData({
+        isType: true
+      })
+    }else{
+      this.setData({
+        isType: false
+      })
+    }
     this.data.app.http({
       url: '/resume/getResume',
       dengl: true,
@@ -45,26 +54,26 @@ Page({
           var xiangTime = res.data.rdata.ctrlProjectDTOS
           var schoolTime = res.data.rdata.ctrlSchoolDTOS
           var book = []
-          if(res.data.rdata.ctrlWorkDTOS.length<=1){
+          if (res.data.rdata.ctrlWorkDTOS.length <= 1) {
             that.setData({
-              hidd:false,
-              isF:true
+              hidd: false,
+              isF: true
             })
-          }else{
+          } else {
             that.setData({
-              hidd:true,
-              isF:false
+              hidd: true,
+              isF: false
             })
           }
-          if(res.data.rdata.ctrlProjectDTOS.length<=1){
+          if (res.data.rdata.ctrlProjectDTOS.length <= 1) {
             that.setData({
-              hidd1:false,
-              isX:true
+              hidd1: false,
+              isX: true
             })
-          }else{
+          } else {
             that.setData({
-              hidd1:true,
-              isX:false
+              hidd1: true,
+              isX: false
             })
           }
           for (var i = 0; i < timer.length; i++) {
@@ -109,17 +118,17 @@ Page({
 
       }
     })
-      let query = wx.createSelectorQuery();
-      query.select('.s_06').boundingClientRect(rect => {
-        let clientHeight = rect.height;
-        let clientWidth = rect.width;
-        let ratio = 750 / clientWidth;
-        let height = parseInt(clientHeight * ratio);
-        console.log(height, clientHeight, clientWidth);
-       this.setData({
-         height:height+340+'rpx',
-       })
-      }).exec();
+    let query = wx.createSelectorQuery();
+    query.select('.s_06').boundingClientRect(rect => {
+      let clientHeight = rect.height;
+      let clientWidth = rect.width;
+      let ratio = 750 / clientWidth;
+      let height = parseInt(clientHeight * ratio);
+      console.log(height, clientHeight, clientWidth);
+      this.setData({
+        height: height + 340 + 'rpx',
+      })
+    }).exec();
   },
   toudi() {
     var that = this
@@ -180,12 +189,12 @@ Page({
         // console.log(this.data.resume.ctrlObjectiveDTOS[0])
         var cot = this.data.resume.ctrlObjectiveDTOS[0]
         wx.navigateTo({
-          url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?money=' + cot.money + '&type=' + cot.type + '&industry=' + cot.industry + '&time=' + cot.time + '&address=' + cot.address + '&posit=' + cot.position + '&pingjia=' + cot.introduction + '&type_id=' + cot.id+'&id='+id,
+          url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?money=' + cot.money + '&type=' + cot.type + '&industry=' + cot.industry + '&time=' + cot.time + '&address=' + cot.address + '&posit=' + cot.position + '&pingjia=' + cot.introduction + '&type_id=' + cot.id + '&id=' + id,
         })
 
       } else {
         wx.navigateTo({
-          url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?id=' + id
+          url: '../x-wodejianli-qzyx/x-wodejianli-qzyx?id=' + id+'&type='+this.data.isType
         })
       }
     }

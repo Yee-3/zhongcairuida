@@ -31,7 +31,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     this.tog = this.selectComponent("#tog");
 
     var that = this
@@ -44,16 +43,13 @@ Page({
     var id = wx.getStorageSync('companyId'),
       app = getApp().globalData,
       that = this
-    console.log(id)
     this.data.app.http({
       type: true,
       url: '/getCompany',
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         if (res.data.rdata.ctrlCompany) {
-          console.log('注册企业信息')
           that.setData({
             isZhuce: true,
           })
@@ -66,7 +62,6 @@ Page({
             })
           }
         } else {
-          console.log('未注册注册企业信息')
           that.setData({
             isHz: false,
             isZhuce: false
@@ -84,7 +79,6 @@ Page({
     //   },
     //   method: 'POST',
     //   success(res) {
-    //     console.log(res)
     //     if (res.data.rdata == 'N') {
     //       that.setData({
     //         isHz: false
@@ -147,7 +141,6 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res.data.rdata)
         that.setData({
           kefuPhone: res.data.rdata
         })
@@ -226,7 +219,6 @@ Page({
             }
           })
         }
-        console.log(res)
       }
     })
   },
@@ -263,7 +255,6 @@ Page({
         icon: "none"
       })
     } else {
-      console.log(e, this.data.datePickerValue, )
       var that = this
       this.data.app.http({
         type: true,
@@ -288,7 +279,6 @@ Page({
               icon: "none"
             })
           }
-          console.log(res)
         }
       })
     }

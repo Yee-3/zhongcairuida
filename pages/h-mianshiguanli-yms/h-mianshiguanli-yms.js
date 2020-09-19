@@ -362,7 +362,6 @@ Page({
             time: `${e.detail.value[0]}-${e.detail.value[1]}-${e.detail.value[2]} ${e.detail.value[3]}:${e.detail.value[4]}:00`
           },
           success(res) {
-            console.log(res)
             if (res.data.code == 200) {
               that.onLoad()
             }
@@ -379,7 +378,6 @@ Page({
 
   },
   dele(e) {
-    console.log(e)
     var del = this.data.isDel
     this.setData({
       isDel: !del,
@@ -419,13 +417,10 @@ Page({
   onShow: function () {
     wx.hideHomeButton({
       success: function () {
-        console.log("hide home success");
       },
       fail: function () {
-        console.log("hide home fail");
       },
       complete: function () {
-        console.log("hide home complete");
       },
     });
   },

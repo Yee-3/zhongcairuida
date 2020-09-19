@@ -64,7 +64,6 @@ Page({
     this.setData({
       currentPage: that.data.currentPage + 1
     })
-    console.log(this.data.loadingType)
     if (this.data.loadingType != 0) {
       //loadingType!=0;直接返回
       return false;
@@ -140,7 +139,6 @@ Page({
    * 页面上拉触底事件的处理函数
    */
   onReachBottom: function () {
-    console.log('zhixingzhixnging ')
     var that=this
     var data = {
       companyId: that.data.comId,

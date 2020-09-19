@@ -110,7 +110,6 @@ Page({
 	},
 	// 公司详情
 	conpanyIn(e){
-		console.log(e)
 		wx.navigateTo({
 			url: '../za-xinzeng-qyzsxq/z-xinzeng-qyzsxq?id='+e.currentTarget.dataset.id,
 		})

@@ -106,7 +106,7 @@ Page({
                         wx.reLaunch({
                           url: '../p-qiyeduan/p-qiyeduan'
                         })
-                      }, 1000)
+                      }, 500)
                     }
                   }else{
                     console.log(res)

@@ -114,9 +114,7 @@ Page({
         }
         var arr = res.data.rdata
         arr.map(function (val, i) {
-          console.log(val)
           if(val.lastLogin){
-            console.log(val)
             var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
             var date = Date.parse(new Date())
             var day = parseInt((date - date1) / 1000)
@@ -169,7 +167,6 @@ Page({
       success(res) {
         var arr = res.data.rdata
         arr.map(function (val, i) {
-          console.log(val)
           if(val.lastLogin){
             var date1 = Date.parse(new Date(val.lastLogin.replace(/\-/g, "/")))
             var date = Date.parse(new Date())

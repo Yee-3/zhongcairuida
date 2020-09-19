@@ -41,7 +41,8 @@ Page({
     value_type: '',
     id: '',
     posi_id: '',
-    type_Id: ''
+    type_Id: '',
+    sxType: false
   },
 
   /**
@@ -52,6 +53,11 @@ Page({
     this.setData({
       id: options.id,
     })
+    if (options.type) {
+      this.setData({
+        sxType: true
+      })
+    }
     console.log(options)
     // this.data.content=options
     if (options.type_id) {
@@ -263,6 +269,11 @@ Page({
                 page.onLoad();
               }
             })
+            if (that.data.sxType) {
+              var pag = getCurrentPages();
+              var prevPages = pag[pag.length - 3]; //上一个页面
+              prevPages.onLoad()
+            }
           }
         }
       })
@@ -276,8 +287,8 @@ Page({
     this.setData({
       ind: e.currentTarget.dataset['index'],
       isTwo: !two,
-      ind1:'x',
-      ind_three:'x'
+      ind1: 'x',
+      ind_three: 'x'
     })
   },
   toggle1(e) {
@@ -286,7 +297,7 @@ Page({
       that = this
     this.setData({
       ind1: e.currentTarget.dataset['index'],
-      ind_three:'x'
+      ind_three: 'x'
     })
   },
   toggle_three(e) {

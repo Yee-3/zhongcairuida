@@ -54,7 +54,8 @@ Page({
     zhCom: true,
     work: {},
     style: 'display:none',
-    isBot: false
+    isBot: false,
+    isTs:false,
   },
   /**
    * 生命周期函数--监听页面加载
@@ -85,24 +86,15 @@ Page({
       }
     })
     this.data.app.http({
-      url: '/resume/getResume',
+      url: '/index/getResumes',
       data: {},
       dengl: true,
+      method:'POST',
       success(res) {
-        console.log(res)
-        if (res.data.rdata == 'unll') {
-          that.setData({
-            isBot: false
-          })
-        } else if (res.data.rdata) {
-          that.setData({
-            isBot: true
-          })
-        } else {
-          that.setData({
-            isBot: false
-          })
-        }
+        console.log(res,4443432)
+        that.setData({
+          isBot:res.data.rdata
+        })
       }
     })
     this.data.app.http({
@@ -183,7 +175,7 @@ Page({
   // 进入我的
   userIn() {
     wx.navigateTo({
-      url: '../s-wodejianli/s-wodejianli',
+      url: '../s-wodejianli/s-wodejianli?type=1',
     })
   },
   // 事件
@@ -341,6 +333,12 @@ Page({
   high() {
     wx.navigateTo({
       url: '../d-gaoduanzhiwei/d-gaoduanzhiwei'
+    })
+  },
+  confirm_ts(){
+    var ts=this.data.isTs
+    this.setData({
+      isTs:!ts
     })
   },
   hotspot() {
@@ -502,15 +500,9 @@ Page({
       method: 'POST',
       success(res) {
         if (res.data.rdata == true) {
-          if (that.data.work) {
-            wx.navigateTo({
-              url: '../a-bangwozhaogongzuo/index?id=' + work.id + '&address=' + work.address + '&money=' + work.money + "&name=" + work.name + '&phone=' + work.phone + '&position=' + work.position + '&status=' + work.status + '&time=' + work.time + '&workType=' + work.workType,
-            })
-          } else {
-            wx.navigateTo({
-              url: '../a-bangwozhaogongzuo/index'
-            })
-          }
+          that.setData({
+            isTs:true
+          })
         } else {
           that.setData({
             style: 'display:block'

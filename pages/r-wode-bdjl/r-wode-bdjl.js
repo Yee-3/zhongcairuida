@@ -57,9 +57,9 @@ Page({
               prevPage.onLoad()
             } else {
               var prevPage = pages[pages.length - 2]; //上一个页面
-              prevPage.setData({
-                resume: []
-              })
+              // prevPage.setData({
+              //   resume: []
+              // })
               prevPage.onLoad()
             }
             wx.switchTab({

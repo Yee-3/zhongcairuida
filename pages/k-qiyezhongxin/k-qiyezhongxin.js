@@ -34,7 +34,6 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res)
         if (res.data.rdata.ctrlCompany) {
           that.setData({
             user: res.data.rdata.ctrlCompany
@@ -62,7 +61,6 @@ Page({
       dengl: true,
       data: {},
       success(res) {
-        console.log(res.data.rdata)
         that.setData({
           kefuPhone: res.data.rdata
         })
@@ -83,7 +81,6 @@ Page({
   //   }
   // },
   gangwei(e) {
-    console.log(e)
     var that=this
     if(this.data.isZhuce){
       if(that.data.com_type!=1){
@@ -131,7 +128,6 @@ Page({
     //     }
     //   }
     // })
-    console.log('sdfadf')
     wx.switchTab({
       url: '../m-shouye/m-shouye',
     })
@@ -151,7 +147,6 @@ Page({
           })
         }
         // this.onLoad()
-        console.log(this.data.user)
       }
     })
   },
@@ -188,13 +183,10 @@ Page({
   onShow: function () {
     wx.hideHomeButton({
       success: function () {
-        console.log("hide home success");
       },
       fail: function () {
-        console.log("hide home fail");
       },
       complete: function () {
-        console.log("hide home complete");
       },
     });
 

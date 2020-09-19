@@ -339,7 +339,6 @@ Component({
           newcity: hot,
           locate: locate
         })
-        console.log(citys,hot,locate)
       })
     }
    

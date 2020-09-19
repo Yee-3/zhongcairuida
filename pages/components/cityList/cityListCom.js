@@ -157,9 +157,7 @@ Component({
       let that = this;
       new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
         var x = val.address_component.city
-        console.log(val)
         var id = val.ad_info.adcode.substring(0,4)+'00'
-        console.log(id)
         that.setData({
           location: val.location,
           loacteId: id,

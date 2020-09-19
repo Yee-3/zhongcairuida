@@ -260,9 +260,9 @@
 	<view class="loading-text">
 		{{loadingType === 0 ? contentText.contentdown : loadingType === 1 ? contentText.contentrefresh : (!isBot?'~':contentText.contentnomore)}}
 	</view>
-	<view class="butImg" bindtap="userIn" wx:if="{{!isBot}}" >
-			<image src="../img/c1.png"></image>
-		</view>
+	<view class="butImg" bindtap="userIn" wx:if="{{!isBot}}">
+		<image src="../img/c1.png"></image>
+	</view>
 </view>
 <view class="f_08" style="{{style}}">
 	<view class="f_07">
@@ -283,6 +283,20 @@
 				</view>
 				<view class="w-clear"></view>
 			</view>
+		</view>
+	</view>
+</view>
+<view class="t_08" wx:if="{{isTs}}">
+	<view class="t_07">
+		<view class="t_14">
+			<view style="font-size:32rpx">温馨提示</view>
+			<p style="padding-top:20rpx">简历已投递</p> 
+			
+			<p>正在为您匹配职位</p>
+		</view>
+		<view class="t_11">
+			<view class="t_13" bindtap="confirm_ts">确定</view>
+			<view class="w-clear"></view>
 		</view>
 	</view>
 </view>

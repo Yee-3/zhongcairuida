@@ -726,7 +726,7 @@ height: 85rpx;
 bottom: 0;
 width: 690rpx;
 margin: 0 auto;
-left: 35rpx;
+left: 30rpx;
 
 }
 .butImg image{
@@ -865,4 +865,77 @@ left: 35rpx;
   font-size: 26rpx;
   color: #666;
   display: block;
+}
+
+.t_07 {
+  width: 630rpx;
+  height: auto;
+  background: #fff;
+  margin: 0 auto;
+  border-radius: 15rpx;
+  padding: 45rpx ;
+  box-sizing: border-box;
+  margin-top: 50%;
+}
+
+.t_08 {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background: rgba(0, 0, 0, 0.4);
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  z-index: 20;
+}
+
+.t_11 {
+  width: 530rpx;
+  margin: 0 auto;
+  margin-top: 30rpx;
+}
+
+.t_12 {
+  width: 240rpx;
+  height: 80rpx;
+  background: #ececec;
+  text-align: center;
+  font-size: 28rpx;
+  color: #333;
+  line-height: 80rpx;
+  border-radius: 40rpx;
+}
+
+.t_13 {
+  width: 240rpx;
+  height: 74rpx;
+  background: #0286ff;
+  text-align: center;
+  font-size: 28rpx;
+  color: #fff;
+  line-height:74rpx;
+	border-radius: 40rpx;
+	margin: 0 auto;
+}
+
+.t_14 {
+  text-align: center;
+}
+
+.t_14 p {
+  display: block;
+  font-size: 28rpx;
+  letter-spacing: 3rpx;
+  margin-bottom: 20rpx;
+
+}
+
+.t_14 span {
+  letter-spacing: 3rpx;
+  font-size: 30rpx;
+  /* color: #0286ff; */
+  /* margin-top: 16rpx;
+   */
 }

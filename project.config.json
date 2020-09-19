@@ -78,13 +78,6 @@
 					"pathName": "pages/q-wode/q-wode",
 					"query": "",
 					"scene": null
-				},
-				{
-					"id": -1,
-					"name": "pages/m-shouye/m-shouye",
-					"pathName": "pages/m-shouye/m-shouye",
-					"query": "",
-					"scene": null
 				}
 			]
 		}

@@ -60,6 +60,11 @@ Page({
         idType: 1
       })
     }
+    if(!this.data.img){
+      this.setData({
+       img:wx.getStorageSync('users').avatarUrl
+      })
+    }
     var list = {}
     this.data.app.http({
       url: '/getResumes',
@@ -78,7 +83,7 @@ Page({
             edu: list.school ? list.school : '',
             id: list.id,
             // money_value: list.address ? list.address : '',
-            home_value: list.address ? list.address : '请输入',
+            home_value: list.address ? list.address : '请输入',  
             mar: list.marriage ? list.marriage : '',
             emil_value: list.email ? list.email : ''
           })
