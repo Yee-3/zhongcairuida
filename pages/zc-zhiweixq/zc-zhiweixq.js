@@ -264,12 +264,13 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function (res) {
-    var that = this;
+    var that = this,
+    company=this.data.detaCont.companyName
     return {
       // desc: this.data.des,
-      title: this.data.title,
+      title: company+'正在招聘'+this.data.detaCont.title,
 
-      imageUrl: '../img/share.png',
+      imageUrl: '../img/share.jpg',
       // 可以更换分享的图片
       success: function (res) {
         // 转发成功

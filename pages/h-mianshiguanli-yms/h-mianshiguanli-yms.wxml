@@ -92,8 +92,9 @@
 					<view class="h_18">
 						<p>{{item.workTimeName}}</p><span>|</span>
 						<p>{{item.school}}</p><span>|</span>
-						<p>{{item.address}}</p><span>|</span>
-						<p>{{item.money}}</p>
+						<p>{{item.address}}</p>
+						<!-- <span>|</span> -->
+						<!-- <p>{{item.money}}</p> -->
 					</view>
 				</view>
 			</view>

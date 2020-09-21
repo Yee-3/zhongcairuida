@@ -8,8 +8,9 @@
 		</view>
 	</view>
 	<view class="a_02">
-		<view class="fl a_03"><em>*</em>
-			<p>公司logo</p>
+		<view class="fl a_03">
+		<!-- <em style="width:30rpx"></em> -->
+			<p style="padding-left:10rpx">公司logo</p>
 		</view>
 		<view class="fr a_04">
 			<view class="section" bindtap="logoImg">

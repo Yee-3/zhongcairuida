@@ -177,6 +177,26 @@ Page({
 	 * 用户点击右上角分享
 	 */
 	onShareAppMessage: function () {
+		return {
+      // desc: this.data.des,
+      title: this.data.detailCont.title,
 
+      imageUrl: '../img/share.jpg',
+      // 可以更换分享的图片
+      success: function (res) {
+        // 转发成功
+        wx.showToast({
+          title: '分享成功',
+          icon: "none"
+        });
+      },
+      fail: function (res) {
+        // 转发失败
+        wx.showToast({
+          title: '分享失败',
+          icon: "none"
+        })
+      }
+    }
 	}
 })

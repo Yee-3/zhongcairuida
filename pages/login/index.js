@@ -9,7 +9,7 @@ Page({
     SessionKey: '',
     OpenId: '',
     nickName: '',
-    avatarUrl: '',
+    avatarUrl: '../img/logo.png',
     code: null,
     isCanUse: wx.getStorageSync('isCanUse') || true, //默认为true,
     //parentId

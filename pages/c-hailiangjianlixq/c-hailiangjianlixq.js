@@ -459,7 +459,7 @@ Page({
     return {
       title: '职面|求职招聘找工作',
       desc: '',
-      imageUrl: '../img/share.png', // 可以更换分享的图片
+      imageUrl: '../img/share.jpg', // 可以更换分享的图片
       success: function (res) {
         // 转发成功
         wx.showToast({

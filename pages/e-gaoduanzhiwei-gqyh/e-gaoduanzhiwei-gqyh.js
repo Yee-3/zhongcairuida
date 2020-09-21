@@ -14,7 +14,7 @@ Page({
       contentnomore: "没有更多数据了"
     },
     lisList: [],
-    id:''
+    id: ''
   },
 
   /**
@@ -23,7 +23,7 @@ Page({
   onLoad: function (options) {
     var that = this
     this.setData({
-      id:options.id
+      id: options.id
     })
     wx.showNavigationBarLoading()
     this.data.app.http({
@@ -32,9 +32,16 @@ Page({
       data: {
         limit: 10,
         page: that.data.currentPage,
-        id:options.id
+        id: options.id
       },
       success(res) {
+        console.log(res.data.rdata)
+        if (res.data.rdata.length > 0) {
+          var arr = res.data.rdata
+          arr.map(function (val, i) {
+            val.valTime = val.createTime.substring(0, 10)
+          })
+        }
         that.setData({
           lisList: res.data.rdata
         })
@@ -58,7 +65,7 @@ Page({
   },
   details(e) {
     wx.navigateTo({
-      url: '../f-gaoduanzhiwei-zexq/f-gaoduanzhiwei-zexq?id='+e.currentTarget.dataset.id,
+      url: '../f-gaoduanzhiwei-zexq/f-gaoduanzhiwei-zexq?id=' + e.currentTarget.dataset.id,
     })
   },
   /**
@@ -118,9 +125,15 @@ Page({
       data: {
         limit: 10,
         page: that.data.currentPage,
-        id:that.data.id
+        id: that.data.id
       },
       success(res) {
+        if (res.data.rdata.length > 0) {
+          var arr = res.data.rdata
+          arr.map(function (val, i) {
+            val.valTime = val.createTime.substring(0, 10)
+          })
+        }
         that.setData({
           lisList: that.data.lisList.concat(res.data.rdata)
         })
@@ -128,7 +141,7 @@ Page({
           that.setData({
             loadingType: 2
           })
-          
+
           wx.hideNavigationBarLoading()
         } else {
           that.setData({
@@ -144,6 +157,6 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
-    
+
   }
 })
