@@ -28,7 +28,7 @@ Page({
   },
   detail(e) {
     wx.navigateTo({
-      url: '../e-gaoduanzhiwei-gqyh/e-gaoduanzhiwei-gqyh?id='+e.currentTarget.dataset.index,
+      url: '../e-gaoduanzhiwei-gqyh/e-gaoduanzhiwei-gqyh?id='+e.currentTarget.dataset.index+'&title='+e.currentTarget.dataset.value,
     })
   },
   /**

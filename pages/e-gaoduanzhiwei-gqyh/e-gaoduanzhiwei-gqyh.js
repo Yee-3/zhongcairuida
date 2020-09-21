@@ -21,6 +21,10 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    console.log(options)
+    wx.setNavigationBarTitle({
+      title:options.title    // 其他页面传过来的标题名
+  })
     var that = this
     this.setData({
       id: options.id
