@@ -27,7 +27,6 @@ Page({
     this.tab = this.selectComponent("#tab");
     var that = this
     if (wx.getStorageSync('companyId')) {
-
       this.setData({
         companyId: wx.getStorageSync('companyId')
       })
@@ -37,7 +36,7 @@ Page({
       type: true,
       url: '/indexCom/getIndex',
       data: {
-        limit: 1,
+        limit: 10,
         page: that.data.currentPage
       },
       dengl: true,
@@ -248,7 +247,7 @@ Page({
   onReachBottom: function () {
     var that = this,
       data = {
-        limit: 1,
+        limit: 10,
         page: that.data.currentPage + 1
       }
     this.jiazai(data)

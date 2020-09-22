@@ -154,7 +154,7 @@ Component({
               load2: e.currentTarget.dataset.types,
             })
             city = this.data.locateCity;
-            // location=this.data
+            location=this.data.location
             break;
           case 'new':
             //热门城市
@@ -199,12 +199,14 @@ Component({
         cityListId: Item //滚动条to指定view
       })
     },
+   
     //调用定位
     getLocate() {
       let that = this;
       new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
         var x = val.address_component.city
-        var id = val.ad_info.adcode.substring(0,4)+'00'
+        var id = val.ad_info.adcode.substring(0,4)+'00',
+        location = val.location
         that.setData({
           location: val.location
         })
@@ -213,13 +215,13 @@ Component({
         }
         that.setData({
           locateCity: val,
-          loacteId: id,
         });
         //把获取的定位和获取的时间放到本地存储
         wx.setStorageSync('locatecity', {
           city: val,
           time: new Date().getTime(),
-          countryId:id
+          countryId:id,
+          location: location.lng + ',' + location.lat
         });
       });
 
@@ -235,8 +237,11 @@ Component({
     if (!cityOrTime.time || (time - cityOrTime.time > 1800000)) { //每隔30分钟请求一次定位
       this.getLocate();
     } else { //如果未满30分钟，那么直接从本地缓存里取值
+      var arr=cityOrTime.location.split(',')
       that.setData({
-        locateCity: cityOrTime.city
+        locateCity: cityOrTime.city,
+        loacteId:cityOrTime.countryId,
+        location:{lat:arr[1],lng:arr[0]}
       })
     }
     var list= wx.getStorageSync('list')

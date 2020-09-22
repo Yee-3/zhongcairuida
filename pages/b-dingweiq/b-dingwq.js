@@ -30,20 +30,26 @@ Page({
 
   },
   cityTap(e) {
+    console.log(e)
     let pages = getCurrentPages(); //获取当前页面js里面的pages里的所有信息。
     let prevPage = pages[pages.length - 2];
     var that = this
     //prevPage 是获取上一个页面的js里面的pages的所有信息。 -2 是上一个页面，-3是上上个页面以此类推。
     if (e.detail.location) {
+      console.log(e.detail)
       prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
         mapValue: e.detail.cityname,
         id_adre: that.map.data.ids ? that.map.data.ids : '',
-        location: e.detail.location.lng + ',' + e.detail.location.lat
+        location: e.detail.location.lng + ',' + e.detail.location.lat,
+        currentPage:1
       })
     } else {
+      console.log(prevPage.data.location,3333)
       prevPage.setData({ // 将我们想要传递的参数在这里直接setData。上个页面就会执行这里的操作。
         mapValue: e.detail.cityname,
         id_adre: that.map.data.ids ? that.map.data.ids : '',
+        currentPage:1
+        
       })
     }
     var that = this

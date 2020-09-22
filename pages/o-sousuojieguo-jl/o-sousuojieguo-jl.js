@@ -40,7 +40,6 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
     if (options) {
       this.setData({
         name: options.name
@@ -147,7 +146,6 @@ Page({
     })
   },
   search(e) {
-    console.log(this.data.location)
     var that = this
     this.setData({
       currentPage: 1,
@@ -164,12 +162,14 @@ Page({
       }
     this.reword(data)
   },
-
+  
   // 获取本地地址
   getLocation() {
     let that = this;
     new qqmap().getLocateInfo().then(function (val) { //这个方法在另一个文件里，下面有贴出代码
-      var location = val.location
+      console.log(val)
+      var location = val.location,
+      y = val.ad_info.adcode.substring(0, 4) + '00'
       var val = val.address_component.city
       that.setData({
         mapValue: val,
@@ -179,7 +179,8 @@ Page({
       wx.setStorageSync('locatecity', {
         city: val,
         time: new Date().getTime(),
-        location:location.lng + ',' + location.lat
+        location:location.lng + ',' + location.lat,
+        countryId: y,
       });
     });
   },
@@ -219,7 +220,6 @@ Page({
     }
   },
   tog() {
-    console.log('zhiwei')
     this.toggleZhi()
     this.setData({
       currentPage: 1,
@@ -380,7 +380,6 @@ Page({
       location: that.data.location,
       name: name
     }
-    console.log(address)
     this.reword(data)
   },
   toggleMor() {
@@ -582,7 +581,6 @@ Page({
         var myDate = new Date()
         if (arr.length > 0) {
           arr.map(function (val, i) {
-            console.log(val)
             if (val.createTime) {
               var date1 = Date.parse(new Date(val.createTime.replace(/\-/g, "/")))
 							var date = Date.parse(new Date())
@@ -593,8 +591,6 @@ Page({
             val.distance=(val.distance/1000).toFixed(1)
           })
         }
-        console.log(arr, 88888)
-        console.log(res.data.rdata)
         that.setData({
           recomList: res.data.rdata
         })
@@ -632,7 +628,6 @@ Page({
       method: 'POST',
       data: data,
       success(res) {
-        console.log(res.data.rdata, 22222)
         function jiance(x) {
           return x < 10 ? '0' + x : x
         }

@@ -15,7 +15,7 @@
 		</view>
 	</view>
 	<view class="fr q_09">
-		<image src="{{detCon.ctrlResumeDTO.url}}"></image>
+		<image src="{{detCon.ctrlResumeDTO.url?detCon.ctrlResumeDTO.url:(detCon.ctrlResumeDTO.sex==0?'../img/f004.png':'../img/f051.png')}}"></image>
 	</view>
 </view>
 

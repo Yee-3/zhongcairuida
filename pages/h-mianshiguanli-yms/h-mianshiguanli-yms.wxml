@@ -85,7 +85,7 @@
 		<view class="h_13">
 			<view class="fl h_14">
 				<view class="fl h_15">
-					<image src="{{item.url}}"></image>
+					<image src="{{item.url?item.url:(item.sex==0?'../img/f004.png':'../img/f051.png')}}"></image>
 				</view>
 				<view class="fl h_16">
 					<view class="h_17">{{item.name}}</view>

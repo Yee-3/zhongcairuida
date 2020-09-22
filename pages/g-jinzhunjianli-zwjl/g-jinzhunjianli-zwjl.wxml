@@ -20,7 +20,7 @@
 		<view class="">
 			<view class="fl d_04">
 				<view class="fl d_05">
-					<image src="{{item.resumeData.url}}"></image>
+					<image src="{{item.resumeData.url?item.resumeData.url:(item.resumeData.sex==0?'../img/f004.png':'../img/f051.png')}}"></image>
 				</view>
 				<view class="fl d_06">
 					<view class="d_07">

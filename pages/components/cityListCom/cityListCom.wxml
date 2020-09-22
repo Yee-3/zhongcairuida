@@ -46,7 +46,7 @@
 				<block wx:for='{{citylist}}' wx:key='this' wx:for-item='letterItem' wx:for-index='letterIndex'>
 					<view class='city_first_letter' id='{{letterItem.letter}}'>{{letterItem.letter}}</view>
 					<view class="cityList">
-						<button size="mini" class="{{(item.id==idn&&idn_nu==letterItem.letter)?'active':'city_name'}}" style="font-size:28rpx;line-height:66rpx;" wx:for='{{letterItem.data}}' wx:key='this' data-loca="{{item.location.lat}}" catchtap='cityTap' data-index='{{item.id}}' data-types="list" data-nu="{{letterItem.letter}}" data-id="{{index}}" data-val='{{item.cityName}}'>{{item.cityName}}
+						<button size="mini" class="{{(item.id==idn&&idn_nu==letterItem.letter)?'active':'city_name'}}" style="font-size:28rpx;line-height:66rpx;" wx:for='{{letterItem.data}}' wx:key='this' data-loca="{{item.location}}" catchtap='cityTap' data-index='{{item.id}}' data-types="list" data-nu="{{letterItem.letter}}" data-id="{{index}}" data-val='{{item.cityName}}'>{{item.cityName}}
 						</button>
 					</view>
 					<!-- 隐藏部分 -->

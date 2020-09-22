@@ -12,7 +12,7 @@ page{ background: #f5f5f5;}
 .d_02{ width: 690rpx; margin: 0 auto;}
 .d_03{ background: #fff; width: 690rpx; border-radius: 10rpx; padding: 20rpx 0 20rpx 20rpx; box-sizing: border-box; margin-top: 30rpx;}
 
-.d_05 image{ width: 90rpx; height: 90rpx;}
+.d_05 image{ width: 90rpx; height: 90rpx;border-radius: 50%;}
 .d_06{ margin-left: 30rpx;}
 .d_07{ margin-top: 8rpx;}
 .d_08{ font-size: 32rpx; color: #333;}

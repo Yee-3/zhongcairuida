@@ -15,6 +15,7 @@
 </button> -->
 
 	<button class='nologin' type='default' withCredentials="true" lang="zh_CN" bindtap="noLogin">
-		取消
+		拒绝登录
 	</button>
+
 </view>
